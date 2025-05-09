@@ -1,0 +1,404 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{mathptmx}[ptm]
+\usepackage{vntex}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{svg}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{longtable}
+\usepackage{pdflscape}  % Để xoay trang thành landscape
+
+\titleformat{\section}{\normalfont\Large\bfseries}{Chương \thesection}{1em}{}
+\titlecontents{section}
+  [0pt]{\vspace{1ex}}{\bfseries Chương \thecontentslabel \quad}{}
+  {\hfill\bfseries\contentspage}
+% \titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
+
+% \usepackage{xltabular}
+
+\usepackage[vietnamese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{placeins}
+\usepackage{tocbibind}
+\usepackage{setspace} %Font, size
+\onehalfspacing
+\fontsize{13}{1}\selectfont
+% \setlength{\parskip}{6pt}
+
+%\usepackage[utf8]{inputenc}
+%\usepackage[francais]{babel}
+\usepackage{a4wide,amssymb,epsfig,latexsym,array,hhline,fancyhdr}
+\usepackage[normalem]{ulem}
+%\usepackage{soul}
+\usepackage{float}
+\usepackage[makeroom]{cancel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{multicol,longtable,amscd}
+\usepackage{diagbox}%Make diagonal lines in tables
+\usepackage{booktabs}
+\usepackage{alltt}
+\usepackage[framemethod=tikz]{mdframed}% For highlighting paragraph backgrounds
+\usepackage{caption,subcaption}
+\usepackage{color}
+\usepackage{indentfirst}
+\usetikzlibrary{calc} 
+
+\usepackage{hyperref}
+
+\usepackage{lastpage}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{graphicx}							% Standard graphics package
+\usepackage{array}
+\usepackage{tabularx, caption}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{graphics}
+\usepackage{geometry}
+\usepackage{epsfig}
+\usepackage{tikz}
+\usepackage{listings}
+
+\usepackage[perpage, hang, flushmargin]{footmisc}
+\renewcommand\footnoterule{
+    \vspace{1em}
+    \hrule width \textwidth height 0.4pt
+    \vspace{1em}
+}
+    
+\usepackage{color} % tô màu cho code
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\usepackage{framed,color,verbatim}
+\definecolor{shadecolor}{rgb}{.98, .98, .98}
+\newenvironment{code}%
+   {\snugshade\verbatim}%
+   {\endverbatim\endsnugshade}
+\lstset{frame=tb,
+  language= C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usetikzlibrary{arrows,snakes,backgrounds}
+\usepackage{hyperref}
+\hypersetup{urlcolor=blue,linkcolor=black,citecolor=blue,colorlinks=true} 
+\setlength\parindent{15pt}
+
+\def\thesislayout{	% A4: 210 × 297
+	\geometry{
+		a4paper,
+		total={160mm,240mm},  % fix over page
+		left=30mm,
+        right=20mm,
+		top=20mm,
+        bottom = 20mm
+	}
+}
+\thesislayout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[L]{
+ \begin{tabular}{rl}
+    \begin{picture}(25,15)(0,0)
+    \put(0,-8){\includegraphics[width=8mm, height=8mm]{Images/hcmut.png}}
+    %\put(0,-8){\epsfig{width=10mm,figure=hcmut.eps}}
+   \end{picture}&
+	%\includegraphics[width=8mm, height=8mm]{hcmut.png} & %
+	\begin{tabular}{l}
+		\textbf{\bf \ttfamily Trường Đại Học Bách Khoa Tp.Hồ Chí Minh}\\
+		\textbf{\bf \ttfamily Khoa Khoa Học và Kỹ Thuật Máy Tính}
+	\end{tabular} 	
+ \end{tabular}
+}
+\fancyhead[R]{
+	\begin{tabular}{l}
+		\tiny \bf \\
+		\tiny \bf 
+	\end{tabular}  }
+\fancyfoot{} % clear all footer fields
+% \fancyfoot[L]{\scriptsize \ttfamily ĐỒ ÁN CHUYÊN NGÀNH (CO4029)}
+\fancyfoot[R]{\scriptsize \ttfamily Trang {\thepage}/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+% \renewcommand{\footrulewidth}{0.3pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\makeatletter
+\newcounter {subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+\newcommand*{\subsubsubsectionmark}[1]{}
+\makeatother
+\everymath{\color{black}}%make in-line maths symbols blue to read/check easily
+\sloppy
+\captionsetup[figure]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=-9pt}
+\captionsetup[table]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=7pt}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{5pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\thesislayout
+\begin{document}
+
+\begin{titlepage}
+\begin{tikzpicture}[remember picture, overlay]
+        \draw[line width = 4pt] ($(current page.north west) + (3cm,-1.5cm)$) rectangle ($(current page.south east) + (-0.5cm,1.5cm)$);
+        \draw[line width=1.5pt]
+            ($ (current page.north west) + (3.05cm,-1.55cm) $)
+            rectangle
+            ($ (current page.south east) + (-0.55cm,1.55cm) $);
+    \end{tikzpicture}
+\begin{center}
+\hspace{1.5cm}\textbf{ \fontfamily{ptm}\fontsize{15}{1}\selectfont{ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH}} \\
+\hspace{1.5cm}\textbf{ \fontfamily{ptm}\fontsize{15}{1}\selectfont{TRƯỜNG ĐẠI HỌC BÁCH KHOA}} \\
+\hspace{1.5cm}\textbf{ \fontfamily{ptm}\fontsize{15}{1}\selectfont{KHOA KHOA HỌC VÀ KỸ THUẬT MÁY TÍNH}}\\
+\end{center}
+
+\vspace{1cm}
+\begin{figure}[h!]
+\begin{center}
+\hspace{1.5cm}\includegraphics[width=5cm]{Images/hcmut.png}
+\end{center}
+\end{figure}
+
+\begin{center}
+\hspace{1.5cm} \textbf{\fontfamily{ptm}\fontsize{15}{1}\selectfont{BÁO CÁO}} \\
+
+\hspace{1.5cm} \textbf{\fontfamily{ptm}\fontsize{15}{1}\selectfont{ĐỒ ÁN CHUYÊN NGÀNH}}\\
+% \begin{tabular}{c}
+% \multicolumn{1}{c}{\textbf{{\fontsize{15}{1}\selectfont{BÁO CÁO}}}}\\
+% \\{\textbf{{\fontsize{15}{1}\selectfont{ĐỒ ÁN TỐT NGHIỆP}}}}
+% \end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{c}
+
+\hspace{1cm}\textbf{{ \fontfamily{ptm}\fontsize{25}{1}\selectfont{{PHÁT TRIỂN HỆ THỐNG}}}}\\\\
+\hspace{1cm}\textbf{{ \fontfamily{ptm}\fontsize{25}{1}\selectfont{{QUẢN LÝ ĐẶT MÓN}}}}\\\\
+\hspace{1cm}\textbf{{ \fontfamily{ptm}\fontsize{25}{1}\selectfont{{Ở NHÀ HÀNG ẨM THỰC}}}}\\\\
+
+\end{tabular}
+\\ \vspace{0.5cm} 
+{\hspace{1.5cm}\fontfamily{ptm}\fontsize{15}{1}\selectfont{ Ngành: KHOA HỌC MÁY TÍNH}}
+\end{center}
+\begin{table}[h]
+\begin{tabular}{rll}
+
+&  & \textbf{\fontfamily{ptm}\fontsize{15}{1}\selectfont{HỘI ĐỒNG: 4 KHOA HỌC MÁY TÍNH}} 
+\vspace{2pt}
+\\
+
+& &  \textbf{\fontfamily{ptm}\fontsize{15}{1}\selectfont{GVHD: Assoc. Prof Võ Thị Ngọc Châu}}
+\vspace{2pt}
+\\ 
+\vspace{2pt}
+\\
+
+% & &  \textbf{\fontfamily{ptm}\fontsize{15}{1}\selectfont{TKHĐ: TRƯỜNG QUỲNH CHI }}
+% \vspace{6pt}
+\\
+
+\hspace{4.5 cm} & $\;$ $\;$$\;$$\;$$\;$$\;$& \Large \hspace{3 cm}     \textbf{\fontfamily{ptm}\fontsize{15}{1}\selectfont{---o0o---}}
+\vspace{6pt}
+\\
+
+\hspace{4.5 cm} & &   \textbf{\fontfamily{ptm}\fontsize{15}{1}\selectfont{SVTH1: Nguyễn Trịnh Ngọc Huân - 2211144}}
+\vspace{2pt}
+\\
+& & \textbf{\fontsize{15}{1}\fontfamily{ptm}\selectfont{SVTH2: Hồ Nguyễn Phi Hùng - 2211327 }}
+\vspace{1pt}
+\\
+
+\end{tabular}
+\end{table}
+% \begin{table}[h]
+% \begin{tabular}{lrl}
+% \hspace{2cm} 
+% & HỘI ĐỒNG: & \textbf{KHOA HỌC MÁY TÍNH 9} 
+% \vspace{6pt}
+% \\
+% & THƯ KÝ HỘI ĐỒNG: & \textbf{NGUYỄN THANH TÙNG} 
+% \vspace{6pt}
+% \\
+
+% & GIẢNG VIÊN HƯỚNG DẪN: & \textbf{THS. ĐỖ THANH THÁI}
+% \vspace{2pt}
+% \\
+% & & \textbf{ASSOC. PROF. TRẦN MINH QUANG} 
+% \vspace{6pt}
+% \\
+
+% & SINH VIÊN THỰC HIỆN: &   \textbf{NGUYỄN MẬU MINH ĐỨC - 2010230}
+% \vspace{2pt}
+% \\
+% & & \textbf{LÝ GIA HUY - 2010289}
+% \vspace{2pt}
+% \\
+% & & \textbf{PHẠM HOÀNG ĐỨC HUY - 2011286}
+% \vspace{2pt}
+% \\
+
+% \end{tabular}
+% \end{table}
+
+\vspace{0.5 cm}
+\begin{center}
+\hspace{1.5cm}\fontfamily{ptm}\fontsize{15}{1}\selectfont{ Tp. Hồ Chí Minh, Tháng 05/2025}
+\end{center}
+\end{titlepage}
+\newpage
+
+\pagestyle{plain}
+\pagenumbering{roman}
+\phantomsection
+\input{Sections/loi_cam_doan}
+\phantomsection
+\input{Sections/loi_cam_on}
+\newpage
+% \phantomsection
+% \input{Sections/tom_tat}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}} 
+\tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{3}} % Đặt lại mức độ hiển thị của mục lục
+
+\newpage
+\phantomsection
+\renewcommand{\listfigurename}{\textbf{Danh sách hình vẽ}}
+\listoffigures
+\newpage
+\phantomsection
+\renewcommand{\listtablename}{\textbf{Danh sách bảng}}
+\listoftables
+\newpage
+\clearpage
+\pagestyle{fancy}
+\pagenumbering{arabic}
+
+
+
+% Bỏ comment phần này ra
+% \input{Sections/gioi_thieu/index}
+% \newpage
+% \input{Sections/co_so_li_thuyet/index}
+% \newpage
+% \input{Sections/cac_he_thong_lien_quan/index}
+% \newpage
+\input{Sections/tong_quan/index}
+\newpage
+% \input{Sections/hien_thuc/index}
+% \newpage
+% \input{Sections/ke_hoach_phat_trien}
+\newpage
+
+
+
+% \input{Sections/trien_khai/index} XXXXXXX
+% \newpage
+% \input{Sections/kiem_thu/index} xXXXXXXXXXX
+% \newpage
+% \input{Sections/danh_gia} xXXXXX
+
+
+
+\newpage
+
+\phantomsection
+\renewcommand{\refname}{\textbf{TÀI LIỆU THAM KHẢO}}
+\begin{thebibliography}{}
+\bibitem[1]{USDA} \textit{Food Service - Hotel Restaurant Institutional Annual
+} (Lần truy cập cuối: 22/04/2025), [Online]. Available: \url{https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=Food\%20Service%20-\%20Hotel\%20Restaurant%20Institutional\%20Annual_Ho\%20Chi\%20Minh\%20City_Vietnam_VM2024-0038.pdf}
+\bibitem[2]{Orderable} \textit{How to Improve Your Restaurant Customer Journey
+} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://orderable.com/blog/restaurant-customer-journey/}
+\bibitem[3]{paper1} \textit{An Innovative Approach for Online Food Order Management System} (Lần truy cập cuối: 22/04/2025), [Online]. Available: \url{https://globaljournals.org/GJCST_Volume18/1-An-Innovative-Approach-for-Online.pdf}
+\bibitem[4]{paper2} \textit{Examining Technology Adoption and Management Perception of Inventory Management Systems: The Case of Aruba Restaurants
+} (Lần truy cập cuối: 22/04/2025), [Online]. Available: \url{https://digitalcommons.fiu.edu/cgi/viewcontent.cgi?article=1482&context=hospitalityreview/}
+\bibitem[5]{paper3} \textit{Restaurant Inventory Management System
+} (Lần truy cập cuối: 22/04/2025), [Online]. Available: \url{https://iciset.in/Paper1217.pdf}
+\bibitem[6]{MVC} \textit{Model-View-Controller (MVC) Architecture} (Lần truy cập cuối: 11/12/2023), [Online]. Available: \url{https://www.academia.edu/30077059/Model_View_Controller_MVC_Architecture}
+\bibitem[7]{FrontendFrameworks} \textit{Front-end frameworks popularity (React, Vue, Angular and Svelte)} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://gist.github.com/tkrotoff/b1caa4c3a185629299ec234d2314e190}
+
+\bibitem[8]{React} \textit{React – A JavaScript library for building user interfaces} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://legacy.reactjs.org}
+% https://star-history.com/#shadcn-ui/ui&Date
+
+\bibitem[9]{ShadcnUIUX} \textit{GitHub Star History - shadcn-ui/ux} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://star-history.com/#shadcn-ui/ui}
+
+\bibitem[10]{ShadcnUI} \textit{shadcn ui Usage Statistics} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://trends.builtwith.com/framework/shadcn-ui}
+
+\bibitem[11]{TanStack} \textit{TanStack | High-quality open-source software for web developers} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://tanstack.com}
+
+\bibitem[12]{SpringBootBenefits} \textit{Top Benefits of Spring Boot in Java that Every Developer Should Know} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://www.syncfusion.com/web-stories/top-benefits-of-spring-boot-in-java-that-every-developer-should-know}
+
+\bibitem[13]{SpringBootProsCons} \textit{Pros and Cons of Using Spring Boot} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://bambooagile.eu/insights/pros-and-cons-of-using-spring-boot}
+
+\bibitem[14]{Redis} \textit{What is Redis?} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://www.ibm.com/think/topics/redis}
+
+
+\bibitem[15]{Viblo} \textit{CI/CD - GitHub Actions và các kiến thức cơ bản} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://viblo.asia/p/cicd-github-actions-va-cac-kien-thuc-co-ban-EoW4oRMrVm/}
+
+
+\bibitem[16]{GitHubActionsIntro} \textit{What is GitHub Actions? How CI/CD \& automation work on GitHub} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://resources.github.com/devops/tools/automation/actions}
+
+\bibitem[17]{GitHubActionsDocs} \textit{Understanding GitHub Actions} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://docs.github.com/en/actions/about-github-actions/understanding-github-actions}
+
+\bibitem[18]{GitHubActionsMerits} \textit{Surveying the Merits and Drawbacks of GitHub Actions} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://blog.mirrorfolio.com/surveying-the-merits-and-drawbacks-of-github-actions}
+
+\bibitem[19]{DockerWiki} \textit{Docker (software)} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://en.wikipedia.org/wiki/Docker\_(software)}
+
+\bibitem[20]{DockerAdvantages} \textit{Advantages of Docker} (Lần truy cập cuối: 13/02/2025), [Online]. Available: \url{https://medium.com/@alrazak/advantages-of-docker-5d153d8e0c79}
+
+\bibitem[21]{FrontCompare1} \textit{React, Angular, Vue, and Svelte: A Comparison} (Lần truy cập cuối: 30/04/2025), [Online]. Available: \url{https://www.ascendientlearning.com/blog/comparing-angular-react-vue-svelte}
+
+\bibitem[22]{FrontCompare2} \textit{Comparing Angular, React, Vue, and Svelte: What you need to know} (Lần truy cập cuối: 30/04/2025), [Online]. Available: \url{https://www.infoworld.com/article/3962039/what-you-need-to-know-about-angular-react-vue-and-svelte-popular-javascript-frameworks-compared.html}
+
+\bibitem[23]{BackCompare1} \textit{ExpressJS vs Flask vs Spring Boot} (Lần truy cập cuối: 30/04/2025), [Online]. Available: \url{https://stackshare.io/stackups/expressjs-vs-flask-vs-spring-boot}
+
+\bibitem[24]{BackCompare2} \textit{Node.js vs Spring Boot vs Django: Which One Is Best for Beginners?} (Lần truy cập cuối: 30/04/2025), [Online]. Available: \url{https://sandydev.medium.com/node-js-vs-spring-boot-vs-django-which-one-is-best-for-beginners-8782d3be54}
+
+\bibitem[25]{BackCompare3} \textit{Spring Boot vs Django: Which Backend Framework Should You Master in 2025?} (Lần truy cập cuối: 30/04/2025), [Online]. Available: \url{https://medium.com/codex/spring-boot-vs-django-which-backend-framework-should-you-master-in-2025-4dafa4d6b2a6}
+\end{thebibliography}
+% \newpage
+% \appendix
+% \renewcommand{\thesection}{\arabic{section}} % Định dạng section là 1, 2, 3,...
+% \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{} % Bỏ chữ "Chương"
+% \titlecontents{section}
+%   [0pt]{\vspace{1ex}}{\bfseries \thecontentslabel \quad}{}
+%   {\hfill\bfseries\contentspage}
+  
+% \section*{\centering \Large Phụ lục}
+% \addcontentsline{toc}{section}{\textbf{PHỤ LỤC}}
+% \input{Sections/phu_luc/index}
+
+\end{document}
