@@ -1,0 +1,492 @@
+\subsection{Module MD-06: Quản lý Bán mang về (POS - Takeout)}
+
+\subsubsection{Use Case UC-MD06-01: Chọn Chế độ Bán Mang về}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-01: Chọn Chế độ Bán Mang về} \label{tab:uc_md06_01} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Chọn Chế độ Bán Mang về \\
+\hline
+Use Case ID & UC-MD06-01 \\
+\hline
+Use Case Description & Cho phép Nhân viên (Phục vụ hoặc Thu ngân) tại điểm bán hàng (POS) lựa chọn một chế độ hoạt động hoặc một giao diện được thiết kế riêng cho việc tiếp nhận và xử lý các đơn hàng khách mua mang đi (Takeout/Takeaway). \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Có khách hàng đến quầy để đặt món mang về. \\
+\hline
+Pre-Condition & - Nhân viên đã đăng nhập và đang trong phiên POS hoạt động (UC-MD05-01). \newline - Giao diện POS chính (ví dụ: Sơ đồ tầng hoặc màn hình chờ) đang hiển thị. \newline - Chế độ/Nút chức năng "Bán Mang về" (Takeout) đã được cấu hình và hiển thị trên giao diện POS. \\
+\hline
+Post-Condition & - Hệ thống chuyển sang giao diện hoặc chế độ dành riêng cho việc tạo đơn hàng mang về. \newline - Giao diện này sẵn sàng để tạo đơn hàng mới (UC-MD06-02) mà không yêu cầu chọn bàn. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02/US-05) đang ở giao diện POS chính. \newline 2. Nhân viên xác định vị trí nút hoặc tùy chọn "Bán Mang về" (Takeout / Takeaway) trên màn hình. \newline 3. Nhân viên nhấp vào nút "Bán Mang về". \newline 4. Hệ thống chuyển đổi giao diện hoặc ngữ cảnh sang chế độ bán mang về. Giao diện này có thể: \newline    - Mở ngay một đơn hàng mới ở chế độ mang về (sẵn sàng thêm món). \newline    - Hoặc hiển thị một danh sách các đơn hàng mang về đang chờ xử lý (nếu có) và nút "Tạo đơn mới". \\
+\hline
+Alternative Flow & \textbf{1a. Chọn từ Menu chính/Dashboard:} \newline    1. Thay vì từ sơ đồ tầng, nút "Bán Mang về" có thể nằm ở menu chính hoặc dashboard của POS. \newline \textbf{4a. Sử dụng cùng giao diện nhưng bỏ qua chọn bàn:} \newline    1. Hệ thống có thể không có giao diện hoàn toàn riêng biệt. Thay vào đó, khi nhấn "Bán Mang về", hệ thống bỏ qua bước chọn bàn và đi thẳng vào màn hình tạo đơn hàng (tương tự UC-MD05-03 nhưng không có thông tin bàn). \\
+\hline
+Exception Flow & \textbf{3a. Nút/Chức năng bị vô hiệu hóa hoặc không tồn tại:} \newline    1. Do cấu hình sai hoặc chưa cấu hình, nút "Bán Mang về" không hiển thị hoặc bị mờ đi. \newline    2. Nhân viên không thể chuyển sang chế độ bán mang về. Cần kiểm tra lại cấu hình POS. \newline \textbf{4a. Lỗi chuyển đổi giao diện/chế độ:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng tải giao diện hoặc chuyển sang chế độ bán mang về. \newline    2. Hệ thống hiển thị thông báo lỗi. Nhân viên không thể tiếp tục. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC6.1-1:} Phải có một cách thức rõ ràng (nút bấm, menu) để nhân viên chuyển sang chế độ xử lý đơn hàng mang về. \newline - \textbf{BR-UC6.1-2:} Chế độ bán mang về phải bỏ qua hoàn toàn quy trình liên quan đến quản lý bàn (chọn bàn, chuyển bàn...). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC6.1-1 (Usability):} Nút/Tùy chọn "Bán Mang về" phải dễ dàng tìm thấy và nhận biết trên giao diện POS. Việc chuyển đổi sang chế độ này phải nhanh chóng và mượt mà. \newline - \textbf{NFR-UC6.1-2 (Performance):} Thời gian chuyển sang giao diện/chế độ bán mang về phải nhanh (< 1-2 giây). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD06-02: Tạo Đơn hàng Mang về}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-02: Tạo Đơn hàng Mang về} \label{tab:uc_md06_02} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Tạo Đơn hàng Mang về \\
+\hline
+Use Case ID & UC-MD06-02 \\
+\hline
+Use Case Description & Khởi tạo một bản ghi đơn hàng mới trên POS dành riêng cho loại hình bán mang về, không cần liên kết với một bàn cụ thể trong nhà hàng. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Nhân viên đã chọn chế độ Bán Mang về (UC-MD06-01) và cần tạo một đơn hàng mới cho khách đang đợi tại quầy. \\
+\hline
+Pre-Condition & - Nhân viên đang ở trong chế độ/giao diện Bán Mang về (UC-MD06-01 thành công). \\
+\hline
+Post-Condition & - Một bản ghi đơn hàng POS mới được tạo trong hệ thống với loại hình là "Mang về" (Takeout). \newline - Đơn hàng này không liên kết với bàn nào. \newline - Giao diện đơn hàng được hiển thị, sẵn sàng để thêm món (UC-MD06-04) và liên kết khách hàng (UC-MD06-03). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Tiếp nối từ UC-MD06-01, nhân viên đang ở giao diện Bán Mang về. \newline 2. Nhân viên chọn hành động "Tạo đơn mới" (New Order) hoặc hệ thống tự động mở một đơn hàng mới (tùy thuộc vào luồng của UC-MD06-01). \newline 3. Hệ thống tạo một bản ghi đơn hàng POS mới, đánh dấu loại hình là "Takeout". \newline 4. Hệ thống hiển thị giao diện đơn hàng tương tự như đơn hàng tại bàn (UC-MD05-03, bước 5) nhưng không có thông tin về số bàn. Giao diện bao gồm: \newline    - Khu vực danh sách món đã gọi (hiện đang trống). \newline    - Khu vực chọn Danh mục POS và Sản phẩm. \newline    - Các nút chức năng (Thanh toán, Gửi bếp...). \newline    - (Tùy chọn) Khu vực để chọn/nhập thông tin khách hàng. \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể cho việc tạo đơn thuần này. \\
+\hline
+Exception Flow & \textbf{3a. Lỗi tạo đơn hàng mới:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng tạo bản ghi đơn hàng POS mới. \newline    2. Hệ thống hiển thị thông báo lỗi "Không thể tạo đơn hàng mang về mới." \newline    3. Nhân viên không thể tiếp tục. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC6.2-1:} Đơn hàng tạo ra từ chế độ "Bán Mang về" phải được hệ thống phân loại đúng là đơn "Takeout" để phục vụ cho báo cáo và xử lý khác biệt nếu có (ví dụ: mẫu in, quy trình bếp). \newline - \textbf{BR-UC6.2-2:} Đơn hàng mang về không được gắn với bất kỳ bàn nào trên sơ đồ tầng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC6.2-1 (Performance):} Việc tạo đơn hàng mang về mới và hiển thị giao diện phải diễn ra tức thời (< 1 giây). \newline - \textbf{NFR-UC6.2-2 (Usability):} Giao diện đơn hàng mang về nên rõ ràng, dễ phân biệt với đơn hàng tại bàn (nếu có sự khác biệt về giao diện). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD06-03: (Tùy chọn) Liên kết Khách hàng}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-03: (Tùy chọn) Liên kết Khách hàng} \label{tab:uc_md06_03} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & (Tùy chọn) Liên kết Khách hàng \\
+\hline
+Use Case ID & UC-MD06-03 \\
+\hline
+Use Case Description & Cho phép Nhân viên tại POS tìm kiếm và chọn một khách hàng đã tồn tại trong cơ sở dữ liệu hoặc tạo nhanh thông tin khách hàng mới (Tên, SĐT) để liên kết với đơn hàng mang về đang xử lý. Việc này hữu ích cho việc theo dõi lịch sử mua hàng, tích điểm (nếu có) hoặc liên lạc khi cần. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & - Nhân viên muốn gắn đơn hàng mang về với một khách hàng cụ thể (ví dụ: khách quen, khách hàng thành viên). \newline - Khách hàng cung cấp thông tin để nhận thông báo hoặc tích điểm. \\
+\hline
+Pre-Condition & - Nhân viên đang xử lý một đơn hàng mang về (UC-MD06-02 thành công). \newline - Giao diện POS có khu vực hoặc nút chức năng để chọn/thêm khách hàng. \\
+\hline
+Post-Condition & - Đơn hàng mang về được liên kết với một bản ghi khách hàng trong hệ thống (khách hàng cũ hoặc mới tạo). \newline - Tên khách hàng (và có thể SĐT) được hiển thị trên giao diện đơn hàng POS. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Chọn khách hàng đã có) & 1. Nhân viên (US-02/US-05) đang ở màn hình đơn hàng mang về. \newline 2. Nhân viên nhấp vào nút/khu vực "Chọn khách hàng" (Select Customer). \newline 3. Hệ thống hiển thị giao diện tìm kiếm/chọn khách hàng (có thể là danh sách khách hàng gần đây hoặc ô tìm kiếm). \newline 4. Nhân viên nhập tên, số điện thoại hoặc mã khách hàng vào ô tìm kiếm. \newline 5. Hệ thống hiển thị danh sách các khách hàng khớp với thông tin tìm kiếm. \newline 6. Nhân viên chọn đúng khách hàng từ danh sách. \newline 7. Hệ thống liên kết bản ghi khách hàng đã chọn với đơn hàng POS hiện tại. \newline 8. Tên khách hàng được hiển thị trên giao diện đơn hàng. \\
+\hline
+Alternative Flow & \textbf{4a. Tạo khách hàng mới nhanh chóng:} \newline    1. Nếu tìm kiếm không thấy khách hàng, nhân viên chọn nút "Tạo mới" (Create) trên giao diện chọn khách hàng. \newline    2. Hệ thống hiển thị form nhỏ yêu cầu nhập thông tin tối thiểu: Tên, SĐT (bắt buộc). \newline    3. Nhân viên nhập thông tin khách hàng cung cấp. \newline    4. Nhân viên nhấn "Lưu" (Save). \newline    5. Hệ thống tạo bản ghi khách hàng mới và tự động liên kết với đơn hàng POS hiện tại. Use Case tiếp tục từ bước 8. \newline \textbf{1a. Không cần liên kết khách hàng:} \newline    1. Nếu không cần thiết hoặc khách hàng không cung cấp thông tin, nhân viên bỏ qua bước này và tiếp tục thêm món hoặc thanh toán. Đơn hàng sẽ không được liên kết với khách hàng nào (hoặc liên kết với một khách hàng mặc định "Walk-in Customer" nếu cấu hình). \\
+\hline
+Exception Flow & \textbf{5a. Tìm thấy nhiều khách hàng trùng tên/SĐT:} \newline    1. Hệ thống hiển thị danh sách các khách hàng trùng khớp. \newline    2. Nhân viên cần hỏi thêm thông tin từ khách (ví dụ: địa chỉ email, ngày sinh nếu có) để chọn đúng người. \newline \textbf{Alternative Flow 4a - Step 4a. Lỗi tạo khách hàng mới:} \newline    1. Hệ thống gặp lỗi khi cố gắng lưu bản ghi khách hàng mới (ví dụ: SĐT đã tồn tại và không cho phép trùng, lỗi cơ sở dữ liệu). \newline    2. Hệ thống báo lỗi. Việc liên kết khách hàng thất bại. \newline \textbf{7a. Lỗi liên kết khách hàng:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng lưu liên kết giữa đơn hàng và khách hàng. \newline    2. Hệ thống báo lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC6.3-1:} Việc liên kết khách hàng với đơn hàng mang về là tùy chọn, không bắt buộc (trừ khi có chính sách đặc biệt về thành viên). \newline - \textbf{BR-UC6.3-2:} Khi tạo khách hàng mới nhanh, tối thiểu cần Tên và SĐT để có thể liên lạc nếu cần. \newline - \textbf{BR-UC6.3-3:} Dữ liệu khách hàng (cũ và mới) được quản lý tập trung trong module Contacts/CRM của Odoo. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC6.3-1 (Usability):} Chức năng tìm kiếm và chọn khách hàng phải nhanh và dễ sử dụng. Việc tạo khách hàng mới nhanh phải đơn giản. \newline - \textbf{NFR-UC6.3-2 (Performance):} Thời gian tìm kiếm khách hàng và liên kết với đơn hàng phải nhanh chóng. \newline - \textbf{NFR-UC6.3-3 (Data Consistency):} Đảm bảo liên kết đúng khách hàng với đúng đơn hàng. Tránh tạo khách hàng trùng lặp nếu có thể. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD06-04: Thêm món vào Đơn hàng Mang về}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-04: Thêm món vào Đơn hàng Mang về} \label{tab:uc_md06_04} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Thêm món vào Đơn hàng Mang về \\
+\hline
+Use Case ID & UC-MD06-04 \\
+\hline
+Use Case Description & Cho phép Nhân viên (Phục vụ hoặc Thu ngân) thêm các món ăn và đồ uống vào đơn hàng mang về đang mở, sử dụng giao diện chọn sản phẩm tương tự như khi xử lý đơn hàng tại bàn. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Khách hàng đang đặt món mang về tại quầy. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng mang về (UC-MD06-02 thành công). \newline - Giao diện POS hiển thị các danh mục và sản phẩm phù hợp. \\
+\hline
+Post-Condition & - Món ăn/đồ uống được chọn (cùng số lượng và biến thể nếu có) được thêm vào danh sách các món đã gọi của đơn hàng mang về. \newline - Tổng tiền tạm tính của đơn hàng được cập nhật. \newline - Món ăn mới thêm sẵn sàng để được gửi xuống bếp/bar (UC-MD06-06). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow, Alternative Flow, Exception Flow & Luồng thực thi, các luồng thay thế (tăng số lượng, tìm kiếm, chọn modifier), và các luồng ngoại lệ (lỗi thêm món, chọn sản phẩm không khả dụng, lỗi chọn biến thể) về cơ bản là giống hệt với Use Case UC-MD05-05: Thêm món ăn/đồ uống vào đơn hàng. Nhân viên sử dụng cùng một giao diện chọn Danh mục POS và Sản phẩm để thêm món vào đơn hàng mang về. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & Các Business Rule tương tự như BR-UC5.5-1, BR-UC5.5-2, BR-UC5.5-3 của UC-MD05-05. \\
+\hline
+Non-Functional Requirement & Các Non-Functional Requirement tương tự như NFR-UC5.5-1, NFR-UC5.5-2, NFR-UC5.5-3 của UC-MD05-05. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD06-05: Xử lý Ghi chú cho Đơn Mang về}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-05: Xử lý Ghi chú cho Đơn Mang về} \label{tab:uc_md06_05} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xử lý Ghi chú cho Đơn Mang về \\
+\hline
+Use Case ID & UC-MD06-05 \\
+\hline
+Use Case Description & Cho phép Nhân viên thêm các ghi chú đặc biệt từ khách hàng (ví dụ: yêu cầu về đóng gói, khẩu vị) hoặc ghi chú nội bộ vào một món ăn cụ thể hoặc toàn bộ đơn hàng mang về. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Khách hàng mua mang về có yêu cầu đặc biệt hoặc nhân viên cần ghi chú lại điều gì đó cho bộ phận bếp/bar hoặc đóng gói. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng mang về (UC-MD06-02). \newline - Có ít nhất một món ăn đã được thêm vào đơn hàng (UC-MD06-04). \\
+\hline
+Post-Condition & - Ghi chú được đính kèm vào món ăn hoặc đơn hàng trên POS. \newline - Ghi chú sẽ được gửi cùng thông tin món ăn xuống bếp/bar (UC-MD06-06). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow, Alternative Flow, Exception Flow & Luồng thực thi, các luồng thay thế (chọn ghi chú có sẵn, ghi chú cho cả đơn), và các luồng ngoại lệ (lỗi lưu ghi chú) về cơ bản là giống hệt với Use Case UC-MD05-06: Xử lý Yêu cầu đặc biệt/Ghi chú bếp. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & Các Business Rule tương tự như BR-UC5.6-1, BR-UC5.6-2, BR-UC5.6-3 của UC-MD05-06. Ghi chú có thể bao gồm các yêu cầu đặc thù cho đơn mang về như "Gói riêng từng phần", "Thêm dụng cụ ăn uống". \\
+\hline
+Non-Functional Requirement & Các Non-Functional Requirement tương tự như NFR-UC5.6-1, NFR-UC5.6-2, NFR-UC5.6-3 của UC-MD05-06. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD06-06: Gửi đơn Mang về xuống Bếp/Bar}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-06: Gửi đơn Mang về xuống Bếp/Bar} \label{tab:uc_md06_06} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Gửi đơn Mang về xuống Bếp/Bar \\
+\hline
+Use Case ID & UC-MD06-06 \\
+\hline
+Use Case Description & Gửi thông tin các món ăn/đồ uống của đơn hàng mang về đến các máy in hoặc màn hình KDS tại bộ phận bếp/bar để bắt đầu chuẩn bị. Phiếu gửi đi cần chỉ rõ đây là đơn hàng mang về. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), System \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Nhân viên đã nhập xong các món khách hàng mang về yêu cầu và cần thông báo cho bếp/bar. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng mang về. \newline - Có các món ăn chưa được gửi đi trong đơn hàng. \newline - Các thiết bị bếp/bar và quy tắc định tuyến đã được cấu hình (FR-MD02-10, MD-09). \\
+\hline
+Post-Condition & - Thông tin các món cần chuẩn bị được gửi đến đúng bộ phận bếp/bar, có đánh dấu là đơn "Takeout". \newline - Trạng thái các món trên POS được cập nhật là "Đã gửi". \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow, Alternative Flow, Exception Flow & Luồng thực thi, các luồng thay thế và ngoại lệ về cơ bản là giống hệt với Use Case UC-MD05-07: Gửi đơn hàng xuống Bếp/Bar. Điểm khác biệt quan trọng là: \newline - Hệ thống cần bao gồm thông tin "Takeout" hoặc "Mang về" trên dữ liệu gửi đi (bước 5 của UC-MD05-07) để bếp/bar biết và chuẩn bị bao bì phù hợp. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & Các Business Rule tương tự như BR-UC5.7-1, BR-UC5.7-2, BR-UC5.7-3. Bổ sung: \newline - \textbf{BR-UC6.6-1:} Phiếu in/Hiển thị KDS cho đơn mang về phải có dấu hiệu rõ ràng để phân biệt với đơn ăn tại bàn (ví dụ: chữ "Takeout", "Mang về"). \\
+\hline
+Non-Functional Requirement & Các Non-Functional Requirement tương tự như NFR-UC5.7-1, NFR-UC5.7-2, NFR-UC5.7-3. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD06-07: Áp dụng Đặt cọc (Nếu Đặt trước Online)}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-07: Áp dụng Đặt cọc (Nếu Đặt trước Online)} \label{tab:uc_md06_07} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Áp dụng Đặt cọc (Nếu Đặt trước Online) \\
+\hline
+Use Case ID & UC-MD06-07 \\
+\hline
+Use Case Description & Trong trường hợp đơn hàng mang về này được khách hàng đặt trước qua một kênh online khác (ví dụ: website, app riêng cho takeout/delivery) và đã thanh toán tiền đặt cọc, hệ thống POS cần có khả năng nhận diện và áp dụng số tiền cọc đó vào hóa đơn khi nhân viên xử lý thanh toán tại quầy. \\
+\hline
+Actor & System (Thực hiện chính), US-02, US-05 (Kích hoạt khi vào màn hình thanh toán) \\
+\hline
+Priority & Should Have (Phụ thuộc vào việc có kênh đặt takeout online hay không) \\
+\hline
+Trigger & Nhân viên tại POS mở màn hình thanh toán cho một đơn hàng mang về có liên kết với một bản ghi đặt hàng online đã trả cọc. \\
+\hline
+Pre-Condition & - Có một hệ thống/luồng riêng cho phép khách hàng đặt hàng mang về online và trả tiền đặt cọc (ví dụ: qua module eCommerce của Odoo hoặc tích hợp bên thứ ba). \newline - Khi khách đến lấy hàng, nhân viên POS có cách để tìm và mở đúng đơn hàng online đó trên giao diện POS (ví dụ: quét mã QR, nhập mã đơn hàng online, tìm theo SĐT khách). \newline - Đơn hàng online đó có ghi nhận số tiền đặt cọc đã thanh toán. \\
+\hline
+Post-Condition & - Số tiền đặt cọc được tự động trừ vào tổng số tiền cần thanh toán trên màn hình thanh toán POS. \newline - Nhân viên và khách hàng thấy số tiền cuối cùng cần trả đã được giảm. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow, Alternative Flow, Exception Flow & Logic kiểm tra và áp dụng tiền đặt cọc về cơ bản là giống hệt với Use Case UC-MD05-09: Áp dụng Tiền Đặt cọc vào Hóa đơn. Điểm khác biệt chính là cơ chế liên kết đơn hàng POS với đơn hàng online có trả cọc (thay vì liên kết với bản ghi đặt bàn). Cần có một trường hoặc cơ chế để liên kết hai loại đơn hàng này. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & Các Business Rule tương tự như BR-UC5.9-1, BR-UC5.9-2, BR-UC5.9-3, BR-UC5.9-4. Cần bổ sung: \newline - \textbf{BR-UC6.7-1:} Phải có cơ chế tin cậy để nhân viên POS tìm và liên kết đúng đơn hàng online đã trả cọc của khách khi họ đến lấy hàng. \\
+\hline
+Non-Functional Requirement & Các Non-Functional Requirement tương tự như NFR-UC5.9-1, NFR-UC5.9-2, NFR-UC5.9-3, NFR-UC5.9-4. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD06-08: Thanh toán Đơn hàng Mang về}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-08: Thanh toán Đơn hàng Mang về} \label{tab:uc_md06_08} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Thanh toán Đơn hàng Mang về \\
+\hline
+Use Case ID & UC-MD06-08 \\
+\hline
+Use Case Description & Cho phép Nhân viên nhận thanh toán từ khách hàng cho đơn hàng mang về ngay tại quầy POS, sử dụng các phương thức thanh toán được hỗ trợ (tiền mặt, thẻ, ví...) và hoàn tất giao dịch. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Khách hàng đã chọn xong món mang về và sẵn sàng thanh toán tại quầy. Nhân viên đang ở màn hình thanh toán của đơn hàng mang về. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình thanh toán cho đơn hàng mang về. \newline - Số tiền cần thanh toán cuối cùng (đã trừ cọc nếu có - UC-MD06-07) được hiển thị. \newline - Các phương thức thanh toán và thiết bị (nếu cần) đã sẵn sàng. \\
+\hline
+Post-Condition & - Giao dịch thanh toán được ghi nhận thành công. \newline - Trạng thái đơn hàng mang về được cập nhật thành "Đã thanh toán". \newline - Hóa đơn/phiếu thu được in ra (UC-MD06-09). \newline - Đơn hàng sẵn sàng để đóng (UC-MD06-10). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow, Alternative Flow, Exception Flow & Luồng thực thi, các luồng thay thế (thanh toán nhiều phương thức, thêm tiền boa - mặc dù tiền boa ít phổ biến hơn cho takeout), và các luồng ngoại lệ (lỗi thanh toán thẻ, lỗi hệ thống...) về cơ bản là giống hệt với Use Case UC-MD05-11: Xử lý Thanh toán. Điểm khác biệt là ngữ cảnh xảy ra tại quầy cho đơn mang về, không liên quan đến bàn. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & Các Business Rule tương tự như BR-UC5.11-1, BR-UC5.11-2, BR-UC5.11-3, BR-UC5.11-4, BR-UC5.11-5. \\
+\hline
+Non-Functional Requirement & Các Non-Functional Requirement tương tự như NFR-UC5.11-1, NFR-UC5.11-2, NFR-UC5.11-3, NFR-UC5.11-4, NFR-UC5.11-5. Tốc độ xử lý thanh toán tại quầy càng quan trọng để tránh ùn tắc. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD06-09: In Hóa đơn/Phiếu thu Mang về}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-09: In Hóa đơn/Phiếu thu Mang về} \label{tab:uc_md06_09} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & In Hóa đơn/Phiếu thu Mang về \\
+\hline
+Use Case ID & UC-MD06-09 \\
+\hline
+Use Case Description & Hệ thống tự động in ra hóa đơn/phiếu thu (receipt) cho khách hàng sau khi giao dịch thanh toán đơn hàng mang về được xác nhận thành công. Mẫu hóa đơn có thể cần chỉ rõ đây là đơn hàng mang về. \\
+\hline
+Actor & System (Kích hoạt in), US-02, US-05 (Nhận phiếu in đưa khách) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Giao dịch thanh toán đơn hàng mang về được xác nhận thành công (kết thúc thành công UC-MD06-08). \\
+\hline
+Pre-Condition & - Thanh toán đã thành công (UC-MD06-08). \newline - Máy in hóa đơn đã được cấu hình và kết nối với POS. \newline - Mẫu in hóa đơn (POS Receipt Template) đã được thiết lập. \\
+\hline
+Post-Condition & - Một bản hóa đơn/phiếu thu chi tiết về đơn hàng mang về được in ra. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Tiếp nối từ UC-MD06-08, sau khi hệ thống ghi nhận thanh toán thành công. \newline 2. Hệ thống tự động kích hoạt lệnh in hóa đơn đến máy in hóa đơn đã cấu hình. \newline 3. Dữ liệu hóa đơn bao gồm các thông tin tương tự UC-MD05-11 (chi tiết món, tổng tiền, thuế, cọc đã trừ, boa, phương thức thanh toán...), nhưng có thể thêm hoặc thay đổi một số thông tin cho phù hợp với đơn mang về (ví dụ: ghi chú "Takeaway Order", không có số bàn). \newline 4. Máy in in ra hóa đơn. \newline 5. Nhân viên lấy hóa đơn đưa cho khách hàng. \\
+\hline
+Alternative Flow & \textbf{2a. Tùy chọn không in hóa đơn:} \newline    1. Hệ thống có thể được cấu hình để hỏi nhân viên có muốn in hóa đơn hay không sau khi thanh toán. \newline    2. Nếu nhân viên chọn không in, bước 2-5 được bỏ qua. \newline \textbf{2b. Gửi hóa đơn điện tử:} \newline    1. Nếu hệ thống hỗ trợ và khách hàng cung cấp email (từ UC-MD06-03), hệ thống có thể gửi hóa đơn điện tử thay vì hoặc song song với việc in. \\
+\hline
+Exception Flow & \textbf{2a. Lỗi in hóa đơn:} \newline    1. Tương tự Exception Flow của UC-MD05-11, hệ thống không thể gửi lệnh in hoặc máy in gặp sự cố. \newline    2. Hệ thống báo lỗi in. Nhân viên có thể thử in lại từ lịch sử đơn hàng nếu cần. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC6.9-1:} Hóa đơn/phiếu thu phải chứa đầy đủ thông tin giao dịch theo quy định và nhu cầu quản lý. \newline - \textbf{BR-UC6.9-2:} Nên có cách để phân biệt hóa đơn mang về với hóa đơn ăn tại bàn trên mẫu in (ví dụ: tiêu đề, ghi chú). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC6.9-1 (Reliability):} Việc tự động in hóa đơn sau thanh toán phải đáng tin cậy. \newline - \textbf{NFR-UC6.9-2 (Clarity):} Thông tin trên hóa đơn phải rõ ràng, dễ đọc. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD06-10: Đóng Đơn hàng Mang về}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD06-10: Đóng Đơn hàng Mang về} \label{tab:uc_md06_10} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Đóng Đơn hàng Mang về \\
+\hline
+Use Case ID & UC-MD06-10 \\
+\hline
+Use Case Description & Sau khi khách hàng đã thanh toán và nhận hàng mang về, Nhân viên thực hiện hành động cuối cùng trên POS để chính thức đóng đơn hàng mang về đó trong hệ thống. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Giao dịch thanh toán và giao hàng cho đơn mang về đã hoàn tất (sau UC-MD06-08, UC-MD06-09). Nhân viên nhìn thấy màn hình xác nhận thanh toán thành công. \\
+\hline
+Pre-Condition & - Đơn hàng mang về đã ở trạng thái "Đã thanh toán" (Paid). \newline - Nhân viên đang ở màn hình xác nhận thanh toán thành công hoặc màn hình đơn hàng đã thanh toán. \\
+\hline
+Post-Condition & - Trạng thái cuối cùng của đơn hàng POS mang về được cập nhật thành "Đã hoàn thành" (Done) hoặc tương đương. \newline - Nhân viên được chuyển về màn hình chính của POS hoặc sẵn sàng cho đơn hàng mang về tiếp theo. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Sau khi hoàn tất thanh toán và in hóa đơn (nếu có), hệ thống hiển thị màn hình xác nhận thanh toán thành công, thường có nút "Đơn hàng tiếp theo" (Next Order) hoặc "Đơn mang về mới". \newline 2. Nhân viên (US-02/US-05) giao hàng cho khách và nhấp vào nút "Đơn hàng tiếp theo" / "Đơn mang về mới". \newline 3. Hệ thống thực hiện hành động đóng đơn hàng cuối cùng: \newline    a. Cập nhật trạng thái của bản ghi đơn hàng POS thành "Done" hoặc "Completed". \newline 4. Hệ thống chuyển hướng giao diện về màn hình chờ của chế độ bán mang về (sẵn sàng cho UC-MD06-02) hoặc màn hình POS chính. \\
+\hline
+Alternative Flow & Tương tự UC-MD05-12, có thể có nút "Đóng đơn hàng" riêng nếu không tự động chuyển sau khi nhấn "Next Order". \\
+\hline
+Exception Flow & \textbf{3b. Lỗi cập nhật trạng thái đơn hàng:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng cập nhật trạng thái cuối cùng cho đơn hàng. \newline    2. Hệ thống hiển thị thông báo lỗi. Trạng thái đơn hàng có thể không được cập nhật đúng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC6.10-1:} Chỉ những đơn hàng mang về đã thanh toán mới có thể được đóng. \newline - \textbf{BR-UC6.10-2:} Sau khi đóng, đơn hàng không thể sửa đổi trên POS nữa. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC6.10-1 (Performance):} Thao tác đóng đơn hàng phải nhanh chóng (< 1 giây). \newline - \textbf{NFR-UC6.10-2 (Usability):} Quy trình chuyển tiếp sang đơn hàng mới hoặc quay lại màn hình chính sau khi đóng đơn phải mượt mà. \\
+\hline
+\end{longtable}
+

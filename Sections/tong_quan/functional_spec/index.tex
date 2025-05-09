@@ -1,0 +1,298 @@
+\subsection{Đặc tả chức năng}
+\begin{longtable}{|m{1.5cm}|m{3.5cm}|m{4.5cm}|m{5cm}|}
+\hline
+\textbf{Mã} & \textbf{Tên Người Dùng} & \textbf{Vai Trò Thực Tế} & \textbf{Mô Tả Ngắn} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+
+US-01 & Quản lý nhà hàng & Chủ nhà hàng hoặc người quản lý cấp cao & Quản lý tổng thể hoạt động, cấu hình hệ thống (giá bàn, \% đặt cọc, thời gian gọi bot), xem báo cáo toàn diện, quản lý nhân viên và thực đơn. \\
+\hline
+US-02 & Nhân viên phục vụ & Waiter/Waitress & Sử dụng POS để nhận đơn hàng tại bàn, quản lý trạng thái bàn, xử lý thanh toán (bao gồm cả việc trừ tiền đặt cọc), tương tác với hệ thống bếp. \\
+\hline
+US-03 & Nhân viên lễ tân & Host/Hostess (Có thể là Nhân viên phục vụ đảm nhiệm) & Quản lý sơ đồ tầng, trạng thái bàn, nhận và quản lý đặt chỗ trực tiếp hoặc qua điện thoại (ít tương tác hệ thống hơn khách hàng tự đặt). \\
+\hline
+US-04 & Nhân viên bếp & Chef, Cook, Kitchen Assistant & Tương tác chính với Màn hình hiển thị Bếp (KDS) hoặc máy in phiếu bếp để xem chi tiết đơn hàng (bao gồm món đặt trước) và cập nhật trạng thái chuẩn bị. \\
+\hline
+US-05 & Nhân viên thu ngân & Cashier (Có thể là Nhân viên phục vụ hoặc Quản lý) & Chịu trách nhiệm đóng/mở phiên POS, đối soát tiền mặt cuối ngày, xử lý các giao dịch thanh toán. \\
+\hline
+US-06 & Kế toán & Accountant/Bookkeeper & Truy cập dữ liệu bán hàng đã được tổng hợp, báo cáo tài chính, quản lý công nợ (nếu có), đối soát doanh thu và tiền đặt cọc. \\
+\hline
+US-07 & Nhân viên (Chung) & Bất kỳ nhân viên nào cần xem lịch làm việc & Xem lịch làm việc cá nhân được phân công qua Odoo Planning/Employee Portal, có thể có quyền yêu cầu đổi ca hoặc báo nghỉ. \\
+\hline
+US-08 & Khách hàng & Customer/Guest & Tương tác qua giao diện web/app để đặt bàn, đặt món ăn trước, thanh toán đặt cọc, đặt hàng mang về hoặc giao hàng. \\
+\hline
+US-09 & Nhân viên hỗ trợ/ Vận hành & Support/Operations Staff & Tiếp nhận và xử lý các yêu cầu hỗ trợ từ khách hàng. \\
+\hline
+US-10 & Quản trị viên Hệ thống & System Administrator (Có thể là Quản lý nhà hàng hoặc IT) & Thực hiện các cấu hình kỹ thuật sâu, quản lý tích hợp (Shipday, Bot), quản lý tài khoản người dùng và phân quyền chi tiết. \\
+\hline
+\caption{Danh sách Người dùng Hệ thống} \label{tab:users} \\
+
+\end{longtable}
+
+\newpage % Ngắt trang
+
+
+
+\begin{longtable}{|m{2.5cm}|m{2.5cm}|m{5cm}|m{5cm}|}
+\hline
+\textbf{Người dùng} & \textbf{Mã chức năng} & \textbf{Tên chức năng} & \textbf{Mô tả ngắn} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\midrule
+\endfoot % Footer cho bảng
+
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+
+% === US-01: Quản lý nhà hàng ===
+\multicolumn{4}{|l|}{\textbf{US-01: Quản lý nhà hàng}} \\ \hline
+\multirow{15}{=}[2pt]{US-01: Quản lý nhà hàng} & FR-MD01-01 & Tạo ca làm việc & Cho phép định nghĩa các ca làm việc mới (thời gian, vai trò, số lượng). \\
+& FR-MD01-02 & Gán nhân viên vào ca & Chỉ định nhân viên cụ thể cho các vị trí trống trong ca làm việc. \\
+& FR-MD01-03 & Xem lịch biểu Gantt & Hiển thị lịch làm việc dạng Gantt, lọc theo vai trò, xem theo ngày/tuần/tháng. \\
+& FR-MD01-04 & (Kích hoạt) Phát hiện trùng lịch & Kích hoạt hệ thống kiểm tra trùng lịch khi gán nhân viên. \\
+& FR-MD01-05 & Xuất bản và Thông báo lịch & Công khai lịch làm việc và kích hoạt gửi thông báo đến nhân viên. \\
+& FR-MD01-07 & Sao chép lịch tuần & Sao chép nhanh lịch làm việc của một tuần sang tuần khác. \\
+& FR-MD01-08 & Quản lý vai trò công việc & Định nghĩa các vai trò công việc trong nhà hàng. \\
+& FR-MD01-10 & Xem lịch theo vai trò & Lọc và xem lịch làm việc của các nhân viên theo vai trò cụ thể. \\ \cline{2-4}
+& FR-MD02-01 & Tạo Sản phẩm Mới (Món ăn/Đồ uống) & Thêm món ăn, đồ uống mới vào hệ thống (tên, giá, loại...). \\
+& FR-MD02-02 & Chỉnh sửa Thông tin Sản phẩm & Cập nhật chi tiết sản phẩm đã có (giá, mô tả, ảnh...). \\
+& FR-MD02-03 & Lưu trữ/Hủy kích hoạt Sản phẩm & Ẩn/Hiện sản phẩm khỏi các giao dịch mà không xóa hẳn. \\
+& FR-MD02-04 & Quản lý Danh mục Sản phẩm POS & Tạo, sửa, xóa, sắp xếp các danh mục hiển thị trên POS. \\
+& FR-MD02-05 & Định nghĩa Thuộc tính \& Giá trị (cho Biến thể) & Định nghĩa các đặc tính (size, độ cay) và lựa chọn (S, M, L). (Có thể là US-10) \\
+& FR-MD02-06 & Cấu hình Biến thể Sản phẩm & Áp dụng thuộc tính/giá trị vào sản phẩm gốc để tạo biến thể, cấu hình giá riêng. \\
+& FR-MD02-07 & Thiết lập Loại Sản phẩm & Xác định loại sản phẩm (Consumable, Stockable, Service). \\
+& FR-MD02-08 & Cấu hình Hiển thị trên POS & Đánh dấu sản phẩm bán trên POS và gán vào danh mục POS. \\
+& FR-MD02-09 & Quản lý Hình ảnh Sản phẩm & Tải lên, thay thế, xóa hình ảnh đại diện cho sản phẩm. \\
+& FR-MD02-10 & Cấu hình In Bếp/Hiển thị KDS & Chỉ định danh mục sản phẩm nào gửi đến máy in/KDS nào. \\
+& FR-MD02-11 & Định nghĩa Sản phẩm Tùy chọn/Phụ thu & Tạo các sản phẩm nhỏ (Extra cheese) để dùng làm modifier trên POS. \\ \cline{2-4}
+& FR-MD03-11 & Cấu hình Tham số Đặt chỗ & Thiết lập giờ hoạt động, giới hạn khách, quy tắc đặt cọc, giá bàn... \\
+& FR-MD03-12 & Xem Danh sách Đặt chỗ & Xem danh sách tổng hợp các lượt đặt chỗ và trạng thái. \\
+& FR-MD03-13 & Xem Chi tiết Đặt chỗ & Xem thông tin chi tiết của một lượt đặt chỗ cụ thể. \\
+& FR-MD03-14 & Tạo/Sửa Đặt chỗ Thủ công & Tạo hoặc sửa đặt chỗ cho khách qua kênh offline (điện thoại...). \\
+& FR-MD03-15 & Quản lý Trạng thái Đặt chỗ & Thay đổi trạng thái đặt chỗ (Xác nhận, Đã đến, Hủy...). \\
+& FR-MD03-16 & Xem Danh sách Món đặt trước & Xem các món cần chuẩn bị cho các đặt chỗ sắp tới. \\ \cline{2-4}
+& FR-MD04-05 & Cấu hình Dịch vụ Bot Call & Cấu hình tham số tích hợp Bot Call (số ngày gọi, kịch bản, số hỗ trợ...). (Có thể là US-10) \\ \cline{2-4}
+& FR-MD05-01 & Mở phiên làm việc POS & Bắt đầu phiên làm việc POS, nhập tiền mặt đầu ca. (Thường là US-05) \\
+& FR-MD05-13 & Đóng Phiên làm việc POS & Kết thúc phiên làm việc, tổng kết, đối chiếu tiền mặt. (Thường là US-05) \\
+& FR-MD05-14 & Chuyển bàn/Ghép bàn & Di chuyển hoặc gộp đơn hàng giữa các bàn. \\
+& FR-MD05-15 & Hủy món/Hủy đơn (Void) & Hủy bỏ món hoặc đơn hàng (có thể cần quyền quản lý). \\ \cline{2-4}
+& FR-MD09-03 & Xem Báo cáo Doanh thu Phiên POS & Xem báo cáo tổng kết chi tiết của các phiên POS đã đóng. \\
+& FR-MD09-04 & Xem Báo cáo Bán hàng theo Sản phẩm/Danh mục & Xem thống kê số lượng, doanh thu theo từng món ăn/danh mục. \\
+& FR-MD09-05 & Xem Báo cáo Hiệu suất Nhân viên (POS) & Xem doanh thu, số đơn hàng theo từng nhân viên POS. \\
+& FR-MD09-06 & Xem Báo cáo Tiền đặt cọc & Xem báo cáo tổng hợp tình hình thu, sử dụng, mất cọc. \\
+& FR-MD09-07 & Xem Báo cáo Doanh thu theo Loại hình & Phân tích doanh thu theo Eat-in, Takeout, Delivery. \\
+& FR-MD09-08 & Xuất dữ liệu Báo cáo & Xuất dữ liệu báo cáo ra file Excel/CSV. \\ \cline{2-4}
+& FR-MD10-04 & Cấu hình Chung của Hệ thống & Cấu hình thông tin công ty, logo, tiền tệ, email... (Có thể là US-10) \\
+& FR-MD10-05 & Cấu hình Tích hợp Bên thứ ba & Quản lý API keys cho Cổng thanh toán, Bot Call, Shipday. (Có thể là US-10) \\
+& FR-MD10-06 & Cấu hình Tham số Nghiệp vụ Đặc thù & Cấu hình tỷ lệ cọc, giá bàn, số ngày gọi bot... (Có thể là US-10) \\
+\hline
+
+% === US-02: Nhân viên phục vụ ===
+\multicolumn{4}{|l|}{\textbf{US-02: Nhân viên phục vụ}} \\ \hline
+\multirow{12}{=}[2pt]{US-02: Nhân viên phục vụ} & FR-MD05-02 & Truy cập Sơ đồ tầng \& Chọn bàn & Xem trạng thái bàn và chọn bàn để phục vụ. \\
+& FR-MD05-03 & Bắt đầu/Mở đơn hàng tại bàn & Mở giao diện đơn hàng cho bàn đã chọn. \\
+& FR-MD05-04 & Tải và Xác nhận Món ăn Đặt trước & Xem và xác nhận các món khách đã đặt trước online. \\
+& FR-MD05-05 & Thêm món ăn/đồ uống vào đơn hàng & Nhận order tại bàn và thêm món vào POS. \\
+& FR-MD05-06 & Xử lý Yêu cầu đặc biệt/Ghi chú bếp & Thêm ghi chú (ít cay, dị ứng...) vào món ăn/đơn hàng. \\
+& FR-MD05-07 & Gửi đơn hàng xuống Bếp/Bar & Gửi thông tin món cần chuẩn bị đến bếp/bar. \\
+& FR-MD05-08 & Yêu cầu/In Hóa đơn Tạm tính & In bill tạm tính cho khách kiểm tra. \\
+& FR-MD05-09 & (Kích hoạt) Áp dụng Tiền Đặt cọc vào Hóa đơn & Kích hoạt việc trừ cọc khi vào màn hình thanh toán. \\
+& FR-MD05-10 & Tách hóa đơn (Split Bill) & Chia hóa đơn cho khách thanh toán riêng. \\
+& FR-MD05-11 & Xử lý Thanh toán & Nhận thanh toán từ khách (tiền mặt, thẻ...), xử lý tiền boa. \\
+& FR-MD05-12 & Đóng Đơn hàng và Bàn & Đóng đơn hàng và giải phóng bàn sau khi khách thanh toán. \\
+& FR-MD05-14 & Chuyển bàn/Ghép bàn & Di chuyển hoặc gộp đơn hàng giữa các bàn. \\
+& FR-MD05-15 & Hủy món/Hủy đơn (Void) & Hủy món/đơn (có thể cần quyền hoặc xác nhận của quản lý). \\ \cline{2-4}
+& FR-MD06-01 & Chọn Chế độ Bán Mang về & Chuyển sang giao diện bán mang về trên POS. \\
+& FR-MD06-02 & Tạo Đơn hàng Mang về & Khởi tạo đơn hàng mới cho khách mang về. \\
+& FR-MD06-03 & (Tùy chọn) Liên kết Khách hàng & Gán đơn hàng mang về với khách hàng (nếu cần). \\
+& FR-MD06-04 & Thêm món vào Đơn hàng Mang về & Thêm món vào đơn hàng mang về. \\
+& FR-MD06-05 & Xử lý Ghi chú cho Đơn Mang về & Thêm ghi chú cho đơn hàng mang về. \\
+& FR-MD06-06 & Gửi đơn Mang về xuống Bếp/Bar & Gửi món của đơn mang về xuống bếp/bar. \\
+& FR-MD06-07 & (Kích hoạt) Áp dụng Đặt cọc (Nếu Đặt trước Online) & Kích hoạt trừ cọc cho đơn takeout đặt online. \\
+& FR-MD06-08 & Thanh toán Đơn hàng Mang về & Nhận thanh toán cho đơn hàng mang về tại quầy. \\
+& FR-MD06-09 & (Nhận) In Hóa đơn/Phiếu thu Mang về & Nhận hóa đơn in ra để đưa khách. \\
+& FR-MD06-10 & Đóng Đơn hàng Mang về & Đóng đơn hàng mang về sau khi thanh toán/giao hàng. \\ \cline{2-4}
+& FR-MD07-01 & Chọn Chế độ Giao hàng & Chuyển sang giao diện xử lý đơn giao hàng. \\
+& FR-MD07-02 & Tạo/Mở Đơn hàng Giao hàng & Tạo/mở đơn hàng giao đi. \\
+& FR-MD07-03 & Liên kết/Nhập Thông tin Khách hàng Giao hàng & Nhập/chọn thông tin khách và địa chỉ giao hàng. \\
+& FR-MD07-04 & Thêm món vào Đơn hàng Giao hàng & Thêm món vào đơn hàng giao đi. \\
+& FR-MD07-05 & Xử lý Ghi chú cho Đơn Giao hàng & Thêm ghi chú cho món hoặc cho tài xế. \\
+& FR-MD07-06 & Gửi đơn Giao hàng xuống Bếp/Bar & Gửi món của đơn giao hàng xuống bếp/bar. \\
+& FR-MD07-07 & (Kích hoạt) Áp dụng Đặt cọc/Thanh toán Trước & Kích hoạt trừ cọc/thanh toán trước cho đơn giao hàng. \\
+& FR-MD07-08 & Xác nhận và Gửi Đơn hàng sang Shipday & Gửi thông tin đơn hàng qua Shipday để điều phối giao hàng. \\
+& FR-MD07-10 & Xử lý Thanh toán Đơn hàng Giao hàng (Nếu COD) & Ghi nhận tiền COD tài xế nộp lại. \\
+& FR-MD07-11 & In Hóa đơn/Phiếu Giao hàng & In phiếu giao hàng/hóa đơn cho tài xế và khách. \\
+& FR-MD07-12 & Đóng Đơn hàng Giao hàng & Đóng đơn hàng giao đi sau khi hoàn tất. \\
+\hline
+
+% === US-03: Nhân viên lễ tân ===
+\multicolumn{4}{|l|}{\textbf{US-03: Nhân viên lễ tân}} \\ \hline
+\multirow{5}{=}[2pt]{US-03: Nhân viên lễ tân} & FR-MD03-12 & Xem Danh sách Đặt chỗ & Xem danh sách tổng hợp các lượt đặt chỗ và trạng thái. \\
+& FR-MD03-13 & Xem Chi tiết Đặt chỗ & Xem thông tin chi tiết của một lượt đặt chỗ cụ thể. \\
+& FR-MD03-14 & Tạo/Sửa Đặt chỗ Thủ công & Tạo hoặc sửa đặt chỗ cho khách qua kênh offline (điện thoại...). \\
+& FR-MD03-15 & Quản lý Trạng thái Đặt chỗ & Thay đổi trạng thái đặt chỗ (Xác nhận, Đã đến, Hủy...). \\ \cline{2-4}
+& FR-MD05-02 & Truy cập Sơ đồ tầng \& Chọn bàn & Xem trạng thái bàn và xếp khách vào bàn (có thể dùng POS). \\
+\hline
+
+% === US-04: Nhân viên bếp ===
+\multicolumn{4}{|l|}{\textbf{US-04: Nhân viên bếp}} \\ \hline
+\multirow{5}{=}[2pt]{US-04: Nhân viên bếp} & FR-MD03-16 & Xem Danh sách Món đặt trước & Xem các món cần chuẩn bị cho các đặt chỗ sắp tới. \\ \cline{2-4}
+& FR-MD08-02 & Xem Đơn hàng trên KDS & Xem các đơn hàng/phiếu chờ xử lý trên màn hình KDS. \\
+& FR-MD08-03 & Thay đổi Trạng thái Món ăn/Đơn hàng trên KDS & Đánh dấu món/đơn hàng đang làm, đã xong trên KDS. \\
+& FR-MD08-04 & Xem Chi tiết Món ăn trên KDS & Xem chi tiết món ăn, biến thể, ghi chú trên KDS. \\
+& FR-MD08-05 & (Tùy chọn) Sắp xếp/Ưu tiên Đơn hàng trên KDS & Sắp xếp hoặc đánh dấu ưu tiên các đơn hàng trên KDS. \\
+& FR-MD08-07 & Nhận và Xử lý Phiếu in Bếp & Nhận phiếu in từ máy in và thực hiện chế biến (thủ công). \\
+\hline
+
+% === US-05: Nhân viên thu ngân ===
+\multicolumn{4}{|l|}{\textbf{US-05: Nhân viên thu ngân}} \\ \hline
+\multirow{11}{=}[2pt]{US-05: Nhân viên thu ngân} & FR-MD05-01 & Mở phiên làm việc POS & Bắt đầu phiên làm việc POS, nhập tiền mặt đầu ca. \\
+& FR-MD05-11 & Xử lý Thanh toán & Nhận thanh toán từ khách (tiền mặt, thẻ...), xử lý tiền boa. (Có thể là US-02) \\
+& FR-MD05-13 & Đóng Phiên làm việc POS & Kết thúc phiên làm việc, tổng kết, đối chiếu tiền mặt. \\ \cline{2-4}
+& FR-MD06-01 & Chọn Chế độ Bán Mang về & Chuyển sang giao diện bán mang về trên POS. \\
+& FR-MD06-02 & Tạo Đơn hàng Mang về & Khởi tạo đơn hàng mới cho khách mang về. \\
+& FR-MD06-03 & (Tùy chọn) Liên kết Khách hàng & Gán đơn hàng mang về với khách hàng (nếu cần). \\
+& FR-MD06-04 & Thêm món vào Đơn hàng Mang về & Thêm món vào đơn hàng mang về. \\
+& FR-MD06-05 & Xử lý Ghi chú cho Đơn Mang về & Thêm ghi chú cho đơn hàng mang về. \\
+& FR-MD06-06 & Gửi đơn Mang về xuống Bếp/Bar & Gửi món của đơn mang về xuống bếp/bar. \\
+& FR-MD06-08 & Thanh toán Đơn hàng Mang về & Nhận thanh toán cho đơn hàng mang về tại quầy. \\
+& FR-MD06-09 & (Nhận) In Hóa đơn/Phiếu thu Mang về & Nhận hóa đơn in ra để đưa khách. \\
+& FR-MD06-10 & Đóng Đơn hàng Mang về & Đóng đơn hàng mang về sau khi thanh toán/giao hàng. \\ \cline{2-4}
+& FR-MD07-01 & Chọn Chế độ Giao hàng & Chuyển sang giao diện xử lý đơn giao hàng. \\
+& FR-MD07-02 & Tạo/Mở Đơn hàng Giao hàng & Tạo/mở đơn hàng giao đi. \\
+& FR-MD07-03 & Liên kết/Nhập Thông tin Khách hàng Giao hàng & Nhập/chọn thông tin khách và địa chỉ giao hàng. \\
+& FR-MD07-04 & Thêm món vào Đơn hàng Giao hàng & Thêm món vào đơn hàng giao đi. \\
+& FR-MD07-05 & Xử lý Ghi chú cho Đơn Giao hàng & Thêm ghi chú cho món hoặc cho tài xế. \\
+& FR-MD07-06 & Gửi đơn Giao hàng xuống Bếp/Bar & Gửi món của đơn giao hàng xuống bếp/bar. \\
+& FR-MD07-08 & Xác nhận và Gửi Đơn hàng sang Shipday & Gửi thông tin đơn hàng qua Shipday để điều phối giao hàng. \\
+& FR-MD07-10 & Xử lý Thanh toán Đơn hàng Giao hàng (Nếu COD) & Ghi nhận tiền COD tài xế nộp lại. \\
+& FR-MD07-11 & In Hóa đơn/Phiếu Giao hàng & In phiếu giao hàng/hóa đơn cho tài xế và khách. \\
+& FR-MD07-12 & Đóng Đơn hàng Giao hàng & Đóng đơn hàng giao đi sau khi hoàn tất. \\
+\hline
+
+% === US-06: Kế toán ===
+\multicolumn{4}{|l|}{\textbf{US-06: Kế toán}} \\ \hline
+\multirow{5}{=}[2pt]{US-06: Kế toán} & FR-MD09-03 & Xem Báo cáo Doanh thu Phiên POS & Xem báo cáo tổng kết chi tiết của các phiên POS đã đóng. \\
+& FR-MD09-04 & Xem Báo cáo Bán hàng theo Sản phẩm/Danh mục & Xem thống kê số lượng, doanh thu theo từng món ăn/danh mục. \\
+& FR-MD09-06 & Xem Báo cáo Tiền đặt cọc & Xem báo cáo tổng hợp tình hình thu, sử dụng, mất cọc. \\
+& FR-MD09-07 & Xem Báo cáo Doanh thu theo Loại hình & Phân tích doanh thu theo Eat-in, Takeout, Delivery. \\
+& FR-MD09-08 & Xuất dữ liệu Báo cáo & Xuất dữ liệu báo cáo ra file Excel/CSV. \\
+\hline
+
+% === US-07: Nhân viên (Chung) ===
+\multicolumn{4}{|l|}{\textbf{US-07: Nhân viên (Chung)}} \\ \hline
+\multirow{2}{=}[2pt]{US-07: Nhân viên (Chung)} & FR-MD01-06 & Xem lịch cá nhân & Xem lịch làm việc đã được xuất bản của bản thân. \\
+& FR-MD01-09 & Đánh dấu không sẵn sàng & Thông báo cho quản lý về thời gian không thể làm việc. \\
+\hline
+
+% === US-08: Khách hàng ===
+\multicolumn{4}{|l|}{\textbf{US-08: Khách hàng}} \\ \hline
+\multirow{9}{=}[2pt]{US-08: Khách hàng} & FR-MD03-01 & Xem Giao diện Đặt chỗ & Truy cập và xem giao diện đặt chỗ online. \\
+& FR-MD03-02 & Chọn Thông tin Đặt bàn & Chọn ngày, giờ, số lượng người đặt bàn. \\
+& FR-MD03-03 & (Tùy chọn) Chọn Bàn cụ thể & Xem sơ đồ tầng và chọn bàn trống (nếu được phép). \\
+& FR-MD03-04 & Xem Thực đơn & Xem thực đơn online để chọn món đặt trước. \\
+& FR-MD03-05 & Chọn Món ăn Đặt trước & Thêm món ăn/đồ uống vào giỏ hàng đặt trước. \\
+& FR-MD03-06 & Xem Tóm tắt Đặt chỗ & Xem lại thông tin đặt bàn, món ăn, tiền cọc dự kiến. \\
+& FR-MD03-07 & Nhập Thông tin Khách hàng & Cung cấp Tên, SĐT, Email. \\
+& FR-MD03-09 & Thanh toán Đặt cọc & Thực hiện thanh toán tiền đặt cọc qua cổng thanh toán. \\
+& FR-MD03-10 & (Nhận) Xác nhận Đặt chỗ & Nhận email/SMS xác nhận sau khi thanh toán thành công. \\
+& FR-MD03-17 & Xem Lịch sử/Chi tiết Đặt chỗ Cá nhân & Xem lại các đặt chỗ đã thực hiện qua tài khoản. \\ \cline{2-4}
+& FR-MD04-02 & (Tương tác) Thực hiện Cuộc gọi và Tương tác Khách hàng & Nghe máy và bấm phím 1, 0, 2 khi nhận cuộc gọi từ Bot. \\
+\hline
+
+% === US-09: Nhân viên hỗ trợ/ Vận hành ===
+\multicolumn{4}{|l|}{\textbf{US-09: Nhân viên hỗ trợ/ Vận hành}} \\ \hline
+\multirow{1}{=}[2pt]{US-09: Nhân viên hỗ trợ/ Vận hành} & FR-MD04-03 & (Tiếp nhận) Xử lý Phản hồi Khách hàng từ Bot Call & Nhận cuộc gọi chuyển tiếp từ Bot khi khách bấm phím 2 để hỗ trợ. \\
+&&&
+\hline
+
+% === US-10: Quản trị viên Hệ thống ===
+\multicolumn{4}{|l|}{\textbf{US-10: Quản trị viên Hệ thống}} \\ \hline
+\multirow{7}{=}[2pt]{US-10: Quản trị viên Hệ thống} & FR-MD02-05 & Định nghĩa Thuộc tính \& Giá trị (cho Biến thể) & Định nghĩa các đặc tính (size, độ cay) và lựa chọn (S, M, L). (Có thể là US-01) \\ \cline{2-4}
+& FR-MD04-05 & Cấu hình Dịch vụ Bot Call & Cấu hình tham số tích hợp Bot Call. (Có thể là US-01) \\ \cline{2-4}
+& FR-MD07-13 & Cấu hình Tích hợp Shipday & Cấu hình tham số kết nối API Shipday. (Có thể là US-01) \\ \cline{2-4}
+& FR-MD10-01 & Quản lý Người dùng (Nhân viên) & Tạo, sửa, vô hiệu hóa tài khoản người dùng nhân viên. \\
+& FR-MD10-02 & Quản lý Nhóm Quyền & Xem, tạo, sửa, xóa các nhóm quyền truy cập. \\
+& FR-MD10-03 & Phân quyền Truy cập cho Người dùng & Gán người dùng vào các nhóm quyền phù hợp. \\
+& FR-MD10-04 & Cấu hình Chung của Hệ thống & Cấu hình thông tin công ty, logo, tiền tệ, email... (Có thể là US-01) \\
+& FR-MD10-05 & Cấu hình Tích hợp Bên thứ ba & Quản lý API keys cho Cổng thanh toán, Bot Call, Shipday. (Có thể là US-01) \\
+& FR-MD10-06 & Cấu hình Tham số Nghiệp vụ Đặc thù & Cấu hình tỷ lệ cọc, giá bàn, số ngày gọi bot... (Có thể là US-01) \\
+& FR-MD10-07 & Xem Nhật ký Hệ thống (Logs) & Xem log hệ thống để theo dõi và khắc phục sự cố. \\
+\hline
+\caption{Phân công Chức năng theo Người dùng} \label{tab:user_function_map} \\
+
+\end{longtable}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+
+
+\begin{longtable}{|m{1.5cm}|m{4.5cm}|m{9cm}|}
+\hline
+\textbf{Mã} & \textbf{Tên Module} & \textbf{Mô Tả} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+
+MD-01 & Quản lý Lịch làm việc (Scheduling) & Bao gồm các chức năng: tạo ca làm việc, gán nhân viên theo vai trò, hiển thị dạng Gantt, kiểm tra trùng lịch, xuất bản và thông báo lịch trình cho nhân viên. \\
+\hline
+MD-02 & Quản lý Thực đơn \& Sản phẩm (Menu \& Product) & Quản lý danh sách món ăn, đồ uống dưới dạng sản phẩm. Bao gồm tạo mới, chỉnh sửa giá, mô tả, hình ảnh, phân loại theo danh mục POS, quản lý biến thể (ví dụ: size S/M/L), quản lý tồn kho cho các mặt hàng cụ thể (vd: rượu chai). \\
+\hline
+MD-03 & Quản lý Đặt chỗ \& Đặt món trước (Booking \& Pre-order) & Cung cấp giao diện cho khách hàng (web/app) để chọn thời gian, số lượng người, chọn bàn (nếu có), và tùy chọn đặt trước các món ăn từ thực đơn. Tính toán và xử lý thanh toán tiền đặt cọc (15\% giá trị bàn + 15\% giá trị món ăn đặt trước). Quản lý trạng thái các lượt đặt chỗ. \\
+\hline
+MD-04 & Xác nhận Tự động qua Bot (Automated Bot Confirmation) & Tự động kích hoạt cuộc gọi thoại tới khách hàng trước N ngày (cấu hình được) so với ngày đặt chỗ. Phát thông báo và xử lý lựa chọn của khách (1: Xác nhận, 0: Hủy - cập nhật trạng thái đặt chỗ và ghi nhận mất cọc, 2: Chuyển hướng cuộc gọi đến Nhân viên hỗ trợ). \\
+\hline
+MD-05 & Quản lý Bán hàng Tại chỗ (POS - Eat-in) & Giao diện POS cho nhân viên phục vụ, quản lý sơ đồ tầng, trạng thái bàn, nhận đơn hàng tại bàn (bao gồm cả món khách đã đặt trước), xử lý yêu cầu đặc biệt (ghi chú bếp), tách/gộp hóa đơn, áp dụng tiền đặt cọc đã thanh toán vào hóa đơn cuối cùng, xử lý thanh toán đa phương thức, quản lý tiền boa. \\
+\hline
+MD-06 & Quản lý Bán mang về (POS - Takeout) & Cung cấp một giao diện/luồng riêng biệt trên POS (ví dụ: nút "Takeout") để tạo đơn hàng mang về. Không yêu cầu chọn bàn. Có thể liên kết với khách hàng nếu họ đã đăng nhập hoặc cung cấp thông tin. Áp dụng tiền đặt cọc nếu đơn hàng được đặt trước qua kênh online. Xử lý thanh toán. \\
+\hline
+MD-07 & Quản lý Giao hàng (POS - Delivery) & Cung cấp một giao diện/luồng riêng biệt trên POS (ví dụ: nút "Delivery"). Yêu cầu thông tin khách hàng (đã đăng nhập từ web/app đặt hàng). Tích hợp với Shipday: gửi thông tin đơn hàng (địa chỉ, chi tiết món, thông tin khách) sang Shipday để điều phối tài xế, nhận lại cập nhật trạng thái giao hàng từ Shipday. Áp dụng tiền đặt cọc đã thanh toán. Xử lý thanh toán (có thể là online trước hoặc COD tùy cấu hình). \\
+\hline
+MD-08 & Tích hợp Bếp (Kitchen Integration) & Truyền thông tin đơn hàng (từ Eat-in, Takeout, Delivery - bao gồm món đặt trước và ghi chú) tới khu vực bếp thông qua Màn hình hiển thị Bếp (KDS) hoặc máy in phiếu bếp. Cho phép nhân viên bếp cập nhật trạng thái món ăn (đang làm, đã xong). \\
+\hline
+MD-09 & Quản lý Phiên \& Báo cáo (Session \& Reporting) & Quản lý việc mở và đóng phiên làm việc trên POS, đối soát tiền mặt. Cung cấp các báo cáo về doanh thu (theo loại hình: Eat-in, Takeout, Delivery), sản phẩm bán chạy, hiệu suất nhân viên, tiền đặt cọc, trạng thái đơn hàng giao, tích hợp dữ liệu với phân hệ Kế toán của Odoo. \\
+\hline
+MD-10 & Quản lý Hệ thống \& Người dùng (System \& User) & Quản lý tài khoản người dùng (tạo, sửa, xóa), phân quyền truy cập chi tiết cho từng vai trò vào các module và chức năng. Quản lý các cấu hình chung như tỷ lệ đặt cọc, giá trị bàn, thời gian gọi bot, cấu hình tích hợp bên thứ ba (API keys,...). \\
+\hline
+\caption{Phân chia Module Hệ thống} \label{tab:modules} \\
+
+\end{longtable}
+
+\include{Sections/tong_quan/functional_spec/module1}
+\include{Sections/tong_quan/functional_spec/module2}
+% \include{Sections/tong_quan/functional_spec/module3}
+% \include{Sections/tong_quan/functional_spec/module4}
+% \include{Sections/tong_quan/functional_spec/module5}
+% \include{Sections/tong_quan/functional_spec/module6}
+% \include{Sections/tong_quan/functional_spec/module7}
+% \include{Sections/tong_quan/functional_spec/module8}
+% \include{Sections/tong_quan/functional_spec/module9}
+
+% \include{Sections/tong_quan/functional_spec/module10}

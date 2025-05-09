@@ -1,0 +1,44 @@
+\subsubsection{Module MD-07: Quản lý Giao hàng (POS - Delivery)}
+
+\begin{longtable}{|m{2cm}|m{2.5cm}|m{2.5cm}|m{4.5cm}|m{4cm}|}
+\caption{Danh sách Yêu cầu Chức năng cho Module MD-07: Quản lý Giao hàng (POS - Delivery)} \label{tab:fr_md07} \\
+\hline
+\textbf{Mã Module} & \textbf{Mã Yêu cầu CN} & \textbf{Mã Người dùng} & \textbf{Tên Chức năng} & \textbf{Mô tả Ngắn} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+
+MD-07 & FR-MD07-01 & US-02, US-05 & Chọn Chế độ Giao hàng & Cho phép nhân viên chọn một chế độ/giao diện riêng biệt trên POS dành cho việc xử lý các đơn hàng giao đi (Delivery). \\
+\hline
+MD-07 & FR-MD07-02 & US-02, US-05 & Tạo/Mở Đơn hàng Giao hàng & Khởi tạo đơn hàng mới hoặc mở lại đơn hàng giao hàng đang chờ xử lý. Yêu cầu liên kết với thông tin khách hàng (địa chỉ giao, SĐT). \\
+\hline
+MD-07 & FR-MD07-03 & US-02, US-05 & Liên kết/Nhập Thông tin Khách hàng Giao hàng & Yêu cầu bắt buộc tìm kiếm/chọn khách hàng đã có (với địa chỉ) hoặc nhập thông tin khách hàng mới bao gồm Tên, SĐT và Địa chỉ giao hàng chi tiết. \\
+\hline
+MD-07 & FR-MD07-04 & US-02, US-05 & Thêm món vào Đơn hàng Giao hàng & Cho phép nhân viên thêm các món ăn/đồ uống vào đơn hàng giao đi. Tương tự UC-MD05-05 / UC-MD06-04. \\
+\hline
+MD-07 & FR-MD07-05 & US-02, US-05 & Xử lý Ghi chú cho Đơn Giao hàng & Cho phép thêm ghi chú đặc biệt (ví dụ: "Giao vào giờ nghỉ trưa", "Gọi trước khi đến"). Tương tự UC-MD05-06 / UC-MD06-05. \\
+\hline
+MD-07 & FR-MD07-06 & US-02, US-05 & Gửi đơn Giao hàng xuống Bếp/Bar & Gửi thông tin món cần chuẩn bị xuống bếp/bar, đánh dấu là đơn "Delivery". Tương tự UC-MD05-07 / UC-MD06-06. \\
+\hline
+MD-07 & FR-MD07-07 & US-02, US-05, System & Áp dụng Đặt cọc/Thanh toán Trước (Nếu có) & Nếu đơn hàng giao đi được đặt online và đã thanh toán trước (toàn bộ hoặc đặt cọc), hệ thống cần áp dụng khoản đã thanh toán này. Logic tương tự UC-MD05-09 / UC-MD06-07. \\
+\hline
+MD-07 & FR-MD07-08 & US-02, US-05 & Xác nhận và Gửi Đơn hàng sang Shipday & Sau khi đơn hàng sẵn sàng, nhân viên xác nhận và kích hoạt việc gửi thông tin đơn hàng (chi tiết món, thông tin khách hàng, địa chỉ giao) sang hệ thống Shipday qua API. \\
+\hline
+MD-07 & FR-MD07-09 & System (Odoo/Shipday) & Nhận và Hiển thị Trạng thái Giao hàng từ Shipday & Hệ thống Odoo nhận cập nhật trạng thái giao hàng (ví dụ: Đã gán tài xế, Đang giao, Đã giao thành công, Giao thất bại) từ Shipday (qua webhook) và hiển thị trên chi tiết đơn hàng POS/Backend. \\
+\hline
+MD-07 & FR-MD07-10 & US-02, US-05 & Xử lý Thanh toán Đơn hàng Giao hàng (Nếu COD) & Nếu đơn hàng thanh toán khi nhận hàng (COD), cho phép nhân viên ghi nhận thanh toán sau khi nhận được tiền từ tài xế giao hàng. \\
+\hline
+MD-07 & FR-MD07-11 & US-02, US-05 & In Hóa đơn/Phiếu Giao hàng & In hóa đơn/phiếu giao hàng chứa thông tin chi tiết đơn hàng, thông tin khách hàng, địa chỉ giao để tài xế sử dụng và giao cho khách. \\
+\hline
+MD-07 & FR-MD07-12 & US-02, US-05, System & Đóng Đơn hàng Giao hàng & Hoàn tất và đóng đơn hàng giao đi sau khi đã giao thành công và (nếu COD) đã nhận đủ thanh toán. \\
+\hline
+MD-07 & FR-MD07-13 & US-01 / US-10 & Cấu hình Tích hợp Shipday & Cho phép cấu hình các tham số kết nối API giữa Odoo và Shipday (API Key, Endpoint...), và các quy tắc đồng bộ dữ liệu. \\
+\hline
+
+\end{longtable}
+

@@ -1,0 +1,100 @@
+\subsubsection{Kiểm thử tự động}
+
+Kiểm thử tự động (Automation testing) là một kỹ thuật mà người kiểm thử viết các kịch bản một cách độc lập và sử dụng phần mềm phù hợp hoặc Công cụ Tự động hóa để kiểm thử phần mềm. Đó là một Quy trình Tự động hóa của một Quy trình Thủ công. Nó cho phép thực hiện các nhiệm vụ lặp đi lặp lại mà không cần sự can thiệp của một Người kiểm thử Thủ công.
+
+\begin{itemize}
+    \item Nó được sử dụng để tự động hóa các nhiệm vụ kiểm thử khó khăn để thực hiện thủ công.
+    \item Các bài kiểm tra tự động có thể được thực hiện bất kỳ lúc nào trong ngày vì chúng sử dụng các chuỗi kịch bản đã được viết trước để kiểm tra phần mềm.
+    \item Các bài kiểm tra tự động cũng có thể nhập dữ liệu kiểm tra, so sánh kết quả mong đợi với kết quả thực tế và tạo ra các báo cáo kiểm thử chi tiết.
+    \item Mục tiêu của các bài kiểm tra tự động là giảm số lượng các trường hợp kiểm tra cần được thực hiện thủ công nhưng không phải loại bỏ kiểm thử thủ công.
+    \item Có thể ghi lại bộ kiểm tra và phát lại khi cần thiết.
+\end{itemize}
+
+Để hiện thực kiểm thử tự động cho hệ thống, chúng tôi sử dụng Selenium IDE để kiểm tra trên toàn hệ thống.
+
+Selenium IDE (Integrated Development Environment) là một công cụ tự động hóa kiểm thử dựa trên trình duyệt web được sử dụng để ghi và chạy các tác vụ kiểm thử trên ứng dụng web. Selenium IDE được phát triển dựa trên Selenium WebDriver, là một phần của dự án Selenium. Nó cung cấp một giao diện đồ họa dễ sử dụng cho người dùng để tạo và quản lý các kịch bản kiểm thử mà không cần viết mã lập trình.\\
+
+Selenium IDE thích hợp cho người mới bắt đầu với kiểm thử tự động trên giao diện web, nhưng nó cũng có một số hạn chế và không phù hợp cho các kịch bản kiểm thử phức tạp. Đối với các dự án lớn hơn và phức tạp hơn, người dùng thường sử dụng Selenium WebDriver và các thư viện kiểm thử tự động khác để có kiểm soát và tùy chỉnh chi tiết hơn.
+
+\subsubsubsection{Cách sử dụng Selenium IDE}
+\textbf{Welcome Screen}
+Khi mở IDE, bạn sẽ thấy một hộp thoại chào mừng. Điều này sẽ cung cấp cho bạn quyền truy cập nhanh đến các tùy chọn sau:
+\begin{itemize}
+    \item Ghi lại một bài kiểm tra mới trong một dự án mới
+    \item Mở một dự án hiện tại
+    \item Tạo một dự án mới
+    \item Đóng IDE
+\end{itemize}
+
+\textbf{Ghi lại tests}
+Sau khi tạo một dự án mới, bạn sẽ được yêu cầu đặt tên cho nó và sau đó được hỏi để cung cấp một địa chỉ URL cơ sở. Địa chỉ URL cơ sở là địa chỉ URL của ứng dụng bạn đang kiểm tra. Điều này là điều bạn thiết lập một lần và nó sẽ được sử dụng cho tất cả các bài kiểm tra trong dự án này. Bạn có thể thay đổi nó sau này nếu cần. \\
+
+Sau khi hoàn thành các thiết lập này, một cửa sổ trình duyệt mới sẽ mở ra, tải địa chỉ URL cơ sở và bắt đầu ghi lại. \\
+
+Tương tác với trang và mọi hành động của bạn sẽ được ghi lại trong IDE. Để dừng việc ghi lại, chuyển sang cửa sổ IDE và nhấp vào biểu tượng ghi lại. 
+
+
+\textbf{Tổ chức tests}
+\begin{itemize}
+    \item \textbf{Tests}
+    
+    Bạn có thể thêm một bài kiểm tra mới bằng cách nhấp vào biểu tượng + ở đầu của thanh menu bên trái (bên phải của tiêu đề Bài kiểm tra), đặt tên cho nó và nhấp vào THÊM.
+    
+    Sau khi thêm, bạn có thể nhập các lệnh một cách thủ công hoặc nhấp vào biểu tượng ghi lại ở phía trên bên phải của IDE.
+
+    \item \textbf{Suites}
+    
+    Các bài kiểm tra có thể được nhóm lại thành các bộ kiểm tra.
+    Khi tạo dự án, một Bộ kiểm tra Mặc định được tạo và bài kiểm tra đầu tiên của bạn được thêm vào tự động.
+    
+    Để tạo và quản lý các bộ kiểm tra, hãy chuyển đến bảng điều khiển Bộ kiểm tra. Bạn có thể đến đó bằng cách nhấp vào danh sách thả xuống ở đầu thanh menu bên trái (ví dụ: nhấp vào từng chữ Tests) và chọn Bộ kiểm tra.
+
+    \begin{itemize}
+        \item \textbf{Add a suite}
+        Để thêm một bộ kiểm tra, nhấp vào biểu tượng + ở đầu của thanh menu bên trái, bên phải của tiêu đề "Test Suites", cung cấp tên và nhấp vào "ADD".
+
+        \item \textbf{Add a test}
+        Để thêm một bài kiểm tra vào một bộ kiểm tra, di chuột qua tên bộ kiểm tra, sau đó thực hiện các bước sau:
+        \begin{enumerate}
+            \item Nhấp vào biểu tượng xuất hiện bên phải của tiêu đề "Test Suites"
+            \item Nhấp vào "Add tests"
+            \item Chọn các bài kiểm tra bạn muốn thêm từ menu
+            \item Nhấp vào "Select"
+        \end{enumerate}
+
+        \item \textbf{Remove a test}
+        Để xóa một bài kiểm tra, di chuột qua bài kiểm tra và nhấp vào biểu tượng "X" xuất hiện bên phải tên.
+
+        
+        \item \textbf{Remove or rename a suite}
+        
+        Để xóa một bộ kiểm tra, nhấp vào biểu tượng xuất hiện bên phải tên nó, nhấp vào "Delete", và nhấp vào "Delete" khi được nhắc.
+        
+        Để đổi tên một bộ kiểm tra, di chuột qua tên bộ kiểm tra, nhấp vào biểu tượng xuất hiện bên phải tên, nhấp vào "Rename", cập nhật tên và nhấp vào "RENAME".
+        
+    \end{itemize}
+    
+\end{itemize}
+
+\textbf{Lưu lại project}
+Để lưu tất cả những gì bạn vừa làm trong IDE, nhấp vào biểu tượng lưu ở góc phải trên cùng của IDE.
+
+Nó sẽ yêu cầu bạn chọn vị trí và tên để lưu dự án. Kết quả cuối cùng là một tệp duy nhất có phần mở rộng .side.
+
+
+\textbf{Chạy lại test}
+\begin{itemize}
+    \item \textbf{Trong trình duyệt}
+    
+    Bạn có thể chạy lại các bài kiểm tra trong IDE bằng cách chọn bài kiểm tra hoặc bộ kiểm tra bạn muốn chạy và nhấp vào nút chạy ở thanh menu phía trên trình soạn thảo bài kiểm tra.
+    
+    Các bài kiểm tra sẽ chạy lại trong trình duyệt. Nếu cửa sổ vẫn mở từ khi ghi lại, nó sẽ được sử dụng để chạy lại. Nếu không, một cửa sổ mới sẽ được mở và sử dụng.
+
+    \item \textbf{Cross-browser}
+    
+    Nếu bạn muốn chạy các bài kiểm tra IDE của mình trên các trình duyệt khác nhau, hãy chắc chắn kiểm tra Runner dòng lệnh.
+\end{itemize}
+
+\subsubsubsection{Kết quả kiểm thử}
+
+

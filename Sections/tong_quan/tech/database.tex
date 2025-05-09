@@ -1,0 +1,54 @@
+\subsubsection{Cơ sở dữ liệu - PostgreSQL}
+    \begin{enumerate}[(a)]
+        \item \textit{Giới thiệu}
+        
+            PostgreSQL là một hệ thống quản lý cơ sở dữ liệu quan hệ đối tượng (ORDBMS) mã nguồn mở, được phát triển từ năm 1986 tại Đại học California, Berkeley, dưới sự dẫn dắt của giáo sư Michael Stonebraker. Ban đầu, nó được gọi là "Postgres" và đã trải qua nhiều giai đoạn phát triển để trở thành một trong những hệ quản trị cơ sở dữ liệu phổ biến nhất hiện nay. 
+
+            PostgreSQL hỗ trợ cả truy vấn SQL truyền thống và JSON, cho phép xử lý linh hoạt cả dữ liệu quan hệ và phi quan hệ. Nó cung cấp các tính năng nâng cao như hỗ trợ các kiểu dữ liệu đa dạng, khả năng mở rộng cao và tuân thủ các tiêu chuẩn SQL mới nhất.
+
+            Ngày nay, PostgreSQL được sử dụng rộng rãi trong nhiều lĩnh vực, từ các ứng dụng web động đến các hệ thống thông tin địa lý, nhờ vào khả năng hỗ trợ các đối tượng địa lý và tính năng ghi nhật ký trước, giúp đảm bảo tính toàn vẹn và khả năng khôi phục dữ liệu.
+                    
+        \item \textit{Ưu điểm}
+
+        \begin{itemize}
+            \item \textbf{Xử lý khối lượng dữ liệu lớn}: PostgreSQL có khả năng quản lý các hệ thống lớn với hàng triệu bản ghi, đáp ứng nhu cầu của các tập đoàn và tổ chức yêu cầu hệ thống cơ sở dữ liệu mạnh mẽ và đáng tin cậy. 
+            \item \textbf{Kiểm soát đồng thời nhiều phiên bản (MVCC)}: Tính năng MVCC cho phép PostgreSQL xử lý các thao tác ghi thường xuyên và truy vấn phức tạp một cách hiệu quả, phù hợp cho các ứng dụng cấp doanh nghiệp.
+            \item \textbf{Độ tin cậy và phục hồi}: Sử dụng ghi nhật ký ghi trước (WAL), PostgreSQL đảm bảo độ tin cậy và hỗ trợ khôi phục điểm-theo-thời-gian (PITR) và active standbys, giúp hệ thống hoạt động ổn định và phục hồi nhanh chóng khi gặp sự cố.
+        \end{itemize}
+
+        \item \textit{So sánh PostgreSQL và các hệ quản trị cơ sở dữ liệu}
+        
+Khi so sánh PostgreSQL với các hệ quản trị cơ sở dữ liệu khác như MySQL, SQL Server và MongoDB, mỗi hệ thống đều sở hữu những đặc điểm nổi bật và phù hợp với các nhu cầu khác nhau. Dưới đây là bảng so sánh chi tiết giữa PostgreSQL và các cơ sở dữ liệu này, giúp làm rõ ưu điểm và hạn chế của từng loại.
+
+\begin{landscape} 
+\begin{longtable}{|p{3.5cm}|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Tiêu chí} & \textbf{PostgreSQL} & \textbf{MySQL} & \textbf{SQL Server} & \textbf{MongoDB} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Tiêu chí} & \textbf{PostgreSQL} & \textbf{MySQL} & \textbf{SQL Server} & \textbf{MongoDB} \\
+\hline
+\endhead
+\hline
+\textbf{Loại cơ sở dữ liệu} & Quan hệ - Đối tượng (ORDBMS), mã nguồn mở & Quan hệ (RDBMS), mã nguồn mở & Quan hệ (RDBMS), độc quyền & Phi quan hệ (NoSQL), mã nguồn mở \\
+\hline
+\textbf{Hiệu suất} & Tốt cho truy vấn phức tạp, chậm hơn MySQL trong truy vấn đơn giản & Cao cho truy vấn đơn giản, ứng dụng web & Cao, tối ưu cho doanh nghiệp lớn & Cao cho dữ liệu phi cấu trúc, đọc/ghi nhanh \\
+\hline
+\textbf{Khả năng mở rộng} & Cao, hỗ trợ terabyte/petabyte dữ liệu & Tốt, hỗ trợ cluster và replication & Cao, tích hợp đám mây Azure & Rất cao, mở rộng ngang tốt \\
+\hline
+\textbf{Kiểu dữ liệu hỗ trợ} & Phong phú: JSON, XML, PostGIS, tùy chỉnh & Cơ bản, hỗ trợ JSON từ phiên bản 5.7 & Cơ bản, hỗ trợ XML, JSON & Linh hoạt: JSON, BSON \\
+\hline
+\textbf{Khả năng tìm kiếm văn bản} & Tìm kiếm văn bản đầy đủ, hỗ trợ ký tự quốc tế & Tìm kiếm văn bản cơ bản & Tìm kiếm văn bản tốt, tích hợp Full Text Search & Tìm kiếm văn bản tốt, tích hợp Atlas Search \\
+\hline
+\textbf{Hỗ trợ nền tảng} & Linux, Windows, macOS, Solaris & Linux, Windows, macOS & Chủ yếu Windows, hỗ trợ Linux & Linux, Windows, macOS \\
+\hline
+\textbf{Chi phí} & Miễn phí, mã nguồn mở & Miễn phí, có phiên bản thương mại & Độc quyền, chi phí cao & Miễn phí, có dịch vụ đám mây trả phí \\
+\hline
+\textbf{Ứng dụng phù hợp} & GIS, tài chính, ứng dụng phức tạp & Ứng dụng web, WordPress, Joomla & Doanh nghiệp lớn, tích hợp Microsoft & Ứng dụng thời gian thực, dữ liệu lớn \\
+\hline
+\caption{Bảng so sánh PostgreSQL và các hệ quản trị cơ sở dữ liệu}
+\end{longtable}
+\end{landscape} 
+
+    \end{enumerate}

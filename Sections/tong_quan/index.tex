@@ -1,0 +1,161 @@
+\section{TỔNG QUAN VỀ HỆ THỐNG}
+
+\subsection{Bối cảnh kinh doanh (Business context)}
+Trong bối cảnh ngành công nghiệp thực phẩm và dịch vụ ngày càng phát triển và cạnh tranh khốc liệt, việc ứng dụng công nghệ vào quản lý nhà hàng đã trở thành một xu hướng tất yếu. Hệ thống quản lý chuỗi nhà hàng là một giải pháp kỹ thuật số được thiết kế để hỗ trợ và tối ưu hóa các hoạt động vận hành hàng ngày của nhà hàng (đặc biệt là nhà hàng fine dining), từ đặt bàn, xử lý đơn hàng, thanh toán cho đến quản lý nhân sự. Một hệ thống quản lý chuỗi nhà hàng hiệu quả không chỉ giúp nâng cao trải nghiệm của khách hàng mà còn cải thiện hiệu suất làm việc của nhân viên và tối ưu hóa quản lý doanh thu. 
+
+% \subsubsection{Mục tiêu và phạm vi hệ thống}
+% Hệ thống quản lý nhà hàng \textbf{\textit{Menu+}} được phát triển nhằm mục đích đơn giản hóa và nâng cao hiệu quả các hoạt động vận hành hàng ngày trong một nhà hàng fine dining. Các chức năng chính của \textbf{\textit{Menu+}} bao gồm:
+% \begin{itemize}
+%     \item \textbf{Đặt bàn trực tuyến và quản lý bàn}: Giúp khách hàng dễ dàng đặt chỗ và hỗ trợ nhân viên theo dõi trạng thái bàn một cách chính xác.
+%      \item \textbf{Quản lý bàn}: Hỗ trợ nhân viên theo dõi trạng thái bàn (trống, đã đặt, đang phục vụ) và thực hiện các thao tác như chuyển bàn khi cần thiết.
+%     \item \textbf{Xử lý đơn hàng}: Cho phép nhân viên nhập đơn hàng, tùy chỉnh theo yêu cầu của khách và gửi trực tiếp đến hệ thống hiển thị bếp (Kitchen Display System - KDS).
+%     \item \textbf{Thanh toán và quản lý doanh thu}: Tích hợp các phương thức thanh toán đa dạng, tạo điều kiện thuận lợi cho cả khách hàng và nhà hàng.
+%     \item \textbf{Quản lý quan hệ khách hàng (CRM) và nhân sự}: Lưu trữ thông tin khách hàng, quản lý lịch làm việc của nhân viên và cung cấp các báo cáo chi tiết về hoạt động kinh doanh.
+% \end{itemize}
+% \textbf{\textit{Menu+}} linh hoạt và thân thiện với người dùng đóng vai trò quan trọng trong việc giúp các nhà hàng, đặc biệt là những nhà hàng mới khởi nghiệp, mở rộng quy mô hoạt động một cách hiệu quả.
+
+% \subsubsection{Ràng buộc kinh doanh (Business Constraint)}
+
+% exclude
+
+\subsubsection{Tổng quan hệ thống quản lý nhà hàng}
+
+Dưới đây là mô tả tổng quan về các thành phần cấu thành hệ thống quản lý chuỗi nhà hàng, với các chức năng thiết yếu nhằm hỗ trợ việc vận hành và điều phối các hoạt động trong một chuỗi nhà hàng hiện đại. Những hệ thống con này đóng vai trò quan trọng trong việc tối ưu hóa hiệu quả công việc, nâng cao chất lượng dịch vụ và đảm bảo sự hoạt động trơn tru của toàn bộ chuỗi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{Images/so-do-he-thong.png}
+    \vspace{0.5cm}
+    \caption{Sơ đồ tổng quan về một phần mềm Quản lý Nhà hàng}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Hệ thống Quản lý Đơn hàng (Order Management System - OMS)}: Đóng vai trò quan trọng trong việc tiếp nhận và xử lý các đơn đặt món từ khách hàng. Khi khách hàng đặt món, thông tin đơn hàng sẽ được hệ thống OMS ghi nhận và phân phối đến các bộ phận liên quan trong nhà hàng, như bếp để chế biến món ăn, thu ngân để xử lý thanh toán, và đội ngũ giao hàng nếu có. Hệ thống OMS không chỉ giúp theo dõi tình trạng của từng đơn hàng mà còn quản lý các thông tin liên quan đến khách hàng và việc giao nhận món ăn. Đặc biệt, OMS sẽ giúp nhà quản lý theo dõi hiệu suất của đơn hàng và cập nhật kịp thời trạng thái để khách hàng có thể nhận được món ăn một cách nhanh chóng. Mọi thay đổi về đơn hàng sẽ được cập nhật liên tục để các bộ phận liên quan có thể xử lý ngay khi có sự thay đổi, ví dụ như khi khách hàng hủy đơn hoặc có yêu cầu thay đổi món.
+
+    \item \textbf{Hệ thống Quản lý Bếp (Kitchen Management System - KMS)}: Tập trung vào việc quản lý quá trình chế biến món ăn từ khi nhận được đơn hàng từ OMS cho đến khi món ăn hoàn thành và sẵn sàng phục vụ khách. Thông qua KMS, nhà bếp có thể lên kế hoạch chế biến cho từng món ăn và theo dõi hiệu quả làm việc của từng đầu bếp. Mỗi đơn hàng sẽ được chia thành các công đoạn nhỏ để các nhân viên bếp dễ dàng theo dõi và thực hiện. Hệ thống này cũng đóng vai trò trong việc quản lý chất lượng món ăn, đảm bảo rằng món ăn được chế biến đúng quy trình và đạt tiêu chuẩn chất lượng. KMS cũng kết nối với các hệ thống khác như Inventory Management System (IMS) để tự động kiểm tra và yêu cầu bổ sung nguyên liệu khi kho hàng thiếu hụt.
+
+    \item \textbf{Hệ thống Quản lý Kho (Inventory Management System - IMS)}: Quản lý và giám sát tình trạng nguyên liệu trong kho của các chi nhánh nhà hàng. IMS giúp nhà quản lý kiểm soát số lượng nguyên liệu, hạn sử dụng và các mặt hàng còn lại trong kho để đảm bảo rằng luôn có đủ nguyên liệu cho việc chế biến món ăn. Hệ thống này sẽ tự động thông báo khi lượng nguyên liệu sắp hết hoặc sắp hết hạn sử dụng, giúp bộ phận kho có thể lên kế hoạch nhập hàng bổ sung từ các nhà cung cấp. IMS không chỉ giúp đảm bảo việc cung cấp nguyên liệu kịp thời cho KMS, mà còn giúp giảm thiểu tình trạng thiếu hụt nguyên liệu, qua đó đảm bảo việc phục vụ khách hàng không bị gián đoạn. Hệ thống này cũng giúp tối ưu hóa việc sử dụng nguyên liệu, giảm lãng phí và giúp duy trì chi phí vận hành hợp lý.
+
+    \item \textbf{Hệ thống Quản lý Thanh toán (Payment Management System - PMS)}: Chịu trách nhiệm xử lý tất cả các giao dịch thanh toán của khách hàng sau khi món ăn được giao đến bàn hoặc giao tận nơi. Khi món ăn hoàn thành và khách hàng chuẩn bị thanh toán, hệ thống PMS sẽ tự động tính toán giá trị đơn hàng, bao gồm thuế, chiết khấu, và các khoản phí khác nếu có. Hệ thống này hỗ trợ nhiều phương thức thanh toán khác nhau, từ tiền mặt, thẻ tín dụng, thẻ ghi nợ, cho đến các phương thức thanh toán trực tuyến. Sau khi thanh toán hoàn tất, PMS sẽ in hóa đơn cho khách và cập nhật dữ liệu doanh thu vào hệ thống tài chính. Hệ thống này cũng đồng bộ hóa dữ liệu với các hệ thống báo cáo để nhà quản lý có cái nhìn tổng quan về tình hình tài chính của từng chi nhánh. PMS còn có khả năng theo dõi và phân tích các xu hướng chi tiêu của khách hàng để đưa ra các chiến lược giá hợp lý và tăng trưởng doanh thu.
+
+    \item \textbf{Hệ thống Quản lý Nhân sự (Human Resource Management System - HRMS)}: Quản lý thông tin nhân viên, lịch làm việc và hiệu suất công việc của các nhân viên trong chuỗi nhà hàng. Hệ thống này theo dõi số giờ làm việc, ca làm việc của nhân viên, và các yếu tố liên quan đến chấm công, bảo hiểm, tiền lương. Ngoài ra, HRMS còn hỗ trợ việc phân công công việc cho các nhân viên bếp, thu ngân, và các bộ phận khác, giúp việc tổ chức công việc trở nên khoa học và hợp lý. Các tính năng như theo dõi kỳ nghỉ, đào tạo và phát triển nhân viên cũng được HRMS đảm bảo. Một trong những chức năng quan trọng của HRMS là giúp tối ưu hóa quy trình tuyển dụng, giúp tuyển chọn nhân viên phù hợp với yêu cầu công việc. Ngoài ra, HRMS còn hỗ trợ các bộ phận quản lý nhân sự của từng chi nhánh trong việc đánh giá hiệu suất làm việc và cải thiện chất lượng nhân sự.
+
+    \item \textbf{Hệ thống Báo cáo \& Phân tích (Reporting \& Analytics System - R\&A)}: Quản lý có cái nhìn tổng quan về hiệu suất của toàn chuỗi nhà hàng. Hệ thống này thu thập và tổng hợp dữ liệu từ các hệ thống khác nhau như OMS, KMS, IMS, PMS và HRMS để tạo ra các báo cáo chi tiết. Những báo cáo này không chỉ về tình hình doanh thu, mà còn cung cấp các thông tin liên quan đến hiệu quả công việc của nhân viên, tình trạng kho nguyên liệu, mức độ hài lòng của khách hàng, và nhiều yếu tố khác. Thông qua phân tích dữ liệu, nhà quản lý có thể đưa ra những quyết định chiến lược giúp cải thiện quy trình hoạt động, tối ưu hóa chi phí và nâng cao chất lượng dịch vụ. Hệ thống cũng hỗ trợ tạo ra các báo cáo tài chính, giúp các chi nhánh có thể theo dõi doanh thu và chi phí một cách chi tiết.
+
+    \item \textbf{Hệ thống Quản lý Chuỗi Cung ứng (Supply Chain Management System - SCM)}: Quản lý và điều phối mối quan hệ với các nhà cung cấp, đảm bảo nguồn nguyên liệu luôn được cung cấp đầy đủ và đúng chất lượng. SCM theo dõi tình trạng đơn hàng từ khi nguyên liệu được đặt hàng cho đến khi nhận được hàng và đưa vào kho. Hệ thống này không chỉ giúp kiểm soát chất lượng nguồn cung mà còn tối ưu hóa quá trình giao nhận nguyên liệu, giảm thiểu tình trạng thiếu hụt hoặc tồn đọng hàng hóa trong kho. Bằng cách kết hợp dữ liệu từ IMS và KMS, SCM có thể dự báo nhu cầu nguyên liệu cho các món ăn, từ đó có kế hoạch đặt hàng hiệu quả hơn.
+    
+    \item \textbf{Hệ thống Quản lý Khách hàng (Customer Relationship Management - CRM)}: Lưu trữ và quản lý thông tin của khách hàng, bao gồm các thông tin cá nhân, lịch sử đơn hàng và các thói quen tiêu dùng. Hệ thống CRM giúp nhà hàng không chỉ lưu giữ thông tin khách hàng mà còn tạo dựng mối quan hệ lâu dài với khách hàng thông qua các chương trình khách hàng thân thiết và các ưu đãi cá nhân hóa. Bằng cách phân tích dữ liệu từ CRM, nhà hàng có thể hiểu rõ hơn về nhu cầu và sở thích của khách hàng, từ đó đề xuất các món ăn phù hợp, tạo ra những trải nghiệm cá nhân hóa. Hệ thống này còn hỗ trợ việc gửi các thông báo về chương trình khuyến mãi, sự kiện đặc biệt, hoặc thông tin về các sản phẩm mới đến khách hàng, giúp duy trì và phát triển mối quan hệ với khách hàng cũ và thu hút khách hàng mới.
+
+    \item \textbf{Hệ thống Quản lý Marketing \& Khuyến mãi (Marketing \& Promotion Management System)}: Lên kế hoạch, triển khai và theo dõi các chiến dịch marketing và chương trình khuyến mãi. Hệ thống này hỗ trợ việc tạo ra các chiến dịch quảng bá các món ăn, khuyến mãi theo mùa hoặc các chương trình giảm giá đặc biệt cho khách hàng. Marketing \& Promotion Management System cung cấp các công cụ để tạo mã giảm giá, quản lý các chương trình khuyến mãi và theo dõi hiệu quả của từng chiến dịch. Hệ thống này còn giúp phân tích dữ liệu khách hàng từ CRM, từ đó xác định đối tượng mục tiêu cho các chiến dịch marketing, giúp tăng tỷ lệ chuyển đổi và tối ưu hóa chi phí marketing. Ngoài ra, các chiến dịch và khuyến mãi cũng có thể được tích hợp với hệ thống thanh toán để khách hàng có thể dễ dàng sử dụng các ưu đãi khi thanh toán.
+
+    \item \textbf{Hệ thống Quản lý Phản hồi \& Khiếu nại (Feedback \& Complaint Management System)}: Nhận và xử lý các phản hồi, khiếu nại từ khách hàng. Việc lắng nghe và giải quyết nhanh chóng các vấn đề của khách hàng giúp nhà hàng cải thiện chất lượng dịch vụ và tạo dựng lòng tin của khách hàng. Hệ thống này giúp theo dõi các khiếu nại về món ăn, thái độ phục vụ, không gian nhà hàng hoặc các vấn đề khác. Sau khi nhận được phản hồi hoặc khiếu nại từ khách hàng, hệ thống sẽ tự động phân loại và chuyển đến các bộ phận liên quan để xử lý, từ đó giúp khách hàng cảm thấy hài lòng hơn với dịch vụ của nhà hàng. Hệ thống này cũng có chức năng theo dõi các phản hồi tích cực để có thể ghi nhận và thưởng cho những nhân viên hoặc bộ phận có đóng góp xuất sắc.
+
+    \item \textbf{Hệ thống Quản lý Chuỗi Nhà hàng (Chain Management System - CMS)}: Trung tâm quản lý tổng thể của chuỗi các chi nhánh nhà hàng. Hệ thống này giúp giám sát các hoạt động của tất cả các chi nhánh từ một hệ thống tập trung, bao gồm việc theo dõi doanh thu, tồn kho, nhân sự, cũng như các hoạt động vận hành khác của từng chi nhánh. CMS không chỉ giúp đồng bộ hóa các quy trình giữa các chi nhánh mà còn cung cấp các báo cáo tài chính và hoạt động chi tiết để hỗ trợ các quyết định quản lý chiến lược. Hệ thống này tích hợp dữ liệu từ các hệ thống khác như PMS, KMS, IMS, giúp nhà quản lý chuỗi có thể theo dõi tình trạng của từng chi nhánh và đưa ra các quyết định kịp thời để tối ưu hóa hoạt động của toàn chuỗi.
+
+    \item \textbf{Hệ thống Quản lý Giao hàng (Delivery Management System)}: Quản lý các đơn hàng giao tận nơi, bao gồm việc điều phối các nhân viên giao hàng, theo dõi tình trạng đơn hàng và tối ưu hóa thời gian giao hàng. Hệ thống này giúp các nhân viên giao hàng nhận được thông tin đơn hàng một cách nhanh chóng, biết rõ địa chỉ giao hàng và các yêu cầu đặc biệt của khách hàng (nếu có). Hệ thống còn giúp theo dõi trạng thái của đơn hàng từ khi rời khỏi nhà hàng cho đến khi giao đến tay khách hàng, đồng thời cung cấp các công cụ để quản lý các tuyến đường giao hàng sao cho hiệu quả và tiết kiệm thời gian. Việc tích hợp hệ thống này với OMS giúp cập nhật trạng thái của đơn hàng cho khách hàng trong thời gian thực và đảm bảo dịch vụ giao hàng nhanh chóng, chính xác.
+\end{itemize}
+
+\subsubsection{Chính sách vận hành (Policy)}
+Các nhà hàng hiện đại ngày nay thường áp dụng nhiều chính sách linh hoạt nhằm nâng cao chất lượng phục vụ và giảm thiểu các rủi ro trong kinh doanh. Các chính sách phổ biến được áp dụng có thể kể tới như sau:
+
+\begin{itemize}
+    \item \textbf{Đa dạng hóa phương thức thanh toán}: Chính sách này tập trung vào việc cung cấp đa dạng các hình thức thanh toán, như tiền mặt, thẻ tín dụng, ví điện tử và mã QR. Bên cạnh đó, các nhà hàng cũng triển khai hệ thống quản lý thanh toán tự động để rút ngắn thời gian xử lý, giảm thiểu sai sót và tăng trải nghiệm hài lòng của khách hàng. Chính sách này đã được các nhà hàng như \textit{Ngưu Phồn} và \textit{Cơm niêu Sài Gòn} áp dụng rất hiệu quả.
+    
+    \item \textbf{Yêu cầu đặt cọc khi đặt bàn}: Để giảm thiểu tổn thất khi khách hàng hủy đặt bàn vào phút chót hoặc không đến nhà hàng mà không báo trước, nhiều nhà hàng áp dụng chính sách yêu cầu khách hàng đặt cọc trước một khoản tiền nhất định, thường dao động từ 10\% đến 20\% tổng giá trị bàn tiệc. Khoản đặt cọc này sẽ được khấu trừ vào hóa đơn thanh toán hoặc bị giữ lại nếu khách hủy đặt bàn trễ hơn thời gian quy định. Một số nhà hàng áp dụng thành công chính sách này là \textit{Nhà Hàng Phúc Thành} và \textit{Vân Nghĩa Palace}.
+    
+    \item \textbf{Xác nhận đặt bàn trước ngày hẹn}: Chính sách này yêu cầu nhân viên nhà hàng chủ động liên hệ với khách hàng trước ngày đặt bàn để xác nhận lại thông tin và nhắc nhở khách đến đúng giờ. Điều này không chỉ giúp giảm tình trạng khách quên hay thay đổi kế hoạch mà không thông báo, mà còn giúp nhà hàng quản lý hiệu quả hơn trong việc chuẩn bị dịch vụ. Nhà hàng áp dụng tiêu biểu chính sách này là \textit{Nhà Hàng Phúc Thành}.
+    
+    \item \textbf{Chính sách hủy đặt bàn và hoàn tiền rõ ràng}: Các nhà hàng thường đưa ra quy định chi tiết về thời hạn hủy đặt bàn và mức phí áp dụng khi hủy. Điều này giúp khách hàng hiểu rõ trách nhiệm và quyền lợi của mình khi sử dụng dịch vụ, đồng thời tạo ra sự minh bạch và uy tín trong hoạt động kinh doanh. Chính sách này được áp dụng rõ ràng tại \textit{Nhà Hàng Ocean Bay Vũng Tàu}.
+    
+    \item \textbf{Điều kiện hủy đơn hàng}: Chính sách này quy định rõ ràng các điều kiện và thời điểm cụ thể khách hàng được phép hủy đơn hàng, thường là trước khi nhà hàng xác nhận và bắt đầu chuẩn bị món ăn. Điều này giúp nhà hàng giảm thiểu tổn thất về nguyên vật liệu và công sức chế biến không cần thiết. Một ví dụ cụ thể về chính sách này là tại nhà hàng \textit{Patyko}.
+    
+    \item \textbf{Phí hủy đơn hàng}: Để bảo vệ quyền lợi và giảm thiểu thiệt hại khi khách hàng hủy đơn sau khi nhà hàng đã bắt đầu chế biến, nhiều nhà hàng đặt ra quy định thu phí hủy hoặc không hoàn lại tiền đặt cọc trong một số trường hợp nhất định. Chính sách này nhằm bù đắp một phần chi phí nguyên vật liệu và nhân công đã bỏ ra. Điển hình trong việc áp dụng chính sách này là \textit{Nhà Hàng Khoái}.
+    
+    \item \textbf{Chính sách đổi trả sản phẩm}: Để đảm bảo quyền lợi khách hàng và duy trì chất lượng dịch vụ, các nhà hàng thường áp dụng chính sách đổi trả rõ ràng. Khách hàng được quyền đổi hoặc trả lại món ăn trong các trường hợp món bị lỗi, hỏng, không thể sử dụng hoặc không đảm bảo vệ sinh an toàn thực phẩm. Chính sách này giúp tạo dựng lòng tin và gia tăng uy tín của nhà hàng. Một số nhà hàng nổi bật áp dụng thành công chính sách này là \textit{Sườn Mười} và \textit{Nhà Hàng Khoái}.
+    
+\end{itemize}
+
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{8cm}|p{4cm}|}
+\hline
+\textbf{Tên chính sách} & \textbf{Mô tả} & \textbf{Nhà hàng áp dụng} \\
+\hline
+Đa dạng hóa phương thức thanh toán & Cung cấp nhiều phương thức thanh toán như tiền mặt, thẻ tín dụng, ví điện tử và mã QR, đồng thời áp dụng hệ thống quản lý thanh toán tự động để giảm thiểu sai sót và tăng tốc độ phục vụ. & Ngưu Phồn, Cơm niêu Sài Gòn \\
+\hline
+Yêu cầu đặt cọc khi đặt bàn & Để giảm thiểu tình trạng khách hàng hủy bàn vào phút chót hoặc không đến mà không báo trước, nhiều nhà hàng yêu cầu khách đặt cọc trước một khoản tiền, thường khoảng 10-20\% tổng giá trị bàn tiệc. & Nhà Hàng Phúc Thành, Vân Nghĩa Palace \\
+\hline
+Xác nhận đặt bàn trước ngày hẹn & Trước ngày đặt bàn, nhân viên nhà hàng nên gọi điện hoặc nhắn tin xác nhận lại với khách hàng để nhắc nhở và đảm bảo họ sẽ đến. & Nhà Hàng Phúc Thành \\
+\hline
+Chính sách hủy và hoàn tiền rõ ràng & Nhà hàng cần quy định rõ ràng về thời hạn hủy đặt bàn và mức phí hủy, giúp khách hàng nắm rõ quyền lợi và trách nhiệm của mình. & Nhà Hàng Ocean Bay Vũng Tàu \\
+\hline
+Điều kiện hủy đơn hàng & Quy định rõ ràng về thời điểm và điều kiện khách hàng có thể hủy đơn hàng, đại khái hơn là trước khi nhà hàng xác nhận và lên đơn hàng. & Patyko \\
+\hline
+Phí hủy đơn hàng & Áp dụng phí hủy hoặc không hoàn tiền đặt cọc nếu khách hủy sau một thời điểm nhất định, giúp bù đắp chi phí nguyên liệu và công sức chuẩn bị. & Nhà Hàng Khoái \\
+\hline
+Chính sách đổi trả sản phẩm & Chấp nhận đổi, trả các sản phẩm bị lỗi, hỏng, không thể sử dụng hoặc không đảm bảo vệ sinh an toàn thực phẩm. & Sườn Mười, Nhà Hàng Khoái \\
+\hline
+\end{tabular}
+\caption{Tổng hợp các chính sách, mô tả và tham khảo từ các nhà hàng hoặc hệ thống liên quan}
+\end{table}
+
+\subsection{Người dùng và mục đích hệ thống Menu+}
+
+Mục đích của hệ thống quản lý nhà hàng \textbf{\textit{Menu+}} là cung cấp một giải pháp toàn diện nhằm tối ưu hóa và nâng cao hiệu quả các hoạt động vận hành hàng ngày trong một nhà hàng fine dining. Hệ thống được phát triển với mục tiêu hỗ trợ các nhóm người dùng chính trong nhà hàng, bao gồm khách hàng, thu ngân, quản lý, quản trị viên, bếp trưởng, nhân viên phục vụ và nhân viên vệ sinh.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{Images/OMS-Page-2.png}
+    \vspace{0.5cm}
+    \caption{Các người dùng trong hệ thống}
+    \label{fig:my_label}
+\end{figure}
+
+% \begin{table}[h!]
+% \centering
+% \begin{tabular}{|p{3cm}|p{3cm}|p{9cm}|}
+% \hline
+% \textbf{Mã đối tượng} & \textbf{Tên} & \textbf{Mô tả} \\ \hline
+% US-01 & Customer (Khách hàng) & Xem menu trực tuyến, đặt bàn hoặc order trực tiếp tại nhà hàng, thanh toán và sử dụng mã khuyến mãi. \\ \hline
+% US-02 & Cashier (Thu ngân) & Thực hiện xác nhận thanh toán, gộp hoặc tách bill, hỗ trợ khách hàng sử dụng mã khuyến mãi, nhập số tiền nhận và tính tiền thối lại. \\ \hline
+% US-03 & Manager (Quản lý) & Quản lý order, doanh thu, nhân sự, chia ca, thêm nhân sự mới, và điều hành chung hệ thống nhà hàng. \\ \hline
+% US-04 & Administrator (Quản trị viên) & Quản lý và duy trì hệ thống, cấu hình menu, điều chỉnh các thông tin liên quan đến hệ thống chung. \\ \hline
+% US-05 & Chef (Bếp trưởng) & Xem Kitchen Display System (KDS), xác nhận món ăn từ trạng thái "not ready", chuyển sang "cook" và cuối cùng là "ready to serve". \\ \hline
+% US-06 & Waiter (Nhân viên phục vụ) & Giúp khách hàng đặt bàn, order món, lấy món ăn từ bếp, phục vụ món ăn, chuyển bàn, thực hiện self-order cho khách, cập nhật trạng thái món ăn là đã phục vụ. \\ \hline
+% US-07 & Cleaning Staff (Nhân viên vệ sinh) & Dọn dẹp bàn ăn sau khi khách rời đi, cập nhật tình trạng bàn trên hệ thống để sẵn sàng phục vụ khách tiếp theo. \\ \hline
+% \end{tabular}
+% \caption{Bảng tổng hợp đối tượng và chức năng trong hệ thống quản lý nhà hàng}
+% \label{tab:restaurant_objects}
+% \end{table}
+
+\textbf{Các chức năng chính của Menu+}
+
+Hệ thống Menu+ bao gồm các chức năng chính giúp các nhóm người dùng trên thực hiện các công việc hàng ngày một cách hiệu quả và nhanh chóng:
+
+\begin{itemize}
+
+
+    \item Đặt bàn trực tuyến và quản lý bàn: Giúp khách hàng dễ dàng đặt chỗ và hỗ trợ nhân viên theo dõi trạng thái bàn (trống, đã đặt, đang phục vụ).
+
+    \item Quản lý bàn: Cung cấp công cụ cho nhân viên theo dõi và quản lý bàn trong nhà hàng.
+
+    \item Xử lý đơn hàng: Cho phép nhân viên nhập và gửi đơn hàng đến hệ thống Kitchen Display System (KDS) cho bếp.
+
+    \item Thanh toán và quản lý doanh thu: Tích hợp các phương thức thanh toán đa dạng, tạo thuận tiện cho cả khách hàng và nhà hàng.
+
+    \item Quản lý quan hệ khách hàng (CRM) và nhân sự: Lưu trữ thông tin khách hàng, quản lý lịch làm việc của nhân viên và cung cấp các báo cáo chi tiết về hoạt động kinh doanh.
+\end{itemize}
+
+\input{Sections/tong_quan/functional_spec/index}
+
+% \subsection{Yêu cầu chất lương}
+
+% \input{Sections/tong_quan/yeucau}
+
+
+
+
+

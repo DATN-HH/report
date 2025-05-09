@@ -1,0 +1,48 @@
+\subsubsection{Module MD-05: Quản lý Bán hàng Tại chỗ (POS - Eat-in)}
+
+
+\begin{longtable}{|m{2cm}|m{2.5cm}|m{2.5cm}|m{4.5cm}|m{4cm}|}
+\caption{Danh sách Yêu cầu Chức năng cho Module MD-05: Quản lý Bán hàng Tại chỗ (POS - Eat-in)} \label{tab:fr_md05} \\
+\hline
+\textbf{Mã Module} & \textbf{Mã Yêu cầu CN} & \textbf{Mã Người dùng} & \textbf{Tên Chức năng} & \textbf{Mô tả Ngắn} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+
+MD-05 & FR-MD05-01 & US-05, US-01 & Mở phiên làm việc POS & Cho phép nhân viên thu ngân/quản lý bắt đầu một phiên làm việc mới trên POS, nhập số tiền mặt ban đầu (nếu có kiểm soát tiền mặt). \\
+\hline
+MD-05 & FR-MD05-02 & US-02, US-03 & Truy cập Sơ đồ tầng \& Chọn bàn & Hiển thị sơ đồ tầng trực quan, cho phép nhân viên xem trạng thái bàn (trống, đang có khách, đã đặt trước) và chọn một bàn cụ thể. \\
+\hline
+MD-05 & FR-MD05-03 & US-02 & Bắt đầu/Mở đơn hàng tại bàn & Khởi tạo một đơn hàng mới hoặc mở lại đơn hàng đang hoạt động khi nhân viên chọn một bàn đang có khách hoặc xếp khách mới vào bàn trống. \\
+\hline
+MD-05 & FR-MD05-04 & US-02, System & Tải và Xác nhận Món ăn Đặt trước & Nếu bàn có liên kết với một đặt chỗ (từ MD-03) có món đặt trước, hệ thống tự động tải các món này vào đơn hàng POS để nhân viên xác nhận với khách và gửi bếp. \\
+\hline
+MD-05 & FR-MD05-05 & US-02 & Thêm món ăn/đồ uống vào đơn hàng & Cho phép nhân viên chọn các món ăn/đồ uống từ giao diện menu POS (theo danh mục - FR-MD02-04) và thêm vào đơn hàng hiện tại của bàn. \\
+\hline
+MD-05 & FR-MD05-06 & US-02 & Xử lý Yêu cầu đặc biệt/Ghi chú bếp & Cho phép nhân viên đính kèm ghi chú tùy chỉnh hoặc chọn các tùy chọn/ghi chú được định sẵn (liên quan FR-MD02-11) cho từng món ăn hoặc toàn bộ đơn hàng để gửi xuống bếp. \\
+\hline
+MD-05 & FR-MD05-07 & US-02 & Gửi đơn hàng xuống Bếp/Bar & Gửi thông tin các món ăn mới thêm (hoặc các món đặt trước đã xác nhận) đến máy in bếp/bar hoặc màn hình KDS tương ứng (theo cấu hình FR-MD02-10). \\
+\hline
+MD-05 & FR-MD05-08 & US-02 & Yêu cầu/In Hóa đơn Tạm tính & Cho phép nhân viên tạo và in ra hóa đơn tạm tính (pro-forma invoice / bill) cho khách hàng kiểm tra trước khi thanh toán. \\
+\hline
+MD-05 & FR-MD05-09 & US-02, System & Áp dụng Tiền Đặt cọc vào Hóa đơn & Trước khi tính tiền thanh toán cuối cùng, hệ thống tự động xác định và áp dụng (trừ đi) số tiền đặt cọc mà khách hàng đã thanh toán trước đó (từ MD-03) vào tổng hóa đơn. \\
+\hline
+MD-05 & FR-MD05-10 & US-02 & Tách hóa đơn (Split Bill) & Cung cấp chức năng tách hóa đơn của một bàn thành nhiều hóa đơn nhỏ hơn (theo người hoặc theo món ăn), có xem xét việc phân bổ tiền đặt cọc đã áp dụng. \\
+\hline
+MD-05 & FR-MD05-11 & US-02, US-05 & Xử lý Thanh toán & Cho phép nhận thanh toán từ khách hàng bằng nhiều phương thức (tiền mặt, thẻ, ví điện tử...), xử lý tiền boa, và ghi nhận giao dịch vào hệ thống sau khi đã trừ tiền đặt cọc. \\
+\hline
+MD-05 & FR-MD05-12 & US-02 & Đóng Đơn hàng và Bàn & Hoàn tất đơn hàng sau khi thanh toán thành công và cập nhật trạng thái bàn thành trống (sẵn sàng cho khách tiếp theo). \\
+\hline
+MD-05 & FR-MD05-13 & US-05, US-01 & Đóng Phiên làm việc POS & Kết thúc phiên làm việc POS, hệ thống tổng kết doanh thu theo từng phương thức thanh toán, đối chiếu tiền mặt và chuẩn bị dữ liệu cho bộ phận kế toán. \\
+\hline
+MD-05 & FR-MD05-14 & US-01, US-02 & Chuyển bàn/Ghép bàn & Cho phép nhân viên chuyển đơn hàng của khách từ bàn này sang bàn khác hoặc ghép nhiều bàn/đơn hàng lại với nhau. \\
+\hline
+MD-05 & FR-MD05-15 & US-01, US-02 & Hủy món/Hủy đơn (Void) & Cho phép nhân viên (có thể cần quyền quản lý) hủy bỏ một món đã gọi hoặc toàn bộ đơn hàng với lý do cụ thể, có ghi nhận vào hệ thống. \\
+\hline
+
+\end{longtable}

@@ -1,0 +1,53 @@
+\subsubsection{Module MD-03: Quản lý Đặt chỗ \& Đặt món trước}
+
+\begin{longtable}{|m{2cm}|m{2.5cm}|m{2cm}|m{4.5cm}|m{4cm}|}
+\caption{Danh sách Yêu cầu Chức năng cho Module MD-03: Quản lý Đặt chỗ \& Đặt món trước} \label{tab:fr_md03} \\
+\hline
+\textbf{Mã Module} & \textbf{Mã Yêu cầu CN} & \textbf{Mã Người dùng} & \textbf{Tên Chức năng} & \textbf{Mô tả Ngắn} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+
+MD-03 & FR-MD03-01 & US-08 & Xem Giao diện Đặt chỗ & Hiển thị giao diện cho phép khách hàng xem các khung giờ/bàn còn trống và bắt đầu quá trình đặt chỗ. \\
+\hline
+MD-03 & FR-MD03-02 & US-08 & Chọn Thông tin Đặt bàn & Cho phép khách hàng chọn ngày, giờ, số lượng người cho lượt đặt bàn mong muốn. \\
+\hline
+MD-03 & FR-MD03-03 & US-08 & Chọn Bàn cụ thể & Nếu được cấu hình, cho phép khách hàng xem sơ đồ bàn và chọn một bàn cụ thể còn trống phù hợp với số lượng người. \\
+\hline
+MD-03 & FR-MD03-04 & US-08 & Xem Thực đơn & Hiển thị thực đơn (các sản phẩm từ MD-02) để khách hàng lựa chọn món ăn muốn đặt trước. \\
+\hline
+MD-03 & FR-MD03-05 & US-08 & Chọn Món ăn Đặt trước & Cho phép khách hàng thêm các món ăn/đồ uống từ thực đơn vào giỏ hàng đặt trước của lượt đặt chỗ. Bao gồm chọn biến thể (nếu có). \\
+\hline
+MD-03 & FR-MD03-06 & US-08 & Xem Tóm tắt Đặt chỗ & Hiển thị thông tin tổng hợp về lượt đặt chỗ: ngày giờ, số người, bàn (nếu chọn), danh sách món đặt trước, và số tiền đặt cọc dự kiến. \\
+\hline
+MD-03 & FR-MD03-07 & US-08 & Nhập Thông tin Khách hàng & Thu thập thông tin bắt buộc của khách hàng (Tên, Số điện thoại, Email) để hoàn tất đặt chỗ. \\
+\hline
+MD-03 & FR-MD03-08 & System / US-08 & Tính toán Tiền Đặt cọc & Hệ thống tự động tính toán số tiền đặt cọc dựa trên cấu hình: 15\% giá bàn + 15\% tổng giá trị món ăn đặt trước. \\
+\hline
+MD-03 & FR-MD03-09 & US-08 & Thanh toán Đặt cọc & Tích hợp với cổng thanh toán để khách hàng thực hiện thanh toán số tiền đặt cọc đã được tính toán. \\
+\hline
+MD-03 & FR-MD03-10 & System / US-08 & Xác nhận Đặt chỗ & Sau khi thanh toán thành công, hệ thống tạo bản ghi đặt chỗ, gửi email/SMS xác nhận cho khách hàng và cập nhật trạng thái bàn/lịch. \\
+\hline
+MD-03 & FR-MD03-11 & US-01 / US-10 & Cấu hình Tham số Đặt chỗ & Cho phép quản lý cấu hình các tùy chọn đặt chỗ: giờ hoạt động, thời gian mỗi lượt đặt, số lượng khách tối thiểu/tối đa, đặt trước bao lâu, giá trị từng bàn (cho việc tính cọc). \\
+\hline
+MD-03 & FR-MD03-12 & US-01 / US-03 & Xem Danh sách Đặt chỗ & Hiển thị danh sách tất cả các lượt đặt chỗ (online và offline) với các thông tin cơ bản và trạng thái (Chờ xác nhận, Đã xác nhận, Đã hủy...). \\
+\hline
+MD-03 & FR-MD03-13 & US-01 / US-03 & Xem Chi tiết Đặt chỗ & Cho phép xem thông tin chi tiết của một lượt đặt chỗ cụ thể: thông tin khách, bàn, món đặt trước, trạng thái thanh toán cọc, lịch sử thay đổi. \\
+\hline
+MD-03 & FR-MD03-14 & US-01 / US-03 & Tạo/Sửa Đặt chỗ Thủ công & Cho phép nhân viên (Lễ tân, Quản lý) tạo hoặc chỉnh sửa một lượt đặt chỗ trong hệ thống (ví dụ: cho khách gọi điện thoại), bao gồm cả việc nhập món đặt trước và ghi nhận đặt cọc (nếu có). \\
+\hline
+MD-03 & FR-MD03-15 & US-01 / US-03 & Quản lý Trạng thái Đặt chỗ & Cho phép nhân viên thay đổi trạng thái của một lượt đặt chỗ (ví dụ: Xác nhận thủ công, Đánh dấu đã đến, Hủy bỏ). \\
+\hline
+MD-03 & FR-MD03-16 & US-04 / US-01 & Xem Danh sách Món đặt trước & Cung cấp giao diện (có thể là báo cáo hoặc màn hình riêng) cho bộ phận bếp/quản lý xem trước các món ăn cần chuẩn bị cho các lượt đặt chỗ sắp tới. \\
+\hline
+MD-03 & FR-MD03-17 & US-08 & Xem Lịch sử/Chi tiết Đặt chỗ Cá nhân & Cho phép khách hàng đã đăng nhập xem lại các lượt đặt chỗ đã thực hiện và trạng thái của chúng. \\
+\hline
+
+
+\end{longtable}
+

@@ -1,0 +1,494 @@
+\subsection{Module MD-01: Quản lý Lịch làm việc (Scheduling)}
+
+\subsubsection{Use Case UC-MD01-01: Tạo ca làm việc mới}
+
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD01-01: Tạo ca làm việc mới} \label{tab:uc_md01_01} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+
+Use Case Name & Tạo ca làm việc mới \\
+\hline
+Use Case ID & UC-MD01-01 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng định nghĩa và lưu trữ thông tin chi tiết về một ca làm việc mới trong hệ thống lập lịch. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Quản lý nhà hàng cần tạo một khung thời gian làm việc cụ thể với các yêu cầu về vai trò và số lượng nhân sự cho một ngày trong tương lai. \\
+\hline
+Pre-Condition & - Người dùng US-01 đã đăng nhập vào hệ thống với quyền quản lý lịch trình. \newline - Danh sách các vai trò công việc (FR-MD01-08) đã được định nghĩa trong hệ thống. \\
+\hline
+Post-Condition & - Một bản ghi ca làm việc mới được tạo và lưu trong hệ thống với trạng thái "Nháp". \newline - Ca làm việc mới này hiển thị trên giao diện lịch trình (ví dụ: Gantt chart) dưới dạng chưa được gán nhân viên và chưa xuất bản. \newline - Hệ thống ghi nhận hoạt động tạo ca vào nhật ký hệ thống (activity log). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Quản lý nhà hàng (US-01) truy cập chức năng quản lý lịch làm việc. \newline 2. US-01 chọn hành động để tạo ca làm việc mới (ví dụ: nhấn nút "New" hoặc click vào một ô trống trên lịch). \newline 3. Hệ thống hiển thị form/dialog để nhập thông tin ca làm việc. \newline 4. US-01 nhập/chọn thông tin chi tiết cho ca làm việc: \newline    - Ngày diễn ra ca làm việc. \newline    - Giờ bắt đầu. \newline    - Giờ kết thúc. \newline    - Chọn (các) vai trò cần thiết cho ca làm việc từ danh sách vai trò đã có. \newline    - Nhập số lượng nhân viên cần cho mỗi vai trò đã chọn. \newline    - (Tùy chọn) Nhập ghi chú cho ca làm việc. \newline 5. US-01 chọn lệnh "Lưu" hoặc "Tạo". \newline 6. Hệ thống kiểm tra tính hợp lệ của dữ liệu nhập vào (theo BR-UC1.1-1, BR-UC1.1-2). \newline 7. Hệ thống lưu thông tin ca làm việc vào cơ sở dữ liệu với trạng thái "Nháp". \newline 8. Hệ thống cập nhật giao diện lịch trình để hiển thị ca làm việc mới (dạng nháp, chưa gán nhân viên). \newline 9. Hệ thống hiển thị thông báo tạo ca thành công. \newline 10. Hệ thống ghi nhận hoạt động vào Activity Log. \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể cho chức năng cơ bản này. \\
+\hline
+Exception Flow & \textbf{6a. Dữ liệu không hợp lệ:} \newline    1. Hệ thống phát hiện dữ liệu nhập không hợp lệ (ví dụ: giờ kết thúc trước giờ bắt đầu, số lượng nhân viên là số âm hoặc không phải số). \newline    2. Hệ thống hiển thị thông báo lỗi cụ thể, chỉ rõ trường và lý do không hợp lệ. \newline    3. Hệ thống giữ nguyên các dữ liệu đã nhập và cho phép US-01 chỉnh sửa. Use Case quay lại bước 4 của Basic Flow. \newline \textbf{7a. Lỗi hệ thống khi lưu:} \newline    1. Hệ thống gặp lỗi trong quá trình lưu dữ liệu (ví dụ: lỗi kết nối cơ sở dữ liệu). \newline    2. Hệ thống hiển thị thông báo lỗi chung về việc không thể lưu ca làm việc. \newline    3. Use Case kết thúc trong trạng thái lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC1.1-1:} Giờ kết thúc của ca làm việc phải lớn hơn giờ bắt đầu. \newline - \textbf{BR-UC1.1-2:} Số lượng nhân viên cần cho mỗi vai trò phải là một số nguyên dương (>0). \newline - \textbf{BR-UC1.1-3:} Ca làm việc mới tạo mặc định có trạng thái là "Nháp" (Draft). \newline - \textbf{BR-UC1.1-4:} Chỉ có thể chọn các vai trò đã được định nghĩa trong hệ thống (liên kết FR-MD01-08). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC1.1-1 (Usability):} Giao diện nhập thông tin ca làm việc phải trực quan, dễ sử dụng, có gợi ý hoặc calendar picker cho ngày, dropdown/search cho vai trò. \newline - \textbf{NFR-UC1.1-2 (Performance):} Thời gian hệ thống kiểm tra và lưu ca làm việc mới phải dưới 2 giây trong điều kiện tải bình thường. \newline - \textbf{NFR-UC1.1-3 (Data Integrity):} Dữ liệu ca làm việc phải được lưu trữ chính xác theo thông tin người dùng đã nhập. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD01-02: Gán nhân viên vào ca làm việc}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD01-02: Gán nhân viên vào ca làm việc} \label{tab:uc_md01_02} \\
+
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+Use Case Name & Gán nhân viên vào ca làm việc \\
+\hline
+Use Case ID & UC-MD01-02 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng chỉ định một nhân viên cụ thể vào một vị trí/vai trò còn trống trong một ca làm việc đang ở trạng thái Nháp. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Quản lý nhà hàng cần phân công nhân sự cụ thể cho các ca làm việc đã được tạo khung. \\
+\hline
+Pre-Condition & - Người dùng US-01 đã đăng nhập vào hệ thống với quyền quản lý lịch trình. \newline - Tồn tại ít nhất một ca làm việc trong hệ thống với trạng thái "Nháp" (được tạo bởi FR-MD01-01). \newline - Ca làm việc được chọn có ít nhất một vị trí/vai trò chưa được gán nhân viên. \newline - Dữ liệu nhân viên (với vai trò được định nghĩa) đã tồn tại trong hệ thống. \\
+\hline
+Post-Condition & - Nhân viên được chọn được gán thành công vào vị trí/vai trò cụ thể trong bản ghi ca làm việc. \newline - Giao diện lịch trình (ví dụ: Gantt chart) được cập nhật để hiển thị tên nhân viên đã được gán cho vị trí đó. \newline - Số lượng vị trí đã được lấp đầy cho vai trò đó trong ca làm việc được cập nhật (nếu có theo dõi). \newline - Hệ thống ghi nhận hoạt động gán ca vào nhật ký hệ thống (activity log). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Quản lý nhà hàng (US-01) truy cập giao diện quản lý lịch làm việc (ví dụ: chế độ xem Gantt). \newline 2. US-01 chọn một ca làm việc cụ thể đang ở trạng thái "Nháp" và có vị trí cần gán nhân viên. \newline 3. US-01 chọn (ví dụ: click vào) vị trí/vai trò còn trống trong ca làm việc đó. \newline 4. Hệ thống hiển thị danh sách các nhân viên thỏa mãn các điều kiện sau: \newline    - Có vai trò phù hợp với yêu cầu của vị trí. \newline    - Khả dụng trong khung thời gian của ca làm việc (không bị đánh dấu không sẵn sàng - FR-MD01-09, và không bị trùng lịch với ca khác đã được gán - kiểm tra theo FR-MD01-04). \newline 5. US-01 chọn một nhân viên từ danh sách hiển thị. \newline 6. US-01 xác nhận việc gán (ví dụ: nhấn nút "Gán" hoặc kéo thả nhân viên vào vị trí trên Gantt). \newline 7. Hệ thống lưu thông tin gán nhân viên vào vị trí đã chọn của ca làm việc. \newline 8. Hệ thống cập nhật giao diện Gantt chart, hiển thị tên nhân viên vừa được gán vào vị trí đó. \newline 9. Hệ thống (tùy chọn) cập nhật số lượng vị trí còn trống cho vai trò/ca đó. \newline 10. Hệ thống ghi nhận hoạt động vào Activity Log. \\
+\hline
+Alternative Flow & \textbf{4a. Lọc/Tìm kiếm nhân viên:} \newline    1. Nếu danh sách nhân viên dài, US-01 sử dụng chức năng tìm kiếm (theo tên) hoặc bộ lọc (theo kỹ năng, nếu có) để thu hẹp danh sách. \newline    2. Use Case tiếp tục từ bước 5 của Basic Flow. \newline \textbf{4b. Xem chi tiết/lịch trình nhân viên:} \newline    1. Trước khi chọn, US-01 nhấp vào tên nhân viên trong danh sách để xem thông tin chi tiết hơn (ví dụ: tổng số giờ đã được xếp lịch trong tuần). \newline    2. US-01 đóng cửa sổ/panel chi tiết. \newline    3. Use Case tiếp tục từ bước 5 của Basic Flow. \\
+\hline
+Exception Flow & \textbf{4c. Không có nhân viên phù hợp:} \newline    1. Hệ thống xác định không có nhân viên nào thỏa mãn tất cả các điều kiện (vai trò, thời gian khả dụng). \newline    2. Hệ thống hiển thị thông báo: "Không tìm thấy nhân viên phù hợp và khả dụng cho vị trí này". \newline    3. Use Case kết thúc đối với nỗ lực gán vị trí này. \newline \textbf{7a. Xung đột lịch (kiểm tra lại):} \newline    1. Mặc dù đã có kiểm tra ở bước 4, hệ thống có thể phát hiện xung đột ngay tại thời điểm lưu (ví dụ: do thao tác đồng thời). \newline    2. Hệ thống từ chối việc gán. \newline    3. Hệ thống hiển thị thông báo lỗi về việc trùng lịch. \newline    4. Use Case có thể quay lại bước 4 hoặc 5 của Basic Flow. \newline \textbf{7b. Lỗi hệ thống khi gán:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi cố gắng lưu thông tin gán. \newline    2. Hệ thống hiển thị thông báo lỗi chung (ví dụ: "Đã xảy ra lỗi. Không thể gán nhân viên."). \newline    3. Use Case kết thúc trong trạng thái lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC1.2-1:} Chỉ những nhân viên có vai trò được định nghĩa khớp với vai trò yêu cầu của vị trí trong ca mới được hiển thị để lựa chọn. \newline - \textbf{BR-UC1.2-2:} Nhân viên sẽ không xuất hiện trong danh sách lựa chọn nếu họ đã đánh dấu không sẵn sàng (FR-MD01-09) trong khoảng thời gian của ca làm việc. \newline - \textbf{BR-UC1.2-3:} Nhân viên sẽ không xuất hiện trong danh sách lựa chọn nếu họ đã được gán vào một ca làm việc khác có thời gian trùng lặp (liên quan đến FR-MD01-04). \newline - \textbf{BR-UC1.2-4:} Việc gán nhân viên trực tiếp như mô tả trong Use Case này chỉ áp dụng cho các ca làm việc có trạng thái "Nháp". Các ca đã "Xuất bản" có thể cần quy trình khác để thay đổi (ví dụ: hủy xuất bản trước). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC1.2-1 (Performance):} Danh sách nhân viên khả dụng phải được tải và hiển thị trong vòng dưới 3 giây (với giả định < 100 nhân viên). \newline - \textbf{NFR-UC1.2-2 (Usability):} Giao diện cần phân biệt rõ ràng nhân viên khả dụng và không khả dụng (nếu hiển thị cả hai). Nên hỗ trợ thao tác kéo thả nhân viên vào vị trí trên biểu đồ Gantt. \newline - \textbf{NFR-UC1.2-3 (Security):} Chỉ người dùng có vai trò US-01 (hoặc quyền tương đương được cấp) mới có thể thực hiện chức năng gán nhân viên vào ca. \\
+\hline
+
+\end{longtable}
+
+
+\subsubsection{Use Case UC-MD01-03: Xem lịch biểu Gantt}
+
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD01-03: Xem lịch biểu Gantt} \label{tab:uc_md01_03} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem lịch biểu Gantt \\
+\hline
+Use Case ID & UC-MD01-03 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng xem tổng quan lịch làm việc của nhân viên (bao gồm ca nháp và ca đã xuất bản) dưới dạng biểu đồ Gantt trực quan, với khả năng thay đổi khung thời gian hiển thị (ngày, tuần, tháng) và lọc theo vai trò công việc. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Quản lý nhà hàng muốn xem xét, đánh giá, hoặc kiểm tra lịch làm việc đã được phân công hoặc đang trong quá trình lập kế hoạch. \\
+\hline
+Pre-Condition & - Người dùng US-01 đã đăng nhập vào hệ thống với quyền truy cập module Lịch làm việc. \newline - Có dữ liệu lịch làm việc (các ca đã được tạo, có thể đã hoặc chưa gán nhân viên) tồn tại trong hệ thống cho khoảng thời gian được xem xét. \\
+\hline
+Post-Condition & - Biểu đồ Gantt hiển thị trực quan lịch làm việc theo các tiêu chí (thời gian, vai trò) do người dùng chọn hoặc theo mặc định. \newline - Quản lý nhà hàng có cái nhìn tổng quan về việc phân bổ nhân sự theo thời gian. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Quản lý nhà hàng (US-01) truy cập vào module/chức năng quản lý Lịch làm việc. \newline 2. Hệ thống tự động tải và hiển thị biểu đồ Gantt với chế độ xem mặc định (ví dụ: Tuần hiện tại, hiển thị theo Nhân viên - mỗi nhân viên một hàng). \newline 3. US-01 xem xét lịch trình hiển thị trên biểu đồ. \\
+\hline
+Alternative Flow & \textbf{3a. Thay đổi Thang Thời Gian:} \newline    1. US-01 chọn một thang thời gian khác (ví dụ: Ngày, Tháng) từ các nút điều khiển có sẵn. \newline    2. Hệ thống tải lại và hiển thị biểu đồ Gantt tương ứng với thang thời gian mới được chọn. \newline    3. Use Case quay lại bước 3 của Basic Flow. \newline \textbf{3b. Lọc theo Vai Trò:} \newline    1. US-01 chọn một hoặc nhiều Vai trò công việc từ danh sách lọc (ví dụ: chỉ xem lịch của 'Bếp trưởng', 'Phục vụ'). \newline    2. Hệ thống lọc và hiển thị lại biểu đồ Gantt chỉ bao gồm các ca làm việc liên quan đến vai trò đã chọn. \newline    3. Use Case quay lại bước 3 của Basic Flow. \newline \textbf{3c. Chuyển đổi Khung Thời Gian (Tuần/Tháng Tiếp theo/Trước):} \newline    1. US-01 sử dụng các nút điều hướng (ví dụ: mũi tên "<", ">") để chuyển sang xem tuần/tháng trước đó hoặc kế tiếp. \newline    2. Hệ thống tải lại và hiển thị biểu đồ Gantt cho khung thời gian mới. \newline    3. Use Case quay lại bước 3 của Basic Flow. \newline \textbf{3d. Xem chi tiết ca làm việc (Hover/Click):} \newline    1. US-01 di chuột qua một thanh biểu diễn ca làm việc trên biểu đồ. \newline    2. Hệ thống hiển thị một tooltip/popup nhỏ chứa thông tin tóm tắt về ca đó (Nhân viên, Vai trò, Giờ bắt đầu/kết thúc, Trạng thái). \newline    3. (Tùy chọn) US-01 nhấp vào thanh ca làm việc để mở chi tiết đầy đủ hoặc thực hiện hành động khác (như Sửa, Gán nhân viên - liên quan đến UC khác). \newline    4. Use Case quay lại bước 3 của Basic Flow. \\
+\hline
+Exception Flow & \textbf{2a. Không có dữ liệu lịch trình:} \newline    1. Hệ thống không tìm thấy bất kỳ ca làm việc nào trong khoảng thời gian/bộ lọc hiện tại. \newline    2. Hệ thống hiển thị một biểu đồ trống hoặc một thông báo rõ ràng (ví dụ: "Không có lịch trình nào được tìm thấy cho lựa chọn này."). \newline    3. Use Case kết thúc hoặc chờ người dùng thay đổi bộ lọc/thời gian. \newline \textbf{2b. Lỗi tải dữ liệu:} \newline    1. Hệ thống gặp sự cố khi truy vấn hoặc xử lý dữ liệu lịch trình. \newline    2. Hệ thống hiển thị một thông báo lỗi chung (ví dụ: "Không thể tải dữ liệu lịch trình. Vui lòng thử lại sau."). \newline    3. Use Case kết thúc trong trạng thái lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC1.3-1:} Chế độ xem mặc định của biểu đồ Gantt là theo tuần hiện tại, nhóm theo nhân viên (mỗi hàng một nhân viên). \newline - \textbf{BR-UC1.3-2:} Biểu đồ Gantt phải hiển thị cả các ca làm việc ở trạng thái "Nháp" và "Đã xuất bản". Cần có sự phân biệt trực quan rõ ràng giữa hai trạng thái này (ví dụ: ca nháp có sọc chéo, ca xuất bản có màu liền mạch). \newline - \textbf{BR-UC1.3-3:} Các thanh (bar) trên biểu đồ biểu diễn ca làm việc, chiều dài của thanh tương ứng với thời lượng của ca. \newline - \textbf{BR-UC1.3-4:} Màu sắc của các thanh ca làm việc có thể được sử dụng để biểu thị Vai trò hoặc trạng thái khác (nếu được cấu hình). \newline - \textbf{BR-UC1.3-5:} Khi di chuột qua một thanh ca làm việc, hệ thống phải hiển thị thông tin chi tiết cơ bản (tooltip). \newline - \textbf{BR-UC1.3-6:} Các tùy chọn lọc theo vai trò phải dựa trên danh sách vai trò đã được định nghĩa trong hệ thống (FR-MD01-08). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC1.3-1 (Performance):} Thời gian tải và hiển thị biểu đồ Gantt cho một tuần làm việc tiêu chuẩn (ví dụ: < 50 nhân viên, < 200 ca) phải dưới 5 giây. Việc lọc hoặc thay đổi thang thời gian phải cập nhật dưới 3 giây. \newline - \textbf{NFR-UC1.3-2 (Usability):} Biểu đồ phải dễ đọc, dễ điều hướng (cuộn ngang/dọc). Các nút điều khiển thang thời gian, bộ lọc, điều hướng tuần/tháng phải rõ ràng và dễ tiếp cận. Phân biệt trạng thái Nháp/Xuất bản phải rõ ràng. \newline - \textbf{NFR-UC1.3-3 (Accuracy):} Dữ liệu hiển thị trên Gantt chart phải chính xác và đồng bộ với dữ liệu ca làm việc được lưu trong cơ sở dữ liệu tại thời điểm tải. \newline - \textbf{NFR-UC1.3-4 (Scalability):} Hệ thống nên có khả năng xử lý và hiển thị hiệu quả khi số lượng nhân viên và ca làm việc tăng lên (ví dụ: > 100 nhân viên, > 500 ca/tuần), mặc dù hiệu suất có thể giảm nhẹ. \\
+\hline
+
+\end{longtable}
+
+
+\subsubsection{Use Case UC-MD01-04: Phát hiện và Cảnh báo Trùng lịch}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD01-04: Phát hiện và Cảnh báo Trùng lịch} \label{tab:uc_md01_04} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Phát hiện và Cảnh báo Trùng lịch \\
+\hline
+Use Case ID & UC-MD01-04 \\
+\hline
+Use Case Description & Hệ thống tự động xác định và cung cấp cảnh báo trực quan cho Quản lý nhà hàng khi một nhân viên được phân công vào các ca làm việc có thời gian bị trùng lặp nhau. \\
+\hline
+Actor & System (Thực hiện chính), US-01 (Quản lý nhà hàng - Kích hoạt thông qua hành động) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - US-01 thực hiện hành động gán một nhân viên vào một ca làm việc (trong UC-MD01-02). \newline - US-01 lưu lại thay đổi trên lịch trình. \newline - Hệ thống tải/hiển thị giao diện lịch làm việc (ví dụ: Gantt chart - UC-MD01-03). \\
+\hline
+Pre-Condition & - Tồn tại ít nhất một bản ghi nhân viên. \newline - Tồn tại ít nhất hai bản ghi ca làm việc được gán cho cùng một nhân viên (hoặc một ca đang được gán). \\
+\hline
+Post-Condition & - Nếu phát hiện trùng lịch, các ca làm việc bị trùng của nhân viên đó được đánh dấu bằng một chỉ báo trực quan rõ ràng (ví dụ: màu đỏ) trên giao diện Gantt chart. \newline - (Tùy chọn, theo cấu hình) Việc gán ca gây ra xung đột có thể bị chặn hoặc được phép lưu nhưng vẫn giữ cảnh báo. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Triggered by Assignment Attempt) & 1. US-01 thực hiện hành động gán Nhân viên A vào Ca làm việc X (Thời gian T1 đến T2). \newline 2. Hệ thống nhận yêu cầu gán. \newline 3. Hệ thống truy vấn tất cả các Ca làm việc khác (ví dụ: Ca Y, thời gian T3 đến T4) đã được gán cho Nhân viên A. \newline 4. Hệ thống kiểm tra xem có Ca Y nào có khoảng thời gian (T3-T4) trùng lặp với khoảng thời gian của Ca X (T1-T2) hay không (theo BR-UC1.4-1). \newline 5. Giả sử Hệ thống phát hiện Ca Y trùng lặp với Ca X. \newline 6. Hệ thống đánh dấu cả Ca X và Ca Y là có xung đột. \newline 7. Hệ thống hiển thị Ca X và Ca Y trên giao diện Gantt chart với cảnh báo trực quan (theo BR-UC1.4-2). \newline 8. Hệ thống (có thể) hiển thị một thông báo xác nhận cho US-01 về việc xung đột đã được phát hiện (theo BR-UC1.4-3). \newline 9. Việc gán Ca X có thể được hoàn tất (với cảnh báo) hoặc bị hủy bỏ tùy thuộc vào cấu hình (BR-UC1.4-3). \\
+\hline
+Alternative Flow & \textbf{4a. Không phát hiện trùng lặp:} \newline    1. Hệ thống không tìm thấy Ca Y nào có thời gian trùng lặp với Ca X. \newline    2. Hệ thống tiến hành gán Nhân viên A vào Ca X bình thường (tiếp tục luồng thành công của UC-MD01-02). \newline \textbf{Basic Flow (Triggered by Loading Schedule):} \newline    1. US-01 truy cập giao diện lịch làm việc (UC-MD01-03). \newline    2. Hệ thống tải dữ liệu các ca làm việc trong phạm vi hiển thị. \newline    3. Đối với mỗi nhân viên có ca trong phạm vi hiển thị, Hệ thống thực hiện kiểm tra trùng lặp giữa tất cả các ca của nhân viên đó (tương tự bước 3-4 của Basic Flow Assignment). \newline    4. Nếu phát hiện bất kỳ cặp ca nào trùng lặp, Hệ thống đánh dấu và hiển thị cảnh báo trực quan cho các ca đó trên Gantt chart (bước 6-7). \\
+\hline
+Exception Flow & \textbf{3a. Lỗi truy vấn dữ liệu:} \newline    1. Hệ thống gặp lỗi khi cố gắng truy vấn danh sách các ca làm việc của nhân viên. \newline    2. Hệ thống có thể bỏ qua việc kiểm tra xung đột hoặc hiển thị thông báo lỗi. \newline    3. Quá trình gán/hiển thị lịch có thể tiếp tục nhưng không đảm bảo không có xung đột. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC1.4-1 (Overlap Definition):} Hai ca làm việc được coi là trùng lặp (xung đột) nếu khoảng thời gian của chúng có bất kỳ phần nào chung, bao gồm cả trường hợp thời gian bắt đầu hoặc kết thúc trùng nhau. Ví dụ: Ca1(8h-12h) và Ca2(11h-15h) là trùng lặp; Ca1(8h-12h) và Ca2(12h-16h) không được coi là trùng lặp. Cần xác nhận định nghĩa chính xác. Mặc định: (StartA < EndB) và (StartB < EndA). \newline - \textbf{BR-UC1.4-2 (Visual Warning):} Các ca làm việc bị xung đột phải được hiển thị với màu nền khác biệt (ví dụ: màu đỏ) và/hoặc có biểu tượng cảnh báo rõ ràng trên biểu đồ Gantt. \newline - \textbf{BR-UC1.4-3 (Conflict Handling):} Hệ thống phải cảnh báo về xung đột lịch nhưng cho phép Quản lý nhà hàng lưu lại việc gán ca bị trùng. Người quản lý chịu trách nhiệm giải quyết xung đột sau đó. \newline - \textbf{BR-UC1.4-4 (Scope of Check):} Kiểm tra xung đột phải được thực hiện đối với tất cả các ca làm việc đã gán cho nhân viên, bất kể trạng thái của ca là "Nháp" hay "Đã xuất bản". \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC1.4-1 (Performance):} Việc kiểm tra và hiển thị cảnh báo xung đột khi gán một ca đơn lẻ phải hoàn thành trong vòng dưới 1 giây. Khi tải lịch trình tuần, việc kiểm tra xung đột cho tất cả nhân viên hiển thị không được làm tăng thời gian tải quá 20\%. \newline - \textbf{NFR-UC1.4-2 (Usability):} Cảnh báo trực quan phải rõ ràng, dễ nhận biết và không gây nhầm lẫn với các trạng thái khác của ca làm việc. \newline - \textbf{NFR-UC1.4-3 (Accuracy):} Logic phát hiện trùng lặp phải chính xác 100\% dựa trên định nghĩa trùng lặp (BR-UC1.4-1) và dữ liệu thời gian thực tế của các ca. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD01-05: Xuất bản và Thông báo Lịch làm việc}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD01-05: Xuất bản và Thông báo Lịch làm việc} \label{tab:uc_md01_05} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xuất bản và Thông báo Lịch làm việc \\
+\hline
+Use Case ID & UC-MD01-05 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng chính thức hóa lịch làm việc đã xếp (chuyển từ Nháp sang Xuất bản) và tự động gửi thông báo lịch trình cá nhân đến từng nhân viên liên quan qua email hoặc kênh khác đã cấu hình. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), System (Thực hiện thay đổi trạng thái và gửi thông báo) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Quản lý nhà hàng đã hoàn tất việc xếp lịch cho một khoảng thời gian (ví dụ: tuần tới) và muốn công bố chính thức cho nhân viên. \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền quản lý lịch trình. \newline - Tồn tại ít nhất một ca làm việc ở trạng thái "Nháp" trong phạm vi cần xuất bản. \newline - Thông tin liên hệ (ví dụ: địa chỉ email) của các nhân viên liên quan đã được cấu hình chính xác trong hệ thống. \newline - Hệ thống gửi thông báo (ví dụ: Email Server) đã được cấu hình và hoạt động. \\
+\hline
+Post-Condition & - Các ca làm việc được chọn trong phạm vi xuất bản chuyển trạng thái từ "Nháp" sang "Đã xuất bản". \newline - Các ca "Đã xuất bản" trở nên chính thức và có thể được xem bởi nhân viên liên quan (US-07 qua FR-MD01-06). \newline - Thông báo chứa tóm tắt lịch trình cá nhân được gửi (hoặc đưa vào hàng đợi gửi) thành công đến email (hoặc kênh khác) của từng nhân viên có ca được xuất bản. \newline - Giao diện Gantt chart cập nhật, thể hiện trạng thái "Đã xuất bản" của các ca (ví dụ: thay đổi màu sắc/mất sọc chéo). \newline - Hệ thống ghi nhận hoạt động xuất bản vào nhật ký. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-01 truy cập giao diện quản lý lịch làm việc (ví dụ: Gantt view). \newline 2. US-01 chọn(các) ca làm việc ở trạng thái "Nháp" muốn xuất bản HOẶC chọn một hành động xuất bản theo phạm vi (ví dụ: nút "Publish" cho tuần hiện tại/kế tiếp). \newline 3. Hệ thống (có thể) hiển thị danh sách các ca sẽ được xuất bản và yêu cầu xác nhận từ US-01. \newline 4. US-01 xác nhận hành động xuất bản. \newline 5. Hệ thống xác định tất cả các ca làm việc "Nháp" thuộc phạm vi đã chọn. \newline 6. Hệ thống cập nhật trạng thái của các ca này thành "Đã xuất bản" trong cơ sở dữ liệu. \newline 7. Hệ thống xác định danh sách các nhân viên có ca làm việc vừa được xuất bản. \newline 8. Đối với mỗi nhân viên trong danh sách: \newline    a. Hệ thống tạo nội dung thông báo (ví dụ: email) liệt kê các ca làm việc (Ngày, Giờ bắt đầu, Giờ kết thúc, Vai trò) của nhân viên đó trong phạm vi vừa xuất bản. \newline    b. Hệ thống gửi thông báo này đến địa chỉ email (hoặc kênh khác) đã đăng ký của nhân viên (thường thông qua hàng đợi mail). \newline 9. Hệ thống cập nhật giao diện Gantt chart để phản ánh trạng thái "Đã xuất bản" mới của các ca. \newline 10. Hệ thống hiển thị thông báo thành công cho US-01 (ví dụ: "Lịch trình đã được xuất bản và thông báo đã được gửi"). \newline 11. Hệ thống ghi nhận hoạt động vào Activity Log. \\
+\hline
+Alternative Flow & \textbf{2a. Xuất bản và gửi sau:} \newline    1. US-01 chọn tùy chọn "Chỉ xuất bản" (nếu hệ thống hỗ trợ). \newline    2. Hệ thống thực hiện các bước 5, 6, 9, 10, 11 của Basic Flow nhưng bỏ qua bước 7, 8 (không gửi thông báo). \newline    3. Sau đó, US-01 có thể thực hiện một hành động riêng biệt "Gửi thông báo lịch trình" cho các ca đã xuất bản. \newline (Lưu ý: Cần kiểm tra khả năng cấu hình cho luồng này, luồng mặc định thường là xuất bản kèm thông báo). \newline \textbf{3a. Thông báo xem trước nhân viên bị ảnh hưởng:} \newline    1. Trước khi US-01 xác nhận (bước 4), hệ thống hiển thị danh sách các nhân viên sẽ nhận được thông báo. \newline    2. Use Case tiếp tục từ bước 4 của Basic Flow. \\
+\hline
+Exception Flow & \textbf{2b. Không có ca nháp nào được chọn/tìm thấy:} \newline    1. Hệ thống không tìm thấy ca "Nháp" nào trong phạm vi US-01 đã chọn. \newline    2. Hệ thống hiển thị thông báo "Không có ca làm việc nào ở trạng thái Nháp để xuất bản." \newline    3. Use Case kết thúc. \newline \textbf{6a. Lỗi cập nhật trạng thái ca:} \newline    1. Hệ thống gặp lỗi khi cố gắng cập nhật trạng thái ca trong cơ sở dữ liệu. \newline    2. Hệ thống hiển thị thông báo lỗi "Không thể cập nhật trạng thái ca làm việc." \newline    3. Use Case kết thúc trong trạng thái lỗi, các ca có thể vẫn ở trạng thái "Nháp". \newline \textbf{8c. Lỗi gửi thông báo:} \newline    1. Hệ thống gặp lỗi khi cố gắng tạo hoặc gửi thông báo cho một hoặc nhiều nhân viên (ví dụ: email không hợp lệ, lỗi máy chủ mail). \newline    2. Hệ thống (nên) ghi nhận lỗi chi tiết vào log hệ thống. \newline    3. Hệ thống (nên) hoàn thành việc xuất bản các ca (bước 6, 9). \newline    4. Hệ thống hiển thị thông báo cho US-01, ví dụ: "Lịch trình đã được xuất bản, nhưng đã xảy ra lỗi khi gửi thông báo cho một số nhân viên. Vui lòng kiểm tra nhật ký lỗi." \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC1.5-1:} Chỉ các ca làm việc ở trạng thái "Nháp" mới có thể được chuyển sang trạng thái "Đã xuất bản" thông qua chức năng này. \newline - \textbf{BR-UC1.5-2:} Hành động "Xuất bản" được coi là hành động chính thức hóa lịch làm việc. \newline - \textbf{BR-UC1.5-3:} Thông báo phải được gửi đến địa chỉ email công ty (hoặc kênh liên lạc chính thức khác) được định nghĩa trong hồ sơ nhân viên trên hệ thống. \newline - \textbf{BR-UC1.5-4:} Nội dung thông báo tối thiểu phải bao gồm tên nhân viên, danh sách các ca làm việc được xuất bản (Ngày, Giờ bắt đầu, Giờ kết thúc, Vai trò). \newline - \textbf{BR-UC1.5-5:} Việc xuất bản có thể áp dụng cho toàn bộ lịch trình trong một khoảng thời gian (ví dụ: một tuần) hoặc cho các ca được chọn thủ công. \newline - \textbf{BR-UC1.5-6:} Sau khi xuất bản, việc thay đổi ca (ví dụ: hủy ca, đổi nhân viên) có thể yêu cầu quy trình khác (ví dụ: hủy xuất bản trước hoặc gửi thông báo cập nhật). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC1.5-1 (Performance):} Thời gian xử lý cho việc xuất bản lịch trình của một tuần (~200 ca) và đưa thông báo vào hàng đợi phải dưới 10 giây. \newline - \textbf{NFR-UC1.5-2 (Reliability):} Hệ thống gửi thông báo phải đảm bảo email được đưa vào hàng đợi thành công. Việc giám sát hàng đợi email là một phần vận hành hệ thống nói chung. \newline - \textbf{NFR-UC1.5-3 (Usability):} Phải có phản hồi rõ ràng cho người quản lý biết hành động xuất bản và gửi thông báo đã thành công hay gặp lỗi. Nút/hành động "Publish" phải dễ dàng nhận biết và sử dụng. \newline - \textbf{NFR-UC1.5-4 (Security):} Chỉ người dùng có quyền hạn quản lý lịch trình (thường là US-01) mới có thể thực hiện hành động xuất bản. \\
+\hline
+
+\end{longtable}
+
+
+\subsubsection{Use Case UC-MD01-06: Xem lịch làm việc cá nhân}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD01-06: Xem lịch làm việc cá nhân} \label{tab:uc_md01_06} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem lịch làm việc cá nhân \\
+\hline
+Use Case ID & UC-MD01-06 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-07) xem các ca làm việc đã được Quản lý nhà hàng (US-01) xuất bản chính thức cho bản thân mình thông qua cổng thông tin nhân viên hoặc ứng dụng di động. \\
+\hline
+Actor & US-07 (Nhân viên) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Nhân viên muốn biết lịch trình làm việc sắp tới của mình. \\
+\hline
+Pre-Condition & - Nhân viên (US-07) có tài khoản và mật khẩu hợp lệ để đăng nhập vào cổng thông tin/ứng dụng nhân viên. \newline - Quản lý nhà hàng (US-01) đã tạo, gán và xuất bản (FR-MD01-05) ít nhất một ca làm việc cho nhân viên này. \newline - Cổng thông tin/ứng dụng nhân viên đang hoạt động. \\
+\hline
+Post-Condition & - Lịch làm việc đã được xuất bản của nhân viên được hiển thị rõ ràng cho nhân viên đó xem. \newline - Nhân viên nắm được thông tin về các ca làm việc sắp tới của mình (ngày, giờ, vai trò). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-07) mở ứng dụng di động hoặc truy cập trang web cổng thông tin nhân viên. \newline 2. US-07 nhập thông tin đăng nhập (tên người dùng/email và mật khẩu) và chọn Đăng nhập. \newline 3. Hệ thống xác thực thông tin đăng nhập thành công (Xử lý bởi UC Đăng nhập chung). \newline 4. US-07 chọn mục menu "Lịch làm việc của tôi" hoặc tương tự. \newline 5. Hệ thống truy xuất tất cả các ca làm việc có trạng thái "Đã xuất bản" được gán cho US-07 trong khoảng thời gian mặc định (ví dụ: tuần hiện tại). \newline 6. Hệ thống hiển thị danh sách các ca làm việc này, bao gồm thông tin: Ngày, Giờ bắt đầu, Giờ kết thúc, Vai trò. \newline 7. US-07 xem lịch trình của mình. \\
+\hline
+Alternative Flow & \textbf{6a. Thay đổi khoảng thời gian xem:} \newline    1. US-07 sử dụng các điều khiển (ví dụ: chọn tuần/tháng, lịch nhỏ) để chọn một khoảng thời gian khác muốn xem. \newline    2. Hệ thống thực hiện lại bước 5 và 6 cho khoảng thời gian mới. \newline \textbf{6b. Thay đổi định dạng hiển thị:} \newline    1. Nếu hệ thống hỗ trợ nhiều định dạng (ví dụ: danh sách, lịch tháng), US-07 chọn định dạng mong muốn. \newline    2. Hệ thống thực hiện lại bước 6 với định dạng mới. \\
+\hline
+Exception Flow & \textbf{3a. Đăng nhập không thành công:} \newline    1. Hệ thống xác thực thông tin đăng nhập thất bại. \newline    2. Hệ thống hiển thị thông báo lỗi đăng nhập. \newline    3. Use Case kết thúc (hoặc quay lại bước 2). \newline \textbf{5a. Không có lịch làm việc được xuất bản:} \newline    1. Hệ thống không tìm thấy ca làm việc nào có trạng thái "Đã xuất bản" cho US-07 trong khoảng thời gian được chọn. \newline    2. Hệ thống hiển thị thông báo "Bạn không có lịch làm việc nào được xếp trong khoảng thời gian này." hoặc hiển thị lịch trống. \newline    3. Use Case có thể kết thúc hoặc chờ US-07 thay đổi khoảng thời gian. \newline \textbf{5b. Lỗi hệ thống khi truy xuất dữ liệu:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi cố gắng lấy dữ liệu lịch trình từ cơ sở dữ liệu. \newline    2. Hệ thống hiển thị thông báo lỗi chung (ví dụ: "Không thể tải lịch làm việc. Vui lòng thử lại sau."). \newline    3. Use Case kết thúc trong trạng thái lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC1.6-1:} Nhân viên chỉ có thể xem các ca làm việc của chính mình. Không được phép xem lịch của nhân viên khác (trừ khi có cấu hình đặc biệt cho "ca mở" hoặc vai trò quản lý). \newline - \textbf{BR-UC1.6-2:} Chỉ những ca làm việc có trạng thái "Đã xuất bản" mới được hiển thị cho nhân viên. Các ca "Nháp" không hiển thị. \newline - \textbf{BR-UC1.6-3:} Thông tin tối thiểu cần hiển thị cho mỗi ca: Ngày, Giờ bắt đầu, Giờ kết thúc, Vai trò được gán. \newline - \textbf{BR-UC1.6-4:} Định dạng hiển thị mặc định là danh sách theo tuần hiện tại. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC1.6-1 (Usability):} Giao diện xem lịch phải đơn giản, rõ ràng, dễ đọc trên cả máy tính và thiết bị di động (nếu có app). \newline - \textbf{NFR-UC1.6-2 (Performance):} Thời gian tải lịch làm việc của tuần hiện tại phải dưới 3 giây. \newline - \textbf{NFR-UC1.6-3 (Security):} Đảm bảo cơ chế xác thực và phân quyền chỉ cho phép nhân viên xem đúng lịch của mình. \newline - \textbf{NFR-UC1.6-4 (Availability):} Cổng thông tin/ứng dụng nhân viên nên có độ sẵn sàng cao, cho phép nhân viên kiểm tra lịch bất cứ lúc nào (tùy theo chính sách công ty). \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD01-07: Sao chép lịch tuần}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD01-07: Sao chép lịch tuần} \label{tab:uc_md01_07} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Sao chép lịch tuần \\
+\hline
+Use Case ID & UC-MD01-07 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng tạo nhanh lịch làm việc cho một tuần mới bằng cách sao chép toàn bộ cấu trúc ca (và tùy chọn cả phân công nhân viên) từ một tuần đã có lịch trước đó. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & Quản lý nhà hàng muốn tiết kiệm thời gian khi lập lịch cho tuần mới, dựa trên một lịch trình tuần cũ tương tự. \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền quản lý lịch trình. \newline - Tồn tại lịch làm việc (ít nhất một ca) trong tuần được chọn làm nguồn. \newline - Giao diện lịch làm việc đang hiển thị. \\
+\hline
+Post-Condition & - Các ca làm việc mới, giống hệt (về thời gian, vai trò, tùy chọn cả nhân viên) các ca của tuần nguồn, được tạo ra trong tuần đích với trạng thái "Nháp". \newline - Giao diện Gantt chart cập nhật, hiển thị các ca nháp mới trong tuần đích. \newline - Quản lý nhà hàng có thể chỉnh sửa các ca nháp mới này trước khi xuất bản. \newline - Hệ thống ghi nhận hoạt động sao chép vào nhật ký. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-01 truy cập giao diện quản lý lịch làm việc (ví dụ: Gantt view). \newline 2. US-01 đảm bảo đang xem tuần mà mình muốn dùng làm nguồn (Tuần Nguồn). \newline 3. US-01 chọn hành động "Sao chép tuần" (Copy Week) (thường có trong menu hoặc nút lệnh). \newline 4. Hệ thống (có thể) yêu cầu xác nhận tuần nguồn và tuần đích (mặc định là tuần kế tiếp của tuần nguồn - Tuần Đích). US-01 xác nhận. \newline 5. Hệ thống truy vấn và lấy thông tin tất cả các ca làm việc (bao gồm thời gian, vai trò, nhân viên đã gán nếu có) thuộc Tuần Nguồn. \newline 6. Đối với mỗi ca làm việc lấy được từ Tuần Nguồn: \newline    a. Hệ thống tạo một bản ghi ca làm việc mới trong Tuần Đích với cùng thời gian trong tuần (ví dụ: Thứ Hai 9:00-17:00), cùng vai trò. \newline    b. (Theo cấu hình/mặc định) Hệ thống cũng sao chép luôn việc gán nhân viên từ ca nguồn sang ca đích mới. \newline    c. Hệ thống đặt trạng thái của ca làm việc mới này là "Nháp". \newline 7. Hệ thống cập nhật giao diện Gantt chart để hiển thị Tuần Đích với các ca làm việc mới vừa tạo. \newline 8. Hệ thống hiển thị thông báo sao chép thành công. \newline 9. Hệ thống ghi nhận hoạt động vào Activity Log. \\
+\hline
+Alternative Flow & \textbf{4a. Chọn tuần đích khác:} \newline    1. Trước khi xác nhận, US-01 chọn một tuần đích khác (không phải tuần kế tiếp). \newline    2. Use Case tiếp tục từ bước 5 của Basic Flow với tuần đích đã chọn. \newline \textbf{6b-alt. Sao chép không kèm phân công:} \newline    1. Trước khi kích hoạt sao chép (bước 3 hoặc 4), US-01 bỏ chọn tùy chọn "Sao chép phân công nhân viên". \newline    2. Trong bước 6b, Hệ thống chỉ sao chép thời gian và vai trò, không sao chép nhân viên đã gán. Ca mới tạo ra ở tuần đích sẽ ở trạng thái "Nháp" và "Chưa phân công". \\
+\hline
+Exception Flow & \textbf{3a. Không có quyền sao chép:} \newline    1. US-01 không có quyền thực hiện chức năng này. \newline    2. Hành động "Sao chép tuần" bị vô hiệu hóa hoặc hệ thống báo lỗi quyền hạn. \newline    3. Use Case kết thúc. \newline \textbf{5a. Tuần nguồn không có ca nào:} \newline    1. Hệ thống không tìm thấy ca làm việc nào trong Tuần Nguồn. \newline    2. Hệ thống hiển thị thông báo "Tuần nguồn không có lịch trình để sao chép." \newline    3. Use Case kết thúc. \newline \textbf{6d. Lỗi hệ thống khi tạo ca mới:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi cố gắng tạo bản ghi ca mới trong cơ sở dữ liệu. \newline    2. Hệ thống có thể dừng quá trình sao chép hoặc bỏ qua ca bị lỗi và tiếp tục. \newline    3. Hệ thống hiển thị thông báo lỗi (ví dụ: "Đã xảy ra lỗi trong quá trình sao chép. Một số ca có thể chưa được sao chép."). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC1.7-1:} Tất cả các ca làm việc được tạo ra từ quá trình sao chép đều phải có trạng thái ban đầu là "Nháp". \newline - \textbf{BR-UC1.7-2:} Hành động sao chép tạo ra các bản ghi ca mới, không ghi đè lên các ca có thể đã tồn tại trong tuần đích. Nếu tuần đích đã có ca, kết quả là sẽ có các ca trùng lặp (ở trạng thái nháp) mà người quản lý cần xử lý sau. \newline - \textbf{BR-UC1.7-3:} Mặc định, việc gán nhân viên cũng được sao chép từ tuần nguồn sang tuần đích. \newline - \textbf{BR-UC1.7-4:} Sau khi sao chép, các ca mới ở tuần đích phải tuân theo tất cả các quy tắc khác (ví dụ: kiểm tra trùng lịch FR-MD01-04 sẽ được áp dụng khi xem/xuất bản tuần đích). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC1.7-1 (Performance):} Thời gian hoàn thành việc sao chép lịch của một tuần tiêu chuẩn (~200 ca) phải dưới 5 giây. \newline - \textbf{NFR-UC1.7-2 (Usability):} Chức năng "Sao chép tuần" phải dễ tìm và dễ sử dụng. Việc chọn tuần nguồn/đích phải trực quan. \newline - \textbf{NFR-UC1.7-3 (Accuracy):} Thông tin (thời gian, vai trò, nhân viên - nếu có) của các ca mới tạo phải sao chép chính xác từ các ca tương ứng của tuần nguồn. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD01-08: Quản lý vai trò công việc}
+
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD01-08: Quản lý vai trò công việc} \label{tab:uc_md01_08} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Quản lý vai trò công việc \\
+\hline
+Use Case ID & UC-MD01-08 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng tạo, xem, sửa đổi và xóa các vai trò công việc (ví dụ: Bếp trưởng, Phục vụ, Pha chế) được sử dụng trong module lập lịch (Planning) để định nghĩa yêu cầu nhân sự cho các ca làm việc và gán cho nhân viên. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Quản lý nhà hàng cần định nghĩa một vai trò công việc mới, cập nhật thông tin vai trò hiện có, hoặc loại bỏ một vai trò không còn sử dụng. \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập vào hệ thống với quyền quản trị module Planning hoặc cấu hình nhân sự liên quan. \\
+\hline
+Post-Condition & - \textbf{Tạo mới:} Một bản ghi vai trò công việc mới được tạo và lưu trong hệ thống, sẵn sàng để sử dụng khi tạo ca hoặc gán cho nhân viên. \newline - \textbf{Sửa đổi:} Thông tin của vai trò công việc đã chọn được cập nhật trong hệ thống. \newline - \textbf{Xóa:} Vai trò công việc đã chọn bị xóa khỏi hệ thống (nếu không đang được sử dụng). \newline - Danh sách vai trò công việc trên giao diện được cập nhật tương ứng. \newline - Hệ thống ghi nhận hoạt động vào nhật ký. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Xem và Tạo mới) & 1. US-01 truy cập vào khu vực quản lý/cấu hình Vai trò công việc (trong Settings của Planning hoặc HR). \newline 2. Hệ thống hiển thị danh sách các vai trò công việc hiện có. \newline 3. US-01 chọn hành động "Tạo mới". \newline 4. Hệ thống hiển thị form để nhập thông tin vai trò mới. \newline 5. US-01 nhập Tên vai trò (bắt buộc). \newline 6. (Tùy chọn) US-01 nhập Mô tả, chọn Màu sắc đại diện (dùng trên Gantt), hoặc các thuộc tính khác nếu có. \newline 7. US-01 chọn lệnh "Lưu". \newline 8. Hệ thống kiểm tra tính hợp lệ (ví dụ: tên không trùng - BR-UC1.8-1). \newline 9. Hệ thống lưu bản ghi vai trò mới vào cơ sở dữ liệu. \newline 10. Hệ thống cập nhật danh sách vai trò, hiển thị vai trò mới được tạo. \newline 11. Hệ thống hiển thị thông báo tạo thành công. \newline 12. Hệ thống ghi nhận hoạt động vào Activity Log. \\
+\hline
+Alternative Flow & \textbf{3a. Sửa vai trò:} \newline    1. Từ danh sách vai trò (bước 2), US-01 chọn một vai trò muốn sửa. \newline    2. Hệ thống hiển thị form với thông tin hiện tại của vai trò đó. \newline    3. US-01 chỉnh sửa các thông tin cần thiết (Tên, Mô tả, Màu sắc...). \newline    4. US-01 chọn lệnh "Lưu". \newline    5. Hệ thống kiểm tra tính hợp lệ (ví dụ: tên không trùng với vai trò khác). \newline    6. Hệ thống cập nhật thông tin cho bản ghi vai trò đã chọn. \newline    7. Hệ thống cập nhật danh sách vai trò (nếu tên thay đổi). \newline    8. Hệ thống hiển thị thông báo cập nhật thành công. \newline    9. Hệ thống ghi nhận hoạt động vào Activity Log. \newline \textbf{3b. Xóa vai trò:} \newline    1. Từ danh sách vai trò (bước 2), US-01 chọn một vai trò muốn xóa. \newline    2. US-01 chọn hành động "Xóa". \newline    3. Hệ thống hiển thị hộp thoại yêu cầu xác nhận xóa. \newline    4. US-01 xác nhận muốn xóa. \newline    5. Hệ thống kiểm tra xem vai trò này có đang được gán cho bất kỳ nhân viên nào hoặc sử dụng trong bất kỳ ca làm việc nào (kể cả nháp) hay không (BR-UC1.8-2). \newline    6. Nếu KHÔNG đang sử dụng: \newline       a. Hệ thống xóa bản ghi vai trò khỏi cơ sở dữ liệu. \newline       b. Hệ thống cập nhật danh sách vai trò. \newline       c. Hệ thống hiển thị thông báo xóa thành công. \newline       d. Hệ thống ghi nhận hoạt động vào Activity Log. \newline    7. Nếu CÓ đang sử dụng: \newline       a. Hệ thống hiển thị thông báo lỗi, nêu rõ không thể xóa vì vai trò đang được sử dụng. \newline       b. Use Case kết thúc (xóa thất bại). \newline \textbf{2a. Tìm kiếm/Lọc vai trò:} \newline    1. Nếu danh sách vai trò dài, US-01 sử dụng thanh tìm kiếm để tìm vai trò theo tên. \newline    2. Hệ thống lọc và hiển thị kết quả tìm kiếm. \newline    3. Use Case tiếp tục từ bước 3 (chọn hành động). \\
+\hline
+Exception Flow & \textbf{8a/5a. Dữ liệu không hợp lệ khi Lưu/Cập nhật:} \newline    1. Hệ thống phát hiện Tên vai trò bị bỏ trống hoặc trùng với tên vai trò khác đã tồn tại. \newline    2. Hệ thống hiển thị thông báo lỗi cụ thể (ví dụ: "Tên vai trò không được để trống", "Tên vai trò đã tồn tại"). \newline    3. Hệ thống giữ nguyên form và cho phép US-01 sửa lại. Use Case quay lại bước 5 (Tạo mới) hoặc bước 3 (Sửa). \newline \textbf{9a/6a/6a-delete. Lỗi hệ thống khi Lưu/Cập nhật/Xóa:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi tương tác với cơ sở dữ liệu. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc trong trạng thái lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC1.8-1:} Tên của mỗi vai trò công việc phải là duy nhất trong hệ thống. \newline - \textbf{BR-UC1.8-2:} Một vai trò công việc không thể bị xóa nếu nó đang được gán cho ít nhất một nhân viên hoặc đang được sử dụng trong ít nhất một ca làm việc (kể cả trạng thái "Nháp" hoặc "Đã xuất bản"). Người quản lý phải gỡ bỏ vai trò khỏi tất cả các nơi đang sử dụng trước khi xóa. \newline - \textbf{BR-UC1.8-3:} Việc sửa tên vai trò sẽ tự động cập nhật tên này ở tất cả những nơi nó đang được sử dụng (ví dụ: trong thông tin nhân viên, trong các ca làm việc đã tạo). \newline - \textbf{BR-UC1.8-4:} Phải có ít nhất một vai trò công việc được định nghĩa trong hệ thống để module Planning hoạt động đúng. Không thể xóa vai trò cuối cùng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC1.8-1 (Usability):} Giao diện quản lý vai trò phải đơn giản, dễ dàng thực hiện các thao tác CRUD. Việc chọn màu sắc nên có công cụ chọn màu trực quan. \newline - \textbf{NFR-UC1.8-2 (Performance):} Thời gian hiển thị danh sách vai trò (< 100 vai trò) và lưu/cập nhật/xóa một vai trò phải dưới 2 giây. \newline - \textbf{NFR-UC1.8-3 (Security):} Chỉ người dùng có quyền quản trị cấu hình Planning/HR mới được phép thực hiện các thao tác CRUD đối với vai trò công việc. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD01-09: Đánh dấu không sẵn sàng làm việc}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD01-09: Đánh dấu không sẵn sàng làm việc} \label{tab:uc_md01_09} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Đánh dấu không sẵn sàng làm việc \\
+\hline
+Use Case ID & UC-MD01-09 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-07) chủ động thông báo cho hệ thống (và Quản lý nhà hàng) về các khoảng thời gian cụ thể mà họ không thể làm việc (ví dụ: do nghỉ phép, lịch hẹn cá nhân), thông qua cổng thông tin nhân viên hoặc ứng dụng di động. \\
+\hline
+Actor & US-07 (Nhân viên) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & Nhân viên biết trước mình sẽ không thể làm việc trong một khoảng thời gian và muốn thông báo cho quản lý để tránh bị xếp lịch vào thời gian đó. \\
+\hline
+Pre-Condition & - Nhân viên (US-07) có tài khoản và mật khẩu hợp lệ để đăng nhập vào cổng thông tin/ứng dụng nhân viên. \newline - Cổng thông tin/ứng dụng nhân viên có chức năng cho phép nhập thời gian không sẵn sàng. \newline - (Tùy chọn) Chức năng này đã được Quản lý nhà hàng (US-01) kích hoạt cho phép nhân viên sử dụng. \\
+\hline
+Post-Condition & - Một bản ghi về khoảng thời gian không sẵn sàng (ngày bắt đầu, giờ bắt đầu, ngày kết thúc, giờ kết thúc, tùy chọn lý do) được tạo và liên kết với nhân viên đó trong hệ thống. \newline - Thông tin này sẽ được hiển thị hoặc được hệ thống xem xét khi Quản lý nhà hàng (US-01) thực hiện gán ca làm việc (trong UC-MD01-02), giúp tránh xếp lịch cho nhân viên vào thời gian họ đã báo bận. \newline - Hệ thống ghi nhận hoạt động vào nhật ký. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-07) mở ứng dụng di động hoặc truy cập trang web cổng thông tin nhân viên. \newline 2. US-07 đăng nhập thành công vào hệ thống. \newline 3. US-07 điều hướng đến chức năng "Báo cáo không sẵn sàng" hoặc tương tự (có thể nằm trong mục "Lịch của tôi"). \newline 4. Hệ thống hiển thị giao diện để nhập thông tin. \newline 5. US-07 chọn/nhập Ngày bắt đầu và Giờ bắt đầu không sẵn sàng. \newline 6. US-07 chọn/nhập Ngày kết thúc và Giờ kết thúc không sẵn sàng. \newline 7. (Tùy chọn) US-07 nhập Lý do không sẵn sàng vào ô ghi chú. \newline 8. US-07 chọn lệnh "Lưu" hoặc "Gửi". \newline 9. Hệ thống kiểm tra tính hợp lệ của ngày giờ (ví dụ: thời gian kết thúc phải sau thời gian bắt đầu - BR-UC1.9-1). \newline 10. Hệ thống lưu bản ghi thông tin không sẵn sàng này vào cơ sở dữ liệu, gắn với tài khoản của US-07. \newline 11. Hệ thống hiển thị thông báo lưu thành công. \newline 12. Hệ thống ghi nhận hoạt động vào Activity Log. \\
+\hline
+Alternative Flow & \textbf{3a. Đánh dấu trực tiếp trên lịch:} \newline    1. Nếu giao diện hỗ trợ, US-07 có thể chọn trực tiếp một khoảng thời gian trên lịch cá nhân và chọn hành động "Đánh dấu không sẵn sàng". \newline    2. Hệ thống tự động điền ngày giờ vào form (bước 5, 6). \newline    3. Use Case tiếp tục từ bước 7. \newline \textbf{10a. Xem lại/Sửa/Xóa lịch không sẵn sàng đã báo:} \newline    1. Sau khi lưu, hoặc vào một thời điểm khác, US-07 truy cập lại chức năng này. \newline    2. Hệ thống hiển thị danh sách các khoảng thời gian không sẵn sàng mà US-07 đã báo trước đó. \newline    3. US-07 có thể chọn một bản ghi để xem chi tiết, sửa đổi (ví dụ: thay đổi ngày giờ, lý do) hoặc xóa bỏ nếu kế hoạch thay đổi. Quy trình sửa/xóa tương tự như các UC quản lý dữ liệu khác. \\
+\hline
+Exception Flow & \textbf{9a. Dữ liệu ngày giờ không hợp lệ:} \newline    1. Hệ thống phát hiện Ngày/Giờ kết thúc trước hoặc bằng Ngày/Giờ bắt đầu. \newline    2. Hệ thống hiển thị thông báo lỗi cụ thể. \newline    3. Hệ thống giữ nguyên thông tin đã nhập và cho phép US-07 sửa lại. Use Case quay lại bước 5. \newline \textbf{10a. Lỗi hệ thống khi lưu:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi cố gắng lưu dữ liệu vào cơ sở dữ liệu. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc trong trạng thái lỗi. \newline \textbf{3b. Chức năng bị vô hiệu hóa:} \newline    1. Quản lý nhà hàng chưa kích hoạt chức năng này cho nhân viên. \newline    2. Nhân viên không tìm thấy mục menu hoặc chức năng bị vô hiệu hóa. \newline    3. Use Case không thể tiếp tục. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC1.9-1:} Thời gian kết thúc không sẵn sàng phải sau thời gian bắt đầu không sẵn sàng. \newline - \textbf{BR-UC1.9-2:} Việc đánh dấu không sẵn sàng của nhân viên là một thông tin để Quản lý tham khảo khi xếp lịch. Quản lý vẫn có thể ghi đè và xếp lịch nếu cần thiết (tùy thuộc vào chính sách công ty và cấu hình hệ thống - cần xác nhận). Tuy nhiên, hệ thống nên ưu tiên không đề xuất nhân viên trong thời gian họ báo bận (như trong UC-MD01-02). \newline - \textbf{BR-UC1.9-3:} Nhân viên chỉ có thể đánh dấu không sẵn sàng cho chính mình. \newline - \textbf{BR-UC1.9-4:} (Tùy chọn cấu hình) Có thể có giới hạn về việc báo không sẵn sàng quá gần ngày làm việc (ví dụ: phải báo trước 24h). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC1.9-1 (Usability):} Giao diện nhập liệu phải dễ sử dụng, đặc biệt là việc chọn ngày giờ (nên dùng calendar/time picker). \newline - \textbf{NFR-UC1.9-2 (Performance):} Thời gian lưu thông tin không sẵn sàng phải dưới 2 giây. \newline - \textbf{NFR-UC1.9-3 (Security):} Đảm bảo chỉ nhân viên mới có thể đánh dấu không sẵn sàng cho tài khoản của họ. \newline - \textbf{NFR-UC1.9-4 (Integration):} Dữ liệu không sẵn sàng phải được module Planning (cụ thể là chức năng gán ca UC-MD01-02 và hiển thị lịch UC-MD01-03) sử dụng để đưa ra đề xuất/cảnh báo phù hợp. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD01-10: Xem lịch theo vai trò}
+
+Use case này về cơ bản đã được mô tả như một luồng thay thế (Alternative Flow 3b) trong \textbf{UC-MD01-03: Xem lịch biểu Gantt}.

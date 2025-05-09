@@ -1,0 +1,257 @@
+\subsection{Module MD-04: Xác nhận Tự động qua Bot}
+
+\subsubsection{Use Case UC-MD04-01: Lên lịch và Kích hoạt Cuộc gọi Xác nhận}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD04-01: Lên lịch và Kích hoạt Cuộc gọi Xác nhận} \label{tab:uc_md04_01} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Lên lịch và Kích hoạt Cuộc gọi Xác nhận \\
+\hline
+Use Case ID & UC-MD04-01 \\
+\hline
+Use Case Description & Hệ thống Odoo tự động quét các lượt đặt chỗ có trạng thái "Đã xác nhận" và sắp đến ngày diễn ra, sau đó lên lịch và gửi yêu cầu thực hiện cuộc gọi xác nhận đến dịch vụ Bot Call bên ngoài vào thời điểm N ngày trước ngày đặt (N được cấu hình). \\
+\hline
+Actor & System (Odoo Scheduler, Odoo Backend Logic) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Một tác vụ tự động (Scheduled Action/Cron Job) trong Odoo chạy định kỳ (ví dụ: hàng ngày vào một giờ cố định). \\
+\hline
+Pre-Condition & - Tác vụ tự động đã được kích hoạt và cấu hình tần suất chạy. \newline - Có các lượt đặt chỗ ở trạng thái "Đã xác nhận" (Confirmed). \newline - Tham số N (số ngày gọi trước) đã được cấu hình (FR-MD04-05). \newline - Thông tin tích hợp với dịch vụ Bot Call (API endpoint, credentials) đã được cấu hình (FR-MD04-05). \newline - Các đặt chỗ có đủ thông tin cần thiết (Số điện thoại khách hàng, Mã đặt chỗ). \\
+\hline
+Post-Condition & - Hệ thống xác định được danh sách các đặt chỗ cần gọi xác nhận trong ngày. \newline - Đối với mỗi đặt chỗ trong danh sách, hệ thống gửi thành công một yêu cầu (API call) đến dịch vụ Bot Call bên ngoài, bao gồm thông tin cần thiết (SĐT khách, Mã đặt chỗ, kịch bản gọi). \newline - Trạng thái của đặt chỗ có thể được cập nhật (ví dụ: "Đang chờ gọi xác nhận") hoặc một bản ghi yêu cầu gọi được tạo ra để theo dõi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Tác vụ tự động trong Odoo được kích hoạt theo lịch trình. \newline 2. Hệ thống xác định ngày mục tiêu để gọi xác nhận (Ngày Hiện Tại + N ngày, với N là số ngày gọi trước cấu hình). \newline 3. Hệ thống truy vấn cơ sở dữ liệu để tìm tất cả các lượt đặt chỗ thỏa mãn các điều kiện: \newline    - Có ngày đặt bàn (booking date) bằng Ngày Mục Tiêu. \newline    - Có trạng thái là "Đã xác nhận" (Confirmed). \newline    - Chưa được thực hiện gọi xác nhận (hoặc chưa có kết quả gọi). \newline    - Có số điện thoại khách hàng hợp lệ. \newline 4. Đối với mỗi lượt đặt chỗ tìm thấy: \newline    a. Hệ thống chuẩn bị dữ liệu cần thiết cho cuộc gọi: Số điện thoại khách hàng, Mã đặt chỗ, ID kịch bản thoại (đã cấu hình ở FR-MD04-05). \newline    b. Hệ thống thực hiện một lời gọi API đến dịch vụ Bot Call bên ngoài, truyền các dữ liệu đã chuẩn bị. \newline    c. Hệ thống nhận phản hồi từ API của Bot Call (ví dụ: xác nhận đã nhận yêu cầu thành công và trả về một Call ID của dịch vụ Bot Call). \newline    d. Hệ thống cập nhật trạng thái đặt chỗ (ví dụ: thêm cờ "Yêu cầu gọi đã gửi") hoặc lưu lại Call ID nhận được từ Bot Call vào bản ghi đặt chỗ hoặc một bảng log riêng để theo dõi kết quả sau này (FR-MD04-04). \newline 5. Tác vụ tự động kết thúc sau khi xử lý hết danh sách. \\
+\hline
+Alternative Flow & \textbf{3a. Không tìm thấy đặt chỗ nào cần gọi:} \newline    1. Hệ thống không tìm thấy lượt đặt chỗ nào thỏa mãn điều kiện ở bước 3. \newline    2. Tác vụ tự động kết thúc mà không thực hiện hành động nào khác. \\
+\hline
+Exception Flow & \textbf{3b. Lỗi truy vấn cơ sở dữ liệu:} \newline    1. Hệ thống gặp lỗi khi truy vấn danh sách đặt chỗ. \newline    2. Tác vụ tự động ghi nhận lỗi và kết thúc. Các cuộc gọi không được kích hoạt. Cần có cơ chế thông báo lỗi cho quản trị viên. \newline \textbf{4e. Lỗi gọi API đến dịch vụ Bot Call:} \newline    1. Hệ thống không thể kết nối đến dịch vụ Bot Call (lỗi mạng, sai endpoint) hoặc nhận được phản hồi lỗi từ API (sai credentials, sai định dạng dữ liệu, hết hạn mức dịch vụ...). \newline    2. Hệ thống ghi nhận lỗi chi tiết (bao gồm mã lỗi từ Bot Call nếu có) vào log hệ thống hoặc thông tin đặt chỗ. \newline    3. Hệ thống có thể thử lại việc gọi API sau (nếu cấu hình) hoặc bỏ qua đặt chỗ đó và tiếp tục với đặt chỗ tiếp theo. Cần có cơ chế thông báo lỗi cho quản trị viên. \newline \textbf{4f. Lỗi cập nhật trạng thái/lưu Call ID:} \newline    1. Hệ thống gặp lỗi khi cố gắng cập nhật trạng thái hoặc lưu Call ID vào cơ sở dữ liệu Odoo sau khi gọi API thành công. \newline    2. Hệ thống ghi nhận lỗi. Có thể dẫn đến việc gọi lại không cần thiết vào lần chạy sau. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC4.1-1:} Hệ thống chỉ được kích hoạt cuộc gọi xác nhận cho các đặt chỗ ở trạng thái "Đã xác nhận" (Confirmed). \newline - \textbf{BR-UC4.1-2:} Cuộc gọi phải được kích hoạt đúng N ngày trước ngày khách đặt bàn, với N là số ngày cấu hình được (FR-MD04-05). \newline - \textbf{BR-UC4.1-3:} Hệ thống phải đảm bảo không gửi yêu cầu gọi trùng lặp cho cùng một đặt chỗ nếu yêu cầu trước đó đã được gửi thành công. \newline - \textbf{BR-UC4.1-4:} Cần có cơ chế xử lý lỗi khi giao tiếp với dịch vụ Bot Call để tránh bỏ sót việc xác nhận hoặc gây lỗi hệ thống. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC4.1-1 (Reliability):} Tác vụ tự động phải chạy ổn định theo lịch trình. Quá trình gửi yêu cầu API phải đáng tin cậy, có xử lý lỗi và thử lại (retry mechanism) nếu cần thiết và hợp lý. \newline - \textbf{NFR-UC4.1-2 (Performance):} Tác vụ tự động phải xử lý hiệu quả danh sách đặt chỗ, tránh làm quá tải hệ thống, đặc biệt nếu số lượng đặt chỗ lớn. Việc gọi API nên được thực hiện một cách tối ưu (ví dụ: bất đồng bộ nếu có thể). \newline - \textbf{NFR-UC4.1-3 (Scalability):} Giải pháp phải có khả năng xử lý số lượng lớn yêu cầu gọi khi nhà hàng phát triển. \newline - \textbf{NFR-UC4.1-4 (Monitoring):} Cần có cơ chế giám sát hoạt động của tác vụ tự động và kết quả việc gửi yêu cầu API (ví dụ: thông qua logs, dashboard) để quản trị viên có thể theo dõi và xử lý sự cố. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD04-02: Thực hiện Cuộc gọi và Tương tác Khách hàng}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD04-02: Thực hiện Cuộc gọi và Tương tác Khách hàng} \label{tab:uc_md04_02} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Thực hiện Cuộc gọi và Tương tác Khách hàng \\
+\hline
+Use Case ID & UC-MD04-02 \\
+\hline
+Use Case Description & Dịch vụ Bot Call bên ngoài, sau khi nhận yêu cầu từ Odoo (UC-MD04-01), thực hiện cuộc gọi đến số điện thoại của Khách hàng (US-08), phát kịch bản thoại đã được cấu hình, và ghi nhận lựa chọn (bấm phím 1, 0, hoặc 2) từ khách hàng. \\
+\hline
+Actor & Bot Call Service (Bên thứ ba - Thực hiện chính), US-08 (Khách hàng - Tương tác) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Dịch vụ Bot Call nhận được yêu cầu thực hiện cuộc gọi từ hệ thống Odoo. \\
+\hline
+Pre-Condition & - Yêu cầu gọi từ Odoo (UC-MD04-01) đã được gửi thành công đến Bot Call Service. \newline - Yêu cầu chứa đầy đủ thông tin (SĐT khách, kịch bản...). \newline - Dịch vụ Bot Call đang hoạt động. \newline - Khách hàng có điện thoại và trong vùng phủ sóng. \\
+\hline
+Post-Condition & - Cuộc gọi được thực hiện đến khách hàng. \newline - Kịch bản thoại được phát. \newline - Lựa chọn (bấm phím 1, 0, 2) của khách hàng được Bot Call Service ghi nhận (hoặc ghi nhận trạng thái không trả lời, máy bận...). \newline - Bot Call Service chuẩn bị gửi kết quả về cho Odoo (UC-MD04-03). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Khách hàng nghe máy và chọn 1) & 1. Bot Call Service nhận yêu cầu từ Odoo và đưa vào hàng đợi xử lý của nó. \newline 2. Bot Call Service thực hiện cuộc gọi đến Số điện thoại của khách hàng (US-08) được cung cấp trong yêu cầu. \newline 3. Khách hàng US-08 nhấc máy. \newline 4. Bot Call Service phát kịch bản thoại đã được cấu hình (ví dụ: "Xin chào [Tên khách hàng], đây là nhà hàng ABC. Quý khách có đặt bàn vào [Giờ] ngày [Ngày]. Vui lòng bấm phím 1 để xác nhận, bấm phím 0 để hủy, bấm phím 2 để được hỗ trợ."). \newline 5. Khách hàng US-08 nghe và bấm phím 1. \newline 6. Bot Call Service ghi nhận lựa chọn là "1" (Xác nhận). \newline 7. Bot Call Service có thể phát lời thoại cảm ơn và kết thúc cuộc gọi (ví dụ: "Cảm ơn quý khách đã xác nhận. Hẹn gặp lại!"). \newline 8. Bot Call Service chuẩn bị dữ liệu kết quả (Call ID, SĐT, lựa chọn "1", trạng thái "Thành công") để gửi về Odoo. \\
+\hline
+Alternative Flow & \textbf{5a. Khách hàng bấm phím 0 (Hủy):} \newline    1. Khách hàng US-08 bấm phím 0. \newline    2. Bot Call Service ghi nhận lựa chọn là "0" (Hủy). \newline    3. Bot Call Service có thể phát lời thoại xác nhận hủy (ví dụ: "Đặt chỗ của quý khách đã được hủy. Lưu ý quý khách sẽ mất tiền đặt cọc. Cảm ơn!"). \newline    4. Bot Call Service chuẩn bị dữ liệu kết quả (Call ID, SĐT, lựa chọn "0", trạng thái "Thành công"). \newline \textbf{5b. Khách hàng bấm phím 2 (Hỗ trợ):} \newline    1. Khách hàng US-08 bấm phím 2. \newline    2. Bot Call Service ghi nhận lựa chọn là "2" (Hỗ trợ). \newline    3. Bot Call Service thực hiện hành động chuyển hướng cuộc gọi đến số điện thoại hỗ trợ đã được cấu hình (FR-MD04-05). Cuộc gọi tiếp tục giữa khách hàng và nhân viên hỗ trợ (US-09). \newline    4. Bot Call Service chuẩn bị dữ liệu kết quả (Call ID, SĐT, lựa chọn "2", trạng thái "Đã chuyển hướng"). \newline \textbf{3a. Khách hàng không nghe máy / Máy bận:} \newline    1. Bot Call Service thực hiện gọi nhưng không kết nối được (máy bận, không trả lời sau số hồi chuông nhất định). \newline    2. Bot Call Service ghi nhận trạng thái cuộc gọi là "Không liên lạc được" hoặc "Máy bận". \newline    3. Bot Call Service có thể thử gọi lại sau một khoảng thời gian (tùy cấu hình dịch vụ Bot Call). Nếu sau số lần thử lại tối đa vẫn thất bại, dịch vụ sẽ chuẩn bị dữ liệu kết quả cuối cùng (Call ID, SĐT, lựa chọn: null, trạng thái: "Không liên lạc được"/"Máy bận"). \\
+\hline
+Exception Flow & \textbf{2a. Lỗi thực hiện cuộc gọi từ Bot Call Service:} \newline    1. Dịch vụ Bot Call gặp lỗi kỹ thuật nội bộ khi cố gắng thực hiện cuộc gọi (ví dụ: lỗi hạ tầng mạng viễn thông, lỗi tổng đài). \newline    2. Bot Call Service ghi nhận trạng thái cuộc gọi là "Lỗi hệ thống". \newline    3. Bot Call Service chuẩn bị dữ liệu kết quả (Call ID, SĐT, lựa chọn: null, trạng thái: "Lỗi hệ thống"). \newline \textbf{4a. Lỗi phát kịch bản thoại:} \newline    1. Bot Call Service kết nối được nhưng gặp lỗi khi phát file âm thanh/text-to-speech. \newline    2. Cuộc gọi có thể bị ngắt hoặc khách hàng không nghe được nội dung. \newline    3. Bot Call Service ghi nhận trạng thái "Lỗi phát thoại". \newline \textbf{6a. Khách hàng không bấm phím nào / Bấm phím không hợp lệ:} \newline    1. Khách hàng nghe xong nhưng không tương tác hoặc bấm phím khác (3, 4,...). \newline    2. Bot Call Service chờ một khoảng thời gian timeout. \newline    3. Bot Call Service ghi nhận trạng thái "Không phản hồi" hoặc "Lựa chọn không hợp lệ". \newline    4. Bot Call Service chuẩn bị dữ liệu kết quả tương ứng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC4.2-1:} Kịch bản thoại phải rõ ràng, ngắn gọn, cung cấp đủ thông tin (tên nhà hàng, ngày giờ đặt) và hướng dẫn các phím bấm rõ ràng. \newline - \textbf{BR-UC4.2-2:} Dịch vụ Bot Call phải có khả năng nhận diện chính xác phím bấm của khách hàng (DTMF tone). \newline - \textbf{BR-UC4.2-3:} Nếu khách hàng chọn Hỗ trợ (phím 2), việc chuyển hướng cuộc gọi phải được thực hiện đến đúng số điện thoại hỗ trợ đã cấu hình. \newline - \textbf{BR-UC4.2-4:} Cần có giới hạn về số lần thử gọi lại nếu khách hàng không nghe máy hoặc máy bận để tránh làm phiền khách và tốn chi phí. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC4.2-1 (Voice Quality):} Chất lượng âm thanh của cuộc gọi (giọng đọc bot) phải rõ ràng, dễ nghe. \newline - \textbf{NFR-UC4.2-2 (Latency):} Độ trễ từ lúc khách hàng bấm phím đến lúc bot phản hồi (nếu có) hoặc ghi nhận phải thấp. \newline - \textbf{NFR-UC4.2-3 (Reliability):} Dịch vụ Bot Call phải có độ tin cậy cao, đảm bảo thực hiện cuộc gọi theo yêu cầu và xử lý các trường hợp lỗi (máy bận, không trả lời) một cách hợp lý. \newline - \textbf{NFR-UC4.2-4 (Integration):} Dịch vụ Bot Call phải cung cấp cơ chế (ví dụ: webhook) để gửi kết quả cuộc gọi về cho hệ thống Odoo một cách kịp thời và đáng tin cậy (cho UC-MD04-03). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD04-03: Xử lý Phản hồi Khách hàng từ Bot Call}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD04-03: Xử lý Phản hồi Khách hàng từ Bot Call} \label{tab:uc_md04_03} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xử lý Phản hồi Khách hàng từ Bot Call \\
+\hline
+Use Case ID & UC-MD04-03 \\
+\hline
+Use Case Description & Hệ thống Odoo nhận kết quả cuộc gọi (bao gồm lựa chọn của khách hàng: 1, 0, 2 hoặc trạng thái lỗi) từ dịch vụ Bot Call bên ngoài (thường qua webhook) và thực hiện các hành động tương ứng: cập nhật trạng thái đặt chỗ, giải phóng bàn (nếu hủy), hoặc không làm gì (nếu cần hỗ trợ hoặc lỗi). \\
+\hline
+Actor & System (Odoo Backend Logic - Nhận và xử lý webhook), US-09 (Nhân viên hỗ trợ - Chỉ khi khách bấm phím 2) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Hệ thống Odoo nhận được một yêu cầu HTTP (webhook callback) từ dịch vụ Bot Call chứa thông tin kết quả của một cuộc gọi xác nhận. \\
+\hline
+Pre-Condition & - Dịch vụ Bot Call đã thực hiện xong cuộc gọi (UC-MD04-02) và gửi kết quả về endpoint webhook của Odoo. \newline - Endpoint webhook của Odoo đã được cấu hình và sẵn sàng nhận yêu cầu. \newline - Dữ liệu gửi về chứa thông tin để định danh lượt đặt chỗ (ví dụ: Mã đặt chỗ Odoo đã gửi đi, hoặc Call ID đã lưu) và kết quả cuộc gọi (lựa chọn của khách, trạng thái cuộc gọi). \\
+\hline
+Post-Condition & - Trạng thái của lượt đặt chỗ tương ứng trong Odoo được cập nhật dựa trên kết quả cuộc gọi. \newline - Nếu khách hàng hủy (bấm 0), bàn liên quan (nếu có) được giải phóng. \newline - Nếu khách hàng cần hỗ trợ (bấm 2), không có thay đổi trạng thái tự động, chờ xử lý từ nhân viên hỗ trợ. \newline - Hoạt động được ghi nhận vào log hoặc lịch sử đặt chỗ. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Xử lý kết quả thành công) & 1. Endpoint webhook của Odoo nhận được yêu cầu POST/GET từ Bot Call Service chứa dữ liệu kết quả cuộc gọi (ví dụ: Call ID, lựa chọn khách hàng, trạng thái gọi). \newline 2. Hệ thống Odoo xác thực yêu cầu (ví dụ: kiểm tra secret key/token nếu có). \newline 3. Hệ thống Odoo phân tích dữ liệu nhận được, xác định lượt đặt chỗ tương ứng (dựa trên Mã đặt chỗ hoặc Call ID đã lưu). \newline 4. Hệ thống đọc lựa chọn của khách hàng (digit pressed) hoặc trạng thái cuộc gọi từ dữ liệu nhận được. \newline 5. \textbf{Nếu Lựa chọn = "1" (Xác nhận):} \newline    a. Hệ thống cập nhật trạng thái đặt chỗ thành "Đã xác nhận lại bởi khách" (hoặc một trạng thái tương tự) hoặc chỉ ghi nhận vào log là khách đã xác nhận. Trạng thái chính vẫn là "Confirmed". \newline 6. \textbf{Nếu Lựa chọn = "0" (Hủy):} \newline    a. Hệ thống cập nhật trạng thái đặt chỗ thành "Đã hủy bởi khách qua Bot" (hoặc "Cancelled"). \newline    b. Hệ thống kiểm tra xem đặt chỗ này có đang giữ bàn nào không. Nếu có, hệ thống thực hiện giải phóng bàn đó (cập nhật trạng thái bàn thành trống cho khung giờ đó). \newline    c. Hệ thống ghi nhận việc mất cọc (tiền cọc đã thanh toán không được hoàn lại). \newline    d. (Tùy chọn) Gửi thông báo nội bộ cho quản lý về việc hủy. \newline 7. \textbf{Nếu Lựa chọn = "2" (Hỗ trợ):} \newline    a. Hệ thống không thay đổi trạng thái đặt chỗ. \newline    b. Hệ thống ghi nhận vào log/ghi chú của đặt chỗ là "Khách hàng yêu cầu hỗ trợ qua Bot Call". \newline    c. Cuộc gọi đã được chuyển hướng bởi Bot Call Service đến Nhân viên hỗ trợ (US-09) để xử lý trực tiếp. Hành động tiếp theo (nếu có) trên đặt chỗ sẽ do US-09 thực hiện thủ công sau cuộc gọi. \newline 8. \textbf{Nếu Trạng thái cuộc gọi là "Không liên lạc được", "Máy bận", "Không phản hồi", "Lỗi"...:} \newline    a. Hệ thống không thay đổi trạng thái đặt chỗ ("Confirmed"). \newline    b. Hệ thống ghi nhận kết quả chi tiết vào log/ghi chú của đặt chỗ (ví dụ: "Bot Call thất bại: Không liên lạc được"). \newline    c. (Tùy chọn) Hệ thống có thể gắn cờ đặt chỗ này để nhân viên liên hệ xác nhận thủ công. \newline 9. Hệ thống gửi phản hồi HTTP 200 OK cho Bot Call Service để xác nhận đã nhận và xử lý webhook thành công. \newline 10. Hệ thống ghi nhận chi tiết kết quả và hành động đã thực hiện vào lịch sử đặt chỗ hoặc log hệ thống (FR-MD04-04). \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể cho việc xử lý logic webhook này. \\
+\hline
+Exception Flow & \textbf{1a. Lỗi nhận Webhook / Xác thực thất bại:} \newline    1. Endpoint webhook gặp lỗi, không nhận được yêu cầu, hoặc yêu cầu nhận được không hợp lệ/không thể xác thực. \newline    2. Hệ thống không xử lý được kết quả cuộc gọi. \newline    3. Cần có cơ chế theo dõi lỗi webhook ở phía server Odoo và có thể cần kiểm tra lại với Bot Call Service. Trạng thái đặt chỗ không được cập nhật. \newline \textbf{3a. Không tìm thấy Đặt chỗ tương ứng:} \newline    1. Hệ thống không tìm thấy bản ghi đặt chỗ nào khớp với thông tin (Mã đặt chỗ, Call ID) nhận được từ webhook. \newline    2. Hệ thống ghi nhận lỗi và gửi phản hồi lỗi cho Bot Call Service (nếu có thể). \newline    3. Trạng thái đặt chỗ không được cập nhật. \newline \textbf{6d/7d/8d. Lỗi cập nhật trạng thái/Giải phóng bàn:} \newline    1. Hệ thống gặp lỗi khi cố gắng cập nhật trạng thái đặt chỗ hoặc giải phóng bàn trong cơ sở dữ liệu Odoo. \newline    2. Hệ thống ghi nhận lỗi nội bộ. \newline    3. Phản hồi cho Bot Call Service vẫn có thể là 200 OK (vì đã nhận được webhook), nhưng cần có cảnh báo cho quản trị viên Odoo về lỗi xử lý nội bộ. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC4.3-1:} Trạng thái đặt chỗ phải được cập nhật chính xác dựa trên lựa chọn của khách hàng (1=Giữ Confirmed/Xác nhận lại; 0=Cancelled). \newline - \textbf{BR-UC4.3-2:} Nếu khách hàng hủy (bấm 0), bàn liên quan phải được tự động giải phóng để khách khác có thể đặt. \newline - \textbf{BR-UC4.3-3:} Nếu khách hàng yêu cầu hỗ trợ (bấm 2), hệ thống Odoo không tự động thay đổi trạng thái đặt chỗ; trách nhiệm xử lý thuộc về nhân viên hỗ trợ nhận cuộc gọi. \newline - \textbf{BR-UC4.3-4:} Nếu cuộc gọi thất bại (không liên lạc được, lỗi...), trạng thái đặt chỗ nên giữ nguyên là "Confirmed" và cần có cơ chế để nhân viên biết và liên hệ thủ công nếu cần. \newline - \textbf{BR-UC4.3-5:} Phản hồi webhook từ Odoo về Bot Call Service nên được thực hiện nhanh chóng để tránh Bot Call Service gửi lại yêu cầu không cần thiết. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC4.3-1 (Reliability):} Endpoint webhook phải luôn sẵn sàng và xử lý các yêu cầu một cách đáng tin cậy. Logic xử lý phải đúng đắn trong mọi trường hợp (1, 0, 2, lỗi). \newline - \textbf{NFR-UC4.3-2 (Performance):} Thời gian xử lý một yêu cầu webhook phải rất nhanh (dưới 1-2 giây) để tránh timeout từ phía Bot Call Service. \newline - \textbf{NFR-UC4.3-3 (Security):} Endpoint webhook cần có cơ chế xác thực (ví dụ: secret token, IP whitelist) để đảm bảo chỉ Bot Call Service mới có thể gửi dữ liệu đến. \newline - \textbf{NFR-UC4.3-4 (Atomicity):} Việc cập nhật trạng thái và giải phóng bàn (nếu hủy) nên được thực hiện trong cùng một giao dịch cơ sở dữ liệu để đảm bảo tính nhất quán. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD04-04: Ghi nhận Kết quả Cuộc gọi}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD04-04: Ghi nhận Kết quả Cuộc gọi} \label{tab:uc_md04_04} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Ghi nhận Kết quả Cuộc gọi \\
+\hline
+Use Case ID & UC-MD04-04 \\
+\hline
+Use Case Description & Hệ thống Odoo lưu trữ lại thông tin chi tiết về kết quả của mỗi cuộc gọi xác nhận tự động qua bot, bao gồm thời gian gọi, trạng thái cuộc gọi (thành công, thất bại, không liên lạc được), và lựa chọn của khách hàng (nếu có). Thông tin này có thể được lưu trực tiếp vào lịch sử/ghi chú của đặt chỗ hoặc vào một bảng log riêng. \\
+\hline
+Actor & System (Odoo Backend Logic) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Sau khi hệ thống Odoo xử lý xong phản hồi từ Bot Call Service qua webhook (kết thúc UC-MD04-03). \\
+\hline
+Pre-Condition & - Hệ thống đã xử lý xong webhook từ Bot Call Service (UC-MD04-03). \newline - Hệ thống có thông tin chi tiết về kết quả cuộc gọi (Call ID, trạng thái, lựa chọn khách hàng...). \newline - Đã xác định được bản ghi đặt chỗ tương ứng. \\
+\hline
+Post-Condition & - Thông tin về kết quả cuộc gọi Bot Call được lưu trữ bền vững trong hệ thống Odoo, liên kết với lượt đặt chỗ cụ thể. \newline - Nhân viên có thể xem lại lịch sử và kết quả của cuộc gọi xác nhận khi xem chi tiết đặt chỗ. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Tiếp nối từ UC-MD04-03, sau khi hệ thống đã xác định hành động cần thực hiện dựa trên kết quả webhook. \newline 2. Hệ thống chuẩn bị nội dung log cần ghi nhận, bao gồm: \newline    - Thời gian nhận kết quả webhook. \newline    - Call ID từ Bot Call Service (nếu có). \newline    - Trạng thái cuộc gọi (ví dụ: "Thành công", "Không liên lạc được", "Lỗi hệ thống Bot Call"). \newline    - Lựa chọn của khách hàng (nếu có) (ví dụ: "Bấm phím 1 - Xác nhận", "Bấm phím 0 - Hủy", "Bấm phím 2 - Yêu cầu hỗ trợ", "Không phản hồi"). \newline 3. Hệ thống ghi nội dung log này vào: \newline    - Phần chatter/lịch sử/ghi chú (Messaging/Log Note) của bản ghi đặt chỗ tương ứng. \newline    - HOẶC vào một bảng dữ liệu (model) riêng được thiết kế để lưu trữ lịch sử Bot Call, có liên kết đến bản ghi đặt chỗ. \newline 4. Hệ thống lưu thay đổi vào cơ sở dữ liệu. \\
+\hline
+Alternative Flow & \textbf{3a. Lưu thông tin bổ sung:} \newline    1. Hệ thống có thể lưu thêm các thông tin khác từ webhook (nếu Bot Call Service cung cấp) như thời lượng cuộc gọi, chi phí cuộc gọi... \\
+\hline
+Exception Flow & \textbf{4a. Lỗi ghi log vào cơ sở dữ liệu:} \newline    1. Hệ thống gặp lỗi khi cố gắng ghi dữ liệu log vào chatter hoặc bảng log riêng. \newline    2. Hệ thống ghi nhận lỗi hệ thống nội bộ. \newline    3. Thông tin kết quả cuộc gọi có thể bị mất, ảnh hưởng đến khả năng truy vết và kiểm tra sau này. Cần có cảnh báo cho quản trị viên. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC4.4-1:} Mọi kết quả cuộc gọi Bot Call (thành công, thất bại, lỗi) đều phải được ghi nhận lại trong hệ thống Odoo và liên kết với đúng lượt đặt chỗ. \newline - \textbf{BR-UC4.4-2:} Nội dung log cần đủ chi tiết để nhân viên hoặc quản trị viên hiểu được điều gì đã xảy ra với cuộc gọi xác nhận. \newline - \textbf{BR-UC4.4-3:} Dữ liệu log này chỉ nên hiển thị cho người dùng nội bộ có quyền hạn phù hợp, không hiển thị cho khách hàng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC4.4-1 (Auditability):} Việc ghi nhận kết quả cuộc gọi là rất quan trọng cho mục đích kiểm tra, theo dõi và xử lý tranh chấp (nếu có). Dữ liệu log phải đầy đủ và không thể bị sửa đổi dễ dàng. \newline - \textbf{NFR-UC4.4-2 (Performance):} Việc ghi log không được làm chậm đáng kể quá trình xử lý webhook. \newline - \textbf{NFR-UC4.4-3 (Storage):} Cần ước tính dung lượng lưu trữ cần thiết cho dữ liệu log Bot Call, đặc biệt nếu số lượng đặt chỗ lớn. Có thể cần chính sách xóa log cũ định kỳ. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD04-05: Cấu hình Dịch vụ Bot Call}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD04-05: Cấu hình Dịch vụ Bot Call} \label{tab:uc_md04_05} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Cấu hình Dịch vụ Bot Call \\
+\hline
+Use Case ID & UC-MD04-05 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng hoặc Quản trị viên hệ thống thiết lập các tham số cần thiết để tích hợp và vận hành chức năng gọi xác nhận tự động qua bot, bao gồm thông tin kết nối API, kịch bản thoại, thời gian gọi và số điện thoại hỗ trợ. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Thiết lập lần đầu cho chức năng Bot Call. \newline - Cần thay đổi nhà cung cấp dịch vụ Bot Call. \newline - Cần cập nhật kịch bản thoại, thời gian gọi hoặc số hỗ trợ. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-10) đã đăng nhập với quyền quản trị cấu hình hệ thống hoặc cấu hình module Đặt chỗ/Tích hợp. \newline - Nhà hàng đã đăng ký và có tài khoản với một nhà cung cấp dịch vụ Bot Call bên ngoài, có thông tin API cần thiết. \\
+\hline
+Post-Condition & - Các tham số cấu hình Bot Call được lưu lại trong hệ thống Odoo. \newline - Hệ thống Odoo có đủ thông tin để thực hiện việc gửi yêu cầu gọi (UC-MD04-01) và xử lý kết quả (UC-MD04-03) theo các cấu hình mới. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-10) truy cập vào khu vực Cài đặt chung của hệ thống hoặc Cài đặt của module Đặt chỗ/Tích hợp. \newline 2. Người dùng tìm đến phần cấu hình liên quan đến "Bot Call Confirmation" hoặc "Voice Bot Integration". \newline 3. Hệ thống hiển thị form cấu hình với các trường: \newline    - \textbf{Kích hoạt Bot Call:} Ô kiểm để bật/tắt toàn bộ chức năng. \newline    - \textbf{Nhà cung cấp Bot Call:} Chọn nhà cung cấp từ danh sách hỗ trợ (nếu có nhiều) hoặc nhập thông tin API Endpoint. \newline    - \textbf{API Key / Secret Token:} Nhập thông tin xác thực do nhà cung cấp Bot Call cung cấp. \newline    - \textbf{Số ngày gọi trước (N):} Nhập số nguyên dương (ví dụ: 1, 2). \newline    - \textbf{ID Kịch bản thoại:} Nhập mã hoặc tên của kịch bản thoại sẽ sử dụng (kịch bản này thường được soạn thảo trên nền tảng của nhà cung cấp Bot Call). \newline    - \textbf{Số điện thoại Hỗ trợ:} Nhập số điện thoại đầy đủ sẽ nhận cuộc gọi khi khách bấm phím 2. \newline    - (Tùy chọn) Các tham số khác như Giờ bắt đầu/kết thúc cho phép gọi trong ngày, Số lần thử lại tối đa... \newline 4. Người dùng nhập hoặc cập nhật các giá trị cấu hình mong muốn. \newline 5. Người dùng chọn hành động "Lưu" (Save). \newline 6. Hệ thống kiểm tra tính hợp lệ cơ bản của dữ liệu (ví dụ: N là số nguyên dương, SĐT hỗ trợ có định dạng hợp lệ). \newline 7. Hệ thống lưu lại các cấu hình mới. \newline 8. Hệ thống hiển thị thông báo lưu thành công. \\
+\hline
+Alternative Flow & \textbf{3a. Cấu hình Kịch bản thoại trực tiếp (Nếu hệ thống hỗ trợ):} \newline    1. Thay vì nhập ID kịch bản, hệ thống cho phép soạn thảo trực tiếp nội dung kịch bản thoại (text-to-speech) và cấu hình các phím bấm ngay trong Odoo. \newline    2. Người dùng soạn thảo/cập nhật kịch bản. \newline \textbf{3b. Kiểm tra kết nối API:} \newline    1. Giao diện cấu hình có nút "Kiểm tra kết nối" để xác thực thông tin API Key/Endpoint với nhà cung cấp Bot Call. \newline    2. Người dùng nhấp nút kiểm tra. \newline    3. Hệ thống gửi yêu cầu kiểm tra đến Bot Call Service và hiển thị kết quả (Thành công/Thất bại). \\
+\hline
+Exception Flow & \textbf{6a. Lỗi Xác thực Dữ liệu:} \newline    1. Hệ thống phát hiện giá trị nhập không hợp lệ (ví dụ: N không phải số, thiếu API Key). \newline    2. Hệ thống báo lỗi, chỉ rõ trường bị sai. \newline    3. Hệ thống không lưu cấu hình. Use Case quay lại bước 4. \newline \textbf{7a. Lỗi Hệ thống khi Lưu:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi lưu cấu hình. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC4.5-1:} Thông tin API Key/Credentials phải chính xác và được giữ bí mật. \newline - \textbf{BR-UC4.5-2:} Số ngày gọi trước (N) phải là số nguyên dương. \newline - \textbf{BR-UC4.5-3:} Số điện thoại hỗ trợ phải là số điện thoại có thực và có người trực để tiếp nhận cuộc gọi từ khách hàng. \newline - \textbf{BR-UC4.5-4:} Kịch bản thoại (dù cấu hình bằng ID hay trực tiếp) phải tuân thủ các yêu cầu của UC-MD04-02 (rõ ràng, đủ thông tin, hướng dẫn phím bấm). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC4.5-1 (Usability):} Giao diện cấu hình phải tập trung các tham số liên quan đến Bot Call vào một nơi, dễ tìm và dễ hiểu. \newline - \textbf{NFR-UC4.5-2 (Security):} Các thông tin nhạy cảm như API Key/Secret Token phải được lưu trữ an toàn trong hệ thống (ví dụ: mã hóa hoặc lưu dưới dạng trường password). \newline - \textbf{NFR-UC4.5-3 (Flexibility):} Hệ thống nên được thiết kế để có thể tích hợp với các nhà cung cấp Bot Call khác nhau trong tương lai (có thể thông qua adapter pattern). \\
+\hline
+\end{longtable}
+

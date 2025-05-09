@@ -1,0 +1,309 @@
+\subsection{Module MD-08: Tích hợp Bếp (Kitchen Integration)}
+
+\subsubsection{Use Case UC-MD08-02: Xem Đơn hàng trên KDS}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD08-02: Xem Đơn hàng trên KDS} \label{tab:uc_md08_02} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Đơn hàng trên KDS \\
+\hline
+Use Case ID & UC-MD08-02 \\
+\hline
+Use Case Description & Cho phép Nhân viên bếp (US-04) xem danh sách các đơn hàng (hoặc các phiếu/ticket) đang chờ xử lý, mới được gửi đến từ POS trên giao diện Màn hình Hiển thị Bếp (Kitchen Display System - KDS). \\
+\hline
+Actor & US-04 (Nhân viên bếp) \\
+\hline
+Priority & Must Have (Nếu sử dụng KDS thay vì/cùng với máy in bếp) \\
+\hline
+Trigger & - Nhân viên bếp bắt đầu ca làm việc và cần xem các đơn hàng đang chờ. \newline - Có đơn hàng mới được gửi từ POS đến KDS. \newline - Nhân viên bếp hoàn thành một món/đơn và cần xem đơn hàng tiếp theo. \\
+\hline
+Pre-Condition & - Màn hình KDS (thiết bị vật lý như tablet, màn hình cảm ứng) đã được cài đặt, kết nối mạng và chạy ứng dụng/giao diện KDS của Odoo. \newline - KDS đã được cấu hình trong POS để nhận đơn hàng từ các danh mục sản phẩm phù hợp (FR-MD02-10). \newline - Có ít nhất một đơn hàng đã được gửi từ POS đến KDS này (thông qua FR-MD08-01). \\
+\hline
+Post-Condition & - Giao diện KDS hiển thị danh sách các đơn hàng/phiếu đang chờ xử lý. \newline - Mỗi đơn hàng/phiếu hiển thị các thông tin cơ bản cần thiết để nhân viên bếp bắt đầu công việc. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên bếp (US-04) nhìn vào màn hình KDS. \newline 2. Giao diện KDS hiển thị các đơn hàng/phiếu (tickets) dưới dạng các ô hoặc cột. Các đơn hàng mới đến thường xuất hiện ở vị trí đầu tiên hoặc có dấu hiệu mới. \newline 3. Mỗi ô/phiếu đại diện cho một phần hoặc toàn bộ đơn hàng từ POS, hiển thị các thông tin tóm tắt ban đầu: \newline    - Mã đơn hàng POS / Số bàn / Loại đơn (Eat-in, Takeout, Delivery). \newline    - Thời gian gửi đơn. \newline    - Danh sách các món ăn thuộc phạm vi xử lý của KDS này (Tên món, Số lượng). \newline    - (Tùy chọn) Thời gian chờ ước tính hoặc màu sắc chỉ thị độ khẩn cấp. \newline 4. Nhân viên bếp xem xét các đơn hàng đang chờ trên màn hình. \\
+\hline
+Alternative Flow & \textbf{2a. Chế độ xem khác nhau:} \newline    1. Giao diện KDS có thể cung cấp các chế độ xem khác nhau (ví dụ: xem theo món ăn thay vì theo đơn hàng, xem theo trạm chế biến nếu có). \newline    2. Nhân viên bếp chọn chế độ xem phù hợp với quy trình làm việc. \newline \textbf{3a. Thông báo đơn hàng mới:} \newline    1. Khi có đơn hàng mới được gửi đến, KDS phát ra âm thanh thông báo hoặc có hiệu ứng nhấp nháy để thu hút sự chú ý của nhân viên bếp. \\
+\hline
+Exception Flow & \textbf{2a. Lỗi hiển thị KDS:} \newline    1. Giao diện KDS gặp lỗi, không hiển thị được đơn hàng hoặc hiển thị sai thông tin (ví dụ: lỗi kết nối mạng, lỗi ứng dụng KDS). \newline    2. Nhân viên bếp không nhận được hoặc không xem được đơn hàng mới. Cần khắc phục sự cố thiết bị/ứng dụng. \newline \textbf{2b. Không có đơn hàng nào:} \newline    1. Nếu không có đơn hàng nào đang chờ xử lý cho KDS này, màn hình hiển thị trạng thái trống hoặc thông báo "Không có đơn hàng nào". \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC8.2-1:} KDS phải hiển thị các đơn hàng/phiếu theo thứ tự ưu tiên hợp lý (ví dụ: thứ tự thời gian gửi đến, hoặc theo cấu hình ưu tiên khác). \newline - \textbf{BR-UC8.2-2:} Thông tin hiển thị ban đầu phải đủ để nhân viên bếp nắm bắt nhanh công việc cần làm. \newline - \textbf{BR-UC8.2-3:} KDS chỉ hiển thị các món ăn thuộc các Danh mục POS đã được cấu hình định tuyến đến KDS đó (FR-MD02-10). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC8.2-1 (Usability):} Giao diện KDS phải cực kỳ dễ đọc trong môi trường bếp (font chữ lớn, độ tương phản cao). Cách trình bày đơn hàng/phiếu phải rõ ràng, không gây nhầm lẫn. \newline - \textbf{NFR-UC8.2-2 (Performance):} Đơn hàng mới gửi từ POS phải xuất hiện trên KDS gần như tức thời (< 2-3 giây). Giao diện KDS phải hoạt động mượt mà. \newline - \textbf{NFR-UC8.2-3 (Reliability):} KDS phải hoạt động ổn định, đảm bảo không bỏ sót đơn hàng. Cần có cơ chế xử lý khi mất kết nối mạng tạm thời (ví dụ: lưu trữ offline và đồng bộ lại). \newline - \textbf{NFR-UC8.2-4 (Durability):} Thiết bị KDS sử dụng trong bếp cần có độ bền phù hợp với môi trường (chịu nhiệt, dầu mỡ, va đập nhẹ). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD08-03: Thay đổi Trạng thái Món ăn/Đơn hàng trên KDS}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD08-03: Thay đổi Trạng thái Món ăn/Đơn hàng trên KDS} \label{tab:uc_md08_03} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Thay đổi Trạng thái Món ăn/Đơn hàng trên KDS \\
+\hline
+Use Case ID & UC-MD08-03 \\
+\hline
+Use Case Description & Cho phép Nhân viên bếp (US-04) tương tác trực tiếp với màn hình KDS (thường là cảm ứng) để cập nhật trạng thái của từng món ăn hoặc toàn bộ đơn hàng/phiếu, ví dụ: đánh dấu đang chế biến, đã hoàn thành. \\
+\hline
+Actor & US-04 (Nhân viên bếp) \\
+\hline
+Priority & Must Have (Nếu sử dụng KDS) \\
+\hline
+Trigger & - Nhân viên bếp bắt đầu chế biến một món ăn/đơn hàng. \newline - Nhân viên bếp hoàn thành việc chế biến một món ăn/đơn hàng. \\
+\hline
+Pre-Condition & - Nhân viên bếp đang xem danh sách đơn hàng trên KDS (UC-MD08-02). \newline - Đơn hàng/món ăn đang ở trạng thái có thể thay đổi (ví dụ: đang chờ xử lý). \\
+\hline
+Post-Condition & - Trạng thái của món ăn hoặc đơn hàng/phiếu trên KDS được cập nhật (ví dụ: chuyển màu, chuyển sang cột/khu vực khác, biến mất khỏi danh sách chờ). \newline - (Tùy chọn) Thông tin trạng thái mới được gửi về hệ thống Odoo backend và có thể cập nhật về POS (FR-MD08-06). \newline - Giúp theo dõi tiến độ công việc trong bếp. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Đánh dấu hoàn thành đơn hàng/phiếu) & 1. Nhân viên bếp (US-04) đã hoàn thành tất cả các món trong một đơn hàng/phiếu hiển thị trên KDS. \newline 2. US-04 chạm vào đơn hàng/phiếu đó trên màn hình KDS. \newline 3. Giao diện KDS có thể hiển thị các tùy chọn hành động hoặc có một hành động mặc định khi chạm (ví dụ: đánh dấu hoàn thành). \newline 4. US-04 thực hiện hành động "Hoàn thành" / "Done" / "Ready". \newline 5. Đơn hàng/phiếu đó biến mất khỏi danh sách đang chờ hoặc chuyển sang khu vực/trạng thái "Đã xong". \newline 6. (Tùy chọn) Hệ thống KDS gửi thông tin cập nhật trạng thái về Odoo backend/POS. \\
+\hline
+Alternative Flow & \textbf{2a. Đánh dấu trạng thái "Đang làm":} \newline    1. Khi bắt đầu làm một đơn hàng/phiếu, US-04 chạm vào nó và chọn trạng thái "Đang làm" (In Progress / Cooking). \newline    2. Đơn hàng/phiếu có thể đổi màu hoặc di chuyển sang khu vực "Đang làm" trên KDS. \newline \textbf{2b. Đánh dấu hoàn thành từng món ăn:} \newline    1. Nếu KDS hỗ trợ quản lý theo từng món, US-04 chạm vào một món ăn cụ thể trong đơn hàng/phiếu. \newline    2. US-04 chọn hành động "Hoàn thành" cho món đó. \newline    3. Món ăn đó được đánh dấu là đã xong (ví dụ: gạch đi, đổi màu). \newline    4. Khi tất cả các món trong đơn hàng/phiếu đều hoàn thành, toàn bộ đơn hàng/phiếu có thể tự động chuyển sang trạng thái "Đã xong" hoặc yêu cầu xác nhận cuối cùng từ nhân viên. \newline \textbf{2c. Hoàn tác trạng thái:} \newline    1. Nếu đánh dấu nhầm, US-04 có thể có tùy chọn để hoàn tác hành động vừa thực hiện (ví dụ: chuyển món "Đã xong" về lại "Đang làm"). \\
+\hline
+Exception Flow & \textbf{4a. Lỗi khi cập nhật trạng thái trên KDS/Odoo:} \newline    1. Hệ thống KDS hoặc kết nối về backend Odoo gặp lỗi khi cố gắng lưu trạng thái mới. \newline    2. KDS có thể hiển thị thông báo lỗi hoặc trạng thái không được cập nhật đúng cách. \newline    3. Cần kiểm tra kết nối và thử lại. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC8.3-1:} Phải có cách thức rõ ràng và dễ dàng để nhân viên bếp cập nhật trạng thái trên KDS (ví dụ: chạm, vuốt). \newline - \textbf{BR-UC8.3-2:} Các trạng thái khả dụng (ví dụ: Chờ, Đang làm, Đã xong) và luồng chuyển đổi giữa chúng cần được định nghĩa phù hợp với quy trình làm việc của bếp. \newline - \textbf{BR-UC8.3-3:} Việc cập nhật trạng thái phải chính xác và phản ánh đúng tiến độ thực tế. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC8.3-1 (Usability):} Tương tác cảm ứng trên KDS phải nhạy và chính xác. Các nút/khu vực chạm phải đủ lớn và dễ thao tác trong môi trường bếp. \newline - \textbf{NFR-UC8.3-2 (Performance):} Phản hồi khi chạm và cập nhật trạng thái trên màn hình phải tức thời. \newline - \textbf{NFR-UC8.3-3 (Reliability):} Việc cập nhật trạng thái phải đáng tin cậy, không bị mất dữ liệu khi có sự cố tạm thời. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD08-04: Xem Chi tiết Món ăn trên KDS}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD08-04: Xem Chi tiết Món ăn trên KDS} \label{tab:uc_md08_04} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Chi tiết Món ăn trên KDS \\
+\hline
+Use Case ID & UC-MD08-04 \\
+\hline
+Use Case Description & Cho phép Nhân viên bếp (US-04) xem đầy đủ các thông tin chi tiết liên quan đến một món ăn cụ thể cần chế biến, bao gồm tên, số lượng, các tùy chọn biến thể đã chọn, và các ghi chú đặc biệt từ khách hàng hoặc nhân viên phục vụ. \\
+\hline
+Actor & US-04 (Nhân viên bếp) \\
+\hline
+Priority & Must Have (Nếu sử dụng KDS) \\
+\hline
+Trigger & Nhân viên bếp cần xem chi tiết một món ăn hiển thị trên KDS để bắt đầu chế biến hoặc kiểm tra lại yêu cầu. \\
+\hline
+Pre-Condition & - Nhân viên bếp đang xem danh sách đơn hàng/phiếu trên KDS (UC-MD08-02). \newline - Đơn hàng/phiếu chứa món ăn cần xem chi tiết. \\
+\hline
+Post-Condition & - Thông tin chi tiết của món ăn được hiển thị rõ ràng cho nhân viên bếp. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên bếp (US-04) đang xem một đơn hàng/phiếu trên KDS (UC-MD08-02). \newline 2. Đơn hàng/phiếu hiển thị danh sách các món ăn cần làm. \newline 3. Với mỗi món ăn, KDS hiển thị các thông tin chi tiết quan trọng: \newline    - \textbf{Số lượng:} Số phần cần làm. \newline    - \textbf{Tên món ăn:} Tên đầy đủ của món. \newline    - \textbf{Biến thể:} Các tùy chọn biến thể khách đã chọn (ví dụ: "Size: L", "Độ chín: Medium Rare", "Không cay"). \newline    - \textbf{Ghi chú đặc biệt:} Các ghi chú do nhân viên phục vụ nhập (ví dụ: "Không hành", "Dị ứng hải sản", "Món này ra trước"). \newline 4. Nhân viên bếp đọc kỹ các thông tin này để đảm bảo chế biến đúng yêu cầu. \\
+\hline
+Alternative Flow & \textbf{1a. Nhấp để xem chi tiết hơn:} \newline    1. Nếu thông tin ban đầu bị ẩn bớt do giới hạn không gian, nhân viên có thể nhấp vào dòng món ăn để xem đầy đủ các biến thể và ghi chú trong một cửa sổ popup hoặc khu vực riêng. \\
+\hline
+Exception Flow & \textbf{3a. Thông tin bị thiếu hoặc không rõ ràng:} \newline    1. Do lỗi truyền dữ liệu từ POS hoặc lỗi hiển thị của KDS, một số thông tin chi tiết (biến thể, ghi chú) bị thiếu hoặc hiển thị không chính xác. \newline    2. Nhân viên bếp không có đủ thông tin để chế biến đúng. Cần liên hệ lại nhân viên phục vụ hoặc kiểm tra lại hệ thống. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC8.4-1:} KDS phải hiển thị đầy đủ và chính xác tất cả các thông tin liên quan đến việc chế biến món ăn: số lượng, tên, biến thể, ghi chú. \newline - \textbf{BR-UC8.4-2:} Các thông tin quan trọng như ghi chú dị ứng hoặc yêu cầu đặc biệt phải được làm nổi bật để nhân viên bếp dễ dàng nhận thấy. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC8.4-1 (Clarity/Readability):} Thông tin chi tiết món ăn trên KDS phải cực kỳ rõ ràng, dễ đọc, font chữ đủ lớn, bố cục hợp lý. \newline - \textbf{NFR-UC8.4-2 (Accuracy):} Dữ liệu hiển thị phải khớp 100\% với dữ liệu đã được gửi từ POS. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD08-05: (Tùy chọn) Sắp xếp/Ưu tiên Đơn hàng trên KDS}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD08-05: (Tùy chọn) Sắp xếp/Ưu tiên Đơn hàng trên KDS} \label{tab:uc_md08_05} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & (Tùy chọn) Sắp xếp/Ưu tiên Đơn hàng trên KDS \\
+\hline
+Use Case ID & UC-MD08-05 \\
+\hline
+Use Case Description & Cung cấp khả năng cho Nhân viên bếp (US-04) sắp xếp lại thứ tự hiển thị của các đơn hàng/phiếu trên KDS hoặc đánh dấu một số đơn hàng/phiếu là ưu tiên cần xử lý trước, dựa trên các yếu tố như thời gian chờ, yêu cầu đặc biệt hoặc chỉ đạo của quản lý. \\
+\hline
+Actor & US-04 (Nhân viên bếp) \\
+\hline
+Priority & Low / Nice to Have \\
+\hline
+Trigger & - Bếp nhận được nhiều đơn hàng cùng lúc và cần sắp xếp lại thứ tự làm việc. \newline - Có một đơn hàng cần được ưu tiên xử lý (ví dụ: khách VIP, khách đợi lâu). \\
+\hline
+Pre-Condition & - Nhân viên bếp đang xem danh sách đơn hàng trên KDS (UC-MD08-02). \newline - Giao diện KDS được thiết kế hỗ trợ chức năng sắp xếp hoặc đánh dấu ưu tiên. \\
+\hline
+Post-Condition & - Thứ tự hiển thị của các đơn hàng/phiếu trên KDS được thay đổi theo ý muốn của nhân viên. \newline - Các đơn hàng/phiếu được đánh dấu ưu tiên có dấu hiệu nhận biết rõ ràng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Đánh dấu ưu tiên) & 1. Nhân viên bếp (US-04) xác định đơn hàng/phiếu cần ưu tiên trên KDS. \newline 2. US-04 chạm vào đơn hàng/phiếu đó. \newline 3. Giao diện hiển thị tùy chọn "Đánh dấu Ưu tiên" (Prioritize) hoặc tương tự. \newline 4. US-04 chọn tùy chọn đó. \newline 5. Đơn hàng/phiếu được đánh dấu ưu tiên (ví dụ: đổi sang màu khác, có biểu tượng cờ đỏ, di chuyển lên đầu danh sách). \\
+\hline
+Alternative Flow & \textbf{1a. Sắp xếp lại thứ tự (Kéo thả):} \newline    1. Giao diện KDS cho phép kéo và thả các đơn hàng/phiếu để thay đổi vị trí của chúng trong danh sách chờ. \newline    2. US-04 nhấn giữ và kéo một đơn hàng/phiếu đến vị trí mong muốn. \newline    3. Hệ thống cập nhật lại thứ tự hiển thị. \newline \textbf{1b. Sắp xếp theo tiêu chí:} \newline    1. Giao diện KDS có các nút/tùy chọn để sắp xếp toàn bộ danh sách theo các tiêu chí khác nhau (ví dụ: Thời gian chờ lâu nhất, Thời gian gửi đơn mới nhất...). \newline    2. US-04 chọn tiêu chí sắp xếp. \newline    3. Hệ thống sắp xếp lại danh sách. \\
+\hline
+Exception Flow & \textbf{4a/2a-drag/2a-sort. Lỗi khi sắp xếp/đánh dấu:} \newline    1. Hệ thống KDS gặp lỗi khi cố gắng lưu lại thứ tự mới hoặc trạng thái ưu tiên. \newline    2. Thao tác có thể không thành công hoặc hiển thị không đúng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC8.5-1:} Chức năng sắp xếp/ưu tiên là tùy chọn, không bắt buộc phải có. \newline - \textbf{BR-UC8.5-2:} Việc đánh dấu ưu tiên cần có biểu hiện trực quan rõ ràng để tất cả nhân viên bếp đều nhận biết được. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC8.5-1 (Usability):} Thao tác sắp xếp (kéo thả) hoặc đánh dấu ưu tiên phải dễ dàng thực hiện trên màn hình cảm ứng. \newline - \textbf{NFR-UC8.5-2 (Performance):} Việc sắp xếp lại danh sách hoặc đánh dấu ưu tiên phải có hiệu lực ngay lập tức trên màn hình. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD08-06: Cập nhật Trạng thái Món ăn về POS (Tùy chọn)}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD08-06: Cập nhật Trạng thái Món ăn về POS (Tùy chọn)} \label{tab:uc_md08_06} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Cập nhật Trạng thái Món ăn về POS (Tùy chọn) \\
+\hline
+Use Case ID & UC-MD08-06 \\
+\hline
+Use Case Description & Khi Nhân viên bếp cập nhật trạng thái của một món ăn hoặc đơn hàng trên KDS (ví dụ: đánh dấu "Đã xong"), hệ thống KDS (nếu được cấu hình) sẽ tự động gửi thông tin cập nhật này về lại hệ thống POS, cho phép Nhân viên phục vụ biết được món nào đã sẵn sàng để mang ra cho khách. \\
+\hline
+Actor & System (KDS gửi cập nhật, POS nhận cập nhật) \\
+\hline
+Priority & Nice to Have \\
+\hline
+Trigger & Nhân viên bếp thay đổi trạng thái món ăn/đơn hàng trên KDS thành "Đã xong" (hoặc trạng thái tương đương) (UC-MD08-03). \\
+\hline
+Pre-Condition & - KDS và POS được kết nối cùng mạng và có cơ chế giao tiếp hai chiều (thường qua Odoo backend). \newline - Chức năng cập nhật trạng thái từ KDS về POS được kích hoạt trong cấu hình. \\
+\hline
+Post-Condition & - Trạng thái của món ăn tương ứng trên giao diện đơn hàng POS của Nhân viên phục vụ được cập nhật (ví dụ: hiển thị icon "Sẵn sàng", đổi màu). \newline - Nhân viên phục vụ nhận được thông báo (trực quan hoặc âm thanh - tùy thiết kế) về món ăn đã sẵn sàng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên bếp đánh dấu một món ăn/đơn hàng là "Đã xong" trên KDS (UC-MD08-03). \newline 2. Hệ thống KDS gửi thông tin cập nhật trạng thái (bao gồm ID món ăn/đơn hàng và trạng thái mới) đến Odoo backend. \newline 3. Odoo backend nhận thông tin và xác định đơn hàng POS tương ứng. \newline 4. Odoo backend cập nhật trạng thái của (các) dòng món ăn liên quan trong đơn hàng POS đó. \newline 5. Odoo backend gửi tín hiệu cập nhật đến giao diện POS client của nhân viên đang mở đơn hàng đó (thường qua longpolling hoặc websocket). \newline 6. Giao diện POS client nhận được cập nhật. \newline 7. Giao diện POS cập nhật hiển thị của dòng món ăn đó (ví dụ: thêm icon "✓", đổi màu nền). \newline 8. (Tùy chọn) Giao diện POS phát ra âm thanh thông báo ngắn hoặc hiển thị một popup nhỏ báo "Món [Tên món] của bàn [Số bàn] đã sẵn sàng". \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể. \\
+\hline
+Exception Flow & \textbf{2a. Lỗi gửi cập nhật từ KDS:} \newline    1. KDS không thể gửi thông tin cập nhật về backend (lỗi mạng...). \newline    2. Trạng thái trên POS không được cập nhật. \newline \textbf{5a. Lỗi gửi tín hiệu đến POS client:} \newline    1. Backend không thể gửi tín hiệu cập nhật đến POS client (client offline, lỗi kết nối...). \newline    2. Trạng thái trên POS không được cập nhật tức thời, chỉ cập nhật khi làm mới đơn hàng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC8.6-1:} Chức năng cập nhật trạng thái 2 chiều này là tùy chọn và cần được cấu hình. \newline - \textbf{BR-UC8.6-2:} Chỉ trạng thái "Đã xong" (hoặc tương đương) mới nên kích hoạt thông báo/cập nhật về POS để tránh làm phiền nhân viên phục vụ với các trạng thái trung gian. \newline - \textbf{BR-UC8.6-3:} Cơ chế thông báo trên POS cho nhân viên phục vụ cần rõ ràng nhưng không quá gây mất tập trung. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC8.6-1 (Performance/Real-time):} Việc cập nhật trạng thái từ KDS về POS nên diễn ra gần như thời gian thực để nhân viên phục vụ có thông tin kịp thời. \newline - \textbf{NFR-UC8.6-2 (Reliability):} Cơ chế giao tiếp giữa KDS, backend và POS client phải đáng tin cậy. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD08-07: Nhận và Xử lý Phiếu in Bếp}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD08-07: Nhận và Xử lý Phiếu in Bếp} \label{tab:uc_md08_07} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Nhận và Xử lý Phiếu in Bếp \\
+\hline
+Use Case ID & UC-MD08-07 \\
+\hline
+Use Case Description & Mô tả quy trình thủ công của Nhân viên bếp (US-04) khi nhận được phiếu in đơn hàng từ máy in bếp, đọc thông tin trên phiếu và thực hiện chế biến các món ăn theo yêu cầu. \\
+\hline
+Actor & US-04 (Nhân viên bếp) \\
+\hline
+Priority & Must Have (Nếu sử dụng máy in bếp thay vì/cùng với KDS) \\
+\hline
+Trigger & Máy in bếp in ra một phiếu đơn hàng mới (kích hoạt bởi FR-MD08-01). \\
+\hline
+Pre-Condition & - Máy in bếp đang hoạt động và có giấy. \newline - Một phiếu đơn hàng hợp lệ vừa được in ra. \\
+\hline
+Post-Condition & - Nhân viên bếp nắm được các món cần chế biến cho đơn hàng đó. \newline - Nhân viên bếp bắt đầu quá trình chế biến. (Hệ thống không tự động biết được điều này). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Máy in bếp in ra phiếu đơn hàng. \newline 2. Nhân viên bếp (US-04) lấy phiếu in. \newline 3. US-04 đọc các thông tin trên phiếu: \newline    - Số bàn / Loại đơn (Takeout/Delivery) / Tên khách (nếu có). \newline    - Thời gian gửi đơn. \newline    - Tên nhân viên phục vụ. \newline    - Danh sách các món ăn cần chế biến (Tên món, Số lượng, Biến thể, Ghi chú đặc biệt). \newline 4. US-04 xác định các món cần làm và bắt đầu quy trình chế biến theo thứ tự ưu tiên hoặc quy trình của bếp. \newline 5. US-04 giữ lại phiếu in để tham chiếu trong quá trình làm và đối chiếu khi món ăn hoàn thành. \\
+\hline
+Alternative Flow & \textbf{3a. Phiếu in bị mờ/rách/không rõ ràng:} \newline    1. Nhân viên bếp không đọc được rõ thông tin trên phiếu. \newline    2. Nhân viên cần liên hệ lại nhân viên phục vụ đã gửi đơn để xác nhận lại thông tin. \\
+\hline
+Exception Flow & \textbf{1a. Máy in lỗi (Hết giấy, kẹt...):} \newline    1. Phiếu không được in ra hoặc in không hoàn chỉnh. \newline    2. Nhân viên bếp không nhận được đơn hàng. Cần xử lý sự cố máy in và yêu cầu gửi lại đơn từ POS (nếu có chức năng in lại). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC8.7-1:} Định dạng phiếu in bếp phải rõ ràng, dễ đọc, font chữ đủ lớn, các thông tin quan trọng (số lượng, ghi chú) phải nổi bật. \newline - \textbf{BR-UC8.7-2:} Thông tin in ra phải khớp chính xác với những gì đã được gửi từ POS. \newline - \textbf{BR-UC8.7-3:} Cần có quy trình trong bếp để quản lý các phiếu in (ví dụ: treo lên bảng theo thứ tự, đánh dấu khi hoàn thành) để tránh nhầm lẫn hoặc bỏ sót. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC8.7-1 (Clarity/Readability):} Yêu cầu quan trọng nhất là phiếu in phải dễ đọc trong môi trường bếp. \newline - \textbf{NFR-UC8.7-2 (Reliability):} Máy in bếp cần hoạt động ổn định, ít gặp sự cố. \\
+\hline
+\end{longtable}
+
+

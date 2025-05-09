@@ -1,0 +1,597 @@
+\subsection{Module MD-02: Quản lý Thực đơn \& Sản phẩm}
+
+\subsubsection{Use Case UC-MD02-01: Tạo Sản phẩm Mới (Món ăn/Đồ uống)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-01: Tạo Sản phẩm Mới (Món ăn/Đồ uống)} \label{tab:uc_md02_01} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Tạo Sản phẩm Mới (Món ăn/Đồ uống) \\
+\hline
+Use Case ID & UC-MD02-01 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng thêm một món ăn, đồ uống, hoặc dịch vụ mới vào hệ thống với các chi tiết cần thiết như tên, giá bán, loại sản phẩm, giúp sản phẩm sẵn sàng cho việc cấu hình thực đơn và bán hàng. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Nhà hàng bổ sung một món mới vào thực đơn, hoặc cần quản lý một dịch vụ/mặt hàng mới trên hệ thống. \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập vào hệ thống với quyền quản lý sản phẩm (ví dụ: Inventory User/Manager, Sales Manager). \newline - Các loại sản phẩm cơ bản (Consumable, Stockable, Service) đã được định nghĩa sẵn. \\
+\hline
+Post-Condition & - Một bản ghi sản phẩm mới được tạo và lưu thành công trong cơ sở dữ liệu. \newline - Sản phẩm này có thể được tìm kiếm và lựa chọn cho các cấu hình tiếp theo (ví dụ: thêm vào Danh mục POS - FR-MD02-04, cấu hình Biến thể - FR-MD02-06, cấu hình tồn kho nếu là Stockable - FR-MD02-07). \newline - Hệ thống ghi nhận hoạt động tạo sản phẩm vào nhật ký (nếu được cấu hình). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-01 truy cập vào chức năng quản lý Sản phẩm (ví dụ: Menu Inventory > Products > Products). \newline 2. US-01 chọn hành động "Tạo mới" (Create). \newline 3. Hệ thống hiển thị một form sản phẩm trống. \newline 4. US-01 nhập Tên sản phẩm vào trường "Product Name" (Bắt buộc). \newline 5. US-01 nhập Giá bán vào trường "Sales Price" (Bắt buộc). \newline 6. US-01 chọn Loại sản phẩm từ danh sách thả xuống "Product Type" (ví dụ: chọn "Consumable" cho hầu hết món ăn/đồ uống không cần theo dõi tồn kho chi tiết) (Bắt buộc). \newline 7. (Tùy chọn) US-01 nhập Giá vốn vào trường "Cost". \newline 8. (Tùy chọn) US-01 chọn Danh mục sản phẩm (Product Category) cho mục đích quản lý nội bộ (khác với Danh mục POS). \newline 9. (Tùy chọn) US-01 nhập Mã nội bộ (Internal Reference/SKU). \newline 10. (Tùy chọn) US-01 đảm bảo tùy chọn "Có thể Bán" (Can be Sold) được chọn (thường là mặc định). \newline 11. (Tùy chọn) US-01 chuyển qua các tab khác (Sales, Purchase, Inventory, Accounting...) để nhập thêm thông tin chi tiết nếu cần ngay lúc này (ví dụ: cấu hình thuế bán hàng). \newline 12. US-01 chọn hành động "Lưu" (Save). \newline 13. Hệ thống kiểm tra các trường bắt buộc (Tên, Giá bán, Loại SP) đã được điền và Giá bán là số hợp lệ (tham chiếu BR-UC2.1-1, BR-UC2.1-2, BR-UC2.1-3). \newline 14. Hệ thống lưu bản ghi sản phẩm mới vào cơ sở dữ liệu. \newline 15. Hệ thống hiển thị lại form sản phẩm ở chế độ xem (read-only) với thông tin vừa lưu và thông báo "Sản phẩm đã được tạo". \newline 16. Hệ thống ghi nhận hoạt động vào nhật ký. \\
+\hline
+Alternative Flow & \textbf{12a. Lưu và Tạo mới (Save \& New):} \newline    1. Thay vì chọn "Lưu", US-01 chọn "Lưu và Tạo mới". \newline    2. Hệ thống thực hiện các bước 13, 14, 16. \newline    3. Hệ thống hiển thị lại một form sản phẩm trống (quay lại bước 3) để US-01 tiếp tục nhập sản phẩm khác. \\
+\hline
+Exception Flow & \textbf{13a. Lỗi Xác thực Dữ liệu (Validation Error):} \newline    1. Hệ thống phát hiện Tên sản phẩm bị trống, hoặc Giá bán trống/không phải số, hoặc Loại SP chưa chọn. \newline    2. Hệ thống hiển thị thông báo lỗi đỏ, chỉ rõ (các) trường bị lỗi. \newline    3. Hệ thống không cho phép lưu và giữ nguyên trạng thái form để US-01 sửa chữa. Use Case quay lại bước 4. \newline \textbf{14a. Lỗi Hệ thống khi Lưu:} \newline    1. Hệ thống gặp sự cố (ví dụ: mất kết nối cơ sở dữ liệu, lỗi ghi đĩa) trong quá trình thực hiện lưu ở bước 14. \newline    2. Hệ thống hiển thị một thông báo lỗi chung (ví dụ: "Không thể lưu sản phẩm. Đã xảy ra lỗi hệ thống."). \newline    3. Use Case kết thúc không thành công. Dữ liệu có thể bị mất. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.1-1:} Tên sản phẩm là thông tin bắt buộc và không được để trống. \newline - \textbf{BR-UC2.1-2:} Giá bán là thông tin bắt buộc và phải là một giá trị số không âm. \newline - \textbf{BR-UC2.1-3:} Loại sản phẩm (Product Type) phải được chọn từ danh sách cố định (Consumable, Stockable, Service). "Consumable" là lựa chọn phù hợp cho hầu hết các món ăn/đồ uống trong nhà hàng không cần quản lý tồn kho nguyên liệu chi tiết qua BoM (Bill of Materials). \newline - \textbf{BR-UC2.1-4:} Sản phẩm mới tạo mặc định là "Có thể Bán" (Can be Sold = True) và "Hoạt động" (Active = True). \newline - \textbf{BR-UC2.1-5:} Đơn vị tiền tệ của Giá bán và Giá vốn sẽ theo đơn vị tiền tệ mặc định của công ty được cấu hình trong hệ thống. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.1-1 (Usability):} Form tạo sản phẩm cần được tổ chức khoa học, các trường bắt buộc phải được đánh dấu rõ ràng. Việc chọn Loại sản phẩm nên có giải thích ngắn gọn ý nghĩa từng loại. \newline - \textbf{NFR-UC2.1-2 (Performance):} Thời gian từ lúc nhấn "Lưu" đến khi hệ thống xác nhận lưu thành công phải dưới 3 giây trong điều kiện tải bình thường. \newline - \textbf{NFR-UC2.1-3 (Data Integrity):} Dữ liệu được nhập vào các trường phải được lưu chính xác vào cơ sở dữ liệu. \newline - \textbf{NFR-UC2.1-4 (Security):} Chỉ những người dùng được cấp quyền quản lý sản phẩm mới có thể truy cập và thực hiện chức năng này. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD02-02: Chỉnh sửa Thông tin Sản phẩm}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-02: Chỉnh sửa Thông tin Sản phẩm} \label{tab:uc_md02_02} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Chỉnh sửa Thông tin Sản phẩm \\
+\hline
+Use Case ID & UC-MD02-02 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng cập nhật các thông tin chi tiết của một sản phẩm (món ăn, đồ uống) đã tồn tại trong hệ thống, ví dụ như thay đổi giá bán, tên, mô tả, hình ảnh, hoặc gán lại vào danh mục POS. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Thông tin của một sản phẩm cần được cập nhật (ví dụ: thay đổi giá do biến động chi phí, cải thiện mô tả món ăn, đổi hình ảnh, phân loại lại vào danh mục khác). \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập vào hệ thống với quyền quản lý sản phẩm. \newline - Sản phẩm cần chỉnh sửa đã tồn tại trong hệ thống (đã được tạo bởi FR-MD02-01). \\
+\hline
+Post-Condition & - Thông tin của bản ghi sản phẩm được cập nhật thành công trong cơ sở dữ liệu theo những thay đổi đã thực hiện. \newline - Các thay đổi (như giá bán, tên, hình ảnh, trạng thái bán trên POS) sẽ được phản ánh trên các giao diện liên quan (ví dụ: POS, trang đặt hàng online) sau khi được đồng bộ hoặc làm mới phiên. \newline - Hệ thống ghi nhận hoạt động cập nhật sản phẩm vào nhật ký (nếu được cấu hình). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-01 truy cập vào chức năng quản lý Sản phẩm. \newline 2. US-01 tìm kiếm và chọn sản phẩm cần chỉnh sửa từ danh sách (ví dụ: click vào tên sản phẩm). \newline 3. Hệ thống hiển thị chi tiết sản phẩm ở chế độ xem (read-only). \newline 4. US-01 chọn hành động "Sửa" (Edit). \newline 5. Hệ thống chuyển form sang chế độ chỉnh sửa, cho phép thay đổi các trường dữ liệu. \newline 6. US-01 thực hiện các thay đổi mong muốn trên các trường thông tin (ví dụ: cập nhật trường "Sales Price", "Product Name", "Description"). \newline 7. (Tùy chọn) US-01 chuyển qua các tab khác (Sales, POS, Inventory...) để chỉnh sửa các thông tin cấu hình liên quan (ví dụ: thay đổi Danh mục POS, cập nhật Hình ảnh, đánh dấu/bỏ đánh dấu "Available in POS"). \newline 8. US-01 chọn hành động "Lưu" (Save). \newline 9. Hệ thống kiểm tra tính hợp lệ của các dữ liệu đã thay đổi (ví dụ: Giá bán phải là số, Tên không được trống - tham chiếu BR-UC2.2-1, BR-UC2.2-2). \newline 10. Hệ thống lưu các thay đổi vào bản ghi sản phẩm trong cơ sở dữ liệu. \newline 11. Hệ thống chuyển form về chế độ xem (read-only) với thông tin đã được cập nhật và hiển thị thông báo "Sản phẩm đã được cập nhật". \newline 12. Hệ thống ghi nhận hoạt động vào nhật ký. \\
+\hline
+Alternative Flow & \textbf{2a. Sử dụng bộ lọc/tìm kiếm nâng cao:} \newline    1. Để tìm sản phẩm, US-01 sử dụng các bộ lọc (theo Danh mục, Loại sản phẩm, Trạng thái...) hoặc tìm kiếm theo tên/mã nội bộ. \newline    2. Hệ thống hiển thị danh sách sản phẩm phù hợp. \newline    3. Use Case tiếp tục từ bước 2 của Basic Flow. \newline \textbf{7a. Chỉnh sửa nhanh từ danh sách (List View):} \newline    1. Thay vì vào chi tiết, US-01 chỉnh sửa trực tiếp một số trường (như Giá bán) trên giao diện danh sách sản phẩm. \newline    2. Hệ thống tự động lưu thay đổi (hoặc yêu cầu nhấn nút lưu riêng cho list view). \newline    3. Use Case có thể kết thúc hoặc tiếp tục chỉnh sửa sản phẩm khác. \\
+\hline
+Exception Flow & \textbf{9a. Lỗi Xác thực Dữ liệu (Validation Error):} \newline    1. Hệ thống phát hiện dữ liệu không hợp lệ trong các trường đã bị thay đổi (ví dụ: Giá bán chứa ký tự chữ, Tên sản phẩm bị xóa trắng). \newline    2. Hệ thống hiển thị thông báo lỗi đỏ, chỉ rõ (các) trường bị lỗi. \newline    3. Hệ thống không cho phép lưu và giữ nguyên trạng thái form chỉnh sửa để US-01 sửa chữa. Use Case quay lại bước 6. \newline \textbf{10a. Lỗi Hệ thống khi Cập nhật:} \newline    1. Hệ thống gặp sự cố (ví dụ: mất kết nối cơ sở dữ liệu, xung đột dữ liệu do người khác cũng đang sửa) trong quá trình thực hiện lưu ở bước 10. \newline    2. Hệ thống hiển thị một thông báo lỗi chung (ví dụ: "Không thể cập nhật sản phẩm. Đã xảy ra lỗi hệ thống." hoặc lỗi về xung đột). \newline    3. Use Case kết thúc không thành công. Người dùng có thể cần tải lại trang và thử lại. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.2-1:} Tên sản phẩm sau khi sửa không được để trống. \newline - \textbf{BR-UC2.2-2:} Giá bán sau khi sửa phải là một giá trị số không âm. \newline - \textbf{BR-UC2.2-3:} Việc thay đổi Loại sản phẩm (Product Type) từ 'Consumable' sang 'Stockable' hoặc ngược lại có thể ảnh hưởng đến việc theo dõi tồn kho và chỉ nên thực hiện cẩn thận, có thể bị hạn chế nếu sản phẩm đã có giao dịch. \newline - \textbf{BR-UC2.2-4:} Các thay đổi về Giá bán, Tên, Hình ảnh, trạng thái "Available in POS" cần được phản ánh trên giao diện POS (có thể yêu cầu đóng/mở lại phiên POS để cập nhật hoàn toàn). \newline - \textbf{BR-UC2.2-5:} Chỉ có thể gán sản phẩm vào các Danh mục POS đã được tạo (FR-MD02-04). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.2-1 (Usability):} Form chỉnh sửa phải dễ dàng định vị các trường thông tin quan trọng. Việc cập nhật hình ảnh phải đơn giản (ví dụ: kéo thả hoặc chọn file). \newline - \textbf{NFR-UC2.2-2 (Performance):} Thời gian tải form sản phẩm ở chế độ sửa phải dưới 2 giây. Thời gian lưu thay đổi phải dưới 3 giây. \newline - \textbf{NFR-UC2.2-3 (Data Integrity):} Mọi thay đổi hợp lệ phải được lưu chính xác vào cơ sở dữ liệu. \newline - \textbf{NFR-UC2.2-4 (Concurrency):} Hệ thống nên có cơ chế ngăn chặn việc hai người dùng cùng lúc chỉnh sửa và lưu thông tin của cùng một sản phẩm gây mất dữ liệu (thường dùng cơ chế khóa bản ghi - record locking). \\
+\hline
+
+\end{longtable}
+
+
+\subsubsection{Use Case UC-MD02-03: Lưu trữ / Hủy kích hoạt Sản phẩm}
+
+
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-03: Lưu trữ / Hủy kích hoạt Sản phẩm} \label{tab:uc_md02_03} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Lưu trữ / Hủy kích hoạt Sản phẩm (Archive / Unarchive Product) \\
+\hline
+Use Case ID & UC-MD02-03 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng tạm thời hoặc vĩnh viễn ẩn một sản phẩm khỏi các giao diện hoạt động (như POS, danh sách chọn sản phẩm bán hàng, đặt hàng trước) mà không cần xóa bỏ dữ liệu lịch sử của sản phẩm đó. Đồng thời cho phép kích hoạt lại sản phẩm đã bị ẩn. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & - Một sản phẩm không còn được bán/sử dụng nữa (ví dụ: món ăn theo mùa đã hết mùa, nguyên liệu thay thế). \newline - Cần kích hoạt lại một sản phẩm đã từng bị ẩn để bán/sử dụng lại. \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền quản lý sản phẩm. \newline - Sản phẩm cần thao tác đã tồn tại trong hệ thống. \\
+\hline
+Post-Condition & - \textbf{Lưu trữ:} Trường 'Active' của sản phẩm được đặt thành False. Sản phẩm không còn hiển thị trong danh sách sản phẩm mặc định và không thể chọn trong các giao dịch mới (POS, Sales Order, Booking...). \newline - \textbf{Hủy lưu trữ:} Trường 'Active' của sản phẩm được đặt thành True. Sản phẩm xuất hiện trở lại trong danh sách mặc định và có thể được sử dụng trong các giao dịch. \newline - Dữ liệu lịch sử liên quan đến sản phẩm (ví dụ: các đơn hàng cũ) không bị ảnh hưởng. \newline - Hệ thống ghi nhận hoạt động. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Lưu trữ - Archive) & 1. US-01 truy cập vào chức năng quản lý Sản phẩm. \newline 2. US-01 tìm và chọn (tick vào ô vuông) một hoặc nhiều sản phẩm muốn lưu trữ từ giao diện danh sách (List View). \newline 3. US-01 chọn menu "Hành động" (Action). \newline 4. US-01 chọn tùy chọn "Lưu trữ" (Archive) từ menu. \newline 5. Hệ thống (có thể) hiển thị hộp thoại xác nhận. US-01 xác nhận. \newline 6. Hệ thống cập nhật trường `active` thành `False` cho tất cả các sản phẩm đã chọn. \newline 7. Hệ thống tự động làm mới danh sách sản phẩm, các sản phẩm vừa được lưu trữ sẽ biến mất khỏi danh sách mặc định (vì bộ lọc mặc định thường là `Active = True`). \newline 8. Hệ thống hiển thị thông báo thành công (ví dụ: "X sản phẩm đã được lưu trữ."). \newline 9. Hệ thống ghi nhận hoạt động. \\
+\hline
+Alternative Flow & \textbf{Flow 1a (Lưu trữ từ Form View):} \newline    1. US-01 mở chi tiết một sản phẩm (Form View). \newline    2. US-01 chọn menu "Hành động" (Action). \newline    3. US-01 chọn tùy chọn "Lưu trữ" (Archive). \newline    4. Hệ thống (có thể) yêu cầu xác nhận. US-01 xác nhận. \newline    5. Hệ thống cập nhật `active = False`. \newline    6. Hệ thống có thể điều hướng người dùng quay lại danh sách sản phẩm (đã được lọc `Active = True`, nên sản phẩm vừa lưu trữ không còn thấy). \newline    7. Hệ thống ghi nhận hoạt động. \newline \textbf{Flow 2 (Hủy lưu trữ - Unarchive):} \newline    1. US-01 truy cập chức năng quản lý Sản phẩm. \newline    2. US-01 bỏ bộ lọc mặc định "Active" hoặc áp dụng bộ lọc "Archived" / "Active = False" để tìm các sản phẩm đã lưu trữ. \newline    3. Hệ thống hiển thị danh sách các sản phẩm đã lưu trữ. \newline    4. US-01 tìm và chọn (tick) một hoặc nhiều sản phẩm muốn hủy lưu trữ. \newline    5. US-01 chọn menu "Hành động" (Action). \newline    6. US-01 chọn tùy chọn "Hủy lưu trữ" (Unarchive). \newline    7. Hệ thống cập nhật trường `active` thành `True` cho các sản phẩm đã chọn. \newline    8. Hệ thống làm mới danh sách. Nếu đang lọc theo "Archived", các sản phẩm này sẽ biến mất. Nếu quay về bộ lọc mặc định "Active", chúng sẽ xuất hiện. \newline    9. Hệ thống hiển thị thông báo thành công. \newline   10. Hệ thống ghi nhận hoạt động. \\
+\hline
+Exception Flow & \textbf{6a. Lỗi Hệ thống khi Cập nhật Trạng thái:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi cố gắng cập nhật trường `active` trong cơ sở dữ liệu. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Trạng thái của sản phẩm có thể không thay đổi. Use Case kết thúc không thành công. \newline \textbf{4a. Hành động không tồn tại/bị ẩn:} \newline    1. Do cấu hình hoặc lỗi, tùy chọn "Archive"/"Unarchive" không xuất hiện trong menu "Action". \newline    2. US-01 không thể thực hiện hành động. Use Case kết thúc. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.3-1:} Sản phẩm bị Lưu trữ (Archived / Active=False) sẽ không hiển thị trong danh sách chọn sản phẩm mặc định trên các giao diện bán hàng (POS), tạo đơn hàng (Sales Order), đặt món trước (Pre-order - MD-03). \newline - \textbf{BR-UC2.3-2:} Việc Lưu trữ sản phẩm không xóa dữ liệu. Tất cả các giao dịch lịch sử liên quan đến sản phẩm đó vẫn được giữ lại và có thể xem được trong báo cáo. \newline - \textbf{BR-UC2.3-3:} Sản phẩm bị Lưu trữ vẫn có thể được tìm thấy nếu người dùng chủ động bỏ bộ lọc "Active" hoặc sử dụng bộ lọc "Archived". \newline - \textbf{BR-UC2.3-4:} Hủy lưu trữ (Unarchive / Active=True) làm cho sản phẩm hoạt động trở lại và có thể sử dụng trong các giao dịch mới. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.3-1 (Usability):} Các hành động "Archive" và "Unarchive" phải dễ dàng truy cập (thường trong menu Action). Việc lọc để tìm sản phẩm đã lưu trữ cũng phải đơn giản. \newline - \textbf{NFR-UC2.3-2 (Performance):} Thời gian thực hiện lưu trữ/hủy lưu trữ cho một hoặc nhiều sản phẩm (ví dụ < 20 sản phẩm cùng lúc) phải dưới 3 giây. \newline - \textbf{NFR-UC2.3-3 (Security):} Chỉ người dùng có quyền quản lý sản phẩm mới có thể thực hiện hành động lưu trữ/hủy lưu trữ. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD02-04: Quản lý Danh mục Sản phẩm POS}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-04: Quản lý Danh mục Sản phẩm POS} \label{tab:uc_md02_04} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Quản lý Danh mục Sản phẩm POS \\
+\hline
+Use Case ID & UC-MD02-04 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng tạo, xem, sửa đổi, xóa và sắp xếp thứ tự các danh mục (ví dụ: Khai vị, Món chính, Đồ uống) được sử dụng để phân loại và hiển thị sản phẩm trên giao diện Point of Sale (POS). \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Cần thêm một nhóm món ăn mới vào thực đơn POS (ví dụ: "Món Đặc Biệt"). \newline - Cần thay đổi tên hoặc thứ tự hiển thị của một danh mục hiện có. \newline - Cần loại bỏ một danh mục không còn sử dụng. \newline - Cần tạo cấu trúc danh mục con (ví dụ: Đồ uống > Có cồn / Không cồn). \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập vào hệ thống với quyền quản trị cấu hình Point of Sale. \newline - Module Point of Sale đã được cài đặt và cấu hình cơ bản. \\
+\hline
+Post-Condition & - Danh sách các danh mục POS được cập nhật (thêm mới, sửa đổi, xóa bỏ, thay đổi thứ tự). \newline - Thay đổi về danh mục (tên, thứ tự, cấu trúc) sẽ được phản ánh trên giao diện chọn món của POS sau khi phiên POS được khởi động lại hoặc đồng bộ dữ liệu. \newline - Hệ thống ghi nhận hoạt động. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Xem và Tạo mới) & 1. US-01 truy cập vào phần cấu hình của Point of Sale. \newline 2. US-01 chọn mục quản lý "Danh mục Sản phẩm POS" (POS Product Categories). \newline 3. Hệ thống hiển thị danh sách các danh mục POS hiện có, thường sắp xếp theo thứ tự (sequence) và có thể hiển thị cấu trúc cha-con. \newline 4. US-01 chọn hành động "Tạo mới" (Create). \newline 5. Hệ thống hiển thị form để nhập thông tin danh mục mới. \newline 6. US-01 nhập Tên Danh mục (bắt buộc). \newline 7. (Tùy chọn) US-01 chọn Danh mục Cha (Parent Category) nếu muốn tạo danh mục con. \newline 8. (Tùy chọn) US-01 nhập Số thứ tự (Sequence) để kiểm soát vị trí hiển thị (số nhỏ hơn hiển thị trước). \newline 9. (Tùy chọn) US-01 chọn hình ảnh đại diện cho danh mục (nếu POS theme hỗ trợ). \newline 10. US-01 chọn lệnh "Lưu" (Save). \newline 11. Hệ thống kiểm tra tính hợp lệ (Tên không trống - BR-UC2.4-1). \newline 12. Hệ thống lưu bản ghi danh mục POS mới. \newline 13. Hệ thống cập nhật danh sách, hiển thị danh mục mới theo đúng vị trí (dựa vào sequence và parent). \newline 14. Hệ thống hiển thị thông báo tạo thành công. \newline 15. Hệ thống ghi nhận hoạt động. \\
+\hline
+Alternative Flow & \textbf{3a. Sửa danh mục:} \newline    1. Từ danh sách (bước 3), US-01 chọn một danh mục muốn sửa. \newline    2. Hệ thống hiển thị form với thông tin hiện tại. \newline    3. US-01 chỉnh sửa Tên, Danh mục Cha, Số thứ tự, Hình ảnh... \newline    4. US-01 chọn "Lưu". \newline    5. Hệ thống kiểm tra hợp lệ. \newline    6. Hệ thống cập nhật thông tin danh mục. \newline    7. Hệ thống cập nhật danh sách và hiển thị thông báo thành công. \newline    8. Hệ thống ghi nhận hoạt động. \newline \textbf{3b. Xóa danh mục:} \newline    1. Từ danh sách (bước 3), US-01 chọn một danh mục muốn xóa. \newline    2. US-01 chọn hành động "Xóa". \newline    3. Hệ thống yêu cầu xác nhận. US-01 xác nhận. \newline    4. Hệ thống kiểm tra xem danh mục có chứa sản phẩm nào được gán vào nó hoặc có danh mục con nào không (BR-UC2.4-3). \newline    5. Nếu KHÔNG: Hệ thống xóa danh mục, cập nhật danh sách, báo thành công và ghi nhận hoạt động. \newline    6. Nếu CÓ: Hệ thống báo lỗi không thể xóa và giải thích lý do. Use Case kết thúc (xóa thất bại). \newline \textbf{3c. Sắp xếp lại thứ tự:} \newline    1. Giao diện danh sách (bước 3) cho phép US-01 thay đổi số thứ tự trực tiếp trên dòng HOẶC sử dụng chức năng kéo thả (drag \& drop) để thay đổi vị trí các danh mục (cùng cấp). \newline    2. US-01 thực hiện thay đổi thứ tự mong muốn. \newline    3. Hệ thống tự động lưu lại thứ tự mới (hoặc yêu cầu nhấn nút lưu riêng). \newline    4. Hệ thống ghi nhận hoạt động. \\
+\hline
+Exception Flow & \textbf{11a. Lỗi Xác thực Dữ liệu (Tạo/Sửa):} \newline    1. Hệ thống phát hiện Tên Danh mục bị trống. \newline    2. Hệ thống hiển thị thông báo lỗi. \newline    3. Hệ thống giữ nguyên form để sửa lại. Use Case quay lại bước 6 (Tạo mới) hoặc bước 3 (Sửa). \newline \textbf{12a/6a-delete. Lỗi Hệ thống khi Lưu/Cập nhật/Xóa:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi tương tác cơ sở dữ liệu. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.4-1:} Tên Danh mục POS là bắt buộc. Tính duy nhất của tên thường không bắt buộc chặt chẽ như tên sản phẩm, nhưng nên đặt tên rõ ràng để tránh nhầm lẫn. \newline - \textbf{BR-UC2.4-2:} Hệ thống hỗ trợ tạo cấu trúc danh mục POS phân cấp (cha-con). \newline - \textbf{BR-UC2.4-3:} Một danh mục POS không thể bị xóa nếu đang có ít nhất một sản phẩm được gán vào danh mục đó hoặc nếu nó có chứa danh mục con. Cần phải di chuyển sản phẩm/danh mục con sang nơi khác trước khi xóa. \newline - \textbf{BR-UC2.4-4:} Thứ tự hiển thị của các danh mục trên giao diện POS được quyết định bởi trường "Sequence" (số nhỏ hiển thị trước). Các danh mục cùng cấp được sắp xếp theo sequence. \newline - \textbf{BR-UC2.4-5:} Các thay đổi về cấu trúc, tên, hoặc thứ tự danh mục POS sẽ chỉ có hiệu lực trên các thiết bị POS sau khi phiên làm việc hiện tại được đóng và mở lại, hoặc sau khi hệ thống thực hiện đồng bộ dữ liệu cấu hình POS. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.4-1 (Usability):} Giao diện quản lý danh mục phải trực quan, dễ dàng thực hiện CRUD và đặc biệt là sắp xếp thứ tự (ưu tiên kéo thả). Cấu trúc cha-con cần hiển thị rõ ràng. \newline - \textbf{NFR-UC2.4-2 (Performance):} Thời gian tải danh sách danh mục (< 50 danh mục) và lưu các thay đổi phải dưới 3 giây. \newline - \textbf{NFR-UC2.4-3 (Integration):} Cấu hình danh mục POS phải được đồng bộ chính xác xuống giao diện POS client. \newline - \textbf{NFR-UC2.4-4 (Consistency):} Thứ tự và cấu trúc danh mục phải nhất quán giữa màn hình cấu hình và màn hình POS. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD02-05: Định nghĩa Thuộc tính \& Giá trị (cho Biến thể}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-05: Định nghĩa Thuộc tính \& Giá trị (cho Biến thể)} \label{tab:uc_md02_05} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Định nghĩa Thuộc tính \& Giá trị (cho Biến thể) \\
+\hline
+Use Case ID & UC-MD02-05 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng hoặc Quản trị viên hệ thống định nghĩa các đặc tính (Thuộc tính - Attributes, ví dụ: Kích cỡ, Độ cay) và các lựa chọn cụ thể cho từng đặc tính (Giá trị - Values, ví dụ: S, M, L; Ít cay, Cay vừa). Các thuộc tính và giá trị này là nền tảng để tạo ra các biến thể sản phẩm (ví dụ: Pizza size S, Cà phê Ít cay). \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have (nếu cần quản lý biến thể sản phẩm) \\
+\hline
+Trigger & Cần tạo ra các phiên bản khác nhau của cùng một sản phẩm dựa trên các đặc tính có thể lựa chọn (size, màu sắc, độ cay, topping,...). \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-10) đã đăng nhập với quyền quản trị cấu hình sản phẩm/inventory. \newline - Module Inventory (và có thể Sales/POS) đã được cài đặt. \\
+\hline
+Post-Condition & - Các bản ghi Thuộc tính và Giá trị tương ứng được tạo/cập nhật/xóa trong hệ thống. \newline - Các Thuộc tính và Giá trị này sẵn sàng để được áp dụng vào các sản phẩm gốc nhằm tạo ra biến thể (trong FR-MD02-06). \newline - Hệ thống ghi nhận hoạt động. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Tạo Thuộc tính mới và Giá trị) & 1. Người dùng (US-01/US-10) truy cập vào khu vực cấu hình Thuộc tính (ví dụ: Inventory > Configuration > Product Attributes). \newline 2. Hệ thống hiển thị danh sách các Thuộc tính đã có. \newline 3. Người dùng chọn "Tạo mới" (Create) để tạo Thuộc tính. \newline 4. Hệ thống hiển thị form tạo Thuộc tính. \newline 5. Người dùng nhập Tên Thuộc tính (ví dụ: "Kích cỡ") (Bắt buộc). \newline 6. Người dùng chọn Loại hiển thị (Display Type - vd: Radio, Select, Color) để xác định cách thuộc tính này hiển thị khi cấu hình/chọn sản phẩm. \newline 7. (Tùy chọn) Người dùng cấu hình các tùy chọn khác của Thuộc tính (ví dụ: Variants Creation Mode). \newline 8. Người dùng chọn "Lưu" (Save) Thuộc tính. \newline 9. Hệ thống kiểm tra hợp lệ (Tên không trống, Tên duy nhất - BR-UC2.5-1). \newline 10. Hệ thống lưu Thuộc tính mới. \newline 11. Hệ thống quay lại danh sách Thuộc tính hoặc mở chi tiết Thuộc tính vừa tạo. \newline 12. Người dùng chọn Thuộc tính vừa tạo (hoặc một thuộc tính đã có). \newline 13. Trong form chi tiết của Thuộc tính, Người dùng chọn tab/mục "Attribute Values". \newline 14. Người dùng chọn "Add a line" hoặc "Create" để thêm Giá trị mới. \newline 15. Hệ thống hiển thị dòng/form để nhập Giá trị. \newline 16. Người dùng nhập Tên Giá trị (ví dụ: "S", "M", "L") (Bắt buộc). \newline 17. (Tùy chọn) Nếu Loại hiển thị là Color, Người dùng chọn màu tương ứng. \newline 18. Người dùng lặp lại bước 14-17 để thêm các Giá trị khác cho Thuộc tính này. \newline 19. Người dùng chọn "Lưu" (Save) trên form Thuộc tính để lưu tất cả các Giá trị vừa thêm/sửa. \newline 20. Hệ thống kiểm tra hợp lệ (Tên Giá trị không trống, duy nhất trong thuộc tính - BR-UC2.5-2). \newline 21. Hệ thống lưu các Giá trị mới/đã sửa. \newline 22. Hệ thống hiển thị thông báo thành công. \newline 23. Hệ thống ghi nhận hoạt động. \\
+\hline
+Alternative Flow & \textbf{2a. Sửa Thuộc tính:} Tương tự luồng sửa các đối tượng khác (Chọn -> Sửa -> Lưu). \newline \textbf{2b. Xóa Thuộc tính:} Tương tự luồng xóa (Chọn -> Xóa -> Xác nhận -> Kiểm tra sử dụng -> Xóa/Báo lỗi). \newline \textbf{13a. Sửa Giá trị:} Tương tự luồng sửa (Chọn Giá trị -> Sửa -> Lưu). \newline \textbf{13b. Xóa Giá trị:} Tương tự luồng xóa (Chọn Giá trị -> Xóa -> Xác nhận -> Kiểm tra sử dụng -> Xóa/Báo lỗi). \newline \textbf{2c. Tìm kiếm/Lọc Thuộc tính/Giá trị:} Sử dụng các công cụ tìm kiếm/lọc chuẩn của hệ thống. \\
+\hline
+Exception Flow & \textbf{9a/20a. Lỗi Xác thực Dữ liệu (Tạo/Sửa):} \newline    1. Hệ thống phát hiện Tên Thuộc tính/Giá trị bị trống hoặc trùng lặp. \newline    2. Hệ thống báo lỗi cụ thể. \newline    3. Hệ thống giữ nguyên form để sửa lại. \newline \textbf{Xóa bị chặn (BR-UC2.5-3, BR-UC2.5-4):} \newline    1. Người dùng cố gắng xóa Thuộc tính hoặc Giá trị đang được sử dụng bởi ít nhất một biến thể sản phẩm. \newline    2. Hệ thống báo lỗi, giải thích không thể xóa. \newline    3. Use Case xóa kết thúc thất bại. \newline \textbf{Lỗi Hệ thống khi Lưu/Cập nhật/Xóa:} \newline    1. Hệ thống gặp sự cố kỹ thuật. \newline    2. Hệ thống báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.5-1:} Tên Thuộc tính (Attribute Name) phải là duy nhất trong hệ thống. \newline - \textbf{BR-UC2.5-2:} Tên Giá trị (Value Name) phải là duy nhất trong phạm vi một Thuộc tính cụ thể (ví dụ: Thuộc tính "Kích cỡ" không thể có hai giá trị cùng tên là "S"). \newline - \textbf{BR-UC2.5-3:} Một Thuộc tính không thể bị xóa nếu nó đang được sử dụng để tạo biến thể cho ít nhất một sản phẩm. \newline - \textbf{BR-UC2.5-4:} Một Giá trị không thể bị xóa nếu nó đang được sử dụng bởi ít nhất một biến thể sản phẩm. \newline - \textbf{BR-UC2.5-5:} Loại hiển thị (Display Type) ảnh hưởng đến cách người dùng chọn giá trị khi cấu hình sản phẩm hoặc khi khách hàng đặt hàng (nếu áp dụng cho eCommerce). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.5-1 (Usability):} Giao diện quản lý Thuộc tính và Giá trị cần rõ ràng, dễ phân biệt giữa hai cấp. Việc thêm/sửa/xóa giá trị trong ngữ cảnh của thuộc tính phải thuận tiện. \newline - \textbf{NFR-UC2.5-2 (Performance):} Thời gian tải danh sách thuộc tính/giá trị (< 100) và lưu thay đổi phải dưới 3 giây. \newline - \textbf{NFR-UC2.5-3 (Consistency):} Dữ liệu thuộc tính/giá trị phải nhất quán và sẵn sàng để sử dụng ngay trong chức năng cấu hình biến thể sản phẩm (FR-MD02-06). \newline - \textbf{NFR-UC2.5-4 (Security):} Cần phân quyền rõ ràng cho việc ai được phép quản lý Thuộc tính/Giá trị (thường là quản lý cấp cao hoặc admin). \\
+\hline
+
+\end{longtable}
+
+
+\subsubsection{Use Case UC-MD02-06: Cấu hình Biến thể Sản phẩm}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-06: Cấu hình Biến thể Sản phẩm} \label{tab:uc_md02_06} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Cấu hình Biến thể Sản phẩm \\
+\hline
+Use Case ID & UC-MD02-06 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng áp dụng các Thuộc tính và Giá trị đã định nghĩa (từ FR-MD02-05) vào một sản phẩm gốc (template) để hệ thống tự động tạo ra các sản phẩm con (biến thể - variants). Cho phép cấu hình giá bán khác nhau hoặc phụ thu cho từng biến thể cụ thể. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have (nếu nhà hàng có sản phẩm với nhiều lựa chọn như size, loại...) \\
+\hline
+Trigger & Cần quản lý các phiên bản khác nhau của cùng một món ăn/đồ uống với giá cả hoặc đặc tính khác nhau (ví dụ: Cà phê size S/L, Pizza đế dày/mỏng). \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền quản lý sản phẩm. \newline - Sản phẩm gốc (Product Template) đã được tạo (FR-MD02-01). \newline - Các Thuộc tính (Attributes) và Giá trị (Values) cần thiết đã được định nghĩa (FR-MD02-05). \\
+\hline
+Post-Condition & - Sản phẩm gốc được liên kết với các Thuộc tính và Giá trị đã chọn. \newline - Các bản ghi Sản phẩm Biến thể (Product Variants) tương ứng với tổ hợp các Giá trị được chọn đã được hệ thống tạo ra. \newline - (Tùy chọn) Mỗi biến thể có thể có giá bán riêng hoặc giá trị phụ thu được cấu hình. \newline - Khi sản phẩm gốc được chọn trên POS hoặc kênh bán hàng khác, hệ thống sẽ yêu cầu người dùng chọn các giá trị thuộc tính để xác định biến thể cụ thể. \newline - Hệ thống ghi nhận hoạt động. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-01 tìm và mở Form chi tiết của Sản phẩm gốc (Product Template) muốn cấu hình biến thể. \newline 2. US-01 chọn hành động "Sửa" (Edit). \newline 3. US-01 chuyển đến tab "Variants" (Biến thể). \newline 4. Trong phần "Attributes", US-01 chọn "Add a line". \newline 5. US-01 chọn một Thuộc tính (đã tạo ở FR-MD02-05) từ danh sách thả xuống (ví dụ: "Kích cỡ"). \newline 6. Trong cột "Values" tương ứng với Thuộc tính vừa thêm, US-01 chọn (các) Giá trị sẽ áp dụng cho sản phẩm này (ví dụ: tick chọn "S", "M", "L"). \newline 7. US-01 lặp lại bước 4-6 để thêm các Thuộc tính và Giá trị khác nếu cần (ví dụ: thêm thuộc tính "Đế bánh" với giá trị "Dày", "Mỏng"). \newline 8. US-01 chọn hành động "Lưu" (Save) sản phẩm gốc. \newline 9. Hệ thống tự động tạo ra các bản ghi Sản phẩm Biến thể (Product Variant) tương ứng với mọi tổ hợp có thể có của các Giá trị đã chọn (ví dụ: Sản phẩm "Pizza-Size:S, Đế:Dày", "Pizza-Size:S, Đế:Mỏng", "Pizza-Size:M, Đế:Dày"...). Số lượng biến thể được tạo sẽ hiển thị trên form sản phẩm gốc (ví dụ: nút "X Variants"). \newline 10. (Tùy chọn - Cấu hình giá) US-01 nhấp vào nút "X Variants" để xem danh sách các biến thể vừa tạo. \newline 11. US-01 chọn một biến thể cụ thể để mở form chi tiết của biến thể đó. \newline 12. US-01 chọn "Edit". \newline 13. US-01 nhập Giá trị phụ thu (Attribute Price Extra) cho các giá trị thuộc tính của biến thể này HOẶC đặt một Giá bán (Sales Price) riêng cho biến thể này (tùy cách quản lý giá). \newline 14. US-01 chọn "Save" cho biến thể. \newline 15. US-01 lặp lại bước 11-14 cho các biến thể khác cần đặt giá riêng/phụ thu. \newline 16. Hệ thống ghi nhận hoạt động. \\
+\hline
+Alternative Flow & \textbf{9a. Cấu hình chế độ tạo biến thể:} \newline    1. Trước khi lưu (bước 8), US-01 có thể chọn "Variants Creation Mode" (ví dụ: Instantly, Dynamically, Never) cho từng thuộc tính để kiểm soát cách biến thể được tạo (mặc định thường là Instantly). \newline \textbf{13a. Cấu hình giá bằng cách thêm giá trị vào Giá bán gốc:} \newline    1. Thay vì mở từng biến thể, trên form Sản phẩm gốc (tab Variants), US-01 có thể trực tiếp nhập giá trị "Value Price Extra" vào từng dòng Giá trị của Thuộc tính. \newline    2. Hệ thống sẽ tự động cộng giá trị này vào giá bán gốc khi biến thể tương ứng được chọn. \\
+\hline
+Exception Flow & \textbf{5a/6a. Thuộc tính/Giá trị không tồn tại:} \newline    1. Người dùng cố gắng tìm/chọn một Thuộc tính hoặc Giá trị chưa được tạo ở FR-MD02-05. \newline    2. Hệ thống không hiển thị lựa chọn đó. Người dùng cần quay lại FR-MD02-05 để tạo trước. \newline \textbf{8a. Lỗi khi lưu cấu hình thuộc tính:} \newline    1. Hệ thống gặp lỗi khi cố gắng lưu liên kết Thuộc tính/Giá trị vào sản phẩm gốc. \newline    2. Hệ thống báo lỗi. Use Case dừng lại. \newline \textbf{9b. Lỗi khi tạo biến thể:} \newline    1. Hệ thống gặp lỗi khi tự động tạo các bản ghi biến thể (ví dụ: do giới hạn số lượng, lỗi cơ sở dữ liệu). \newline    2. Hệ thống báo lỗi. Các biến thể có thể không được tạo hoặc tạo không đầy đủ. \newline \textbf{14a. Lỗi khi lưu giá biến thể:} \newline    1. Hệ thống gặp lỗi khi lưu giá riêng/phụ thu cho biến thể. \newline    2. Hệ thống báo lỗi. Giá của biến thể có thể không được cập nhật. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.6-1:} Một Sản phẩm gốc (Template) chỉ có thể được cấu hình biến thể nếu nó chưa có giao dịch chứng khoán nào (nếu là loại Stockable). \newline - \textbf{BR-UC2.6-2:} Số lượng Sản phẩm Biến thể (Variant) được tạo ra bằng tích số lượng Giá trị được chọn cho mỗi Thuộc tính áp dụng cho sản phẩm gốc. \newline - \textbf{BR-UC2.6-3:} Mỗi Sản phẩm Biến thể là một bản ghi sản phẩm riêng biệt trong hệ thống (product.product), kế thừa các thuộc tính chung từ Sản phẩm gốc (product.template) nhưng có thể có giá, mã SKU, tồn kho riêng. \newline - \textbf{BR-UC2.6-4:} Nếu giá bán không được cấu hình riêng cho biến thể, biến thể đó sẽ sử dụng giá bán của sản phẩm gốc cộng với tổng các giá trị "Value Price Extra" của các giá trị thuộc tính tạo nên nó. \newline - \textbf{BR-UC2.6-5:} Khi một sản phẩm có biến thể được chọn trên POS, hệ thống phải hiển thị giao diện popup yêu cầu người dùng chọn các Giá trị thuộc tính tương ứng trước khi thêm vào đơn hàng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.6-1 (Usability):} Giao diện thêm Thuộc tính/Giá trị vào sản phẩm phải trực quan. Việc cấu hình giá cho biến thể cần rõ ràng (phân biệt giá riêng và phụ thu). Nút xem danh sách biến thể phải dễ thấy. \newline - \textbf{NFR-UC2.6-2 (Performance):} Thời gian hệ thống tự động tạo biến thể (ví dụ: < 50 biến thể) phải nhanh chóng (< 5 giây). Thời gian lưu sản phẩm gốc sau khi cấu hình biến thể phải hợp lý. \newline - \textbf{NFR-UC2.6-3 (Data Integrity):} Liên kết giữa sản phẩm gốc, thuộc tính, giá trị và các biến thể được tạo ra phải chính xác. Giá của biến thể phải được tính toán đúng theo cấu hình. \newline - \textbf{NFR-UC2.6-4 (Scalability):} Hệ thống cần xử lý được số lượng lớn biến thể (ví dụ: hàng trăm) mà không làm giảm hiệu năng đáng kể khi quản lý hoặc bán hàng (cân nhắc kỹ khi thiết kế nhiều thuộc tính/giá trị). \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD02-07: Thiết lập Loại Sản phẩm}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-07: Thiết lập Loại Sản phẩm} \label{tab:uc_md02_07} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Thiết lập Loại Sản phẩm \\
+\hline
+Use Case ID & UC-MD02-07 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng xác định bản chất của một sản phẩm bằng cách chọn loại phù hợp (Tiêu hao - Consumable, Lưu kho - Stockable, Dịch vụ - Service). Lựa chọn này quyết định cách hệ thống, đặc biệt là module Inventory, sẽ quản lý tồn kho cho sản phẩm đó. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khi tạo một sản phẩm mới (FR-MD02-01), cần phải xác định loại của nó. \newline - Khi cần thay đổi cách quản lý tồn kho cho một sản phẩm hiện có (ví dụ: từ không theo dõi sang theo dõi). \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền quản lý sản phẩm. \newline - US-01 đang ở trong form tạo mới hoặc chỉnh sửa của một sản phẩm. \newline - Hệ thống đã có sẵn các loại sản phẩm cơ bản: Consumable, Stockable, Service. \\
+\hline
+Post-Condition & - Bản ghi sản phẩm được lưu với trường "Product Type" được đặt thành giá trị đã chọn. \newline - Hành vi của hệ thống đối với sản phẩm này trong các quy trình liên quan đến tồn kho (mua hàng, bán hàng, kiểm kê, điều chuyển) sẽ tuân theo logic của loại sản phẩm đã chọn (ví dụ: chỉ sản phẩm "Stockable" mới thực sự cập nhật số lượng tồn kho). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Khi tạo mới hoặc sửa) & 1. US-01 đang ở trên Form Sản phẩm (chế độ Tạo mới hoặc Sửa). \newline 2. US-01 tìm đến trường "Loại Sản phẩm" (Product Type) (thường nằm ở tab General Information hoặc Inventory). \newline 3. US-01 nhấp vào danh sách thả xuống và chọn một trong các loại: \newline    - \textbf{Consumable (Tiêu hao):} Cho các sản phẩm không cần theo dõi số lượng tồn kho chi tiết (ví dụ: hầu hết món ăn, đồ uống pha chế, gia vị...). Hệ thống giả định luôn có sẵn. \newline    - \textbf{Stockable (Lưu kho):} Cho các sản phẩm cần quản lý số lượng tồn kho chính xác (ví dụ: Rượu chai, bia lon, nước đóng chai, nguyên liệu thô nếu quản lý theo BoM...). Hệ thống sẽ tạo bút toán kho khi có giao dịch. \newline    - \textbf{Service (Dịch vụ):} Cho các sản phẩm là dịch vụ, không liên quan đến tồn kho vật lý (ví dụ: Phí phục vụ, phí giao hàng...). \newline 4. US-01 tiếp tục nhập/chỉnh sửa các thông tin khác của sản phẩm. \newline 5. US-01 chọn hành động "Lưu" (Save) cho toàn bộ form sản phẩm. \newline 6. Hệ thống kiểm tra các ràng buộc (nếu có, xem Exception Flow) và các quy tắc xác thực chung của form sản phẩm. \newline 7. Hệ thống lưu bản ghi sản phẩm với Loại Sản phẩm đã chọn. \newline 8. Hệ thống hiển thị thông báo lưu thành công. \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể cho hành động chọn loại sản phẩm đơn thuần này. Việc thay đổi loại sản phẩm hiện có có thể dẫn đến Exception Flow. \\
+\hline
+Exception Flow & \textbf{6a. Không thể thay đổi Loại Sản phẩm:} \newline    1. US-01 cố gắng thay đổi Loại Sản phẩm của một sản phẩm đã có giao dịch tồn kho (ví dụ: từ Stockable sang Consumable khi đang có số lượng tồn kho khác 0, hoặc ngược lại). \newline    2. Hệ thống chặn hành động Lưu và hiển thị thông báo lỗi giải thích rằng không thể thay đổi loại sản phẩm do đã có bút toán kho liên quan. \newline    3. US-01 phải hoàn tác việc thay đổi Loại Sản phẩm hoặc xử lý các vấn đề tồn kho trước khi có thể lưu. Use Case quay lại bước 3 hoặc kết thúc thất bại. \newline \textbf{7a. Lỗi Hệ thống Chung khi Lưu:} \newline    1. Hệ thống gặp sự cố kỹ thuật không liên quan trực tiếp đến việc chọn loại sản phẩm khi cố gắng lưu form. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.7-1:} Mọi sản phẩm trong hệ thống phải thuộc một trong ba loại: Consumable, Stockable, hoặc Service. Đây là trường bắt buộc khi tạo sản phẩm. \newline - \textbf{BR-UC2.7-2 (Consumable):} Sản phẩm loại 'Consumable' không được theo dõi tồn kho định lượng. Hệ thống không kiểm tra số lượng có sẵn khi bán hoặc sử dụng. \newline - \textbf{BR-UC2.7-3 (Stockable):} Sản phẩm loại 'Stockable' được quản lý tồn kho chặt chẽ. Hệ thống sẽ tạo các bút toán kho (stock moves) để ghi nhận việc nhập, xuất, điều chuyển và cập nhật số lượng tồn kho (quantity on hand). Việc bán hàng có thể bị chặn nếu không đủ tồn kho (tùy cấu hình). \newline - \textbf{BR-UC2.7-4 (Restriction):} Việc thay đổi Loại Sản phẩm (đặc biệt là giữa Stockable và các loại khác) của một sản phẩm đã phát sinh giao dịch tồn kho thường bị hạn chế hoặc không được phép để đảm bảo tính toàn vẹn dữ liệu kho. \newline - \textbf{BR-UC2.7-5 (Service):} Sản phẩm loại 'Service' không bao giờ được quản lý tồn kho. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.7-1 (Usability):} Trường chọn Loại Sản phẩm phải dễ dàng tìm thấy trên form. Danh sách lựa chọn cần rõ ràng. Có thể có tooltip giải thích ngắn gọn ý nghĩa của từng loại. \newline - \textbf{NFR-UC2.7-2 (Data Integrity):} Loại sản phẩm được chọn phải được lưu chính xác và được các module khác (Inventory, Sales, Purchase, POS) tôn trọng để xử lý logic phù hợp. \newline - \textbf{NFR-UC2.7-3 (Clarity):} Thông báo lỗi khi không thể thay đổi loại sản phẩm (BR-UC2.7-4) cần phải rõ ràng, giải thích lý do tại sao không thể thực hiện. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD02-08: Cấu hình Hiển thị trên POS}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-08: Cấu hình Hiển thị trên POS} \label{tab:uc_md02_08} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Cấu hình Hiển thị trên POS \\
+\hline
+Use Case ID & UC-MD02-08 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng kiểm soát việc một sản phẩm có xuất hiện trên giao diện Point of Sale (POS) hay không và xác định sản phẩm đó thuộc về (các) danh mục nào trên màn hình chọn món của POS. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Cần đưa một sản phẩm mới tạo (hoặc sản phẩm cũ) lên bán trên POS. \newline - Cần tạm thời hoặc vĩnh viễn ẩn một sản phẩm khỏi giao diện POS mà không cần lưu trữ (Archive) sản phẩm đó. \newline - Cần thay đổi cách phân loại sản phẩm trên màn hình POS (ví dụ: chuyển món từ Khai vị sang Món chính). \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền quản lý sản phẩm và/hoặc cấu hình POS. \newline - Sản phẩm cần cấu hình đã tồn tại trong hệ thống. \newline - Các Danh mục Sản phẩm POS (POS Categories) cần thiết đã được tạo (FR-MD02-04). \\
+\hline
+Post-Condition & - Trạng thái của trường "Available in POS" (hoặc tương đương) của sản phẩm được cập nhật (True/False). \newline - Liên kết giữa sản phẩm và các Danh mục POS được cập nhật (thêm/xóa). \newline - Thay đổi này sẽ ảnh hưởng đến việc sản phẩm có hiển thị và được nhóm như thế nào trên giao diện POS sau khi POS client đồng bộ dữ liệu cấu hình. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-01 tìm và mở Form chi tiết của Sản phẩm cần cấu hình ở chế độ Sửa (Edit). \newline 2. US-01 điều hướng đến tab chứa thông tin cấu hình POS (thường là tab "Sales" hoặc có một tab/phần riêng "Point of Sale"). \newline 3. US-01 tìm đến ô kiểm "Available in POS" (hoặc tên tương tự). \newline 4. US-01 đánh dấu (tick) vào ô này nếu muốn sản phẩm hiển thị trên POS, hoặc bỏ đánh dấu nếu muốn ẩn. \newline 5. US-01 tìm đến trường "POS Category" (hoặc "Point of Sale Category"). \newline 6. US-01 nhấp vào trường này. Hệ thống hiển thị danh sách các Danh mục POS đã tạo (FR-MD02-04). \newline 7. US-01 chọn một hoặc nhiều Danh mục POS mà sản phẩm này sẽ thuộc về. (thường hỗ trợ chọn một danh mục chính, nhưng có thể tùy chỉnh hoặc dùng trường khác cho nhiều danh mục). \newline 8. US-01 chọn hành động "Lưu" (Save) cho form sản phẩm. \newline 9. Hệ thống lưu lại trạng thái "Available in POS" và (các) Danh mục POS đã chọn cho sản phẩm. \newline 10. Hệ thống hiển thị thông báo cập nhật thành công. \\
+\hline
+Alternative Flow & \textbf{7a. Bỏ chọn Danh mục POS:} \newline    1. Nếu muốn loại bỏ sản phẩm khỏi một danh mục, US-01 nhấp vào biểu tượng xóa (dấu 'x') bên cạnh tên danh mục đã chọn trong trường "POS Category". \newline \textbf{7b. Sử dụng trường khác cho nhiều danh mục (nếu có):} \newline    1. Nếu hệ thống được tùy chỉnh để hỗ trợ gán vào nhiều danh mục thông qua một trường khác (ví dụ: trường Many2many), US-01 sẽ thao tác trên trường đó để thêm/bớt danh mục. \\
+\hline
+Exception Flow & \textbf{6a. Không có Danh mục POS nào được tạo:} \newline    1. Nếu chưa có Danh mục POS nào được tạo (FR-MD02-04), danh sách ở bước 6 sẽ trống. \newline    2. US-01 không thể gán danh mục. Hệ thống có thể báo lỗi hoặc yêu cầu tạo danh mục trước nếu việc gán danh mục là bắt buộc để hiển thị trên POS (theo BR-UC2.8-2). \newline \textbf{9a. Lỗi Hệ thống khi Lưu:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi cố gắng lưu dữ liệu cấu hình POS cho sản phẩm. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.8-1:} Một sản phẩm chỉ hiển thị trên giao diện POS nếu trường "Available in POS" được đánh dấu (True). \newline - \textbf{BR-UC2.8-2:} Một sản phẩm (đã đánh dấu "Available in POS") phải được gán vào ít nhất một Danh mục POS (POS Category) thì mới xuất hiện trong danh mục đó trên màn hình POS. Nếu không được gán vào danh mục nào, nó có thể không hiển thị hoặc hiển thị ở một khu vực mặc định (tùy cấu hình POS). \newline - \textbf{BR-UC2.8-3:} Các thay đổi trong cấu hình này (Available in POS, POS Category) yêu cầu phiên POS hiện tại phải được đóng và mở lại hoặc POS client phải thực hiện đồng bộ dữ liệu cấu hình để áp dụng. \newline - \textbf{BR-UC2.8-4:} Danh mục POS (POS Category) dùng để tổ chức hiển thị trên POS, khác với Danh mục Sản phẩm (Product Category) dùng cho quản lý nội bộ và báo cáo trong backend. \newline - \textbf{BR-UC2.8-5:} Nếu một sản phẩm có biến thể (FR-MD02-06), việc cấu hình "Available in POS" và "POS Category" thường được thực hiện ở cấp Sản phẩm gốc (Template). Tất cả các biến thể sẽ kế thừa cấu hình này. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.8-1 (Usability):} Các trường cấu hình ("Available in POS", "POS Category") phải dễ dàng tìm thấy trong form sản phẩm. Việc chọn danh mục POS phải thuận tiện (ví dụ: danh sách thả xuống có tìm kiếm). \newline - \textbf{NFR-UC2.8-2 (Performance):} Việc lưu thay đổi cấu hình POS cho sản phẩm phải nhanh chóng (dưới 2 giây). \newline - \textbf{NFR-UC2.8-3 (Integration/Consistency):} Dữ liệu cấu hình phải được đồng bộ một cách đáng tin cậy xuống POS client. Trạng thái hiển thị và phân loại sản phẩm trên POS phải khớp với cấu hình backend sau khi đồng bộ. \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD02-09: Quản lý Hình ảnh Sản phẩm}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-09: Quản lý Hình ảnh Sản phẩm} \label{tab:uc_md02_09} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Quản lý Hình ảnh Sản phẩm \\
+\hline
+Use Case ID & UC-MD02-09 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng tải lên, thay thế hoặc xóa bỏ hình ảnh đại diện cho một sản phẩm (món ăn, đồ uống). Hình ảnh này có thể được hiển thị trên giao diện POS, trang đặt hàng online, hoặc các tài liệu bán hàng khác để giúp khách hàng và nhân viên nhận diện sản phẩm dễ dàng hơn. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & - Cần thêm ảnh cho một sản phẩm mới tạo. \newline - Cần cập nhật ảnh của một sản phẩm hiện có bằng ảnh mới đẹp hơn/chính xác hơn. \newline - Cần xóa ảnh hiện tại của một sản phẩm. \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền quản lý sản phẩm. \newline - Sản phẩm cần quản lý ảnh đã tồn tại trong hệ thống. \newline - US-01 có sẵn tệp hình ảnh cần tải lên trên thiết bị của mình, với định dạng và kích thước phù hợp (nếu có quy định). \\
+\hline
+Post-Condition & - Bản ghi sản phẩm được cập nhật với hình ảnh mới (hoặc không có hình ảnh nếu thực hiện xóa). \newline - Hình ảnh mới sẽ được hiển thị trên form sản phẩm và các giao diện khác (POS, Website - nếu có) sau khi hệ thống đồng bộ/làm mới. \newline - Hệ thống ghi nhận hoạt động. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Tải lên/Thay thế ảnh) & 1. US-01 tìm và mở Form chi tiết của Sản phẩm cần quản lý ảnh ở chế độ Sửa (Edit). \newline 2. US-01 xác định vị trí hiển thị hình ảnh sản phẩm (thường là một khung ảnh ở góc trên). \newline 3. US-01 nhấp vào biểu tượng chỉnh sửa (hình bút chì) hoặc vào chính khung ảnh đó. \newline 4. Hệ thống mở hộp thoại chọn tệp của hệ điều hành. \newline 5. US-01 duyệt đến thư mục chứa ảnh, chọn tệp hình ảnh mong muốn và nhấn "Open" hoặc "Chọn". \newline 6. Hệ thống kiểm tra sơ bộ định dạng/kích thước tệp (nếu có cấu hình client-side). \newline 7. Hệ thống tải tệp lên máy chủ và hiển thị ảnh xem trước trong khung ảnh trên form sản phẩm. \newline 8. US-01 chọn hành động "Lưu" (Save) cho form sản phẩm. \newline 9. Hệ thống lưu trữ hình ảnh mới và liên kết nó với bản ghi sản phẩm. \newline 10. Hệ thống hiển thị thông báo cập nhật thành công. \\
+\hline
+Alternative Flow & \textbf{3a. Xóa ảnh hiện có:} \newline    1. Nếu sản phẩm đang có ảnh, US-01 nhấp vào biểu tượng xóa ảnh (hình thùng rác hoặc dấu 'x') bên cạnh hoặc trên khung ảnh. \newline    2. Hệ thống (có thể) yêu cầu xác nhận xóa ảnh. US-01 xác nhận. \newline    3. Hệ thống xóa liên kết ảnh khỏi sản phẩm và hiển thị khung ảnh trống. \newline    4. Use Case tiếp tục từ bước 8 (Lưu sản phẩm). \\
+\hline
+Exception Flow & \textbf{6a. Định dạng tệp không được hỗ trợ:} \newline    1. Hệ thống phát hiện tệp được chọn không thuộc các định dạng ảnh được phép (ví dụ: không phải JPG, PNG, GIF). \newline    2. Hệ thống hiển thị thông báo lỗi "Định dạng tệp không hợp lệ. Vui lòng chọn tệp JPG, PNG, GIF...". \newline    3. Use Case quay lại bước 5 để chọn lại tệp. \newline \textbf{6b. Kích thước tệp quá lớn:} \newline    1. Hệ thống phát hiện kích thước tệp vượt quá giới hạn cho phép (nếu được cấu hình). \newline    2. Hệ thống hiển thị thông báo lỗi "Kích thước tệp quá lớn. Vui lòng chọn tệp nhỏ hơn X MB.". \newline    3. Use Case quay lại bước 5 để chọn lại tệp. \newline \textbf{7a. Lỗi tải tệp lên máy chủ:} \newline    1. Xảy ra lỗi trong quá trình truyền tệp lên máy chủ (ví dụ: mất kết nối mạng, lỗi máy chủ). \newline    2. Hệ thống hiển thị thông báo lỗi tải tệp. \newline    3. Use Case có thể quay lại bước 5 hoặc kết thúc thất bại. \newline \textbf{9a. Lỗi Hệ thống khi Lưu:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi cố gắng lưu sản phẩm (bao gồm cả việc lưu ảnh). \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.9-1:} Hệ thống chỉ chấp nhận các định dạng tệp hình ảnh phổ biến (ví dụ: JPEG/JPG, PNG, GIF). Cần xác định danh sách cụ thể được hỗ trợ. \newline - \textbf{BR-UC2.9-2:} Nên có giới hạn về kích thước tệp tối đa cho mỗi hình ảnh tải lên (ví dụ: 2MB, 5MB) để tránh làm đầy bộ nhớ máy chủ và ảnh hưởng hiệu năng tải trang/ứng dụng. Giới hạn này cần được cấu hình. \newline - \textbf{BR-UC2.9-3:} Hình ảnh được tải lên ở cấp Sản phẩm gốc (Product Template). Các Sản phẩm Biến thể (Product Variant) sẽ mặc định sử dụng ảnh này, trừ khi cho phép tải ảnh riêng cho từng biến thể. \newline - \textbf{BR-UC2.9-4:} Hình ảnh sản phẩm cần được đồng bộ xuống POS client để hiển thị trên màn hình chọn món (nếu giao diện POS hỗ trợ hiển thị ảnh). Quá trình đồng bộ có thể yêu cầu khởi động lại phiên POS. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.9-1 (Usability):} Quá trình tải lên/thay đổi/xóa ảnh phải trực quan và đơn giản. Nên có phản hồi rõ ràng khi tải lên thành công hoặc thất bại. \newline - \textbf{NFR-UC2.9-2 (Performance):} Thời gian tải lên và hiển thị ảnh xem trước phải hợp lý, phụ thuộc vào kích thước tệp và tốc độ mạng. Thời gian lưu sản phẩm không bị ảnh hưởng quá nhiều bởi việc có ảnh hay không. \newline - \textbf{NFR-UC2.9-3 (Storage):} Cần xem xét dung lượng lưu trữ cần thiết trên máy chủ để chứa hình ảnh sản phẩm, đặc biệt nếu có nhiều sản phẩm và ảnh chất lượng cao. Có thể cần cơ chế tối ưu hóa ảnh tự động. \\
+\hline
+
+\end{longtable}
+
+
+\subsubsection{Use Case UC-MD02-10: Cấu hình Định tuyến In Bếp / Hiển thị KDS theo Danh mục Sản phẩm}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-10: Cấu hình Định tuyến In Bếp / Hiển thị KDS theo Danh mục Sản phẩm} \label{tab:uc_md02_10} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Cấu hình Định tuyến In Bếp / Hiển thị KDS theo Danh mục Sản phẩm \\
+\hline
+Use Case ID & UC-MD02-10 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng thiết lập quy tắc để các món ăn/đồ uống thuộc các Danh mục Sản phẩm POS cụ thể (ví dụ: Khai vị, Đồ uống) sẽ tự động được gửi đến (in ra hoặc hiển thị trên) Máy in Bếp hoặc Màn hình Hiển thị Bếp (KDS) tương ứng khi nhân viên phục vụ gửi đơn hàng từ POS. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have (nếu có nhiều khu vực chuẩn bị hoặc nhiều máy in/KDS) \\
+\hline
+Trigger & - Cần phân chia việc chuẩn bị đơn hàng giữa các bộ phận khác nhau (ví dụ: bếp chính, quầy bar). \newline - Thiết lập một máy in bếp/KDS mới. \newline - Thay đổi luồng công việc trong bếp/bar. \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền quản trị cấu hình Point of Sale. \newline - Ít nhất một cấu hình Point of Sale đã tồn tại. \newline - Các thiết bị Máy in Bếp (Order Printer) hoặc Màn hình Hiển thị Bếp (KDS) đã được khai báo và kết nối với hệ thống (thường thông qua IoT Box - liên quan MD-09). \newline - Các Danh mục Sản phẩm POS (POS Categories) cần định tuyến đã được tạo (FR-MD02-04). \\
+\hline
+Post-Condition & - Quy tắc định tuyến (ánh xạ giữa Danh mục POS và Thiết bị In/Hiển thị) được lưu lại trong cấu hình POS. \newline - Khi một đơn hàng được gửi từ POS, các món (items) trong đơn hàng sẽ được tự động gửi đến đúng máy in/KDS dựa trên Danh mục POS của chúng và cấu hình định tuyến đã thiết lập. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-01 truy cập vào module Point of Sale và chọn mục Cấu hình (Configuration) > Point of Sale. \newline 2. US-01 chọn một cấu hình POS cụ thể (ví dụ: "Restaurant") để chỉnh sửa. \newline 3. US-01 tìm đến phần cấu hình "Connected Devices" (Thiết bị Kết nối) hoặc một mục tương tự liên quan đến máy in/hiển thị. \newline 4. US-01 tìm đến mục "Order Printers" (Máy in Đơn hàng) hoặc "Kitchen Display" (KDS). \newline 5. Hệ thống hiển thị danh sách các máy in/KDS đã được thêm vào cấu hình POS này. \newline 6. US-01 chọn một máy in/KDS cụ thể (ví dụ: "Kitchen Printer") để chỉnh sửa cấu hình định tuyến của nó. \newline 7. Hệ thống hiển thị các tùy chọn cho máy in/KDS đó, bao gồm trường "Printed Product Categories" (Danh mục Sản phẩm được In) hoặc tương tự. \newline 8. US-01 nhấp vào trường này để chỉnh sửa danh sách. \newline 9. Hệ thống hiển thị một danh sách đa lựa chọn (many2many) chứa tất cả các Danh mục Sản phẩm POS đã tạo (FR-MD02-04). \newline 10. US-01 chọn (tick) vào (các) danh mục mà mình muốn định tuyến đến máy in/KDS này (ví dụ: chọn "Appetizers", "Mains", "Desserts" cho "Kitchen Printer"). \newline 11. US-01 xác nhận lựa chọn danh mục. \newline 12. (Tùy chọn) US-01 lặp lại bước 6-11 cho các máy in/KDS khác (ví dụ: chọn "Drinks" cho "Bar Printer"). \newline 13. US-01 chọn hành động "Lưu" (Save) cho toàn bộ cấu hình POS. \newline 14. Hệ thống lưu lại các quy tắc định tuyến đã thiết lập. \newline 15. Hệ thống hiển thị thông báo lưu thành công. \newline 16. Hệ thống ghi nhận hoạt động. \\
+\hline
+Alternative Flow & \textbf{10a. Bỏ chọn danh mục:} \newline    1. Nếu muốn loại bỏ một danh mục khỏi định tuyến của máy in/KDS, US-01 bỏ tick chọn danh mục đó trong danh sách ở bước 10. \\
+\hline
+Exception Flow & \textbf{5a. Chưa có máy in/KDS nào được thêm vào POS:} \newline    1. Danh sách ở bước 5 trống. \newline    2. Hệ thống hiển thị thông báo yêu cầu thêm thiết bị máy in/KDS vào cấu hình POS trước (liên quan MD-09). \newline    3. Use Case không thể tiếp tục cho đến khi thiết bị được thêm. \newline \textbf{9a. Chưa có Danh mục POS nào được tạo:} \newline    1. Danh sách lựa chọn ở bước 9 trống. \newline    2. Hệ thống hiển thị thông báo yêu cầu tạo Danh mục Sản phẩm POS trước (FR-MD02-04). \newline    3. US-01 không thể gán danh mục cho máy in/KDS. \newline \textbf{14a. Lỗi Hệ thống khi Lưu:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi cố gắng lưu cấu hình POS. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.10-1:} Việc định tuyến đơn hàng đến máy in/KDS dựa trên Danh mục Sản phẩm POS (POS Category) của từng món trong đơn hàng. \newline - \textbf{BR-UC2.10-2:} Một Danh mục POS có thể được định tuyến đến một hoặc nhiều máy in/KDS (ví dụ: món khai vị có thể in ở bếp chính và trạm salad). \newline - \textbf{BR-UC2.10-3:} Nếu một sản phẩm thuộc Danh mục POS không được gán cho bất kỳ máy in/KDS nào trong cấu hình, thông tin của sản phẩm đó sẽ không được gửi đến bất kỳ máy in/KDS nào khi đặt hàng. \newline - \textbf{BR-UC2.10-4:} Các thay đổi về cấu hình định tuyến máy in/KDS yêu cầu phiên POS hiện tại phải được đóng và mở lại hoặc POS client phải thực hiện đồng bộ dữ liệu cấu hình để áp dụng. \newline - \textbf{BR-UC2.10-5:} Cấu hình này gắn liền với từng Cấu hình Point of Sale riêng biệt (nếu nhà hàng có nhiều điểm bán hàng với cấu hình khác nhau). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.10-1 (Usability):} Giao diện cấu hình định tuyến phải rõ ràng, cho phép dễ dàng chọn và gán nhiều danh mục cho mỗi thiết bị. \newline - \textbf{NFR-UC2.10-2 (Performance):} Việc lưu cấu hình POS phải nhanh chóng (dưới 3 giây). \newline - \textbf{NFR-UC2.10-3 (Integration):} Quy tắc định tuyến phải được hệ thống xử lý đơn hàng và IoT Box (hoặc dịch vụ in trực tiếp) diễn giải chính xác để gửi thông tin đến đúng thiết bị vật lý. \newline - \textbf{NFR-UC2.10-4 (Reliability):} Hệ thống phải đảm bảo việc gửi đơn hàng đến máy in/KDS là đáng tin cậy sau khi cấu hình đúng. \\
+\hline
+
+\end{longtable}
+
+
+\subsubsection{Use Case UC-MD02-11: Định nghĩa Sản phẩm Tùy chọn/Phụ thu}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD02-11: Định nghĩa Sản phẩm Tùy chọn/Phụ thu} \label{tab:uc_md02_11} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Định nghĩa Sản phẩm Tùy chọn/Phụ thu \\
+\hline
+Use Case ID & UC-MD02-11 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng tạo ra các bản ghi sản phẩm đặc biệt (ví dụ: "Thêm phô mai", "Sốt BBQ", "Trứng ốp la") với một mức giá cụ thể (phụ thu). Các sản phẩm này được thiết kế để sử dụng làm tùy chọn (modifiers) gắn liền với các món ăn chính trên giao diện POS, cho phép khách hàng thêm các thành phần/dịch vụ phụ và tính thêm phí tương ứng. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Should Have (Nếu nhà hàng có nhiều tùy chọn thêm món/phụ thu) \\
+\hline
+Trigger & - Cần cung cấp cho khách hàng khả năng thêm các thành phần phụ (ví dụ: thêm topping cho pizza, thêm trứng vào phở) và tính phí cho việc này. \newline - Cần định nghĩa các loại sốt, đồ ăn kèm có tính phí để nhân viên có thể chọn nhanh trên POS. \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền quản lý sản phẩm. \newline - Quy trình tạo sản phẩm cơ bản (FR-MD02-01) đã được hiểu rõ. \\
+\hline
+Post-Condition & - Một hoặc nhiều sản phẩm mới được tạo ra trong hệ thống, đại diện cho các tùy chọn/phụ thu. \newline - Các sản phẩm này có tên rõ ràng và giá bán tương ứng với mức phụ thu. \newline - Các sản phẩm này sẵn sàng để được liên kết với các sản phẩm chính thông qua cơ chế cấu hình tùy chọn/bổ trợ (modifiers) của POS (sẽ được định nghĩa ở module POS). \newline - Hệ thống ghi nhận hoạt động. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-01 thực hiện quy trình tạo sản phẩm mới tương tự như UC-MD02-01. \newline 2. Trong bước nhập thông tin (bước 4-11 của UC-MD02-01 Basic Flow): \newline    a. Tên sản phẩm: US-01 nhập tên mô tả rõ ràng đây là món thêm/tùy chọn (ví dụ: "Thêm Trứng", "Extra Cheese", "Sốt Cay"). \newline    b. Giá bán: US-01 nhập mức giá phụ thu cho tùy chọn này (ví dụ: 10,000 VNĐ cho "Thêm Trứng"). (Bắt buộc nếu muốn tính phí). \newline    c. Loại sản phẩm: US-01 thường chọn là "Consumable". \newline    d. Available in POS: US-01 có thể không cần đánh dấu "Available in POS" nếu sản phẩm này chỉ dùng làm modifier và không bán riêng lẻ. Nếu có bán riêng (ví dụ: bán riêng sốt), thì đánh dấu và gán Danh mục POS phù hợp. (Quyết định này tùy thuộc vào cách nhà hàng muốn quản lý). \newline    e. (Tùy chọn) US-01 có thể tạo một Danh mục sản phẩm nội bộ riêng (ví dụ: "POS Modifiers", "Extras") để dễ quản lý các sản phẩm loại này trong backend. \newline 3. US-01 Lưu sản phẩm. \newline 4. Hệ thống lưu sản phẩm như một sản phẩm bình thường nhưng với mục đích sử dụng đặc biệt đã được người quản lý xác định. \newline 5. Hệ thống hiển thị thông báo tạo thành công. \newline 6. Hệ thống ghi nhận hoạt động. \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể ngoài các luồng của UC-MD02-01. \\
+\hline
+Exception Flow & Các luồng ngoại lệ tương tự như của UC-MD02-01 (Lỗi xác thực, Lỗi hệ thống khi lưu). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC2.11-1:} Tên sản phẩm tùy chọn/phụ thu nên rõ ràng, dễ hiểu cho cả nhân viên và có thể cả khách hàng (nếu hiển thị trên KDS/hóa đơn). \newline - \textbf{BR-UC2.11-2:} Giá bán của sản phẩm này chính là mức phí sẽ được cộng thêm vào đơn hàng khi tùy chọn này được chọn trên POS. Nếu giá là 0, tùy chọn sẽ không làm tăng giá trị đơn hàng. \newline - \textbf{BR-UC2.11-3:} Các sản phẩm này phải được tạo trước khi có thể cấu hình chúng làm tùy chọn (modifier) cho các sản phẩm chính trong cài đặt POS. \newline - \textbf{BR-UC2.11-4:} Việc sản phẩm tùy chọn có cần hiển thị trực tiếp trên POS ("Available in POS") hay không phụ thuộc vào việc nó có được bán như một sản phẩm độc lập hay chỉ là món thêm kèm. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC2.11-1 (Clarity):} Cần có quy ước đặt tên hoặc phân loại (ví dụ: dùng danh mục nội bộ) để phân biệt rõ ràng các sản phẩm tùy chọn/phụ thu với các sản phẩm bán chính. \newline - \textbf{NFR-UC2.11-2 (Integration):} Các sản phẩm này phải có thể được chọn và liên kết dễ dàng trong phần cấu hình tùy chọn (modifiers) của module POS. \newline - (Các NFR khác về Usability, Performance, Data Integrity tương tự như UC-MD02-01). \\
+\hline
+
+\end{longtable}

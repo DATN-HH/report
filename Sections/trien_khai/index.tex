@@ -1,0 +1,107 @@
+\section{TRIỂN KHAI HỆ THỐNG}
+\subsection{Triền khai Front-end}
+Như đã được đề cập, nhóm triển khai hệ thống lên nền tảng Vercel nhằm tối ưu chi phí và tận dụng những lợi ích liên quan đến việc thống kê trang web. Việc triển khai lên Vercel có thể được thực hiện qua các bước sau:
+\begin{itemize}
+    \item Đăng ký và tạo tài khoản Vercel: Đầu tiên, nhóm sẽ đăng ký một tài khoản trên Vercel. Quá trình này thường đơn giản và chỉ đòi hỏi thông tin cơ bản như địa chỉ email và mật khẩu hoặc có thể sử dụng Github làm tài khoản.
+    \item Tạo dự án trên Vercel: Sau khi có tài khoản, nhóm sẽ tạo một dự án mới trên Vercel. Điều này thường liên quan đến việc cung cấp tên dự án và liên kết đến kho lưu trữ mã nguồn, chẳng hạn như GitHub hoặc GitLab.
+    \item Cấu hình dự án: Trong quá trình tạo dự án, nhóm sẽ phải cấu hình các thông số cho dự án trên Vercel. Điều này có thể bao gồm chỉ định các biến môi trường, xác định cách triển khai và xử lý các bước xây dựng. \\
+    
+    Các cấu hình của nhóm cho phần front-end của dự án như sau: 
+    \begin{itemize}
+        \item $Build Command$: next build
+        \item $Output Directory$: Next.js default
+        \item $Install Command$: yarn
+        \item $Development Command$: next
+        \item $Node.js Version$: 18.18
+        \item $NEXT\_PUBLIC\_GOOGLE\_SITE\_VERIFICATION$: hbwzV-DeoMMsgwNxZaw6s9L74x53\_w8KjhK68izrsnE
+        \item $NEXT\_PUBLIC\_GOOGLE\_MEASUREMENT\_ID$: G-MDBKYG0VYG
+        \item $CLIENT\_URL$: https://share-cv.vercel.app
+        \item $SERVER\_URL$: https://share-cv-ubv1.onrender.com
+    \end{itemize}
+    \item Triển khai ứng dụng: Khi các thiết lập cấu hình hoàn tất, nhóm có thể tiến hành triển khai ứng dụng lên Vercel. Quá trình này thường đơn giản và chỉ đòi hỏi một số thao tác cơ bản để khởi động quá trình triển khai.
+    \item Kiểm tra và giám sát: Sau khi triển khai, nhóm nên kiểm tra kỹ lưỡng để đảm bảo rằng trang web hoạt động đúng như mong đợi. Ngoài ra, Vercel cũng cung cấp các công cụ giám sát để theo dõi hiệu suất và hoạt động của ứng dụng trên nền tảng.
+\end{itemize}
+
+Thêm hình 
+
+
+
+\subsection{Vercel Web Analytics cho Front-end}
+Sử dụng gói npm @vercel/analytics nhằm cài đặt Vercel Web Analytics cho Front-end:\\
+
+\textbf{Lợi ích:}
+
+\begin{itemize}
+    \item Dễ dàng cài đặt: Đây là cách đơn giản nhất để tích hợp Web Analytics vào ứng dụng Vercel của bạn. Chỉ cần cài đặt một gói npm và thêm một thành phần vào mã của bạn.
+    \item Dữ liệu phân tích toàn diện: Gói @vercel/analytics cung cấp nhiều thông tin chi tiết về lưu lượng truy cập trang web của bạn, bao gồm lượt xem trang, nguồn lưu lượng truy cập, thông tin người dùng (quốc gia, hệ điều hành, trình duyệt,...)
+    \item Miễn phí: Web Analytics cho Vercel hoàn toàn miễn phí cho tất cả các dự án Vercel.
+\end{itemize}
+
+\textbf{Cách thực hiện:}
+
+Cài đặt gói npm @vercel/analytics:
+Thêm Analytics component vào ứng dụng. Mở tệp JavaScript chính của ứng dụng Vercel (index.js). Nhập gói @vercel/analytics và thêm Analytics component vào mã
+\begin{lstlisting}
+import { Analytics } from '@vercel/analytics';
+
+function App() {
+  return (
+    <div>
+      <Analytics />
+      {/* App content */}
+    </div>
+  );
+}
+\end{lstlisting}
+
+Sau khi thêm Analytics component vào mã, lưu tệp và triển khai ứng dụng đến Vercel và test thử chức năng của ứng dụng.
+
+Thêm hình
+
+\subsection{Triển khai Back-end}
+
+\subsection{Triển khai Google Search Console}
+Google Search Console (trước đây được gọi là Google Webmaster Tools) là một công cụ miễn phí của Google dành cho các chủ sở hữu trang web và nhà phát triển. Nó cung cấp các công cụ và tài nguyên để giúp họ hiểu và quản lý hiệu suất của trang web trên công cụ tìm kiếm của Google.\\
+
+Google Search Console cho phép người dùng theo dõi và báo cáo về khái quát về cách trang web của họ được tìm thấy và hiển thị trong kết quả tìm kiếm của Google. Bằng cách đăng ký và xác minh trang web của mình, họ có thể thu thập thông tin quan trọng về lượng truy cập, từ khóa tìm kiếm, liên kết đến trang web và nhiều thông tin khác.\\
+
+Với Google Search Console, người dùng có thể:
+\begin{itemize}
+    \item Xác minh và gửi bản đồ trang web của họ cho Google để đảm bảo rằng các trang web của họ được chỉ định và hiển thị đúng cách trong kết quả tìm kiếm.
+    \item Kiểm tra xem Google có gặp vấn đề nào khi truy cập trang web của họ và cung cấp thông tin về các lỗi crawl hoặc lỗi chỉ mục.
+    \item Theo dõi các chỉ số hiệu suất trang web, bao gồm lượng truy cập, tỷ lệ nhấp chuột, thứ hạng từ khóa và nhiều thông tin liên quan khác.
+    \item Tìm hiểu về các từ khóa mà trang web của họ đang xếp hạng và hiển thị trong kết quả tìm kiếm.
+    \item Nhận thông báo từ Google về các vấn đề quan trọng liên quan đến trang web của họ, như lỗi tìm kiếm, vi phạm chính sách và nhiều hơn nữa.
+\end{itemize}
+Google Search Console là một công cụ hữu ích để tối ưu hóa trang web và cải thiện hiệu suất tìm kiếm trên Google. Nó cung cấp thông tin chi tiết về cách Google xem và xếp hạng trang web, giúp người dùng điều chỉnh và tăng cường chiến lược SEO của mình.\\
+
+Cài đặt bằng cách thêm thẻ này vào root layout của trang web:
+\begin{lstlisting}
+    <meta
+        name="google-site-verification"
+        content={CONFIG.googleSearchConsole.config.siteVerification}
+    />
+\end{lstlisting}
+
+Thêm hình
+
+\subsection{Triển khai Dashboard}
+Appsmith là một nền tảng phát triển ứng dụng mã nguồn mở, cho phép bạn nhanh chóng xây dựng giao diện người dùng và kết nối với các nguồn dữ liệu khác nhau như cơ sở dữ liệu MongoDB. Dưới đây là sơ lược về quá trình triển khai ứng dụng lên Appsmith và cách quản lý thông tin trong cơ sở dữ liệu MongoDB cho các đối tượng như CV, bài viết (post) và người dùng (user) trong hệ thống.
+
+\textbf{Kết nối Appsmith với MongoDB:}
+\begin{itemize}
+    \item Mở Appsmith trên trình duyệt web.
+    \item Tạo kết nối đến MongoDB: Trong giao diện Appsmith, tạo một kết nối mới đến MongoDB bằng cách cung cấp thông tin đăng nhập và cấu hình của cơ sở dữ liệu MongoDB.
+\end{itemize}
+\textbf{Xây dựng giao diện ứng dụng:}
+\begin{itemize}
+    \item Tạo trang cho CV: Sử dụng trình tạo giao diện của Appsmith để tạo một trang hiển thị danh sách CV. Lấy dữ liệu từ bảng "cv" trong cơ sở dữ liệu và hiển thị nó trên trang.
+    \item Tạo trang cho người dùng: Tương tự, tạo một trang hiển thị danh sách người dùng, lấy dữ liệu từ bảng "user" và hiển thị nó trên trang.
+\end{itemize}
+\textbf{Thao tác với dữ liệu:}
+\begin{itemize}
+    \item Thêm, sửa, xóa CV: Cho phép người dùng thêm, sửa đổi hoặc xóa CV thông qua giao diện ứng dụng. Khi người dùng thực hiện các thao tác này, gửi yêu cầu tương ứng đến Appsmith, và Appsmith sẽ thực hiện các thao tác tương ứng với cơ sở dữ liệu MongoDB.
+    \item Thêm, sửa, xóa người dùng: Tương tự, cho phép người dùng thêm, sửa đổi hoặc xóa người dùng thông qua giao diện ứng dụng, và Appsmith sẽ thực hiện các thao tác tương ứng với cơ sở dữ liệu MongoDB.
+\end{itemize}
+
+Thêm hình

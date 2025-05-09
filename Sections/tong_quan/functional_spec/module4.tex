@@ -1,0 +1,28 @@
+\subsubsection{Module MD-04: Xác nhận Tự động qua Bot}
+
+\begin{longtable}{|m{2cm}|m{2.5cm}|m{2.5cm}|m{4.5cm}|m{3.5cm}|}
+\caption{Danh sách Yêu cầu Chức năng cho Module MD-04: Xác nhận Tự động qua Bot} \label{tab:fr_md04} \\
+\hline
+\textbf{Mã Module} & \textbf{Mã Yêu cầu CN} & \textbf{Mã Người dùng} & \textbf{Tên Chức năng} & \textbf{Mô tả Ngắn} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+
+MD-04 & FR-MD04-01 & System & Lên lịch và Kích hoạt Cuộc gọi Xác nhận & Tự động xác định các đặt chỗ 'Đã xác nhận' sắp diễn ra và lên lịch kích hoạt cuộc gọi xác nhận N ngày trước ngày đặt (N cấu hình được). \\
+\hline
+MD-04 & FR-MD04-02 & System (Bot Service), US-08 (Tương tác) & Thực hiện Cuộc gọi và Tương tác Khách hàng & Tích hợp với dịch vụ Bot Call bên ngoài để thực hiện cuộc gọi đến SĐT khách hàng, phát thông điệp và nhận lựa chọn (phím 1, 0, 2). \\
+\hline
+MD-04 & FR-MD04-03 & System, US-09 (Tiếp nhận cuộc gọi hỗ trợ) & Xử lý Phản hồi Khách hàng từ Bot Call & Cập nhật trạng thái đặt chỗ và thực hiện hành động tương ứng (xác nhận lại, hủy bỏ & giải phóng bàn, chuyển cuộc gọi hỗ trợ) dựa trên phím khách hàng đã bấm. \\
+\hline
+MD-04 & FR-MD04-04 & System & Ghi nhận Kết quả Cuộc gọi & Lưu trữ lại kết quả của mỗi cuộc gọi Bot Call (thành công, thất bại, không liên lạc được, lựa chọn của khách) vào thông tin đặt chỗ hoặc nhật ký hệ thống. \\
+\hline
+MD-04 & FR-MD04-05 & US-01 / US-10 & Cấu hình Dịch vụ Bot Call & Cho phép cấu hình các tham số tích hợp Bot Call: số ngày N gọi trước, nội dung kịch bản thoại, số điện thoại chuyển tiếp hỗ trợ, API key/credentials của dịch vụ Bot Call. \\
+\hline
+
+\end{longtable}
+

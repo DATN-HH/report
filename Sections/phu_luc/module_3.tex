@@ -1,0 +1,874 @@
+\subsection{Module MD-03: Quản lý Đặt chỗ \& Đặt món trước}
+
+\subsubsection{Use Case UC-MD03-01: Xem Giao diện Đặt chỗ}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-01: Xem Giao diện Đặt chỗ} \label{tab:uc_md03_01} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Giao diện Đặt chỗ \\
+\hline
+Use Case ID & UC-MD03-01 \\
+\hline
+Use Case Description & Cho phép Khách hàng (US-08) truy cập vào trang web hoặc ứng dụng di động của nhà hàng và xem được giao diện ban đầu của chức năng đặt chỗ online, sẵn sàng để nhập các thông tin đặt bàn. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Khách hàng có nhu cầu đặt bàn tại nhà hàng thông qua kênh trực tuyến. \\
+\hline
+Pre-Condition & - Trang web hoặc ứng dụng di động của nhà hàng đang hoạt động và có kết nối internet. \newline - Chức năng đặt chỗ online đã được quản trị viên kích hoạt và cấu hình cơ bản (liên quan FR-MD03-11). \\
+\hline
+Post-Condition & - Giao diện đặt chỗ online ban đầu được hiển thị thành công cho khách hàng. \newline - Khách hàng có thể nhìn thấy các thành phần điều khiển để bắt đầu lựa chọn thông tin đặt chỗ (ví dụ: lịch chọn ngày, ô chọn giờ, ô chọn số lượng người). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Khách hàng (US-08) sử dụng trình duyệt web truy cập địa chỉ trang web của nhà hàng hoặc mở ứng dụng di động của nhà hàng. \newline 2. US-08 tìm và nhấp vào liên kết/nút "Đặt bàn", "Book a Table", "Reservation" hoặc tương tự trên giao diện trang web/ứng dụng. \newline 3. Hệ thống xử lý yêu cầu và tải trang/màn hình đặt chỗ. \newline 4. Hệ thống hiển thị giao diện đặt chỗ ban đầu. Giao diện này thường bao gồm các thành phần chính: \newline    - Một công cụ chọn ngày (ví dụ: lịch tháng). \newline    - Một công cụ chọn giờ (ví dụ: danh sách thả xuống hoặc các ô giờ). \newline    - Một công cụ chọn số lượng người (ví dụ: danh sách thả xuống hoặc ô nhập số). \newline    - (Tùy chọn) Các bộ lọc khác nếu được cấu hình (ví dụ: chọn khu vực). \newline    - Một nút để tiếp tục hoặc tìm kiếm bàn trống (ví dụ: "Tìm bàn", "Check Availability"). \newline 5. US-08 xem giao diện và chuẩn bị cho các bước tiếp theo của quy trình đặt chỗ. \\
+\hline
+Alternative Flow & \textbf{2a. Giao diện đặt chỗ nhúng sẵn:} \newline    1. Widget hoặc form đặt chỗ được nhúng trực tiếp trên trang chủ hoặc một trang khác mà khách hàng đang xem. \newline    2. US-08 tương tác trực tiếp với các thành phần của giao diện đặt chỗ (lịch, giờ, số người) mà không cần điều hướng sang trang riêng. \newline    3. Use Case tiếp tục từ bước 4 (sau khi hệ thống đã hiển thị widget). \\
+\hline
+Exception Flow & \textbf{3a. Lỗi tải trang/giao diện:} \newline    1. Hệ thống gặp lỗi khi cố gắng tải trang hoặc các thành phần của giao diện đặt chỗ (ví dụ: lỗi kết nối máy chủ, lỗi kịch bản frontend, lỗi cấu hình backend). \newline    2. Hệ thống hiển thị một trang lỗi hoặc thông báo lỗi chung (ví dụ: "Không thể tải trang đặt chỗ. Vui lòng thử lại sau."). \newline    3. Use Case kết thúc không thành công. \newline \textbf{3b. Chức năng đặt chỗ bị vô hiệu hóa:} \newline    1. Quản trị viên đã tạm thời tắt chức năng đặt chỗ online trong cấu hình hệ thống. \newline    2. Khi US-08 nhấp vào liên kết "Đặt bàn" (bước 2), hệ thống chuyển hướng đến một trang thông báo hoặc hiển thị thông báo trực tiếp: "Chức năng đặt bàn online hiện không khả dụng. Vui lòng liên hệ nhà hàng qua điện thoại." hoặc tương tự. \newline    3. Use Case kết thúc. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.1-1:} Giao diện đặt chỗ phải rõ ràng, cung cấp đủ các yếu tố đầu vào cơ bản cần thiết để khách hàng bắt đầu quy trình (Ngày, Giờ, Số lượng người). \newline - \textbf{BR-UC3.1-2:} Giao diện ban đầu nên hiển thị ngày hiện tại là ngày được chọn mặc định trên lịch. \newline - \textbf{BR-UC3.1-3:} Các giá trị mặc định (ví dụ: số lượng người, khung giờ) và các giới hạn (ví dụ: ngày có thể chọn trong tương lai) phải tuân theo cấu hình do Quản lý nhà hàng thiết lập (FR-MD03-11). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.1-1 (Usability):} Giao diện đặt chỗ phải thân thiện với người dùng, dễ hiểu và dễ thao tác trên các thiết bị khác nhau (desktop, mobile, tablet - Responsive Design). Các công cụ chọn ngày, giờ, số người phải trực quan. \newline - \textbf{NFR-UC3.1-2 (Performance):} Thời gian tải hoàn chỉnh giao diện đặt chỗ ban đầu (bao gồm lịch và các tùy chọn cơ bản) không nên vượt quá 3 giây trong điều kiện mạng thông thường. \newline - \textbf{NFR-UC3.1-3 (Availability):} Chức năng xem giao diện đặt chỗ phải có độ sẵn sàng cao, hoạt động ổn định cùng với trang web/ứng dụng chính của nhà hàng. \newline - \textbf{NFR-UC3.1-4 (Accessibility):} Giao diện nên tuân thủ các tiêu chuẩn cơ bản về khả năng tiếp cận web (WCAG) để hỗ trợ người dùng khuyết tật (nếu là yêu cầu). \\
+\hline
+
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-02: Chọn Thông tin Đặt bàn}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-02: Chọn Thông tin Đặt bàn} \label{tab:uc_md03_02} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Chọn Thông tin Đặt bàn \\
+\hline
+Use Case ID & UC-MD03-02 \\
+\hline
+Use Case Description & Cho phép Khách hàng (US-08) lựa chọn các thông tin cơ bản cho lượt đặt bàn mong muốn, bao gồm ngày, giờ và số lượng người, thông qua giao diện đặt chỗ online. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Khách hàng đang ở giao diện đặt chỗ (đã xem qua UC-MD03-01) và muốn bắt đầu lựa chọn chi tiết cho lượt đặt bàn. \\
+\hline
+Pre-Condition & - Khách hàng đang xem giao diện đặt chỗ online (UC-MD03-01 thành công). \newline - Các tùy chọn về ngày, giờ, số lượng người được hệ thống hiển thị dựa trên cấu hình (FR-MD03-11). \\
+\hline
+Post-Condition & - Hệ thống ghi nhận lựa chọn của khách hàng về ngày, giờ, số lượng người. \newline - Hệ thống (thường là bước tiếp theo) sẽ kiểm tra tính khả dụng của bàn/khung giờ dựa trên lựa chọn này. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Khách hàng (US-08) tương tác với công cụ chọn ngày trên giao diện đặt chỗ (UC-MD03-01). \newline 2. US-08 chọn một ngày mong muốn từ lịch hiển thị (tuân thủ giới hạn ngày có thể đặt - BR-UC3.2-1). \newline 3. US-08 tương tác với công cụ chọn số lượng người. \newline 4. US-08 chọn số lượng người phù hợp (tuân thủ giới hạn min/max - BR-UC3.2-2). \newline 5. Dựa trên ngày và số lượng người đã chọn, hệ thống có thể cập nhật danh sách các giờ còn trống hiển thị cho khách hàng (BR-UC3.2-3). \newline 6. US-08 tương tác với công cụ chọn giờ. \newline 7. US-08 chọn một khung giờ mong muốn từ danh sách các giờ còn trống. \newline 8. Hệ thống ghi nhận các lựa chọn: Ngày, Giờ, Số lượng người. \newline 9. (Thường có) US-08 nhấp vào nút "Tìm bàn" / "Tiếp tục" / "Check Availability". \\
+\hline
+Alternative Flow & \textbf{5a. Chọn giờ trước khi chọn ngày/số người:} \newline    1. Thứ tự các bước 1-7 có thể thay đổi tùy thuộc vào thiết kế giao diện. Khách hàng có thể chọn giờ hoặc số người trước. \newline    2. Hệ thống sẽ cập nhật các tùy chọn còn lại dựa trên lựa chọn đã thực hiện. \\
+\hline
+Exception Flow & \textbf{2a. Chọn ngày không hợp lệ:} \newline    1. Khách hàng cố gắng chọn một ngày trong quá khứ hoặc một ngày không được phép đặt (ví dụ: nhà hàng đóng cửa, quá xa trong tương lai). \newline    2. Giao diện không cho phép chọn ngày đó (ví dụ: ngày bị làm mờ, không thể nhấp) hoặc hiển thị thông báo lỗi nếu cố chọn. \newline    3. Use Case quay lại bước 2. \newline \textbf{4a. Chọn số lượng người không hợp lệ:} \newline    1. Khách hàng nhập/chọn số lượng người nhỏ hơn mức tối thiểu hoặc lớn hơn mức tối đa cho phép đặt online. \newline    2. Hệ thống hiển thị thông báo lỗi về giới hạn số lượng người. \newline    3. Use Case quay lại bước 4. \newline \textbf{7a. Chọn giờ không còn trống/không hợp lệ:} \newline    1. Khung giờ khách hàng chọn đã bị đặt hết hoặc không còn phù hợp với số lượng người/ngày đã chọn (do cập nhật tức thời từ người dùng khác). \newline    2. Hệ thống hiển thị thông báo lỗi "Khung giờ này không còn trống" hoặc không cho phép chọn giờ đó. \newline    3. Use Case quay lại bước 7. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.2-1:} Khách hàng chỉ có thể chọn đặt bàn cho các ngày trong tương lai và trong khoảng thời gian cho phép đặt trước (ví dụ: tối đa 30 ngày tới), theo cấu hình hệ thống (FR-MD03-11). \newline - \textbf{BR-UC3.2-2:} Số lượng người phải nằm trong giới hạn tối thiểu và tối đa cho phép đặt bàn online (cấu hình bởi FR-MD03-11). Các nhóm lớn hơn có thể cần liên hệ trực tiếp. \newline - \textbf{BR-UC3.2-3:} Hệ thống chỉ hiển thị các khung giờ còn khả dụng (còn bàn trống phù hợp với số lượng người) cho ngày đã chọn. Các khung giờ đã hết chỗ hoặc ngoài giờ hoạt động sẽ không hiển thị hoặc bị làm mờ. \newline - \textbf{BR-UC3.2-4:} Khoảng cách giữa các khung giờ cho phép đặt (ví dụ: 15 phút, 30 phút) và thời lượng mặc định của một lượt đặt bàn được xác định bởi cấu hình hệ thống (FR-MD03-11). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.2-1 (Usability):} Các công cụ chọn ngày (lịch), giờ (danh sách/ô), số người (thả xuống/nhập số) phải dễ sử dụng và trực quan. \newline - \textbf{NFR-UC3.2-2 (Performance):} Việc cập nhật danh sách giờ khả dụng (bước 5) sau khi chọn ngày/số người phải diễn ra nhanh chóng (dưới 2 giây). \newline - \textbf{NFR-UC3.2-3 (Accuracy):} Danh sách các khung giờ khả dụng phải phản ánh chính xác tình trạng đặt chỗ theo thời gian thực (hoặc gần đúng, tùy thuộc vào cơ chế cập nhật). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-03: (Tùy chọn) Chọn Bàn cụ thể}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-03: (Tùy chọn) Chọn Bàn cụ thể} \label{tab:uc_md03_03} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & (Tùy chọn) Chọn Bàn cụ thể \\
+\hline
+Use Case ID & UC-MD03-03 \\
+\hline
+Use Case Description & Nếu được Quản lý nhà hàng cấu hình, cho phép Khách hàng (US-08) xem sơ đồ mặt bằng (floor plan) của nhà hàng và chọn một bàn trống cụ thể phù hợp với thông tin đặt chỗ (ngày, giờ, số người) đã chọn trước đó. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Low / Nice to Have (Tùy thuộc vào quyết định của nhà hàng) \\
+\hline
+Trigger & - Sau khi khách hàng đã chọn xong thông tin đặt bàn cơ bản (UC-MD03-02) và nhấp "Tìm bàn/Tiếp tục". \newline - Hệ thống được cấu hình cho phép khách hàng tự chọn bàn. \\
+\hline
+Pre-Condition & - Khách hàng đã hoàn thành UC-MD03-02 (chọn ngày, giờ, số người). \newline - Hệ thống đã kiểm tra và xác định có bàn trống phù hợp với yêu cầu. \newline - Quản lý nhà hàng (US-01) đã cấu hình chức năng cho phép chọn bàn trên giao diện đặt chỗ online và đã thiết lập sơ đồ tầng (Floor Plan) tương ứng. \\
+\hline
+Post-Condition & - Hệ thống ghi nhận bàn cụ thể mà khách hàng đã chọn cho lượt đặt chỗ. \newline - Trạng thái của bàn đó được cập nhật (ví dụ: giữ chỗ tạm thời) cho đến khi đặt chỗ được hoàn tất (thanh toán cọc). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Tiếp nối từ UC-MD03-02, sau khi khách hàng nhấn "Tìm bàn/Tiếp tục". \newline 2. Hệ thống (dựa trên cấu hình) hiển thị sơ đồ mặt bằng (Floor Plan) của nhà hàng cho khách hàng xem. Sơ đồ này hiển thị vị trí các bàn. \newline 3. Các bàn phù hợp với số lượng người và còn trống vào ngày giờ đã chọn sẽ được làm nổi bật hoặc có trạng thái "Có thể chọn". Các bàn khác (đã bị đặt, không đủ chỗ) sẽ có trạng thái khác (ví dụ: mờ đi, màu đỏ). \newline 4. US-08 xem xét sơ đồ và vị trí các bàn còn trống. \newline 5. US-08 nhấp chuột vào một bàn trống cụ thể mà mình muốn chọn. \newline 6. Hệ thống xác nhận lựa chọn bàn của khách hàng. \newline 7. Hệ thống có thể hiển thị lại thông tin tóm tắt bao gồm cả bàn đã chọn. \newline 8. Use Case kết thúc, chuyển sang các bước tiếp theo (ví dụ: chọn món đặt trước hoặc nhập thông tin khách hàng). \\
+\hline
+Alternative Flow & \textbf{2a. Không hiển thị sơ đồ, chỉ hiển thị danh sách bàn:} \newline    1. Thay vì sơ đồ trực quan, hệ thống chỉ hiển thị danh sách tên/mã các bàn còn trống phù hợp. \newline    2. US-08 chọn một bàn từ danh sách. \newline    3. Use Case tiếp tục từ bước 6. \newline \textbf{2b. Hệ thống tự động gán bàn:} \newline    1. Nếu cấu hình không cho phép khách chọn bàn, sau UC-MD03-02, hệ thống sẽ tự động chọn và gán một bàn trống phù hợp. \newline    2. Use Case này được bỏ qua. \\
+\hline
+Exception Flow & \textbf{3a. Không có bàn nào phù hợp hiển thị:} \newline    1. Mặc dù UC-MD03-02 xác nhận có khung giờ trống, nhưng có thể không có bàn cụ thể nào phù hợp (ví dụ: do cách ghép bàn, hoặc lỗi logic). \newline    2. Hệ thống hiển thị thông báo "Rất tiếc, không tìm thấy bàn cụ thể phù hợp. Vui lòng thử lại hoặc liên hệ nhà hàng." \newline    3. Use Case kết thúc thất bại hoặc quay lại UC-MD03-02. \newline \textbf{5a. Bàn vừa chọn đã bị người khác đặt:} \newline    1. Trong khoảng thời gian ngắn giữa lúc hệ thống hiển thị bàn trống và lúc khách hàng nhấp chọn, bàn đó đã bị một người khác đặt thành công. \newline    2. Khi khách hàng nhấp chọn, hệ thống kiểm tra lại và phát hiện bàn không còn khả dụng. \newline    3. Hệ thống hiển thị thông báo "Rất tiếc, bàn này vừa có người khác đặt. Vui lòng chọn bàn khác." \newline    4. Use Case quay lại bước 4. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.3-1:} Chức năng cho phép khách hàng chọn bàn cụ thể phải được kích hoạt trong cấu hình hệ thống (FR-MD03-11). \newline - \textbf{BR-UC3.3-2:} Sơ đồ tầng hiển thị cho khách hàng phải tương ứng với sơ đồ tầng được quản lý trong backend (liên quan đến cấu hình POS). \newline - \textbf{BR-UC3.3-3:} Hệ thống chỉ hiển thị các bàn có sức chứa phù hợp (lớn hơn hoặc bằng số lượng người khách đã chọn) và còn trống vào ngày giờ đã chọn. \newline - \textbf{BR-UC3.3-4:} Sau khi khách hàng chọn bàn, hệ thống nên tạm giữ bàn đó trong một khoảng thời gian nhất định (ví dụ: 10-15 phút) để khách hàng hoàn tất các bước còn lại (nhập thông tin, thanh toán cọc). Nếu quá thời gian, bàn có thể được giải phóng cho người khác. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.3-1 (Usability):} Sơ đồ tầng phải rõ ràng, dễ nhìn, thể hiện đúng vị trí tương đối của các bàn. Trạng thái bàn (trống, đã đặt, có thể chọn) phải dễ phân biệt. \newline - \textbf{NFR-UC3.3-2 (Performance):} Thời gian tải sơ đồ tầng và cập nhật trạng thái bàn phải nhanh chóng. \newline - \textbf{NFR-UC3.3-3 (Accuracy):} Trạng thái bàn hiển thị phải phản ánh đúng tình trạng thực tế (hoặc gần đúng nhất có thể). \newline - \textbf{NFR-UC3.3-4 (Responsiveness):} Sơ đồ tầng cần hiển thị tốt trên các kích thước màn hình khác nhau. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-04: Xem Thực đơn}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-04: Xem Thực đơn} \label{tab:uc_md03_04} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Thực đơn \\
+\hline
+Use Case ID & UC-MD03-04 \\
+\hline
+Use Case Description & Cho phép Khách hàng (US-08) xem danh sách các món ăn và đồ uống có sẵn của nhà hàng trong quá trình đặt chỗ online, để chuẩn bị cho việc lựa chọn các món muốn đặt trước (pre-order). \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Must Have (nếu có chức năng đặt món trước) \\
+\hline
+Trigger & Sau khi khách hàng đã chọn thông tin đặt bàn (và có thể đã chọn bàn), họ muốn xem thực đơn để đặt món ăn trước. \\
+\hline
+Pre-Condition & - Khách hàng đang trong luồng đặt chỗ online, đã qua các bước chọn thông tin cơ bản (UC-MD03-02). \newline - Quản lý nhà hàng (US-01) đã tạo các sản phẩm (món ăn, đồ uống - MD-02) và cấu hình chúng để hiển thị trên kênh online (ví dụ: đánh dấu "Available Online" hoặc tương tự). \newline - Các sản phẩm đã được phân loại vào các danh mục phù hợp (ví dụ: Khai vị, Món chính - có thể dùng chung hoặc khác với Danh mục POS). \\
+\hline
+Post-Condition & - Thực đơn của nhà hàng được hiển thị cho khách hàng xem trên giao diện đặt chỗ. \newline - Khách hàng có thể thấy tên món, mô tả (nếu có), giá bán, hình ảnh (nếu có) và các danh mục. \newline - Khách hàng sẵn sàng để chọn món (UC-MD03-05). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Tiếp nối từ các bước trước trong luồng đặt chỗ (UC-MD03-02 hoặc UC-MD03-03). \newline 2. Hệ thống hiển thị một phần hoặc một nút/liên kết cho phép khách hàng xem/chọn món đặt trước (ví dụ: "Bạn có muốn đặt món trước?", "Xem thực đơn"). \newline 3. US-08 nhấp vào tùy chọn để xem thực đơn. \newline 4. Hệ thống truy vấn cơ sở dữ liệu để lấy danh sách các sản phẩm được phép hiển thị online. \newline 5. Hệ thống hiển thị thực đơn cho khách hàng, thường được trình bày theo các danh mục (ví dụ: Khai vị, Món chính, Tráng miệng, Đồ uống). \newline 6. Với mỗi món ăn/đồ uống, hệ thống hiển thị tối thiểu: \newline    - Tên món. \newline    - Giá bán. \newline 7. (Tùy chọn) Hệ thống có thể hiển thị thêm: \newline    - Hình ảnh món ăn. \newline    - Mô tả ngắn gọn. \newline    - Các biểu tượng đặc biệt (ví dụ: món cay, món chay). \newline 8. US-08 xem xét thực đơn. \\
+\hline
+Alternative Flow & \textbf{5a. Lọc/Tìm kiếm món ăn:} \newline    1. Nếu thực đơn dài, giao diện cung cấp chức năng tìm kiếm theo tên món hoặc lọc theo danh mục. \newline    2. US-08 sử dụng tìm kiếm/lọc để thu hẹp danh sách. \newline    3. Hệ thống hiển thị kết quả phù hợp. \newline    4. Use Case tiếp tục từ bước 8. \newline \textbf{5b. Xem chi tiết món ăn:} \newline    1. US-08 nhấp vào một món ăn để xem thông tin chi tiết hơn (ví dụ: mô tả đầy đủ, thành phần, tùy chọn biến thể nếu có). \newline    2. Hệ thống hiển thị chi tiết món ăn (có thể trong popup hoặc trang riêng). \newline    3. Use Case tiếp tục từ bước 8 (hoặc có thể chọn món ngay từ màn hình chi tiết). \\
+\hline
+Exception Flow & \textbf{4a. Lỗi truy vấn thực đơn:} \newline    1. Hệ thống gặp lỗi khi cố gắng lấy dữ liệu sản phẩm từ cơ sở dữ liệu. \newline    2. Hệ thống hiển thị thông báo lỗi "Không thể tải thực đơn. Vui lòng thử lại sau." \newline    3. Use Case kết thúc không thành công. \newline \textbf{4b. Không có sản phẩm nào được cấu hình hiển thị online:} \newline    1. Mặc dù có sản phẩm trong backend, nhưng không có sản phẩm nào được đánh dấu để hiển thị trên kênh đặt chỗ online. \newline    2. Hệ thống hiển thị thông báo "Hiện tại chưa có thực đơn online." hoặc tương tự. \newline    3. Khách hàng không thể thực hiện đặt món trước. Use Case có thể bỏ qua bước chọn món và đi tiếp. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.4-1:} Chỉ những sản phẩm được Quản lý nhà hàng cấu hình cho phép bán/hiển thị trên kênh online mới xuất hiện trong thực đơn đặt trước. \newline - \textbf{BR-UC3.4-2:} Thực đơn nên được trình bày một cách có tổ chức, thường theo các danh mục món ăn (có thể dùng Danh mục POS hoặc một cấu trúc danh mục riêng cho Website/Booking). \newline - \textbf{BR-UC3.4-3:} Giá bán hiển thị trên thực đơn online phải khớp với giá bán đã được cấu hình trong backend (có thể bao gồm cả thuế nếu cấu hình hiển thị giá đã gồm thuế). \newline - \textbf{BR-UC3.4-4:} Nếu sản phẩm có biến thể (FR-MD02-06), thực đơn nên chỉ ra điều đó (ví dụ: hiển thị giá gốc và ghi chú "từ", hoặc hiển thị nút "Tùy chọn"). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.4-1 (Usability):} Thực đơn phải dễ đọc, dễ điều hướng. Hình ảnh (nếu có) cần hấp dẫn và tải nhanh. Việc tìm kiếm/lọc món phải hiệu quả. \newline - \textbf{NFR-UC3.4-2 (Performance):} Thời gian tải thực đơn (ví dụ: < 100 món) không nên quá lâu (dưới 3-4 giây). Hình ảnh cần được tối ưu hóa. \newline - \textbf{NFR-UC3.4-3 (Accuracy):} Thông tin món ăn (tên, giá, mô tả, hình ảnh) hiển thị phải chính xác và cập nhật theo dữ liệu backend. \newline - \textbf{NFR-UC3.4-4 (Responsiveness):} Thực đơn cần hiển thị tốt trên các thiết bị khác nhau. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-05: Chọn Món ăn Đặt trước}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-05: Chọn Món ăn Đặt trước} \label{tab:uc_md03_05} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Chọn Món ăn Đặt trước \\
+\hline
+Use Case ID & UC-MD03-05 \\
+\hline
+Use Case Description & Cho phép Khách hàng (US-08), sau khi xem thực đơn (UC-MD03-04), lựa chọn các món ăn và đồ uống cụ thể cùng số lượng mong muốn để thêm vào giỏ hàng đặt trước, bao gồm cả việc chọn các biến thể (ví dụ: size, độ cay) nếu món ăn có yêu cầu. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Must Have (nếu có chức năng đặt món trước) \\
+\hline
+Trigger & Khách hàng đang xem thực đơn online và muốn chọn một hoặc nhiều món để đặt trước cho lượt đặt bàn của mình. \\
+\hline
+Pre-Condition & - Khách hàng đang xem thực đơn online (UC-MD03-04 thành công). \newline - Giao diện hiển thị các nút hoặc cơ chế để thêm món vào giỏ hàng/đơn đặt trước. \\
+\hline
+Post-Condition & - Các món ăn/đồ uống cùng số lượng và biến thể (nếu có) do khách hàng chọn được thêm vào một "giỏ hàng" hoặc "danh sách đặt trước" tạm thời. \newline - Khách hàng có thể thấy số lượng món và tổng giá trị tạm tính của các món đã chọn. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Khách hàng (US-08) đang xem thực đơn (UC-MD03-04). \newline 2. US-08 tìm đến món ăn/đồ uống muốn đặt trước. \newline 3. US-08 nhấp vào nút "Thêm vào giỏ" / "Chọn món" / "+" hoặc tương tự bên cạnh món ăn. \newline 4. \textbf{Nếu món ăn không có biến thể:} \newline    a. Hệ thống thêm 1 đơn vị của món ăn đó vào giỏ hàng đặt trước. \newline    b. Giao diện cập nhật hiển thị số lượng món trong giỏ hoặc số lượng của món đó. \newline 5. \textbf{Nếu món ăn có biến thể (ví dụ: size, độ cay):} \newline    a. Hệ thống hiển thị một popup/dialog yêu cầu khách hàng chọn các Giá trị Thuộc tính bắt buộc (ví dụ: chọn Size: S/M/L, chọn Độ cay: Ít/Vừa/Nhiều). \newline    b. US-08 thực hiện lựa chọn các biến thể. \newline    c. (Tùy chọn) Hệ thống hiển thị giá tương ứng với biến thể đã chọn. \newline    d. US-08 xác nhận lựa chọn biến thể (ví dụ: nhấn nút "Thêm vào giỏ"). \newline    e. Hệ thống thêm 1 đơn vị của biến thể sản phẩm cụ thể đó vào giỏ hàng đặt trước. \newline    f. Giao diện cập nhật hiển thị số lượng món trong giỏ. \newline 6. US-08 có thể lặp lại bước 2-5 để chọn thêm các món khác hoặc tăng số lượng món đã chọn. \newline 7. Giao diện hiển thị giỏ hàng (hoặc biểu tượng giỏ hàng) được cập nhật liên tục với số lượng món và tổng giá trị tạm tính. \\
+\hline
+Alternative Flow & \textbf{6a. Thay đổi số lượng:} \newline    1. Bên cạnh món ăn đã chọn (trong giỏ hàng hoặc trên thực đơn), có các nút "+" / "-" hoặc ô nhập số lượng. \newline    2. US-08 sử dụng các nút này để tăng/giảm số lượng hoặc nhập số lượng mong muốn. \newline    3. Hệ thống cập nhật số lượng và tổng giá trị trong giỏ hàng. \newline \textbf{6b. Xóa món khỏi giỏ hàng:} \newline    1. Trong giỏ hàng, US-08 nhấp vào nút xóa (hình thùng rác hoặc dấu 'x') bên cạnh món muốn loại bỏ. \newline    2. Hệ thống xóa món đó khỏi giỏ hàng và cập nhật lại tổng giá trị. \\
+\hline
+Exception Flow & \textbf{4c/5g. Lỗi khi thêm vào giỏ hàng:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng thêm món ăn/biến thể vào giỏ hàng tạm thời (ví dụ: lỗi session, lỗi kịch bản). \newline    2. Hệ thống hiển thị thông báo lỗi "Không thể thêm món vào giỏ hàng. Vui lòng thử lại." \newline    3. Món ăn không được thêm vào giỏ. \newline \textbf{5h. Lỗi không chọn đủ biến thể bắt buộc:} \newline    1. Khách hàng nhấn "Thêm vào giỏ" (bước 5d) mà chưa chọn đủ các tùy chọn biến thể bắt buộc. \newline    2. Hệ thống hiển thị thông báo lỗi, yêu cầu chọn đầy đủ các tùy chọn. \newline    3. Use Case quay lại bước 5b. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.5-1:} Khách hàng phải có khả năng chọn số lượng cho mỗi món ăn/biến thể muốn đặt trước. \newline - \textbf{BR-UC3.5-2:} Nếu một sản phẩm có các thuộc tính/biến thể bắt buộc (được cấu hình trong backend - FR-MD02-06), khách hàng phải lựa chọn các giá trị thuộc tính đó trước khi có thể thêm món vào giỏ hàng. \newline - \textbf{BR-UC3.5-3:} Giá của từng món trong giỏ hàng phải phản ánh đúng giá của biến thể được chọn (bao gồm cả phụ thu nếu có). \newline - \textbf{BR-UC3.5-4:} Giỏ hàng đặt trước là tạm thời và gắn liền với phiên làm việc (session) của khách hàng trong quá trình đặt chỗ. Dữ liệu sẽ được lưu chính thức khi hoàn tất đặt chỗ. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.5-1 (Usability):} Quá trình chọn món, chọn biến thể, thay đổi số lượng, xóa món phải trực quan và dễ dàng. Phản hồi khi thêm món vào giỏ phải rõ ràng. Giao diện chọn biến thể không được gây nhầm lẫn. \newline - \textbf{NFR-UC3.5-2 (Performance):} Việc thêm món vào giỏ và cập nhật giỏ hàng phải diễn ra gần như tức thời (< 1 giây). \newline - \textbf{NFR-UC3.5-3 (Accuracy):} Số lượng, loại món, biến thể và tổng giá trị trong giỏ hàng phải được tính toán và hiển thị chính xác. \\
+\hline
+\end{longtable}
+
+% ... (Continue with the rest of the Use Cases for MD-03 in the same format) ...
+\subsubsection{Use Case UC-MD03-06: Xem Tóm tắt Đặt chỗ}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-06: Xem Tóm tắt Đặt chỗ} \label{tab:uc_md03_06} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Tóm tắt Đặt chỗ \\
+\hline
+Use Case ID & UC-MD03-06 \\
+\hline
+Use Case Description & Cho phép Khách hàng (US-08) xem lại toàn bộ thông tin chi tiết của lượt đặt chỗ mà họ đã chọn/nhập, bao gồm thông tin đặt bàn, danh sách món ăn đặt trước (nếu có), và số tiền đặt cọc dự kiến, trước khi tiến hành nhập thông tin cá nhân và thanh toán. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Khách hàng đã hoàn thành việc chọn thông tin đặt bàn (UC-MD03-02), có thể đã chọn bàn (UC-MD03-03), và có thể đã chọn món đặt trước (UC-MD03-05), và muốn xem lại tổng thể trước khi xác nhận. \\
+\hline
+Pre-Condition & - Khách hàng đang trong luồng đặt chỗ online. \newline - Khách hàng đã cung cấp các thông tin cần thiết ở các bước trước (ngày, giờ, số người, tùy chọn bàn, tùy chọn món đặt trước). \newline - Hệ thống đã tạm thời lưu trữ các lựa chọn này trong phiên làm việc. \\
+\hline
+Post-Condition & - Khách hàng có cái nhìn tổng quan và chính xác về lượt đặt chỗ của mình. \newline - Khách hàng có thể kiểm tra lại thông tin và quay lại các bước trước để sửa đổi nếu cần. \newline - Khách hàng sẵn sàng chuyển sang bước nhập thông tin cá nhân (UC-MD03-07). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Sau khi khách hàng (US-08) hoàn thành các bước lựa chọn trước đó (đặt bàn, tùy chọn đặt món) và nhấn nút "Tiếp tục" / "Xem lại" / "Proceed to Checkout" hoặc tương tự. \newline 2. Hệ thống tổng hợp tất cả thông tin khách hàng đã chọn trong phiên làm việc hiện tại. \newline 3. Hệ thống hiển thị trang/màn hình tóm tắt đặt chỗ, bao gồm các thông tin sau: \newline    - Ngày đặt bàn. \newline    - Giờ đặt bàn. \newline    - Số lượng người. \newline    - (Nếu có) Bàn cụ thể đã chọn. \newline    - (Nếu có) Danh sách chi tiết các món ăn/đồ uống đã chọn đặt trước, bao gồm tên món, biến thể (nếu có), số lượng, đơn giá và thành tiền của từng món. \newline    - (Nếu có) Tổng giá trị các món ăn đặt trước. \newline    - Số tiền đặt cọc dự kiến (được tính toán bởi hệ thống - UC-MD03-08). \newline    - (Tùy chọn) Chính sách hủy/thay đổi đặt chỗ. \newline 4. US-08 xem xét kỹ lưỡng các thông tin hiển thị. \\
+\hline
+Alternative Flow & \textbf{4a. Quay lại chỉnh sửa:} \newline    1. Nếu phát hiện thông tin chưa chính xác hoặc muốn thay đổi, US-08 nhấp vào nút "Quay lại" / "Chỉnh sửa" tương ứng với phần thông tin muốn thay đổi (ví dụ: chỉnh sửa món ăn, thay đổi giờ đặt). \newline    2. Hệ thống điều hướng khách hàng về bước tương ứng trong luồng đặt chỗ. \newline    3. Sau khi chỉnh sửa xong, khách hàng sẽ quay lại bước 1 của Use Case này. \\
+\hline
+Exception Flow & \textbf{2a. Lỗi tổng hợp thông tin:} \newline    1. Hệ thống gặp lỗi khi cố gắng lấy hoặc tổng hợp thông tin từ phiên làm việc của khách hàng. \newline    2. Hệ thống hiển thị thông báo lỗi "Không thể hiển thị tóm tắt đặt chỗ. Vui lòng thử lại." \newline    3. Use Case kết thúc không thành công. Khách hàng có thể cần bắt đầu lại quá trình đặt chỗ. \newline \textbf{3a. Lỗi tính toán tiền đặt cọc:} \newline    1. Hệ thống gặp lỗi khi thực hiện tính toán số tiền đặt cọc (liên quan UC-MD03-08). \newline    2. Số tiền đặt cọc có thể không hiển thị hoặc hiển thị không chính xác. Hệ thống nên báo lỗi. \newline    3. Use Case có thể bị chặn không cho đi tiếp cho đến khi lỗi được khắc phục. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.6-1:} Tất cả các thông tin quan trọng của lượt đặt chỗ (ngày, giờ, số người, món đặt trước, tiền cọc) phải được hiển thị rõ ràng và chính xác trên màn hình tóm tắt. \newline - \textbf{BR-UC3.6-2:} Phải có cơ chế cho phép khách hàng dễ dàng quay lại các bước trước để chỉnh sửa thông tin nếu cần thiết. \newline - \textbf{BR-UC3.6-3:} Số tiền đặt cọc hiển thị phải là kết quả tính toán từ UC-MD03-08 dựa trên các quy tắc đã cấu hình. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.6-1 (Usability):} Bố cục trang tóm tắt phải rõ ràng, dễ đọc, dễ kiểm tra thông tin. Các nút hành động (Tiếp tục, Quay lại) phải nổi bật. \newline - \textbf{NFR-UC3.6-2 (Performance):} Thời gian tải trang tóm tắt phải nhanh chóng (dưới 2 giây). \newline - \textbf{NFR-UC3.6-3 (Accuracy):} Mọi thông tin hiển thị trên trang tóm tắt phải khớp 100\% với các lựa chọn mà khách hàng đã thực hiện ở các bước trước. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-07: Nhập Thông tin Khách hàng}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-07: Nhập Thông tin Khách hàng} \label{tab:uc_md03_07} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Nhập Thông tin Khách hàng \\
+\hline
+Use Case ID & UC-MD03-07 \\
+\hline
+Use Case Description & Thu thập thông tin liên hệ cần thiết từ Khách hàng (US-08) như Tên, Số điện thoại, Địa chỉ Email để hoàn tất quá trình đặt chỗ và phục vụ cho việc liên lạc, xác nhận sau này. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Khách hàng đã xem xét và đồng ý với thông tin tóm tắt đặt chỗ (UC-MD03-06) và nhấn nút "Tiếp tục" / "Nhập thông tin" / "Proceed". \\
+\hline
+Pre-Condition & - Khách hàng đã hoàn thành UC-MD03-06. \newline - Hệ thống đã lưu trữ tạm thời các thông tin đặt bàn/đặt món. \\
+\hline
+Post-Condition & - Thông tin liên hệ của khách hàng (Tên, SĐT, Email) được ghi nhận tạm thời cùng với các thông tin đặt chỗ khác. \newline - Hệ thống sẵn sàng chuyển sang bước thanh toán đặt cọc (UC-MD03-09). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Khách hàng mới/Chưa đăng nhập) & 1. Tiếp nối từ UC-MD03-06, sau khi khách hàng nhấn "Tiếp tục". \newline 2. Hệ thống hiển thị một form yêu cầu khách hàng nhập thông tin cá nhân. \newline 3. US-08 nhập Họ và Tên vào trường tương ứng (Bắt buộc). \newline 4. US-08 nhập Số Điện Thoại vào trường tương ứng (Bắt buộc, định dạng hợp lệ - BR-UC3.7-2). \newline 5. US-08 nhập Địa chỉ Email vào trường tương ứng (Bắt buộc, định dạng hợp lệ - BR-UC3.7-3). \newline 6. (Tùy chọn) US-08 có thể nhập các thông tin khác nếu form yêu cầu (ví dụ: Ghi chú cho nhà hàng). \newline 7. US-08 nhấp vào nút "Tiếp tục" / "Xác nhận thông tin" / "Proceed to Payment". \newline 8. Hệ thống kiểm tra tính hợp lệ của các trường bắt buộc và định dạng dữ liệu. \newline 9. Hệ thống ghi nhận tạm thời thông tin khách hàng. \\
+\hline
+Alternative Flow & \textbf{1a. Khách hàng đã đăng nhập:} \newline    1. Nếu khách hàng đã đăng nhập vào tài khoản trên website/app trước đó. \newline    2. Hệ thống tự động điền các thông tin cá nhân (Tên, SĐT, Email) đã lưu trong hồ sơ tài khoản vào form. \newline    3. US-08 kiểm tra lại thông tin, có thể chỉnh sửa nếu cần. \newline    4. Use Case tiếp tục từ bước 6. \newline \textbf{6a. Tùy chọn tạo tài khoản:} \newline    1. Form có thể cung cấp tùy chọn "Tạo tài khoản với thông tin này" (ví dụ: checkbox). \newline    2. Nếu US-08 chọn tùy chọn này, hệ thống sẽ yêu cầu nhập thêm Mật khẩu. \newline    3. Sau khi đặt chỗ thành công, hệ thống sẽ tạo tài khoản mới cho khách hàng. \\
+\hline
+Exception Flow & \textbf{8a. Lỗi Xác thực Dữ liệu (Validation Error):} \newline    1. Hệ thống phát hiện thiếu thông tin bắt buộc (Tên, SĐT, Email) hoặc định dạng SĐT/Email không hợp lệ. \newline    2. Hệ thống hiển thị thông báo lỗi cụ thể, chỉ rõ trường bị lỗi. \newline    3. Hệ thống không cho phép tiếp tục và giữ nguyên form để US-08 sửa chữa. Use Case quay lại bước 3. \newline \textbf{9a. Lỗi Hệ thống khi ghi nhận thông tin:} \newline    1. Hệ thống gặp lỗi khi cố gắng lưu tạm thông tin khách hàng vào session hoặc cơ sở dữ liệu tạm. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.7-1:} Tên, Số điện thoại và Địa chỉ Email là các thông tin bắt buộc phải thu thập từ khách hàng để phục vụ việc xác nhận đặt chỗ và liên lạc khi cần. \newline - \textbf{BR-UC3.7-2:} Số điện thoại phải được kiểm tra định dạng cơ bản (ví dụ: chỉ chứa số, đủ độ dài). \newline - \textbf{BR-UC3.7-3:} Địa chỉ Email phải được kiểm tra định dạng cơ bản (ví dụ: chứa ký tự '@' và '.'). \newline - \textbf{BR-UC3.7-4:} Thông tin khách hàng thu thập được phải được xử lý và lưu trữ tuân thủ các quy định về bảo mật dữ liệu cá nhân (ví dụ: GDPR, nếu áp dụng). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.7-1 (Usability):} Form nhập thông tin phải đơn giản, rõ ràng. Các trường bắt buộc phải được đánh dấu. Nên có gợi ý về định dạng SĐT/Email. Tự động điền thông tin cho khách đã đăng nhập là một điểm cộng lớn. \newline - \textbf{NFR-UC3.7-2 (Security):} Quá trình truyền và lưu trữ tạm thời thông tin khách hàng cần được bảo mật. Nếu có tùy chọn tạo tài khoản, mật khẩu phải được xử lý an toàn (hash). \newline - \textbf{NFR-UC3.7-3 (Performance):} Việc kiểm tra định dạng dữ liệu và ghi nhận thông tin phải nhanh chóng (< 1 giây). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-08: Tính toán Tiền Đặt cọc}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-08: Tính toán Tiền Đặt cọc} \label{tab:uc_md03_08} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Tính toán Tiền Đặt cọc \\
+\hline
+Use Case ID & UC-MD03-08 \\
+\hline
+Use Case Description & Hệ thống tự động tính toán số tiền đặt cọc mà khách hàng cần thanh toán dựa trên các quy tắc đã được Quản lý nhà hàng cấu hình, bao gồm tỷ lệ phần trăm trên giá trị bàn (nếu có) và tỷ lệ phần trăm trên tổng giá trị các món ăn đã đặt trước. \\
+\hline
+Actor & System (Thực hiện tính toán) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khi khách hàng xem trang tóm tắt đặt chỗ (UC-MD03-06). \newline - Hoặc khi hệ thống chuẩn bị chuyển sang trang thanh toán đặt cọc. \\
+\hline
+Pre-Condition & - Các thông tin về lượt đặt chỗ đã được ghi nhận (số người, bàn đã chọn - nếu có, danh sách món đặt trước). \newline - Quản lý nhà hàng đã cấu hình các tham số cần thiết cho việc tính đặt cọc (FR-MD03-11): \newline    - Tỷ lệ phần trăm đặt cọc cho bàn (ví dụ: 15\%). \newline    - Giá trị của từng bàn (nếu áp dụng tính cọc theo bàn). \newline    - Tỷ lệ phần trăm đặt cọc cho món ăn đặt trước (ví dụ: 15\%). \\
+\hline
+Post-Condition & - Hệ thống xác định được số tiền đặt cọc chính xác cho lượt đặt chỗ hiện tại. \newline - Số tiền này được hiển thị cho khách hàng (trên trang tóm tắt hoặc trang thanh toán) và được sử dụng trong bước thanh toán (UC-MD03-09). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Hệ thống nhận được yêu cầu tính tiền đặt cọc (từ trigger). \newline 2. Hệ thống truy xuất thông tin về lượt đặt chỗ hiện tại: \newline    - Bàn đã chọn (nếu có) và giá trị cấu hình cho bàn đó (Table Price). \newline    - Danh sách các món ăn đặt trước và tổng giá trị của chúng (Pre-order Total). \newline 3. Hệ thống truy xuất các tham số cấu hình đặt cọc (từ FR-MD03-11): \newline    - Tỷ lệ cọc bàn (Table Deposit Rate, ví dụ: 0.15). \newline    - Tỷ lệ cọc món ăn (Food Deposit Rate, ví dụ: 0.15). \newline 4. Hệ thống tính tiền cọc cho bàn (Table Deposit Amount): \newline    `Table Deposit Amount = Table Price * Table Deposit Rate` \newline    (Nếu không có giá bàn hoặc tỷ lệ cọc bàn = 0, thì Table Deposit Amount = 0). \newline 5. Hệ thống tính tiền cọc cho món ăn (Food Deposit Amount): \newline    `Food Deposit Amount = Pre-order Total * Food Deposit Rate` \newline    (Nếu không có món đặt trước hoặc tỷ lệ cọc món = 0, thì Food Deposit Amount = 0). \newline 6. Hệ thống tính tổng tiền đặt cọc (Total Deposit Amount): \newline    `Total Deposit Amount = Table Deposit Amount + Food Deposit Amount` \newline 7. Hệ thống lưu trữ hoặc trả về giá trị `Total Deposit Amount` để hiển thị hoặc sử dụng cho thanh toán. \\
+\hline
+Alternative Flow & \textbf{4a. Chỉ đặt bàn, không đặt món:} \newline    1. `Pre-order Total = 0`. \newline    2. `Food Deposit Amount = 0`. \newline    3. `Total Deposit Amount = Table Deposit Amount`. \newline \textbf{4b. Chỉ đặt món (ví dụ: takeout/delivery đặt trước), không đặt bàn:} \newline    1. `Table Price = 0` (hoặc không áp dụng). \newline    2. `Table Deposit Amount = 0`. \newline    3. `Total Deposit Amount = Food Deposit Amount`. \newline \textbf{4c. Cấu hình đặt cọc cố định:} \newline    1. Nếu hệ thống hỗ trợ đặt cọc một số tiền cố định (ví dụ: 100,000 VNĐ cho mọi đặt chỗ), hệ thống sẽ lấy giá trị cố định này thay vì tính toán theo tỷ lệ. \\
+\hline
+Exception Flow & \textbf{2a. Lỗi truy xuất thông tin đặt chỗ/cấu hình:} \newline    1. Hệ thống không thể lấy được giá bàn hoặc tổng giá trị món ăn hoặc các tỷ lệ cọc đã cấu hình. \newline    2. Hệ thống không thể thực hiện tính toán. \newline    3. Hệ thống ghi nhận lỗi và có thể báo lỗi cho người dùng hoặc quản trị viên. Việc đặt chỗ có thể bị tạm dừng. \newline \textbf{6a. Lỗi tính toán số học:} \newline    1. Xảy ra lỗi không mong muốn trong quá trình tính toán (ví dụ: chia cho 0, tràn số - ít khả năng xảy ra với phép nhân tỷ lệ). \newline    2. Hệ thống ghi nhận lỗi. Kết quả tính toán không đáng tin cậy. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.8-1:} Công thức tính tiền đặt cọc là: (Giá trị bàn * Tỷ lệ cọc bàn) + (Tổng giá trị món đặt trước * Tỷ lệ cọc món ăn). \newline - \textbf{BR-UC3.8-2:} Các tỷ lệ phần trăm (Tỷ lệ cọc bàn, Tỷ lệ cọc món ăn) và Giá trị bàn được cấu hình bởi Quản lý nhà hàng (FR-MD03-11). \newline - \textbf{BR-UC3.8-3:} Nếu một thành phần (bàn hoặc món ăn) không được đặt hoặc tỷ lệ cọc tương ứng bằng 0, thì phần tiền cọc của thành phần đó sẽ bằng 0. \newline - \textbf{BR-UC3.8-4:} Kết quả tính toán tiền đặt cọc phải được làm tròn theo quy tắc làm tròn tiền tệ của hệ thống (ví dụ: làm tròn đến hàng trăm, hàng nghìn). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.8-1 (Accuracy):} Việc tính toán phải chính xác 100\% dựa trên công thức và các giá trị đầu vào. \newline - \textbf{NFR-UC3.8-2 (Performance):} Quá trình tính toán phải diễn ra gần như tức thời. \newline - \textbf{NFR-UC3.8-3 (Configurability):} Công thức tính toán dựa trên các tham số có thể cấu hình được (tỷ lệ \%, giá bàn), đảm bảo tính linh hoạt cho nhà hàng. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-09: Thanh toán Đặt cọc}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-09: Thanh toán Đặt cọc} \label{tab:uc_md03_09} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Thanh toán Đặt cọc \\
+\hline
+Use Case ID & UC-MD03-09 \\
+\hline
+Use Case Description & Cho phép Khách hàng (US-08) thực hiện thanh toán số tiền đặt cọc đã được hệ thống tính toán (UC-MD03-08) thông qua một cổng thanh toán trực tuyến được tích hợp (ví dụ: Stripe, PayPal, VNPay, MoMo...). \\
+\hline
+Actor & US-08 (Khách hàng), System (Tích hợp cổng thanh toán), Payment Gateway (Bên thứ ba) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Khách hàng đã nhập đầy đủ thông tin cá nhân (UC-MD03-07) và nhấn nút tiến hành thanh toán. \\
+\hline
+Pre-Condition & - Khách hàng đã hoàn thành UC-MD03-07. \newline - Hệ thống đã tính toán thành công số tiền đặt cọc (UC-MD03-08). \newline - Hệ thống đã được tích hợp với ít nhất một cổng thanh toán trực tuyến và cấu hình tích hợp đang hoạt động. \newline - Khách hàng có phương thức thanh toán hợp lệ (ví dụ: thẻ tín dụng, tài khoản ví điện tử). \\
+\hline
+Post-Condition & - \textbf{Thành công:} Giao dịch thanh toán đặt cọc được xử lý thành công bởi cổng thanh toán. Hệ thống nhận được xác nhận thanh toán thành công. Lượt đặt chỗ được đánh dấu là đã thanh toán đặt cọc. \newline - \textbf{Thất bại:} Giao dịch thanh toán không thành công. Hệ thống nhận được thông báo lỗi. Lượt đặt chỗ không được xác nhận. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Thanh toán thành công) & 1. Tiếp nối từ UC-MD03-07, sau khi khách hàng nhấn "Tiếp tục thanh toán". \newline 2. Hệ thống hiển thị các phương thức thanh toán trực tuyến khả dụng (ví dụ: Visa/Mastercard, MoMo, VNPay...). \newline 3. US-08 chọn một phương thức thanh toán. \newline 4. Hệ thống chuyển hướng (redirect) khách hàng đến giao diện an toàn của Cổng Thanh Toán (Payment Gateway) đã chọn HOẶC hiển thị form nhập thông tin thanh toán được nhúng trực tiếp (ví dụ: Stripe Elements). \newline 5. Tại giao diện Cổng Thanh Toán (hoặc form nhúng): \newline    a. US-08 nhập thông tin thanh toán được yêu cầu (số thẻ, ngày hết hạn, CVV, hoặc thông tin đăng nhập ví điện tử...). \newline    b. US-08 xác nhận thanh toán trên giao diện của Cổng Thanh Toán. \newline 6. Cổng Thanh Toán xử lý giao dịch. \newline 7. Cổng Thanh Toán gửi kết quả giao dịch (Thành công) trở lại cho Hệ thống (thông qua webhook hoặc redirect URL). \newline 8. Hệ thống nhận được xác nhận thanh toán thành công. \newline 9. Hệ thống cập nhật trạng thái thanh toán đặt cọc cho lượt đặt chỗ này là "Đã thanh toán". \newline 10. Hệ thống chuyển hướng khách hàng đến trang xác nhận đặt chỗ thành công (UC-MD03-10). \\
+\hline
+Alternative Flow & \textbf{4a. Thanh toán bằng phương thức khác (nếu có):} \newline    1. Hệ thống có thể hỗ trợ các phương thức khác như Chuyển khoản ngân hàng (hiển thị thông tin tài khoản) hoặc thanh toán sau (nếu chính sách cho phép - ít dùng cho đặt cọc online). Luồng xử lý sẽ khác nhau tùy phương thức. \newline \textbf{5c. Xác thực bổ sung (3D Secure, OTP):} \newline    1. Cổng Thanh Toán có thể yêu cầu khách hàng thực hiện bước xác thực bổ sung (ví dụ: nhập mã OTP gửi về điện thoại). \newline    2. US-08 hoàn thành bước xác thực. \newline    3. Use Case tiếp tục từ bước 6. \\
+\hline
+Exception Flow & \textbf{6a. Thanh toán thất bại tại Cổng Thanh Toán:} \newline    1. Giao dịch bị từ chối bởi Cổng Thanh Toán (ví dụ: sai thông tin thẻ, không đủ tiền, thẻ hết hạn, nghi ngờ gian lận...). \newline    2. Cổng Thanh Toán gửi kết quả giao dịch (Thất bại) kèm mã lỗi/lý do trở lại cho Hệ thống. \newline    3. Hệ thống nhận được thông báo thất bại. \newline    4. Hệ thống chuyển hướng khách hàng quay lại trang thanh toán hoặc trang thông báo lỗi, hiển thị thông báo "Thanh toán không thành công. [Lý do nếu có]. Vui lòng thử lại hoặc chọn phương thức khác." \newline    5. Lượt đặt chỗ không được xác nhận. Khách hàng có thể thử lại (quay lại bước 3). \newline \textbf{7a. Lỗi giao tiếp với Cổng Thanh Toán:} \newline    1. Hệ thống không nhận được phản hồi từ Cổng Thanh Toán sau một khoảng thời gian chờ đợi (timeout) hoặc nhận được phản hồi lỗi kỹ thuật. \newline    2. Hệ thống không thể xác định trạng thái giao dịch. \newline    3. Hệ thống nên hiển thị thông báo lỗi chung, khuyến nghị khách hàng kiểm tra lại giao dịch với ngân hàng/ví và liên hệ nhà hàng để xác nhận. \newline    4. Lượt đặt chỗ có thể ở trạng thái "Chờ xử lý" hoặc "Lỗi". \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.9-1:} Việc thanh toán đặt cọc là bắt buộc để hoàn tất và xác nhận lượt đặt chỗ online (trừ khi có cấu hình đặc biệt cho phép đặt chỗ không cần cọc). \newline - \textbf{BR-UC3.9-2:} Số tiền yêu cầu thanh toán phải chính xác bằng số tiền đặt cọc đã được tính toán ở UC-MD03-08. \newline - \textbf{BR-UC3.9-3:} Hệ thống phải tích hợp an toàn với Cổng Thanh Toán được lựa chọn, tuân thủ các tiêu chuẩn bảo mật thanh toán (ví dụ: PCI DSS nếu xử lý thẻ trực tiếp). \newline - \textbf{BR-UC3.9-4:} Kết quả giao dịch (thành công/thất bại) từ Cổng Thanh Toán phải được ghi nhận chính xác và cập nhật vào trạng thái của lượt đặt chỗ trong hệ thống. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.9-1 (Security):} Quá trình thanh toán phải cực kỳ bảo mật. Hệ thống không nên lưu trữ thông tin nhạy cảm của thẻ thanh toán. Việc chuyển hướng hoặc nhúng form thanh toán phải qua kết nối HTTPS. \newline - \textbf{NFR-UC3.9-2 (Reliability):} Tích hợp với Cổng Thanh Toán phải ổn định và đáng tin cậy. Cần có cơ chế xử lý lỗi giao tiếp hoặc timeout. \newline - \textbf{NFR-UC3.9-3 (Usability):} Giao diện chọn phương thức thanh toán và quá trình thanh toán (dù là redirect hay nhúng) phải rõ ràng, dễ dàng cho khách hàng thực hiện. Thông báo lỗi khi thanh toán thất bại cần dễ hiểu. \newline - \textbf{NFR-UC3.9-4 (Performance):} Thời gian chuyển hướng đến cổng thanh toán và nhận phản hồi phải nhanh chóng. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-10: Xác nhận Đặt chỗ}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-10: Xác nhận Đặt chỗ} \label{tab:uc_md03_10} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xác nhận Đặt chỗ \\
+\hline
+Use Case ID & UC-MD03-10 \\
+\hline
+Use Case Description & Sau khi khách hàng thanh toán thành công tiền đặt cọc (UC-MD03-09), hệ thống tự động hoàn tất việc tạo bản ghi đặt chỗ chính thức, cập nhật trạng thái bàn/lịch và gửi thông báo xác nhận (email/SMS) đến khách hàng. \\
+\hline
+Actor & System (Thực hiện chính), US-08 (Khách hàng - Nhận xác nhận) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Hệ thống nhận được xác nhận thanh toán đặt cọc thành công từ Cổng Thanh Toán (kết thúc thành công của UC-MD03-09). \\
+\hline
+Pre-Condition & - Thanh toán đặt cọc đã thành công (UC-MD03-09 thành công). \newline - Hệ thống đã lưu trữ tạm thời đầy đủ thông tin về lượt đặt chỗ (ngày, giờ, số người, bàn, món đặt trước, thông tin khách hàng). \newline - Hệ thống gửi email/SMS đã được cấu hình và hoạt động. \\
+\hline
+Post-Condition & - Một bản ghi đặt chỗ (booking record) chính thức được tạo hoặc cập nhật trong hệ thống với trạng thái "Đã xác nhận" (Confirmed). \newline - Thông tin chi tiết của lượt đặt chỗ (bao gồm cả mã đặt chỗ duy nhất) được lưu trữ bền vững. \newline - Nếu có chọn bàn cụ thể, trạng thái của bàn đó trong hệ thống được cập nhật là "Đã đặt" cho khung thời gian tương ứng. \newline - Khách hàng nhận được email hoặc SMS xác nhận đặt chỗ thành công với đầy đủ thông tin chi tiết và mã đặt chỗ. \newline - (Tùy chọn) Thông báo về lượt đặt chỗ mới có thể được gửi đến Quản lý nhà hàng hoặc bộ phận Lễ tân. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Hệ thống nhận được tín hiệu thanh toán đặt cọc thành công cho một lượt đặt chỗ đang chờ xử lý. \newline 2. Hệ thống truy xuất toàn bộ thông tin của lượt đặt chỗ đó (thông tin khách, bàn, món ăn, thanh toán cọc...). \newline 3. Hệ thống tạo một bản ghi đặt chỗ mới (hoặc cập nhật bản ghi tạm thời) trong cơ sở dữ liệu với trạng thái là "Đã xác nhận" (Confirmed). \newline 4. Hệ thống tạo một mã đặt chỗ (Booking ID) duy nhất cho lượt đặt chỗ này. \newline 5. Nếu khách hàng đã chọn bàn cụ thể (UC-MD03-03), hệ thống cập nhật trạng thái của bàn đó là "Đã đặt" (Reserved/Occupied) trong khoảng thời gian tương ứng trên sơ đồ tầng hoặc lịch tài nguyên bàn. \newline 6. Hệ thống soạn nội dung email/SMS xác nhận, bao gồm: \newline    - Lời chào và xác nhận đặt chỗ thành công. \newline    - Mã đặt chỗ. \newline    - Thông tin chi tiết: Ngày, giờ, số người, tên khách, SĐT. \newline    - (Nếu có) Bàn đã đặt. \newline    - (Nếu có) Danh sách món ăn đặt trước và tổng giá trị. \newline    - Số tiền đặt cọc đã thanh toán. \newline    - Địa chỉ nhà hàng, thông tin liên hệ, chính sách hủy/thay đổi. \newline 7. Hệ thống gửi email/SMS xác nhận đến địa chỉ/số điện thoại khách hàng đã cung cấp (UC-MD03-07). \newline 8. Hệ thống chuyển hướng khách hàng đến trang "Đặt chỗ thành công" trên website/app, hiển thị thông báo xác nhận và mã đặt chỗ. \newline 9. (Tùy chọn) Hệ thống gửi thông báo nội bộ đến người quản lý/lễ tân về lượt đặt chỗ mới. \newline 10. Hệ thống ghi nhận hoạt động hoàn tất đặt chỗ vào nhật ký. \\
+\hline
+Alternative Flow & \textbf{7a. Gửi thông báo qua nhiều kênh:} \newline    1. Hệ thống có thể được cấu hình để gửi xác nhận qua cả email và SMS (nếu có tích hợp SMS Gateway). \newline \textbf{9a. Không gửi thông báo nội bộ:} \newline    1. Nếu không được cấu hình, hệ thống bỏ qua bước gửi thông báo cho nhân viên. Nhân viên sẽ xem đặt chỗ qua danh sách (FR-MD03-12). \\
+\hline
+Exception Flow & \textbf{3a. Lỗi tạo/cập nhật bản ghi đặt chỗ:} \newline    1. Hệ thống gặp lỗi khi cố gắng lưu bản ghi đặt chỗ chính thức vào cơ sở dữ liệu (ví dụ: lỗi ràng buộc dữ liệu, lỗi kết nối). \newline    2. Hệ thống không thể hoàn tất việc xác nhận. Đây là trường hợp lỗi nghiêm trọng. \newline    3. Hệ thống cần ghi nhận lỗi chi tiết, có thể cần thông báo cho quản trị viên để xử lý thủ công (ví dụ: hoàn tiền cọc cho khách nếu không thể tạo đặt chỗ). Khách hàng nên được thông báo về sự cố. \newline \textbf{5a. Lỗi cập nhật trạng thái bàn:} \newline    1. Hệ thống gặp lỗi khi cố gắng cập nhật trạng thái bàn đã chọn. \newline    2. Hệ thống ghi nhận lỗi. Có thể dẫn đến nguy cơ double-booking nếu không được xử lý. \newline 3. Bản ghi đặt chỗ vẫn có thể được tạo, nhưng cần cảnh báo cho nhân viên kiểm tra lại tình trạng bàn. \newline \textbf{7a. Lỗi gửi email/SMS xác nhận:} \newline    1. Hệ thống gặp lỗi khi gửi thông báo (ví dụ: địa chỉ email không hợp lệ, lỗi máy chủ mail/SMS gateway). \newline    2. Hệ thống ghi nhận lỗi gửi tin. \newline    3. Việc đặt chỗ vẫn được xác nhận trong hệ thống (bước 3-5 vẫn thành công). Khách hàng vẫn thấy trang xác nhận thành công (bước 8), nhưng không nhận được email/SMS. Nhân viên có thể cần liên hệ xác nhận lại với khách qua điện thoại. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.10-1:} Lượt đặt chỗ chỉ được coi là chính thức và thành công khi bản ghi đặt chỗ được tạo/cập nhật với trạng thái "Đã xác nhận" và khách hàng nhận được mã đặt chỗ. \newline - \textbf{BR-UC3.10-2:} Mã đặt chỗ phải là duy nhất để dễ dàng tra cứu và quản lý. \newline - \textbf{BR-UC3.10-3:} Thông tin trong email/SMS xác nhận phải đầy đủ và khớp với thông tin khách hàng đã cung cấp/chọn lựa. \newline - \textbf{BR-UC3.10-4:} Việc cập nhật trạng thái bàn (nếu có chọn bàn) là cần thiết để tránh việc bàn đó bị gán cho lượt đặt chỗ khác trong cùng thời điểm. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.10-1 (Reliability):} Quá trình xác nhận đặt chỗ và gửi thông báo phải đáng tin cậy. Các lỗi cần được ghi nhận và có cơ chế xử lý phù hợp. \newline - \textbf{NFR-UC3.10-2 (Performance):} Toàn bộ quá trình từ lúc nhận xác nhận thanh toán đến lúc hiển thị trang thành công cho khách hàng và gửi thông báo nên diễn ra nhanh chóng (vài giây). \newline - \textbf{NFR-UC3.10-3 (Clarity):} Thông báo xác nhận (trên web/app và qua email/SMS) phải rõ ràng, dễ hiểu, cung cấp đủ thông tin cần thiết cho khách hàng. \newline - \textbf{NFR-UC3.10-4 (Atomicity):} Lý tưởng nhất, quá trình xác nhận (tạo bản ghi, cập nhật bàn, gửi thông báo) nên có tính chất "nguyên tử" - hoặc thành công tất cả, hoặc rollback nếu có lỗi nghiêm trọng (ví dụ: lỗi tạo bản ghi đặt chỗ). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-11: Cấu hình Tham số Đặt chỗ}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-11: Cấu hình Tham số Đặt chỗ} \label{tab:uc_md03_11} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Cấu hình Tham số Đặt chỗ \\
+\hline
+Use Case ID & UC-MD03-11 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng hoặc Quản trị viên hệ thống thiết lập các quy tắc và tham số vận hành cho chức năng đặt chỗ online và quản lý đặt chỗ nói chung. Bao gồm giờ hoạt động, khoảng thời gian đặt, giới hạn số khách, quy tắc đặt cọc, giá trị bàn, và các tùy chọn khác. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Cần thiết lập ban đầu cho chức năng đặt chỗ hoặc cần thay đổi các quy tắc vận hành hiện tại. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-10) đã đăng nhập với quyền quản trị cấu hình module Đặt chỗ (Booking/Reservation) hoặc cấu hình Website/POS liên quan. \newline - Module Đặt chỗ (hoặc tương đương) đã được cài đặt. \\
+\hline
+Post-Condition & - Các quy tắc và tham số đặt chỗ được cập nhật trong cấu hình hệ thống. \newline - Chức năng đặt chỗ online (cho khách hàng) và quản lý đặt chỗ (cho nhân viên) sẽ hoạt động theo các quy tắc mới được thiết lập. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-10) truy cập vào khu vực cấu hình của module Đặt chỗ (ví dụ: Reservations > Configuration > Settings). \newline 2. Hệ thống hiển thị giao diện cấu hình với nhiều tùy chọn được nhóm lại. \newline 3. Người dùng tìm đến các mục cấu hình cần thiết và thay đổi giá trị: \newline    - \textbf{Giờ hoạt động \& Khung giờ đặt chỗ:} Thiết lập giờ mở cửa, giờ đóng cửa cho phép đặt bàn, khoảng cách giữa các slot đặt (ví dụ: 15 phút), thời lượng mặc định của một lượt đặt. \newline    - \textbf{Giới hạn đặt chỗ:} Số ngày tối thiểu/tối đa cho phép đặt trước, số lượng khách tối thiểu/tối đa cho mỗi lượt đặt online. \newline    - \textbf{Quy tắc Đặt cọc:} Kích hoạt/Tắt yêu cầu đặt cọc, nhập Tỷ lệ phần trăm đặt cọc cho bàn, Tỷ lệ phần trăm đặt cọc cho món ăn. \newline    - \textbf{Giá trị Bàn:} Truy cập một khu vực riêng (ví dụ: quản lý tài nguyên bàn) để nhập giá trị tham chiếu cho từng bàn hoặc loại bàn (dùng để tính cọc bàn). \newline    - \textbf{Cho phép chọn bàn:} Kích hoạt/Tắt tùy chọn cho phép khách hàng tự chọn bàn cụ thể trên sơ đồ tầng khi đặt online. \newline    - \textbf{Thông báo \& Email Template:} Cấu hình nội dung các email/SMS xác nhận, nhắc nhở, hủy bỏ. \newline    - \textbf{Tích hợp Thanh toán:} Chọn và cấu hình cổng thanh toán sẽ sử dụng cho việc đặt cọc. \newline 4. Sau khi thực hiện các thay đổi mong muốn, Người dùng chọn hành động "Lưu" (Save). \newline 5. Hệ thống kiểm tra tính hợp lệ của các giá trị nhập vào (ví dụ: tỷ lệ phần trăm hợp lệ, giờ hợp lệ). \newline 6. Hệ thống lưu lại các cấu hình mới. \newline 7. Hệ thống hiển thị thông báo lưu thành công. \\
+\hline
+Alternative Flow & \textbf{3a. Cấu hình theo từng Điểm bán hàng (POS):} \newline    1. Nếu hệ thống hỗ trợ nhiều điểm bán hàng/nhà hàng, một số cấu hình (ví dụ: giờ hoạt động, giá bàn) có thể cần được thiết lập riêng cho từng điểm. Người dùng cần chọn đúng điểm bán hàng trước khi cấu hình. \\
+\hline
+Exception Flow & \textbf{5a. Lỗi Xác thực Dữ liệu:} \newline    1. Người dùng nhập giá trị không hợp lệ (ví dụ: tỷ lệ phần trăm > 100, giờ kết thúc trước giờ bắt đầu). \newline    2. Hệ thống báo lỗi, chỉ rõ trường bị sai. \newline    3. Hệ thống không lưu cấu hình. Use Case quay lại bước 3. \newline \textbf{6a. Lỗi Hệ thống khi Lưu:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi cố gắng lưu cấu hình. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.11-1:} Các tham số cấu hình này ảnh hưởng trực tiếp đến luồng đặt chỗ của khách hàng và cách hệ thống quản lý đặt chỗ. \newline - \textbf{BR-UC3.11-2:} Giá trị bàn (Table Price) là giá tham chiếu để tính tiền cọc bàn, không nhất thiết là giá thuê bàn thực tế. Cần có cơ chế nhập giá trị này cho từng bàn hoặc loại bàn. \newline - \textbf{BR-UC3.11-3:} Việc thay đổi các cấu hình này (ví dụ: giờ hoạt động, tỷ lệ cọc) sẽ có hiệu lực cho các lượt đặt chỗ mới sau khi lưu. Các lượt đặt chỗ cũ không bị ảnh hưởng (trừ khi có cơ chế cập nhật lại). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.11-1 (Usability):} Giao diện cấu hình phải được tổ chức logic, dễ tìm các tùy chọn. Các thuật ngữ sử dụng phải rõ ràng. Nên có giải thích ngắn (tooltip) cho các tùy chọn phức tạp. \newline - \textbf{NFR-UC3.11-2 (Flexibility):} Hệ thống nên cung cấp đủ các tham số cấu hình cần thiết để đáp ứng các quy tắc kinh doanh phổ biến của nhà hàng về đặt chỗ. \newline - \textbf{NFR-UC3.11-3 (Security):} Chỉ những người dùng có quyền hạn cao (Quản lý, Admin) mới được phép thay đổi các cấu hình quan trọng này. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-12: Xem Danh sách Đặt chỗ}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-12: Xem Danh sách Đặt chỗ} \label{tab:uc_md03_12} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Danh sách Đặt chỗ \\
+\hline
+Use Case ID & UC-MD03-12 \\
+\hline
+Use Case Description & Cho phép Nhân viên được phân quyền (Quản lý, Lễ tân) xem danh sách tổng hợp các lượt đặt chỗ đã được tạo trong hệ thống (bao gồm cả đặt online và nhập thủ công), với khả năng lọc và tìm kiếm theo các tiêu chí khác nhau. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-03 (Nhân viên lễ tân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Nhân viên cần kiểm tra các lượt đặt chỗ sắp tới, xem tình hình đặt bàn chung, hoặc tìm kiếm một lượt đặt chỗ cụ thể. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-03) đã đăng nhập vào hệ thống với quyền xem đặt chỗ. \newline - Đã có ít nhất một lượt đặt chỗ được tạo trong hệ thống. \\
+\hline
+Post-Condition & - Danh sách các lượt đặt chỗ phù hợp với tiêu chí lọc/tìm kiếm được hiển thị cho người dùng. \newline - Người dùng có cái nhìn tổng quan về tình trạng đặt chỗ. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-03) truy cập vào module quản lý Đặt chỗ (Reservations). \newline 2. Hệ thống mặc định hiển thị danh sách các lượt đặt chỗ, thường là các lượt đặt cho ngày hiện tại hoặc tương lai gần, ở dạng danh sách (List View) hoặc dạng lịch (Calendar View). \newline 3. Danh sách hiển thị các thông tin cơ bản của mỗi lượt đặt chỗ, ví dụ: \newline    - Mã đặt chỗ. \newline    - Tên khách hàng. \newline    - Ngày giờ đặt. \newline    - Số lượng người. \newline    - Bàn được gán (nếu có). \newline    - Trạng thái đặt chỗ (ví dụ: Đã xác nhận, Chờ xác nhận, Đã hủy, Đã đến). \newline    - Trạng thái thanh toán cọc (nếu có). \newline 4. Người dùng xem xét danh sách. \\
+\hline
+Alternative Flow & \textbf{4a. Lọc danh sách:} \newline    1. Người dùng sử dụng các bộ lọc có sẵn (Filters) để thu hẹp danh sách, ví dụ: lọc theo Ngày, theo Trạng thái, theo Bàn, theo Khách hàng. \newline    2. Hệ thống áp dụng bộ lọc và hiển thị lại danh sách kết quả. \newline    3. Use Case quay lại bước 4. \newline \textbf{4b. Tìm kiếm:} \newline    1. Người dùng nhập từ khóa (ví dụ: tên khách, SĐT, mã đặt chỗ) vào ô tìm kiếm. \newline    2. Hệ thống thực hiện tìm kiếm và hiển thị các lượt đặt chỗ khớp với từ khóa. \newline    3. Use Case quay lại bước 4. \newline \textbf{4c. Sắp xếp danh sách:} \newline    1. Người dùng nhấp vào tiêu đề cột (ví dụ: Ngày giờ đặt, Tên khách hàng) để sắp xếp danh sách tăng dần hoặc giảm dần theo cột đó. \newline    2. Hệ thống sắp xếp lại và hiển thị danh sách. \newline    3. Use Case quay lại bước 4. \newline \textbf{4d. Chuyển đổi dạng xem:} \newline    1. Người dùng chọn chuyển đổi sang dạng xem khác (ví dụ: từ List View sang Calendar View hoặc Kanban View nếu có). \newline    2. Hệ thống hiển thị dữ liệu đặt chỗ theo dạng xem mới. \newline    3. Use Case quay lại bước 4. \\
+\hline
+Exception Flow & \textbf{2a. Lỗi tải danh sách:} \newline    1. Hệ thống gặp lỗi khi truy vấn hoặc hiển thị danh sách đặt chỗ. \newline    2. Hệ thống hiển thị thông báo lỗi. \newline    3. Use Case kết thúc không thành công. \newline \textbf{2b. Không có đặt chỗ nào:} \newline    1. Nếu không có lượt đặt chỗ nào phù hợp với bộ lọc mặc định. \newline    2. Hệ thống hiển thị danh sách trống hoặc thông báo "Không có đặt chỗ nào". \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.12-1:} Danh sách phải hiển thị đủ thông tin cơ bản để nhân viên có thể nhận diện nhanh lượt đặt chỗ. \newline - \textbf{BR-UC3.12-2:} Các bộ lọc và chức năng tìm kiếm phải hoạt động chính xác, giúp người dùng dễ dàng tìm thấy thông tin cần thiết. \newline - \textbf{BR-UC3.12-3:} Trạng thái đặt chỗ hiển thị phải là trạng thái mới nhất của lượt đặt chỗ đó. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.12-1 (Usability):} Giao diện danh sách phải rõ ràng, dễ đọc. Các chức năng lọc, tìm kiếm, sắp xếp phải dễ sử dụng. \newline - \textbf{NFR-UC3.12-2 (Performance):} Thời gian tải danh sách đặt chỗ (ví dụ: cho một ngày) phải nhanh chóng (dưới 3 giây). Việc lọc/tìm kiếm cũng cần phản hồi nhanh. \newline - \textbf{NFR-UC3.12-3 (Security):} Chỉ những người dùng có quyền hạn phù hợp mới được phép xem danh sách đặt chỗ. \newline - \textbf{NFR-UC3.12-4 (Accuracy):} Dữ liệu hiển thị trong danh sách phải chính xác và đồng bộ với dữ liệu gốc trong cơ sở dữ liệu. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-13: Xem Chi tiết Đặt chỗ}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-13: Xem Chi tiết Đặt chỗ} \label{tab:uc_md03_13} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Chi tiết Đặt chỗ \\
+\hline
+Use Case ID & UC-MD03-13 \\
+\hline
+Use Case Description & Cho phép Nhân viên được phân quyền (Quản lý, Lễ tân) xem thông tin chi tiết đầy đủ của một lượt đặt chỗ cụ thể đã được chọn từ danh sách. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-03 (Nhân viên lễ tân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Nhân viên nhấp vào một lượt đặt chỗ cụ thể từ danh sách đặt chỗ (UC-MD03-12) để xem thông tin chi tiết hơn. \\
+\hline
+Pre-Condition & - Người dùng đang xem danh sách đặt chỗ (UC-MD03-12 thành công). \newline - Người dùng có quyền xem chi tiết đặt chỗ. \\
+\hline
+Post-Condition & - Form/màn hình hiển thị chi tiết đầy đủ của lượt đặt chỗ đã chọn được hiển thị cho người dùng. \newline - Người dùng nắm được mọi thông tin liên quan đến lượt đặt chỗ đó. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-03) đang xem danh sách đặt chỗ (UC-MD03-12). \newline 2. Người dùng nhấp vào mã đặt chỗ, tên khách hàng hoặc một vùng có thể nhấp được của một dòng đặt chỗ cụ thể. \newline 3. Hệ thống truy xuất toàn bộ thông tin chi tiết của lượt đặt chỗ đã chọn từ cơ sở dữ liệu. \newline 4. Hệ thống hiển thị Form/màn hình chi tiết đặt chỗ, bao gồm các thông tin: \newline    - Mã đặt chỗ. \newline    - Thông tin khách hàng (Tên, SĐT, Email). \newline    - Ngày giờ đặt. \newline    - Thời lượng đặt (ước tính). \newline    - Số lượng người. \newline    - Bàn được chỉ định (nếu có). \newline    - Trạng thái đặt chỗ hiện tại. \newline    - Thông tin thanh toán đặt cọc (Số tiền cọc, trạng thái thanh toán, phương thức thanh toán). \newline    - Danh sách chi tiết các món ăn đặt trước (tên món, biến thể, số lượng, đơn giá, thành tiền). \newline    - Tổng giá trị món ăn đặt trước. \newline    - Ghi chú của khách hàng (nếu có). \newline    - Ghi chú nội bộ (nếu có). \newline    - Lịch sử thay đổi trạng thái hoặc các thông tin quan trọng (nếu có). \newline 5. Người dùng xem xét các thông tin chi tiết. \\
+\hline
+Alternative Flow & \textbf{5a. Thực hiện hành động từ màn hình chi tiết:} \newline    1. Từ màn hình chi tiết, người dùng có thể truy cập các hành động khác như "Sửa" (UC-MD03-14), "Hủy" (UC-MD03-15), "Đánh dấu đã đến" (UC-MD03-15), "In thông tin"... tùy thuộc vào quyền hạn và trạng thái đặt chỗ. \\
+\hline
+Exception Flow & \textbf{3a. Lỗi truy xuất dữ liệu chi tiết:} \newline    1. Hệ thống gặp lỗi khi cố gắng lấy thông tin chi tiết của lượt đặt chỗ từ cơ sở dữ liệu. \newline    2. Hệ thống hiển thị thông báo lỗi. \newline    3. Use Case kết thúc không thành công. Người dùng có thể quay lại danh sách. \newline \textbf{3b. Đặt chỗ không tồn tại/không có quyền truy cập:} \newline    1. Do lỗi đồng bộ hoặc vấn đề phân quyền, người dùng nhấp vào một đặt chỗ mà họ không có quyền xem hoặc đã bị xóa. \newline    2. Hệ thống hiển thị thông báo lỗi "Không tìm thấy đặt chỗ" hoặc "Bạn không có quyền truy cập". \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.13-1:} Màn hình chi tiết phải hiển thị tất cả các thông tin liên quan đến lượt đặt chỗ một cách đầy đủ và chính xác. \newline - \textbf{BR-UC3.13-2:} Các thông tin nhạy cảm (nếu có) cần được kiểm soát quyền truy cập. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.13-1 (Usability):} Thông tin chi tiết cần được trình bày một cách logic, dễ đọc. Các phần thông tin khác nhau (thông tin khách, chi tiết đặt bàn, món ăn, thanh toán) nên được phân tách rõ ràng. \newline - \textbf{NFR-UC3.13-2 (Performance):} Thời gian tải và hiển thị đầy đủ chi tiết của một lượt đặt chỗ phải nhanh chóng (dưới 2 giây). \newline - \textbf{NFR-UC3.13-3 (Accuracy):} Mọi thông tin hiển thị phải là dữ liệu mới nhất và chính xác nhất của lượt đặt chỗ đó. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-14: Tạo/Sửa Đặt chỗ Thủ công}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-14: Tạo/Sửa Đặt chỗ Thủ công} \label{tab:uc_md03_14} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Tạo/Sửa Đặt chỗ Thủ công \\
+\hline
+Use Case ID & UC-MD03-14 \\
+\hline
+Use Case Description & Cho phép Nhân viên được phân quyền (Quản lý, Lễ tân) tạo một lượt đặt chỗ mới hoặc chỉnh sửa thông tin của một lượt đặt chỗ đã có trực tiếp trong hệ thống backend/POS, thường dành cho các trường hợp khách đặt qua điện thoại, email hoặc yêu cầu thay đổi thông tin. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-03 (Nhân viên lễ tân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khách hàng gọi điện thoại/gửi email để đặt bàn. \newline - Khách hàng yêu cầu thay đổi thông tin đặt chỗ đã có (ngày giờ, số người, món ăn...). \newline - Nhân viên cần nhập một lượt đặt chỗ đặc biệt vào hệ thống. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-03) đã đăng nhập vào hệ thống với quyền tạo/sửa đặt chỗ. \newline - Module quản lý đặt chỗ đang hoạt động. \\
+\hline
+Post-Condition & - \textbf{Tạo mới:} Một bản ghi đặt chỗ mới được tạo trong hệ thống với các thông tin do nhân viên nhập, trạng thái thường là "Đã xác nhận" hoặc "Chờ xác nhận" tùy quy trình. \newline - \textbf{Sửa đổi:} Thông tin của lượt đặt chỗ đã chọn được cập nhật trong hệ thống. \newline - Thay đổi (nếu liên quan đến bàn/thời gian) có thể ảnh hưởng đến tính khả dụng hiển thị cho các lượt đặt chỗ khác. \newline - Hệ thống ghi nhận hoạt động. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Tạo mới) & 1. Người dùng (US-01/US-03) truy cập module quản lý Đặt chỗ. \newline 2. Người dùng chọn hành động "Tạo mới" (Create). \newline 3. Hệ thống hiển thị form đặt chỗ trống. \newline 4. Người dùng nhập thông tin khách hàng (Tên, SĐT, Email - UC-MD03-07). Có thể tìm kiếm khách hàng đã có trong hệ thống. \newline 5. Người dùng chọn Ngày, Giờ đặt, Số lượng người (UC-MD03-02). Hệ thống có thể kiểm tra và hiển thị các bàn/khung giờ còn trống. \newline 6. (Tùy chọn) Người dùng chọn Bàn cụ thể từ danh sách bàn còn trống (UC-MD03-03). \newline 7. (Tùy chọn) Người dùng chuyển sang phần đặt món trước. \newline    a. Chọn các món ăn/đồ uống và số lượng (UC-MD03-05). \newline 8. (Tùy chọn) Người dùng nhập thông tin đặt cọc nếu khách đã thanh toán hoặc sẽ thanh toán qua kênh khác (ví dụ: tiền mặt tại quầy). \newline 9. Người dùng chọn Trạng thái ban đầu cho đặt chỗ (ví dụ: "Confirmed"). \newline 10. Người dùng nhập Ghi chú nội bộ (nếu cần). \newline 11. Người dùng chọn hành động "Lưu" (Save). \newline 12. Hệ thống kiểm tra tính hợp lệ của dữ liệu (ngày giờ, bàn trống, thông tin khách...). \newline 13. Hệ thống lưu bản ghi đặt chỗ mới. \newline 14. Hệ thống hiển thị thông báo tạo thành công. \newline 15. (Tùy chọn) Hệ thống có thể kích hoạt gửi email xác nhận cho khách hàng (nếu cấu hình). \newline 16. Hệ thống ghi nhận hoạt động. \\
+\hline
+Alternative Flow & \textbf{Flow 1a (Sửa đặt chỗ):} \newline    1. Người dùng tìm và mở chi tiết một lượt đặt chỗ đã có (UC-MD03-13). \newline    2. Người dùng chọn hành động "Sửa" (Edit). \newline    3. Hệ thống cho phép chỉnh sửa các trường thông tin (Ngày giờ, Số người, Bàn, Món ăn, Thông tin khách, Trạng thái...). \newline    4. Người dùng thực hiện các thay đổi cần thiết. \newline    5. Người dùng chọn "Lưu". \newline    6. Hệ thống kiểm tra tính hợp lệ (ví dụ: nếu đổi giờ/bàn, kiểm tra xem còn trống không). \newline    7. Hệ thống lưu lại các thay đổi. \newline    8. Hệ thống hiển thị thông báo cập nhật thành công. \newline    9. (Tùy chọn) Hệ thống có thể gửi thông báo cập nhật cho khách hàng. \newline   10. Hệ thống ghi nhận hoạt động. \\
+\hline
+Exception Flow & \textbf{12a/6a-edit. Lỗi Xác thực Dữ liệu:} \newline    1. Hệ thống phát hiện dữ liệu nhập/sửa không hợp lệ (ví dụ: thiếu thông tin khách, chọn ngày giờ quá khứ, chọn bàn đã bị đặt vào giờ đó). \newline    2. Hệ thống báo lỗi cụ thể. \newline    3. Hệ thống không cho phép lưu. Use Case quay lại bước nhập liệu/chỉnh sửa. \newline \textbf{13a/7a-edit. Lỗi Hệ thống khi Lưu:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi lưu bản ghi. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.14-1:} Nhân viên phải nhập đầy đủ các thông tin bắt buộc (Khách hàng, Ngày, Giờ, Số người) khi tạo đặt chỗ thủ công. \newline - \textbf{BR-UC3.14-2:} Khi tạo/sửa đặt chỗ thủ công, hệ thống vẫn phải kiểm tra tính khả dụng của bàn/khung giờ để tránh double-booking. \newline - \textbf{BR-UC3.14-3:} Việc sửa đổi các thông tin quan trọng (ngày giờ, số người, bàn) của một đặt chỗ đã xác nhận nên được thực hiện cẩn thận và có thể cần thông báo lại cho khách hàng. \newline - \textbf{BR-UC3.14-4:} Quy trình xử lý đặt cọc cho đặt chỗ thủ công cần được định nghĩa rõ ràng (ví dụ: ghi nhận tiền mặt, tạo link thanh toán gửi khách...). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.14-1 (Usability):} Form tạo/sửa đặt chỗ cho nhân viên phải đầy đủ chức năng nhưng vẫn dễ sử dụng. Việc tìm kiếm khách hàng cũ, kiểm tra bàn trống phải thuận tiện. \newline - \textbf{NFR-UC3.14-2 (Performance):} Việc kiểm tra tính khả dụng của bàn/giờ khi nhập liệu và thời gian lưu đặt chỗ phải nhanh chóng. \newline - \textbf{NFR-UC3.14-3 (Security):} Phân quyền rõ ràng ai được phép tạo/sửa đặt chỗ. \newline - \textbf{NFR-UC3.14-4 (Concurrency):} Cần có cơ chế xử lý nếu nhiều nhân viên cùng lúc cố gắng đặt hoặc sửa cùng một bàn/khung giờ. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-15: Quản lý Trạng thái Đặt chỗ}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-15: Quản lý Trạng thái Đặt chỗ} \label{tab:uc_md03_15} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Quản lý Trạng thái Đặt chỗ \\
+\hline
+Use Case ID & UC-MD03-15 \\
+\hline
+Use Case Description & Cho phép Nhân viên được phân quyền (Quản lý, Lễ tân) cập nhật trạng thái của một lượt đặt chỗ trong suốt vòng đời của nó, ví dụ: xác nhận một đặt chỗ chờ, đánh dấu khách đã đến, hoặc hủy bỏ một đặt chỗ. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-03 (Nhân viên lễ tân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Cần xác nhận một lượt đặt chỗ thủ công hoặc đặt chỗ online chưa được tự động xác nhận. \newline - Khách hàng đến nhà hàng nhận bàn. \newline - Khách hàng hoặc nhà hàng muốn hủy bỏ một lượt đặt chỗ. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-03) đã đăng nhập với quyền quản lý trạng thái đặt chỗ. \newline - Lượt đặt chỗ cần thay đổi trạng thái đã tồn tại trong hệ thống. \\
+\hline
+Post-Condition & - Trạng thái của lượt đặt chỗ được cập nhật thành công trong hệ thống (ví dụ: từ "Pending" sang "Confirmed", từ "Confirmed" sang "Arrived" hoặc "Cancelled"). \newline - Việc thay đổi trạng thái có thể kích hoạt các hành động khác (ví dụ: giải phóng bàn nếu hủy, gửi thông báo hủy cho khách). \newline - Hệ thống ghi nhận hoạt động thay đổi trạng thái. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Thay đổi trạng thái chung) & 1. Người dùng (US-01/US-03) tìm và mở chi tiết lượt đặt chỗ cần thay đổi trạng thái (UC-MD03-13). \newline 2. Người dùng xác định vị trí hiển thị trạng thái hiện tại và các nút/tùy chọn để thay đổi trạng thái (thường là các nút bấm ở header của form). \newline 3. Người dùng nhấp vào nút tương ứng với trạng thái mới mong muốn (ví dụ: "Confirm", "Mark as Arrived", "Cancel"). \newline 4. \textbf{Nếu chọn "Confirm":} \newline    a. Hệ thống cập nhật trạng thái thành "Confirmed". \newline    b. (Tùy chọn) Gửi email xác nhận (nếu chưa gửi). \newline 5. \textbf{Nếu chọn "Mark as Arrived":} \newline    a. Hệ thống cập nhật trạng thái thành "Arrived". \newline    b. (Tùy chọn) Cập nhật trạng thái bàn trên POS thành "Occupied". \newline 6. \textbf{Nếu chọn "Cancel":} \newline    a. Hệ thống (có thể) yêu cầu nhập lý do hủy. \newline    b. Hệ thống cập nhật trạng thái thành "Cancelled". \newline    c. Hệ thống giải phóng bàn đã được giữ cho lượt đặt này (nếu có). \newline    d. (Tùy chọn) Xử lý hoàn tiền cọc (có thể là quy trình riêng). \newline    e. (Tùy chọn) Gửi email thông báo hủy cho khách hàng. \newline 7. Hệ thống lưu lại trạng thái mới. \newline 8. Hệ thống hiển thị thông báo cập nhật trạng thái thành công. \newline 9. Hệ thống ghi nhận hoạt động. \\
+\hline
+Alternative Flow & \textbf{3a. Thay đổi trạng thái từ List View:} \newline    1. Một số thay đổi trạng thái đơn giản (ví dụ: Cancel) có thể được thực hiện trực tiếp từ danh sách đặt chỗ (UC-MD03-12) thông qua các nút hoặc menu ngữ cảnh. \\
+\hline
+Exception Flow & \textbf{3a. Hành động không hợp lệ với trạng thái hiện tại:} \newline    1. Người dùng cố gắng thực hiện một hành động không phù hợp với trạng thái hiện tại (ví dụ: Hủy một đặt chỗ đã ở trạng thái "Arrived"). \newline    2. Nút hành động có thể bị vô hiệu hóa hoặc hệ thống báo lỗi "Hành động không hợp lệ". \newline    3. Use Case kết thúc. \newline \textbf{7a. Lỗi Hệ thống khi Cập nhật Trạng thái:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi lưu trạng thái mới. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Use Case kết thúc không thành công. Trạng thái có thể không thay đổi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.15-1:} Phải có một quy trình (workflow) các trạng thái đặt chỗ hợp lệ được định nghĩa (ví dụ: Pending -> Confirmed -> Arrived/Cancelled/No-show). Hệ thống chỉ cho phép chuyển đổi giữa các trạng thái hợp lệ. \newline - \textbf{BR-UC3.15-2:} Việc chuyển sang trạng thái "Cancelled" phải giải phóng tài nguyên (bàn) đã được giữ cho lượt đặt chỗ đó. \newline - \textbf{BR-UC3.15-3:} Việc xử lý tiền đặt cọc khi hủy đặt chỗ (hoàn tiền hay không) phụ thuộc vào chính sách của nhà hàng và thời điểm hủy, có thể cần một quy trình riêng hoặc tích hợp với module Kế toán. \newline - \textbf{BR-UC3.15-4:} Cần định nghĩa rõ vai trò nào được phép thực hiện thay đổi trạng thái nào (ví dụ: Lễ tân có thể xác nhận, nhưng chỉ Quản lý mới được hủy và hoàn tiền). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.15-1 (Usability):} Các nút/tùy chọn thay đổi trạng thái phải rõ ràng và dễ nhận biết. Quy trình chuyển đổi trạng thái phải logic. \newline - \textbf{NFR-UC3.15-2 (Performance):} Việc cập nhật trạng thái phải diễn ra nhanh chóng. \newline - \textbf{NFR-UC3.15-3 (Auditability):} Hệ thống cần ghi log lại mọi thay đổi trạng thái, bao gồm người thực hiện và thời gian thực hiện. \newline - \textbf{NFR-UC3.15-4 (Consistency):} Trạng thái đặt chỗ phải được cập nhật đồng bộ trên tất cả các giao diện liên quan (danh sách đặt chỗ, chi tiết đặt chỗ, có thể cả lịch tài nguyên bàn). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-16: Xem Danh sách Món đặt trước}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-16: Xem Danh sách Món đặt trước} \label{tab:uc_md03_16} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Danh sách Món đặt trước \\
+\hline
+Use Case ID & UC-MD03-16 \\
+\hline
+Use Case Description & Cung cấp cho bộ phận Bếp hoặc Quản lý một giao diện/báo cáo tổng hợp danh sách các món ăn và đồ uống đã được khách hàng đặt trước cho các lượt đặt chỗ sắp tới, giúp chuẩn bị nguyên liệu và lên kế hoạch chế biến hiệu quả. \\
+\hline
+Actor & US-04 (Nhân viên bếp), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Should Have (Quan trọng nếu đặt món trước là phổ biến) \\
+\hline
+Trigger & Bộ phận bếp/quản lý cần biết trước các món ăn cần chuẩn bị cho các khách hàng đã đặt chỗ và đặt món trước. \\
+\hline
+Pre-Condition & - Người dùng (US-04 hoặc US-01) đã đăng nhập vào hệ thống với quyền truy cập báo cáo/danh sách món đặt trước. \newline - Có ít nhất một lượt đặt chỗ đã xác nhận và có chứa thông tin món ăn đặt trước. \\
+\hline
+Post-Condition & - Danh sách tổng hợp các món ăn cần chuẩn bị (tên món, biến thể, số lượng) cho một khoảng thời gian hoặc một ca làm việc cụ thể được hiển thị. \newline - Bộ phận bếp/quản lý có thông tin để chuẩn bị. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-04/US-01) truy cập vào chức năng/báo cáo "Món ăn Đặt trước" (Pre-ordered Items Report/List). \newline 2. Hệ thống mặc định hiển thị danh sách các món ăn đã được đặt trước cho ngày hiện tại hoặc ca làm việc hiện tại. \newline 3. Danh sách này thường được tổng hợp theo từng món ăn/biến thể, hiển thị: \newline    - Tên món ăn / Biến thể. \newline    - Tổng số lượng cần chuẩn bị. \newline    - (Tùy chọn) Danh sách các lượt đặt chỗ liên quan đến món đó (Mã đặt chỗ, Giờ đến, Bàn). \newline    - (Tùy chọn) Ghi chú đặc biệt liên quan đến món ăn từ các lượt đặt chỗ. \newline 4. Người dùng xem xét danh sách để lên kế hoạch chuẩn bị. \\
+\hline
+Alternative Flow & \textbf{2a. Lọc theo khoảng thời gian:} \newline    1. Người dùng chọn một khoảng thời gian khác (ví dụ: ngày mai, tuần tới) hoặc một ca làm việc cụ thể. \newline    2. Hệ thống lọc và hiển thị lại danh sách món đặt trước cho khoảng thời gian đã chọn. \newline    3. Use Case quay lại bước 4. \newline \textbf{2b. Lọc theo trạng thái đặt chỗ:} \newline    1. Người dùng chỉ muốn xem món của các đặt chỗ "Đã xác nhận". \newline    2. Hệ thống áp dụng bộ lọc trạng thái. \newline    3. Use Case quay lại bước 4. \newline \textbf{3a. Xem chi tiết theo từng đặt chỗ:} \newline    1. Thay vì tổng hợp, giao diện hiển thị danh sách các lượt đặt chỗ sắp tới, và người dùng có thể nhấp vào từng lượt để xem danh sách món đặt trước của riêng lượt đó. \\
+\hline
+Exception Flow & \textbf{2a. Lỗi tải dữ liệu:} \newline    1. Hệ thống gặp lỗi khi truy vấn và tổng hợp dữ liệu món ăn đặt trước. \newline    2. Hệ thống hiển thị thông báo lỗi. \newline    3. Use Case kết thúc không thành công. \newline \textbf{2b. Không có món nào đặt trước:} \newline    1. Không có lượt đặt chỗ nào trong khoảng thời gian/bộ lọc có món đặt trước. \newline    2. Hệ thống hiển thị danh sách trống hoặc thông báo "Không có món ăn nào được đặt trước". \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.16-1:} Danh sách chỉ nên bao gồm các món từ những lượt đặt chỗ đã được xác nhận (Confirmed) và chưa bị hủy (Not Cancelled). \newline - \textbf{BR-UC3.16-2:} Số lượng hiển thị phải là tổng số lượng của món ăn/biến thể đó từ tất cả các lượt đặt chỗ hợp lệ trong khoảng thời gian/bộ lọc được chọn. \newline - \textbf{BR-UC3.16-3:} Giao diện/báo cáo này nên dễ dàng truy cập đối với bộ phận bếp. Có thể cần in ra được. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.16-1 (Usability):} Giao diện/báo cáo phải rõ ràng, dễ đọc, dễ hiểu cho nhân viên bếp. Việc lọc theo thời gian/ca làm việc phải đơn giản. \newline - \textbf{NFR-UC3.16-2 (Performance):} Thời gian tải và tổng hợp danh sách món đặt trước cho một ngày phải nhanh chóng (dưới 5 giây). \newline - \textbf{NFR-UC3.16-3 (Accuracy):} Dữ liệu về tên món, biến thể, số lượng phải chính xác 100\%. \newline - \textbf{NFR-UC3.16-4 (Accessibility):} Nếu cần hiển thị trên màn hình trong bếp, giao diện cần có font chữ lớn, độ tương phản cao. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD03-17: Xem Lịch sử/Chi tiết Đặt chỗ Cá nhân}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD03-17: Xem Lịch sử/Chi tiết Đặt chỗ Cá nhân} \label{tab:uc_md03_17} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Lịch sử/Chi tiết Đặt chỗ Cá nhân \\
+\hline
+Use Case ID & UC-MD03-17 \\
+\hline
+Use Case Description & Cho phép Khách hàng (US-08) đã đăng nhập vào tài khoản trên website/app của nhà hàng xem lại danh sách các lượt đặt chỗ mà họ đã thực hiện trước đây và xem thông tin chi tiết của từng lượt đặt chỗ. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & Khách hàng muốn kiểm tra lại thông tin một lượt đặt chỗ sắp tới hoặc xem lại lịch sử các lần đặt chỗ trước đây. \\
+\hline
+Pre-Condition & - Khách hàng (US-08) có tài khoản trên website/app và đã đăng nhập thành công. \newline - Khách hàng đã thực hiện ít nhất một lượt đặt chỗ online thông qua tài khoản này trước đó. \\
+\hline
+Post-Condition & - Khách hàng xem được danh sách các lượt đặt chỗ của mình. \newline - Khách hàng xem được thông tin chi tiết của một lượt đặt chỗ cụ thể. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Khách hàng (US-08) đã đăng nhập vào tài khoản. \newline 2. US-08 điều hướng đến khu vực quản lý tài khoản cá nhân và chọn mục "Lịch sử Đặt chỗ", "Đặt chỗ của tôi" hoặc tương tự. \newline 3. Hệ thống truy vấn cơ sở dữ liệu để lấy danh sách các lượt đặt chỗ được liên kết với tài khoản của US-08. \newline 4. Hệ thống hiển thị danh sách các lượt đặt chỗ, bao gồm các thông tin cơ bản như: \newline    - Mã đặt chỗ. \newline    - Ngày giờ đặt. \newline    - Số lượng người. \newline    - Trạng thái (Đã xác nhận, Đã hủy, Đã hoàn thành...). \newline 5. US-08 nhấp vào một lượt đặt chỗ cụ thể trong danh sách để xem chi tiết. \newline 6. Hệ thống truy xuất và hiển thị thông tin chi tiết của lượt đặt chỗ đó (tương tự như thông tin trong UC-MD03-13 nhưng trình bày cho khách hàng). \newline 7. US-08 xem xét thông tin. \\
+\hline
+Alternative Flow & \textbf{4a. Lọc/Sắp xếp lịch sử:} \newline    1. Giao diện cung cấp tùy chọn lọc theo trạng thái (sắp tới, đã qua, đã hủy) hoặc sắp xếp theo ngày đặt. \newline    2. US-08 sử dụng bộ lọc/sắp xếp. \newline    3. Hệ thống cập nhật danh sách hiển thị. \newline    4. Use Case tiếp tục từ bước 5. \newline \textbf{6a. Hủy đặt chỗ từ màn hình chi tiết (nếu được phép):} \newline    1. Nếu đặt chỗ đang ở trạng thái hợp lệ để hủy (ví dụ: "Confirmed" và còn trong thời hạn cho phép hủy theo chính sách), màn hình chi tiết có thể hiển thị nút "Hủy đặt chỗ". \newline    2. US-08 nhấp nút hủy. \newline    3. Hệ thống thực hiện quy trình hủy (tương tự phần hủy trong UC-MD03-15), có thể yêu cầu xác nhận và thông báo về việc hoàn/mất cọc. \\
+\hline
+Exception Flow & \textbf{3a. Lỗi tải lịch sử đặt chỗ:} \newline    1. Hệ thống gặp lỗi khi truy vấn dữ liệu đặt chỗ của khách hàng. \newline    2. Hệ thống hiển thị thông báo lỗi. \newline    3. Use Case kết thúc không thành công. \newline \textbf{3b. Không có lịch sử đặt chỗ:} \newline    1. Khách hàng chưa từng thực hiện đặt chỗ nào qua tài khoản này. \newline    2. Hệ thống hiển thị thông báo "Bạn chưa có lượt đặt chỗ nào." hoặc danh sách trống. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC3.17-1:} Khách hàng chỉ có thể xem lịch sử đặt chỗ của chính tài khoản của họ. \newline - \textbf{BR-UC3.17-2:} Thông tin hiển thị phải đầy đủ và chính xác. \newline - \textbf{BR-UC3.17-3:} Khả năng hủy đặt chỗ online của khách hàng phụ thuộc vào trạng thái đặt chỗ và chính sách hủy của nhà hàng (ví dụ: chỉ được hủy trước 24 giờ). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC3.17-1 (Usability):} Giao diện xem lịch sử phải dễ dàng truy cập và dễ hiểu. Việc xem chi tiết cần đơn giản. \newline - \textbf{NFR-UC3.17-2 (Performance):} Thời gian tải danh sách lịch sử đặt chỗ phải nhanh. \newline - \textbf{NFR-UC3.17-3 (Security):} Đảm bảo chỉ khách hàng đã đăng nhập mới xem được lịch sử của mình. \\
+\hline
+\end{longtable}
+
+
+

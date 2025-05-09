@@ -1,0 +1,263 @@
+\subsubsection{Công nghệ Back-end}
+\subsubsubsection{SpringBoot}
+    \begin{enumerate}[(a)]
+        \item \textit{Giới thiệu}
+
+        Spring Boot là một framework mã nguồn mở dựa trên nền tảng Java, được thiết kế để đơn giản hóa việc phát triển các ứng dụng Spring độc lập, sẵn sàng cho môi trường sản xuất. Nó cung cấp các cấu hình mặc định thông minh và tự động, giúp giảm thiểu cấu hình thủ công và tối ưu hóa quá trình phát triển ứng dụng Java. Spring Boot tích hợp tốt với nhiều công nghệ và thư viện khác trong hệ sinh thái Spring Framework, cho phép hệ thống dễ dàng tích hợp các module và dịch vụ khác nhau mà không cần phải lo lắng về cấu hình phức tạp. Ngoài ra, Spring Boot đi kèm với các máy chủ nhúng như Tomcat, Jetty hoặc Undertow, giúp triển khai ứng dụng một cách đơn giản mà không cần cấu hình thêm bất kỳ máy chủ nào khác
+        
+        \item \textit{Ưu điểm} \cite{SpringBootBenefits}
+
+        \begin{itemize}
+            \item \textbf{Phát triển nhanh chóng}: Tuân theo nguyên tắc "quy ước hơn cấu hình" (convention over configuration), Spring Boot cung cấp các thiết lập mặc định hợp lý cho các trường hợp sử dụng phổ biến. Cách tiếp cận này giúp giảm thiểu mã lặp (boilerplate code), cho phép lập trình viên tập trung vào logic nghiệp vụ thay vì phải cấu hình phức tạp. 
+            \item \textbf{Tự động cấu hình}: Cơ chế tự động cấu hình (auto-configuration) của Spring Boot giúp thiết lập các thành phần ứng dụng dựa trên các thư viện và đặc điểm của dự án, giảm bớt công việc cấu hình thủ công và tối ưu hóa quy trình phát triển.
+            \item \textbf{Tích hợp liền mạch với hệ sinh thái Spring}: Spring Boot kết nối dễ dàng với các dự án khác trong hệ sinh thái Spring như Spring Data, Spring Security và Spring Cloud, cung cấp một nền tảng toàn diện để phát triển ứng dụng.
+            \item \textbf{Tính sẵn sàng cho môi trường sản xuất}: Spring Boot tích hợp sẵn các tính năng hỗ trợ triển khai trong môi trường thực tế như kiểm tra sức khỏe (health checks), thu thập số liệu (metrics), và cấu hình bên ngoài (externalized configuration), giúp giám sát và quản lý ứng dụng hiệu quả hơn.
+        \end{itemize}
+        
+        % \item \textit{Nhược điểm}
+
+        % \begin{itemize}
+        %     \item \textbf{Chi phí hiệu năng (Performance Overhead)}: Việc sử dụng cấu hình tự động và máy chủ nhúng có thể làm tăng mức tiêu thụ tài nguyên. Trong các môi trường bị giới hạn tài nguyên, chi phí này có thể ảnh hưởng đến hiệu suất của ứng dụng \cite{SpringBootProsCons}.
+        %     \item \textbf{Khó khăn trong tùy chỉnh}: Việc ghi đè (override) các cấu hình mặc định để đáp ứng yêu cầu cụ thể của dự án có thể phức tạp. Lập trình viên có thể cần phải tìm hiểu sâu về nội bộ của framework để thực hiện các tùy chỉnh mong muốn, dẫn đến tăng thời gian phát triển và độ phức tạp của dự án.
+        %     \item \textbf{Thách thức trong quản lý dependency}: Việc quản lý số lượng lớn dependency đi kèm với Spring Boot có thể gây khó khăn. Các xung đột phiên bản hoặc dependency không cần thiết có thể làm phức tạp quá trình xây dựng (build process) và gia tăng rủi ro trong thời gian chạy (runtime).
+        % \end{itemize}
+
+        \item \textit{So sánh Spring Boot và các công nghệ khác}
+
+            Khi so sánh giữa các công nghệ liên quan, đặc biệt là Spring Boot với Express, Flask và Django, chúng ta có thể nhận thấy mỗi công nghệ có những ưu điểm và hạn chế riêng. Dưới đây là bảng so sánh chi tiết giữa Spring Boot và các công nghệ khác, dựa trên các tài liệu \cite{BackCompare1}, \cite{BackCompare2}, \cite{BackCompare3}:
+            
+            % \begin{longtable}{|p{3.5cm}|p{5.5cm}|p{5.5cm}|}
+            % \hline
+            % \textbf{Tiêu Chí} & \textbf{Spring Boot} & \textbf{Node.js (Express)} \\ 
+            % \hline
+            % \endfirsthead
+            % \hline
+            % \textbf{Tiêu Chí} & \textbf{Spring Boot} & \textbf{Node.js (Express)} \\ 
+            % \endhead
+            % \hline
+            % % \multicolumn{3}{|r|}{\small\slshape Còn tiếp} \\ \hline
+            % \endfoot
+            % \hline
+            % \endlastfoot
+            % Ngôn ngữ & Java (hỗ trợ TypeScript qua tích hợp) & JavaScript (hỗ trợ TypeScript)\\ 
+            % \hline
+            % Định nghĩa & Framework Java để xây dựng ứng dụng web và microservices & Môi trường runtime JavaScript với Express là framework nhẹ cho backend\\ 
+            % \hline
+            % Kiến trúc & Dựa trên thành phần, MVC, tự động cấu hình, luồng dữ liệu một chiều & Dựa trên sự kiện, không chặn (non-blocking), linh hoạt\\ 
+            % \hline
+            % Thời gian phát triển & Nhanh cho dự án lớn nhờ tự động cấu hình, chậm hơn cho dự án nhỏ & Rất nhanh, đặc biệt cho ứng dụng nhỏ và thời gian đưa ra thị trường ngắn\\ 
+            % \hline
+            % Độ phức tạp & Trung bình đến cao, cần hiểu Spring ecosystem & Thấp, dễ bắt đầu nhưng phức tạp hơn khi mở rộng quy mô\\ 
+            % \hline
+            % Tính linh hoạt & Trung bình, bị ràng buộc bởi cấu trúc Spring nhưng dễ tích hợp thư viện Java & Cao, tự do chọn công cụ và thư viện\\ 
+            % \hline
+            % Bảo trì & Dễ bảo trì cho ứng dụng lớn, khó hơn nếu không tổ chức tốt & Dễ bảo trì cho ứng dụng nhỏ, khó hơn khi codebase lớn\\ 
+            % \hline
+            % Dễ sử dụng/Dễ học & Khó hơn, cần kiến thức Java và Spring & Dễ học, đặc biệt với người biết JavaScript\\ 
+            % \hline
+            % Hỗ trợ cộng đồng & Lớn, tài liệu phong phú, hỗ trợ từ Pivotal và cộng đồng Java & Rất lớn, tài liệu đa dạng, cộng đồng JavaScript rộng khắp\\ 
+            % \hline
+            % Kiểm thử & JUnit, Mockito, tích hợp sẵn nhưng cần cấu hình & Jest, Mocha, dễ thiết lập và linh hoạt\\ 
+            % \hline
+            % \caption{Bảng so sánh Spring Boot và Node.js (Express)}\\
+            % \end{longtable}
+
+            % \begin{longtable}{|p{3.5cm}|p{5.5cm}|p{5.5cm}|}
+            % \hline
+            % \textbf{Tiêu Chí} & \textbf{Flask} & \textbf{Django)} \\ 
+            % \hline
+            % \endfirsthead
+            % \hline
+            % \textbf{Tiêu Chí} & \textbf{Flask} & \textbf{Django} \\ 
+            % \endhead
+            % \hline
+            % % \multicolumn{3}{|r|}{\small\slshape Còn tiếp} \\ \hline
+            % \endfoot
+            % \hline
+            % \endlastfoot
+            % Ngôn ngữ & Python & Python\\ 
+            % \hline
+            % Định nghĩa & Framework Python nhẹ cho phát triển web & Framework Python toàn diện cho phát triển web\\ 
+            % \hline
+            % Kiến trúc & Không áp đặt, linh hoạt, microframework & MVC (MTV - Model-Template-View), tích hợp sẵn\\ 
+            % \hline
+            % Thời gian phát triển & Rất nhanh cho dự án nhỏ, cần thêm cấu hình cho dự án lớn & Nhanh, tích hợp sẵn nhiều tính năng\\ 
+            % \hline
+            % Độ phức tạp & Thấp, đơn giản nhưng phức tạp khi mở rộng & Trung bình, dễ dùng nhưng phức tạp với tùy chỉnh nâng cao\\ 
+            % \hline
+            % Tính linh hoạt & Cao, tự do chọn công cụ và cấu hình & Thấp hơn, bị ràng buộc bởi cấu trúc Django\\ 
+            % \hline
+            % Bảo trì & Dễ cho ứng dụng nhỏ, khó hơn khi codebase lớn & Dễ bảo trì nhờ ORM và cấu trúc rõ ràng\\ 
+            % \hline
+            % Dễ sử dụng/Dễ học & Rất dễ học, tối giản, phù hợp người mới & Dễ học, tài liệu tốt, phù hợp người mới\\ 
+            % \hline
+            % Hỗ trợ cộng đồng & Trung bình, tài liệu tốt nhưng nhỏ hơn Django & Lớn, tài liệu chi tiết, cộng đồng Python rộng\\ 
+            % \hline
+            % Kiểm thử & unittest, pytest, dễ thiết lập & unittest, pytest, tích hợp tốt\\ 
+            % \hline
+            % \caption{Bảng so sánh Flask và Django}\\
+            % \end{longtable}
+
+\begin{landscape}  % Bắt đầu phần landscape
+\begin{longtable}{|p{3.5cm}|p{5cm}|p{5cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{Tiêu Chí} & \textbf{Spring Boot} & \textbf{Express} & \textbf{Flask} & \textbf{Django} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Tiêu Chí} & \textbf{Spring Boot} & \textbf{Express} & \textbf{Flask} & \textbf{Django} \\
+\hline
+\endhead
+\hline
+Ngôn ngữ & Java (hỗ trợ TypeScript qua tích hợp) & JavaScript (hỗ trợ TypeScript) & Python & Python \\
+\hline
+Định nghĩa & Framework Java để xây dựng ứng dụng web và microservices & Môi trường runtime JavaScript với Express là framework nhẹ cho backend & Framework Python nhẹ cho phát triển web & Framework Python toàn diện cho phát triển web \\
+\hline
+Kiến trúc & Dựa trên thành phần, MVC, tự động cấu hình, luồng dữ liệu một chiều & Dựa trên sự kiện, không chặn (non-blocking), linh hoạt & Không áp đặt, linh hoạt, microframework & MVC (MTV - Model-Template-View), tích hợp sẵn \\
+\hline
+Thời gian phát triển & Nhanh cho dự án lớn nhờ tự động cấu hình, chậm hơn cho dự án nhỏ & Rất nhanh, đặc biệt cho ứng dụng nhỏ và thời gian đưa ra thị trường ngắn & Rất nhanh cho dự án nhỏ, cần thêm cấu hình cho dự án lớn & Nhanh, tích hợp sẵn nhiều tính năng \\
+\hline
+Độ phức tạp & Trung bình đến cao, cần hiểu Spring ecosystem & Thấp, dễ bắt đầu nhưng phức tạp hơn khi mở rộng quy mô & Thấp, đơn giản nhưng phức tạp khi mở rộng & Trung bình, dễ dùng nhưng phức tạp với tùy chỉnh nâng cao \\
+\hline
+Tính linh hoạt & Trung bình, bị ràng buộc bởi cấu trúc Spring nhưng dễ tích hợp thư viện Java & Cao, tự do chọn công cụ và thư viện & Cao, tự do chọn công cụ và cấu hình & Thấp hơn, bị ràng buộc bởi cấu trúc Django \\
+\hline
+Bảo trì & Dễ bảo trì cho ứng dụng lớn, khó hơn nếu không tổ chức tốt & Dễ bảo trì cho ứng dụng nhỏ, khó hơn khi codebase lớn & Dễ cho ứng dụng nhỏ, khó hơn khi codebase lớn & Dễ bảo trì nhờ ORM và cấu trúc rõ ràng \\
+\hline
+Dễ sử dụng/Dễ học & Khó hơn, cần kiến thức Java và Spring & Dễ học, đặc biệt với người biết JavaScript & Rất dễ học, tối giản, phù hợp người mới & Dễ học, tài liệu tốt, phù hợp người mới \\
+\hline
+Kiểm thử & JUnit, Mockito, tích hợp sẵn nhưng cần cấu hình & Jest, Mocha, dễ thiết lập và linh hoạt & unittest, pytest, dễ thiết lập & unittest, pytest, tích hợp tốt \\
+\hline
+\caption{Bảng so sánh các công nghệ Back-end phổ biến}
+\end{longtable}
+\end{landscape}
+
+            \textbf{Kết luận: } Dựa trên các bảng so sánh, nhóm quyết định chọn Spring Boot là công nghệ chính để phát triển hệ thống vì các lý do sau:
+
+            \begin{itemize}
+                \item Phù hợp với kiến trúc MVC: Spring Boot hỗ trợ tốt kiến trúc MVC (Model-View-Controller), giúp phân chia rõ ràng các phần của hệ thống và tạo cấu trúc dễ hiểu, phù hợp với yêu cầu đồ án. Điều này sẽ giúp nhóm triển khai hệ thống có tổ chức và dễ dàng phân chia công việc.
+                \item Linh hoạt và dễ mở rộng: Spring Boot mang lại khả năng tích hợp microservices và hỗ trợ các thư viện Java phong phú. Điều này cho phép nhóm dễ dàng mở rộng hệ thống trong tương lai mà không cần thay đổi quá nhiều mã nguồn.
+                \item Dễ bảo trì: Với cấu trúc dự án rõ ràng và các công cụ như Spring Boot Actuator, Spring Boot giúp nhóm dễ dàng theo dõi và bảo trì hệ thống, rất thuận lợi khi cần sửa lỗi nhanh chóng hoặc thực hiện các thay đổi trong quá trình phát triển.
+            \end{itemize}
+            
+    \end{enumerate}
+
+\subsubsubsection{Hibernate}
+    \begin{enumerate}[(a)]
+        \item \textit{Giới thiệu}
+        
+            Hibernate là một framework ORM (Object-Relational Mapping) mạnh mẽ dành cho Java, giúp lập trình viên làm việc với cơ sở dữ liệu một cách hiệu quả hơn. Nó cung cấp một lớp trừu tượng giữa ứng dụng và cơ sở dữ liệu, cho phép thao tác dữ liệu bằng các đối tượng Java thay vì truy vấn SQL thuần túy. Hibernate hỗ trợ nhiều hệ quản trị cơ sở dữ liệu khác nhau và có khả năng tự động ánh xạ các bảng trong cơ sở dữ liệu thành các lớp Java thông qua tập hợp các quy tắc ánh xạ linh hoạt. Ngoài ra, Hibernate còn đi kèm với các tính năng như quản lý phiên làm việc (session management), bộ nhớ đệm (caching), và hỗ trợ giao dịch (transaction management), giúp tối ưu hóa hiệu suất và đơn giản hóa quá trình phát triển ứng dụng. Với khả năng tích hợp dễ dàng cùng các framework khác như Spring và Java EE, Hibernate đã trở thành một trong những lựa chọn phổ biến nhất trong các ứng dụng doanh nghiệp sử dụng Java.
+            
+        \item \textit{Ưu điểm}
+
+        \begin{itemize}
+            \item \textbf{Ánh xạ đối tượng-quan hệ tự động}: Hibernate cho phép ánh xạ tự động giữa các lớp Java và các bảng trong cơ sở dữ liệu thông qua các tệp cấu hình XML hoặc annotation, giúp giảm thiểu mã nguồn và đơn giản hóa việc quản lý dữ liệu.
+            \item \textbf{Độc lập với cơ sở dữ liệu}: Mã lệnh của Hibernate có thể hoạt động với nhiều hệ quản trị cơ sở dữ liệu khác nhau như MySQL, Oracle mà không cần thay đổi mã HQL. Người dùng chỉ cần cập nhật thông tin cấu hình khi chuyển đổi hệ quản trị, giúp tiết kiệm thời gian và công sức.
+            \item \textbf{Quản lý phiên và giao dịch hiệu quả}: Hibernate cung cấp cơ chế quản lý phiên (Session) và giao dịch (Transaction) mạnh mẽ, đảm bảo tính toàn vẹn dữ liệu và hỗ trợ các thao tác như lưu trữ, cập nhật và xóa dữ liệu một cách an toàn.
+            \item \textbf{Hỗ trợ tải chậm (Lazy Loading)}: Hibernate hỗ trợ cơ chế tải chậm, chỉ tải dữ liệu khi cần thiết, giúp tiết kiệm tài nguyên hệ thống và cải thiện hiệu suất ứng dụng.
+
+        \item \textit{Vì sao chọn Hibernate}
+
+        Hibernate được chọn để phát triển hệ thống Menu+ vì những lý do sau:
+
+            \begin{itemize} 
+                \item Quản lý dữ liệu đơn giản và hiệu quả: Menu+ cần quản lý lượng lớn dữ liệu như thực đơn, đơn hàng và thông tin khách hàng. Hibernate giúp ánh xạ tự động giữa các đối tượng trong Java và cơ sở dữ liệu, giúp giảm thiểu công việc thủ công trong việc viết mã SQL và làm cho việc quản lý dữ liệu trở nên dễ dàng và linh hoạt.
+                \item Hỗ trợ mở rộng: Menu+ có thể phát triển và mở rộng trong tương lai, ví dụ như thêm nhiều tính năng mới hoặc thay đổi cơ sở dữ liệu. Hibernate hỗ trợ nhiều loại cơ sở dữ liệu khác nhau, cho phép hệ thống dễ dàng thay đổi hoặc nâng cấp mà không gặp khó khăn lớn.
+            \end{itemize}
+        \end{itemize}
+        
+        % \item \textit{Nhược điểm}
+
+        % \begin{itemize}
+        %     \item \textbf{Không hỗ trợ tốt cho các truy vấn phức tạp}: Hibernate có thể gặp khó khăn khi xử lý các truy vấn SQL phức tạp, đặc biệt là những truy vấn yêu cầu tối ưu hóa cao hoặc sử dụng các tính năng đặc thù của hệ quản trị cơ sở dữ liệu. Trong những trường hợp này, lập trình viên có thể phải sử dụng truy vấn SQL gốc (native SQL), làm giảm tính trừu tượng và lợi ích của ORM.
+        %     \item \textbf{Tăng độ trễ khởi tạo}: Việc sử dụng Hibernate có thể dẫn đến thời gian khởi tạo đối tượng và kết nối cơ sở dữ liệu lâu hơn so với cách viết SQL trực tiếp, do quá trình ánh xạ và cấu hình phức tạp.
+        %     \item \textbf{Tiêu thụ tài nguyên hệ thống}: Hibernate có thể tiêu thụ nhiều tài nguyên hệ thống hơn so với việc sử dụng JDBC thuần túy, đặc biệt khi không được cấu hình và tối ưu hóa đúng cách.
+        % \end{itemize}
+    \end{enumerate}
+
+\subsubsubsection{Redis}
+    \begin{enumerate}[(a)]
+        \item \textit{Giới thiệu}
+
+        Redis, viết tắt của "Remote Dictionary Server", là một hệ thống lưu trữ dữ liệu mã nguồn mở, hoạt động trong bộ nhớ (in-memory), thuộc loại NoSQL và sử dụng mô hình key-value. Được phát triển bởi Salvatore Sanfilippo vào năm 2009, Redis ban đầu được thiết kế để cải thiện khả năng mở rộng cho một dự án phân tích nhật ký web theo thời gian thực. Kể từ đó, nó đã trở thành một trong những cơ sở dữ liệu NoSQL phổ biến nhất, được sử dụng rộng rãi trong các ứng dụng yêu cầu hiệu suất cao và độ trễ thấp. 
+
+        Redis lưu trữ toàn bộ dữ liệu trong bộ nhớ, cho phép truy xuất và ghi dữ liệu với tốc độ rất nhanh. Ngoài việc hỗ trợ các kiểu dữ liệu đơn giản như chuỗi (strings), Redis còn hỗ trợ các cấu trúc dữ liệu phức tạp như danh sách (lists), tập hợp (sets), tập hợp có thứ tự (sorted sets), băm (hashes), và nhiều cấu trúc khác. Điều này giúp Redis linh hoạt trong việc giải quyết nhiều bài toán khác nhau, từ lưu trữ phiên làm việc (session storage), hàng đợi tin nhắn (message queues), đến bộ đệm (caching) và phân tích thời gian thực.
+
+        Hiện nay, Redis được sử dụng bởi nhiều công ty lớn như Twitter, Airbnb, Tinder, Yahoo, Adobe, Hulu, Amazon và OpenAI, nhờ vào khả năng cung cấp hiệu suất cao và linh hoạt trong nhiều trường hợp sử dụng khác nhau.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=15cm]{Images/redis.png}
+            \vspace{0.5cm}
+            \caption{Logo của Redis}
+            \label{fig:my_label}
+        \end{figure}
+        
+        \item \textit{Ưu điểm} \cite{Redis}
+
+        \begin{itemize}
+            \item \textbf{Hiệu suất cao}: Là một hệ thống lưu trữ dữ liệu trong bộ nhớ (in-memory data store), Redis cung cấp các thao tác đọc và ghi cực kỳ nhanh chóng, có thể xử lý hàng triệu yêu cầu mỗi giây. Điều này làm cho Redis trở nên lý tưởng cho các ứng dụng yêu cầu truy cập dữ liệu với độ trễ thấp.
+            \item \textbf{Hỗ trợ đa dạng cấu trúc dữ liệu}: Redis hỗ trợ nhiều kiểu dữ liệu khác nhau, bao gồm chuỗi (strings), danh sách (lists), băm (hashes), tập hợp (sets) và tập hợp có thứ tự (sorted sets), cho phép các nhà phát triển triển khai hiệu quả nhiều chức năng khác nhau.
+            \item \textbf{Hệ thống nhắn tin xuất bản/đăng ký (Publish/Subscribe)}: Redis bao gồm một hệ thống nhắn tin xuất bản/đăng ký (Pub/Sub), cho phép giao tiếp theo thời gian thực giữa các ứng dụng, hữu ích cho việc xây dựng các hệ thống trò chuyện, thông báo và các tính năng thời gian thực khác.
+        \end{itemize}
+
+        \item \textit{Vì sao chọn Redis}
+
+        Redis được chọn để phát triển hệ thống Menu+ vì những lý do sau:
+
+        \begin{itemize}
+            \item Tăng tốc độ truy xuất dữ liệu: Redis là một cơ sở dữ liệu lưu trữ theo kiểu key-value trong bộ nhớ (in-memory), giúp truy xuất dữ liệu cực kỳ nhanh chóng. Điều này rất quan trọng trong hệ thống Menu+ khi cần xử lý nhanh các tác vụ như lưu trữ thông tin đơn hàng, phiên làm việc của người dùng hay các trạng thái tạm thời.
+            \item Quản lý phiên làm việc (Session Management): Trong hệ thống quản lý đặt món, Redis rất hữu ích để lưu trữ và quản lý phiên làm việc của người dùng. Điều này giúp theo dõi trạng thái đăng nhập và các hoạt động của người dùng một cách hiệu quả, đồng thời giảm thiểu việc truy xuất cơ sở dữ liệu truyền thống.
+            \item Dễ dàng tích hợp: Redis có thể dễ dàng tích hợp vào hệ thống hiện tại của Menu+ mà không yêu cầu thay đổi lớn về cấu trúc. Nó cũng tương thích tốt với các hệ thống khác như Hibernate và TanStack, giúp cải thiện hiệu quả hoạt động của toàn bộ hệ thống.
+        \end{itemize}
+
+        % \item \textit{Nhược điểm}
+
+        % \begin{itemize}
+        %     \item \textbf{Giới hạn về dung lượng bộ nhớ}: Redis lưu trữ toàn bộ dữ liệu trong bộ nhớ RAM, do đó, khả năng lưu trữ bị giới hạn bởi dung lượng bộ nhớ vật lý của hệ thống. Đối với các ứng dụng yêu cầu lưu trữ lượng dữ liệu lớn, việc sử dụng Redis có thể dẫn đến chi phí cao và không khả thi. 
+        %     \item \textbf{Thiếu tính nhất quán mạnh mẽ}: Redis sử dụng mô hình sao chép bất đồng bộ, điều này có thể dẫn đến tình trạng dữ liệu không nhất quán giữa các nút chủ và nút phụ, đặc biệt trong các tình huống chuyển đổi dự phòng hoặc phân tách mạng.
+        %     \item \textbf{Hạn chế trong truy vấn phức tạp}: Redis không hỗ trợ các truy vấn phức tạp như join hoặc các phép tổng hợp, điều này làm giảm tính linh hoạt khi cần thao tác với dữ liệu phức tạp.
+        %     \item \textbf{Phức tạp trong việc thiết lập phân cụm}: Việc cấu hình và quản lý Redis Cluster có thể phức tạp, đòi hỏi kiến thức chuyên sâu và kinh nghiệm để đảm bảo hệ thống hoạt động ổn định và hiệu quả.
+        % \end{itemize}
+    \end{enumerate}
+
+% \subsubsubsection{Kafka}
+%     \begin{enumerate}[(a)]
+%         \item \textit{Giới thiệu}
+
+%         Apache Kafka là một nền tảng phân tán mã nguồn mở được thiết kế để xử lý các luồng dữ liệu theo thời gian thực. Ban đầu được phát triển bởi LinkedIn và sau đó trở thành dự án của Apache Software Foundation, Kafka cho phép các ứng dụng xuất bản, lưu trữ và tiêu thụ các luồng bản ghi (record streams) một cách hiệu quả. Hệ thống này hoạt động dựa trên mô hình xuất bản-đăng ký (publish-subscribe), trong đó các nhà sản xuất (producers) gửi thông điệp đến các chủ đề (topics), và các người tiêu thụ (consumers) đăng ký để nhận các thông điệp này. Kafka được sử dụng rộng rãi trong việc xây dựng các hệ thống xử lý dữ liệu thời gian thực, như theo dõi hoạt động người dùng, giám sát hệ thống, và phân tích dữ liệu trực tuyến. 
+
+%         \begin{figure}[H]
+%             \centering
+%             \includegraphics[width=15cm]{Images/kafka.png}
+%             \vspace{0.5cm}
+%             \caption{Vị trí của Kafka trong dự án}
+%             \label{fig:my_label}
+%         \end{figure}
+%         \item \textit{Ưu điểm}
+
+%         \begin{itemize}
+%             \item \textbf{Hiệu suất cao}: Kafka có khả năng xử lý lượng lớn thông tin với thông lượng cao và độ trễ thấp, cho phép xử lý hàng triệu thông điệp mỗi giây.
+%             \item \textbf{Khả năng mở rộng}: Với kiến trúc phân tán, Kafka dễ dàng mở rộng bằng cách thêm các broker vào cụm, tăng khả năng xử lý dữ liệu mà không cần thay đổi cấu trúc hệ thống. 
+%             \item \textbf{Độ tin cậy và bền vững}: Kafka lưu trữ các sự kiện theo định dạng nhật ký đơn giản, đảm bảo dữ liệu bền vững và chính sách lưu giữ dễ triển khai. 
+%             \item \textbf{Xử lý dữ liệu thời gian thực}: Kafka được thiết kế để xử lý dữ liệu thời gian thực và streaming, cho phép bạn đáp ứng nhanh chóng đối với sự kiện mới xảy ra. 
+%         \end{itemize}
+        
+%         % \item \textit{Nhược điểm}
+
+%         % \begin{itemize}
+%         %     \item \textbf{Phức tạp trong cài đặt và quản lý}: Việc triển khai và cấu hình Kafka ban đầu có thể phức tạp, đặc biệt đối với những người mới bắt đầu. Để quản lý hiệu quả, cần có kiến thức sâu về hệ thống phân tán và mạng.
+%         %     \item \textbf{Yêu cầu tài nguyên hệ thống cao}: Kafka đòi hỏi một lượng tài nguyên phần cứng đáng kể, bao gồm bộ nhớ, dung lượng lưu trữ và khả năng xử lý, để hoạt động hiệu quả. 
+%         %     \item \textbf{Thiếu công cụ giám sát hoàn chỉnh}: Kafka không cung cấp một bộ công cụ giám sát và quản lý tích hợp đầy đủ. Người dùng thường phải dựa vào các công cụ của bên thứ ba để theo dõi và quản lý hệ thống.
+%         % \end{itemize}
+%     \end{enumerate}
+
+% % \subsubsubsection{RESTful API}
+% %     \begin{enumerate}[(a)]
+% %         \item \textit{Giới thiệu}
+        
+% %         \item \textit{Vì sao chọn RESTful API} 
+        
+% %         \item \textit{Ưu điểm}
+        
+% %         \item \textit{Nhược điểm}
+% %     \end{enumerate}

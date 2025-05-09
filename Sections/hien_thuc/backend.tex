@@ -1,0 +1,9 @@
+\subsection{Triển khai Web API cho cơ sở dữ liệu}
+
+\subsubsection{Triển khai Backend}
+Nhóm đã áp dụng mô hình MVC (Model-View-Controller) trong việc xây dựng phần Backend cho ứng dụng của mình. Trong mô hình MVC, mỗi đối tượng sẽ có ba thành phần chính là Controller, Model và View (Router) để đảm bảo tính phân tách và dễ bảo trì của ứng dụng.
+\begin{itemize}
+    \item Controller: Đây là thành phần chịu trách nhiệm xử lý yêu cầu từ phía client và điều khiển việc xử lý của ứng dụng. Controller sẽ nhận các yêu cầu từ phía client, xử lý chúng và gửi kết quả trả về cho client. Controller cũng có thể gọi các phương thức của Model để thực hiện các thao tác truy vấn cơ sở dữ liệu.
+    \item Model: Đây là thành phần đại diện cho dữ liệu và xử lý các thao tác truy vấn cơ sở dữ liệu. 
+    \item View (Router): Đây là thành phần đại diện cho giao diện người dùng. View sẽ nhận các yêu cầu từ phía client và điều hướng chúng đến các Controller tương ứng. View cũng có thể chứa các template để hiển thị dữ liệu trả về từ Controller.
+\end{itemize}

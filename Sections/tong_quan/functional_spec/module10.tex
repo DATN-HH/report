@@ -1,0 +1,383 @@
+\subsubsection{Module MD-10: Quản lý Hệ thống \& Người dùng}
+
+\begin{longtable}{|m{2cm}|m{2.5cm}|m{2cm}|m{4.5cm}|m{4cm}|}
+\caption{Danh sách Yêu cầu Chức năng cho Module MD-10: Quản lý Hệ thống \& Người dùng} \label{tab:fr_md10} \\
+\hline
+\textbf{Mã Module} & \textbf{Mã Yêu cầu CN} & \textbf{Mã Người dùng} & \textbf{Tên Chức năng} & \textbf{Mô tả Ngắn} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+
+\hline
+\endfoot % Footer cho bảng
+
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+
+MD-10 & FR-MD10-01 & US-10 & Quản lý Người dùng (Nhân viên) & Cho phép Quản trị viên tạo, xem, sửa đổi (thông tin cá nhân, vai trò công việc) và vô hiệu hóa/kích hoạt tài khoản người dùng cho nhân viên nhà hàng. \\
+\hline
+MD-10 & FR-MD10-02 & US-10 & Quản lý Nhóm Quyền & Cho phép Quản trị viên xem và quản lý các nhóm quyền truy cập (Access Groups) trong hệ thống Odoo (ví dụ: POS User, Inventory Manager, Booking Manager). \\
+\hline
+MD-10 & FR-MD10-03 & US-10 & Phân quyền Truy cập cho Người dùng & Cho phép Quản trị viên gán người dùng vào các Nhóm Quyền phù hợp để kiểm soát chức năng và dữ liệu mà họ có thể truy cập trong hệ thống. \\
+\hline
+MD-10 & FR-MD10-04 & US-10, US-01 & Cấu hình Chung của Hệ thống & Cho phép Quản trị viên/Quản lý cấu hình các thông tin chung của công ty/nhà hàng (tên, địa chỉ, logo, tiền tệ...), cấu hình email server, và các cài đặt hệ thống cơ bản khác. \\
+\hline
+MD-10 & FR-MD10-05 & US-10, US-01 & Cấu hình Tích hợp Bên thứ ba & Quản lý thông tin cấu hình (API Keys, Endpoints...) cho các dịch vụ bên thứ ba được tích hợp như Cổng thanh toán, Dịch vụ Bot Call (FR-MD04-05), Shipday (FR-MD07-13). \\
+\hline
+MD-10 & FR-MD10-06 & US-10, US-01 & Cấu hình Tham số Nghiệp vụ Đặc thù & Quản lý các tham số cấu hình riêng của ứng dụng nhà hàng đã xây dựng, ví dụ: Tỷ lệ đặt cọc bàn/món ăn (FR-MD03-11), Giá trị bàn (FR-MD03-11), Số ngày gọi bot trước (FR-MD04-05). \\
+\hline
+MD-10 & FR-MD10-07 & US-10 & Xem Nhật ký Hệ thống (Logs) & Cho phép Quản trị viên xem lại các bản ghi nhật ký hoạt động của hệ thống, bao gồm lỗi, hoạt động người dùng (nếu bật audit log), để phục vụ việc theo dõi và khắc phục sự cố. \\
+\hline
+
+
+\subsection*{Đặc tả Use Case Chi tiết}
+
+\subsubsubsection{Use Case UC-MD10-01: Quản lý Người dùng (Nhân viên)}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-01: Quản lý Người dùng (Nhân viên)} \label{tab:uc_md10_01} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Quản lý Người dùng (Nhân viên) \\
+\hline
+Use Case ID & UC-MD10-01 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) thực hiện các thao tác quản lý vòng đời tài khoản người dùng cho nhân viên nhà hàng, bao gồm tạo mới, xem thông tin, cập nhật thông tin cá nhân và vai trò công việc, đặt lại mật khẩu, và kích hoạt hoặc vô hiệu hóa tài khoản. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Có nhân viên mới vào làm cần cấp tài khoản truy cập hệ thống. \newline - Thông tin nhân viên (email, SĐT, vai trò) thay đổi. \newline - Nhân viên quên mật khẩu cần hỗ trợ đặt lại. \newline - Nhân viên nghỉ việc cần vô hiệu hóa tài khoản. \\
+\hline
+Pre-Condition & - Người dùng US-10 đã đăng nhập vào Odoo với quyền quản trị người dùng (ví dụ: quyền Settings hoặc Administrator). \\
+\hline
+Post-Condition & - \textbf{Tạo mới:} Tài khoản người dùng mới cho nhân viên được tạo, liên kết với hồ sơ nhân viên (Employee record - nếu dùng module HR), và được gán các quyền truy cập ban đầu. \newline - \textbf{Sửa đổi:} Thông tin của tài khoản người dùng được cập nhật. \newline - \textbf{Vô hiệu hóa:} Tài khoản người dùng không thể đăng nhập vào hệ thống nữa nhưng dữ liệu lịch sử vẫn còn. \newline - \textbf{Kích hoạt:} Tài khoản bị vô hiệu hóa được phép đăng nhập trở lại. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Tạo người dùng mới) & 1. US-10 truy cập vào mục "Cài đặt" (Settings) > "Quản lý Người dùng & Công ty" (Users & Companies) > "Người dùng" (Users). \newline 2. Hệ thống hiển thị danh sách người dùng hiện có. \newline 3. US-10 chọn "Tạo mới" (Create). \newline 4. Hệ thống hiển thị form tạo người dùng mới. \newline 5. US-10 nhập Tên người dùng (Name) (bắt buộc). \newline 6. US-10 nhập Địa chỉ Email đăng nhập (Login/Email Address) (bắt buộc, phải là duy nhất - BR-UC10.1-1). \newline 7. (Tùy chọn) US-10 liên kết người dùng này với một Hồ sơ Nhân viên (Employee) đã có hoặc tạo mới (nếu dùng module HR). \newline 8. US-10 gán các Nhóm Quyền (Access Rights/Groups) phù hợp cho người dùng này trong các tab Application Access (xem UC-MD10-03). Ví dụ: gán quyền "Point of Sale / User". \newline 9. (Tùy chọn) US-10 có thể đặt mật khẩu ban đầu hoặc gửi email mời người dùng tự đặt mật khẩu. \newline 10. US-10 chọn "Lưu" (Save). \newline 11. Hệ thống kiểm tra tính hợp lệ (Email duy nhất, các trường bắt buộc...). \newline 12. Hệ thống tạo bản ghi người dùng mới, mặc định là hoạt động (Active). \newline 13. Hệ thống hiển thị thông báo tạo thành công. \\
+\hline
+Alternative Flow & \textbf{2a. Sửa người dùng:} \newline    1. Từ danh sách người dùng (bước 2), US-10 chọn người dùng cần sửa. \newline    2. Hệ thống hiển thị form chi tiết người dùng. \newline    3. US-10 chọn "Sửa" (Edit). \newline    4. US-10 thay đổi thông tin cần thiết (Tên, Email, Ảnh đại diện, liên kết Nhân viên, Nhóm quyền...). \newline    5. US-10 chọn "Lưu". \newline    6. Hệ thống kiểm tra và lưu thay đổi. \newline \textbf{2b. Vô hiệu hóa/Kích hoạt người dùng:} \newline    1. Từ form chi tiết người dùng (bước 2a-2), US-10 chọn menu "Hành động" (Action). \newline    2. US-10 chọn "Lưu trữ" (Archive) để vô hiệu hóa hoặc "Hủy lưu trữ" (Unarchive) để kích hoạt lại. \newline    3. Hệ thống cập nhật trạng thái `active` của người dùng. \newline \textbf{2c. Đặt lại mật khẩu:} \newline    1. Từ form chi tiết người dùng, US-10 chọn tùy chọn "Đặt lại mật khẩu" (Reset Password) hoặc "Gửi email đặt lại mật khẩu". \newline    2. Hệ thống thực hiện hành động tương ứng (gửi email hoặc cho phép admin đặt mật khẩu mới trực tiếp - tùy cấu hình). \\
+\hline
+Exception Flow & \textbf{11a. Lỗi Xác thực Dữ liệu (Tạo/Sửa):} \newline    1. Hệ thống phát hiện Email không hợp lệ hoặc đã tồn tại. \newline    2. Hệ thống báo lỗi. Không cho phép lưu. \newline \textbf{12a/6a-edit/Archive... Lỗi Hệ thống khi Lưu/Cập nhật:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi thao tác với cơ sở dữ liệu. \newline    2. Hệ thống báo lỗi chung. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.1-1:} Địa chỉ Email đăng nhập của mỗi người dùng phải là duy nhất trong toàn hệ thống. \newline - \textbf{BR-UC10.1-2:} Việc gán quyền truy cập (UC-MD10-03) là bước quan trọng khi tạo/sửa người dùng để đảm bảo họ chỉ thấy và thao tác được những gì cần thiết cho vai trò của mình. \newline - \textbf{BR-UC10.1-3:} Khi nhân viên nghỉ việc, nên Vô hiệu hóa (Archive) tài khoản thay vì xóa hoàn toàn để giữ lại lịch sử hoạt động và tránh lỗi liên kết dữ liệu. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.1-1 (Usability):} Giao diện quản lý người dùng phải dễ sử dụng, dễ tìm kiếm, dễ thực hiện các thao tác CRUD và quản lý quyền. \newline - \textbf{NFR-UC10.1-2 (Security):} Việc quản lý người dùng và phân quyền là cực kỳ quan trọng về mặt bảo mật. Chỉ Quản trị viên mới có quyền này. Quy trình đặt lại mật khẩu phải an toàn. \newline - \textbf{NFR-UC10.1-3 (Auditability):} Nên ghi log lại các hành động quan trọng như tạo người dùng, thay đổi quyền, vô hiệu hóa tài khoản. \\
+\hline
+\end{longtable}
+
+\subsubsubsection{Use Case UC-MD10-02: Quản lý Nhóm Quyền}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-02: Quản lý Nhóm Quyền} \label{tab:uc_md10_02} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Quản lý Nhóm Quyền \\
+\hline
+Use Case ID & UC-MD10-02 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) xem, tạo mới, sửa đổi hoặc xóa các Nhóm Quyền truy cập (Access Groups). Mỗi nhóm quyền định nghĩa một tập hợp các quyền hạn cụ thể đối với các ứng dụng, menu, và hành động trong hệ thống Odoo. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Should Have (Thường ít khi cần tạo/sửa nhóm quyền gốc của Odoo, chủ yếu là xem và hiểu để gán cho người dùng) \\
+\hline
+Trigger & - Cần hiểu rõ các quyền hạn của một nhóm quyền cụ thể trước khi gán cho người dùng. \newline - Cần tạo một nhóm quyền mới với tập hợp quyền hạn tùy chỉnh (ít phổ biến cho ứng dụng cơ bản). \newline - Cần điều chỉnh quyền hạn của một nhóm quyền hiện có (cần cẩn trọng). \\
+\hline
+Pre-Condition & - Người dùng US-10 đã đăng nhập với quyền quản trị hệ thống cao nhất (Administrator) và đã kích hoạt chế độ nhà phát triển (Developer Mode) để thấy các menu kỹ thuật. \\
+\hline
+Post-Condition & - \textbf{Xem:} Quản trị viên hiểu được các quyền hạn được định nghĩa trong một nhóm quyền. \newline - \textbf{Tạo/Sửa/Xóa:} Cấu trúc các nhóm quyền trong hệ thống được thay đổi (ảnh hưởng đến tất cả người dùng thuộc nhóm đó). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Xem nhóm quyền) & 1. US-10 truy cập "Cài đặt" (Settings) > "Kỹ thuật" (Technical) > "Bảo mật" (Security) > "Nhóm" (Groups). (Yêu cầu bật Developer Mode). \newline 2. Hệ thống hiển thị danh sách tất cả các Nhóm Quyền trong hệ thống, thường nhóm theo Ứng dụng (Application). \newline 3. US-10 tìm và chọn một Nhóm Quyền muốn xem (ví dụ: "Point of Sale / User"). \newline 4. Hệ thống hiển thị chi tiết Nhóm Quyền, bao gồm: \newline    - Tên Nhóm (Name). \newline    - Ứng dụng (Application). \newline    - Các nhóm kế thừa (Implied Groups - các quyền của nhóm này tự động bao gồm quyền của các nhóm được kế thừa). \newline    - Danh sách người dùng thuộc nhóm này (Users tab). \newline    - Các menu được phép truy cập (Menus tab). \newline    - Các quyền truy cập đối tượng (Access Rights tab - quyền Read, Write, Create, Delete trên các Model). \newline    - Các quy tắc bản ghi (Record Rules tab - giới hạn quyền truy cập trên các bản ghi cụ thể). \newline    - Các chế độ xem được phép (Views tab). \newline 5. US-10 xem xét các thông tin chi tiết để hiểu quyền hạn của nhóm. \\
+\hline
+Alternative Flow & \textbf{2a. Tạo/Sửa/Xóa nhóm quyền:} \newline    1. Từ danh sách Nhóm Quyền (bước 2), US-10 có thể chọn Tạo mới, hoặc chọn một nhóm rồi nhấn Sửa/Xóa. \newline    2. Quy trình CRUD tương tự như quản lý các đối tượng khác trong Odoo, nhưng đòi hỏi hiểu biết sâu về cấu trúc phân quyền của Odoo. \newline    3. **Lưu ý:** Việc sửa đổi hoặc xóa các nhóm quyền gốc của Odoo có thể gây ra lỗi hệ thống nghiêm trọng. Thao tác này chỉ nên thực hiện bởi người có kinh nghiệm hoặc khi tạo module tùy chỉnh. \\
+\hline
+Exception Flow & \textbf{1a. Chưa bật Developer Mode:} \newline    1. Menu "Kỹ thuật" không hiển thị. \newline    2. US-10 không thể truy cập chức năng này. Cần bật Developer Mode trước. \newline \textbf{Alternative Flow 2a - Lỗi khi Tạo/Sửa/Xóa:} \newline    1. Hệ thống gặp lỗi kỹ thuật hoặc lỗi logic (ví dụ: xóa nhóm đang được kế thừa bởi nhóm khác). \newline    2. Hệ thống báo lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.2-1:} Hệ thống phân quyền của Odoo dựa trên mô hình Nhóm Quyền. Người dùng được gán vào một hoặc nhiều nhóm và sẽ có tổng hợp các quyền từ các nhóm đó. \newline - \textbf{BR-UC10.2-2:} Việc sửa đổi các nhóm quyền gốc của Odoo là không khuyến khích. Nếu cần quyền hạn tùy chỉnh, nên tạo nhóm mới và kế thừa từ các nhóm gốc. \newline - \textbf{BR-UC10.2-3:} Việc hiểu rõ ý nghĩa của các tab (Implied Groups, Access Rights, Record Rules...) là cần thiết để quản lý quyền hiệu quả. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.2-1 (Complexity):} Quản lý Nhóm Quyền là một chức năng phức tạp, đòi hỏi kiến thức về Odoo. \newline - \textbf{NFR-UC10.2-2 (Security):} Đây là chức năng cốt lõi về bảo mật, phải được kiểm soát quyền truy cập chặt chẽ nhất. \newline - \textbf{NFR-UC10.2-3 (Impact):} Bất kỳ thay đổi nào đối với Nhóm Quyền đều có thể ảnh hưởng đến nhiều người dùng và chức năng hệ thống. \\
+\hline
+\end{longtable}
+
+\subsubsubsection{Use Case UC-MD10-03: Phân quyền Truy cập cho Người dùng}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-03: Phân quyền Truy cập cho Người dùng} \label{tab:uc_md10_03} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Phân quyền Truy cập cho Người dùng \\
+\hline
+Use Case ID & UC-MD10-03 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) gán hoặc gỡ bỏ người dùng (nhân viên) khỏi các Nhóm Quyền truy cập (Access Groups) đã được định nghĩa trong hệ thống, qua đó kiểm soát các chức năng và dữ liệu mà người dùng đó có thể truy cập và thao tác. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khi tạo người dùng mới (UC-MD10-01), cần gán quyền ban đầu. \newline - Khi vai trò công việc của nhân viên thay đổi, cần cập nhật lại quyền truy cập. \newline - Khi cần cấp thêm hoặc thu hồi bớt quyền cho một nhân viên. \\
+\hline
+Pre-Condition & - Người dùng US-10 đã đăng nhập với quyền quản trị người dùng. \newline - Tài khoản người dùng cần phân quyền đã được tạo (UC-MD10-01). \newline - Các Nhóm Quyền phù hợp đã tồn tại trong hệ thống (có sẵn của Odoo hoặc tạo mới ở UC-MD10-02). \\
+\hline
+Post-Condition & - Danh sách các Nhóm Quyền mà người dùng thuộc về được cập nhật. \newline - Quyền truy cập thực tế của người dùng vào các ứng dụng, menu, và dữ liệu thay đổi theo các nhóm quyền mới được gán/gỡ bỏ (thường có hiệu lực sau khi người dùng đăng xuất và đăng nhập lại). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10 truy cập vào form chi tiết của Người dùng cần phân quyền (thông qua UC-MD10-01, luồng sửa người dùng). \newline 2. US-10 chọn chế độ "Sửa" (Edit). \newline 3. US-10 tìm đến phần "Quyền Truy cập" (Access Rights) hoặc các tab tương ứng với từng Ứng dụng (Application). \newline 4. Trong mỗi ứng dụng (ví dụ: Point of Sale, Inventory, Sales, Reservations...), có các tùy chọn dưới dạng danh sách thả xuống hoặc checkbox tương ứng với các Nhóm Quyền liên quan đến ứng dụng đó (ví dụ: cho POS có thể là "User: All Documents" hoặc "Administrator"). \newline 5. US-10 chọn (hoặc bỏ chọn) các Nhóm Quyền phù hợp với vai trò và trách nhiệm của người dùng này. \newline    - Ví dụ: Gán quyền "Point of Sale / User" cho nhân viên phục vụ/thu ngân. Gán "Reservations / User" cho lễ tân. Gán "Inventory / User" cho nhân viên kho/bếp. Gán quyền Administrator (ví dụ: "Point of Sale / Administrator") cho quản lý nhà hàng. \newline 6. US-10 kiểm tra lại các quyền đã gán. \newline 7. US-10 chọn "Lưu" (Save). \newline 8. Hệ thống lưu lại các thay đổi về việc gán nhóm quyền cho người dùng. \newline 9. Hệ thống hiển thị thông báo cập nhật thành công. \\
+\hline
+Alternative Flow & \textbf{1a. Phân quyền qua Nhóm Quyền:} \newline    1. US-10 truy cập vào chi tiết một Nhóm Quyền (UC-MD10-02). \newline    2. US-10 chuyển sang tab "Users". \newline    3. US-10 chọn "Add a line" hoặc "Edit". \newline    4. US-10 tìm và chọn (các) người dùng muốn thêm vào nhóm quyền này. \newline    5. US-10 lưu lại thay đổi trên Nhóm Quyền. (Cách này ít phổ biến hơn cách phân quyền trực tiếp trên người dùng). \\
+\hline
+Exception Flow & \textbf{7a. Lỗi hệ thống khi lưu:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng lưu lại việc gán nhóm quyền. \newline    2. Hệ thống báo lỗi chung. Thay đổi có thể không được lưu. \newline \textbf{5a. Gán quyền không tương thích / Gây xung đột (Hiếm gặp):} \newline    1. Việc gán một số nhóm quyền nhất định có thể gây ra cảnh báo từ hệ thống nếu chúng không tương thích logic với nhau (rất hiếm khi xảy ra với các nhóm quyền chuẩn). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.3-1:} Nguyên tắc phân quyền tối thiểu: Chỉ cấp cho người dùng những quyền hạn thực sự cần thiết để thực hiện công việc của họ. \newline - \textbf{BR-UC10.3-2:} Cần hiểu rõ ý nghĩa của từng Nhóm Quyền trước khi gán. Tham khảo tài liệu Odoo hoặc UC-MD10-02. \newline - \textbf{BR-UC10.3-3:} Quyền hạn mới thường chỉ có hiệu lực sau khi người dùng đăng xuất và đăng nhập lại vào hệ thống. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.3-1 (Usability):} Giao diện gán quyền trên form người dùng phải rõ ràng, dễ dàng thấy các ứng dụng và các cấp độ quyền tương ứng. \newline - \textbf{NFR-UC10.3-2 (Security):} Phân quyền chính xác là yếu tố then chốt để đảm bảo an toàn và bảo mật dữ liệu hệ thống. \newline - \textbf{NFR-UC10.3-3 (Maintainability):} Việc phân quyền dựa trên nhóm giúp dễ dàng quản lý và cập nhật quyền cho nhiều người dùng cùng lúc khi có thay đổi về quy trình hoặc vai trò. \\
+\hline
+\end{longtable}
+
+\subsubsubsection{Use Case UC-MD10-04: Cấu hình Chung của Hệ thống}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-04: Cấu hình Chung của Hệ thống} \label{tab:uc_md10_04} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Chung của Hệ thống \\
+\hline
+Use Case ID & UC-MD10-04 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hoặc Quản lý cấp cao cấu hình các thông tin và cài đặt cơ bản áp dụng cho toàn bộ hệ thống Odoo, như thông tin công ty/nhà hàng, logo, đơn vị tiền tệ, ngôn ngữ, cài đặt email gửi đi, v.v. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống), US-01 (Quản lý nhà hàng - có thể có quyền truy cập một số cài đặt chung) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Thiết lập ban đầu cho hệ thống Odoo. \newline - Khi thông tin công ty/nhà hàng thay đổi. \newline - Cần thay đổi cài đặt ngôn ngữ, tiền tệ hoặc email. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập với quyền quản trị cài đặt chung (Settings Administrator). \\
+\hline
+Post-Condition & - Các thông tin và cài đặt chung của hệ thống được cập nhật. \newline - Các thay đổi này ảnh hưởng đến toàn bộ hệ thống (ví dụ: logo hiển thị trên báo cáo, đơn vị tiền tệ trong giao dịch, ngôn ngữ giao diện). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-10/US-01) truy cập vào mục "Cài đặt" (Settings). \newline 2. Hệ thống hiển thị giao diện Cài đặt chung, thường được chia thành nhiều mục nhỏ (General Settings, Users & Companies, Technical...). \newline 3. Người dùng điều hướng đến các mục cần cấu hình: \newline    - \textbf{Thông tin Công ty/Nhà hàng:} Nhập/Sửa Tên, Địa chỉ, Mã số thuế, SĐT, Email, Website, Logo. \newline    - \textbf{Ngôn ngữ:} Quản lý các ngôn ngữ được cài đặt và chọn ngôn ngữ mặc định. \newline    - \textbf{Tiền tệ:} Kích hoạt các đơn vị tiền tệ cần sử dụng và chọn tiền tệ mặc định của công ty. \newline    - \textbf{Email Marketing/Outgoing Email Server:} Cấu hình thông tin máy chủ SMTP để hệ thống có thể gửi email đi (xác nhận đặt chỗ, đặt lại mật khẩu...). \newline    - \textbf{Tích hợp bên ngoài (External API Keys):} Quản lý các API key chung (ví dụ: Google Maps). \newline    - Các cài đặt khác tùy thuộc vào các module đã cài đặt. \newline 4. Người dùng thực hiện các thay đổi mong muốn trong các trường cấu hình. \newline 5. Người dùng chọn "Lưu" (Save) để áp dụng các thay đổi. \newline 6. Hệ thống kiểm tra và lưu lại các cấu hình mới. \newline 7. Hệ thống hiển thị thông báo lưu thành công. \\
+\hline
+Alternative Flow & \textbf{3a. Cài đặt/Gỡ bỏ Module:} \newline    1. Từ giao diện Cài đặt hoặc mục Apps, người dùng có thể cài đặt thêm các module chức năng mới hoặc gỡ bỏ các module không cần thiết. (Việc này đòi hỏi quyền admin cao nhất). \\
+\hline
+Exception Flow & \textbf{6a. Lỗi xác thực cấu hình:} \newline    1. Người dùng nhập giá trị không hợp lệ cho một cài đặt (ví dụ: sai định dạng email server). \newline    2. Hệ thống báo lỗi. Không lưu thay đổi. \newline \textbf{6b. Lỗi hệ thống khi lưu:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi lưu cấu hình. \newline    2. Hệ thống báo lỗi chung. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.4-1:} Thông tin công ty/nhà hàng (tên, địa chỉ, logo) sẽ được sử dụng trên các tài liệu in ấn (hóa đơn, báo cáo...). \newline - \textbf{BR-UC10.4-2:} Việc cấu hình đúng Outgoing Email Server là bắt buộc để các tính năng gửi email tự động của hệ thống (xác nhận đặt chỗ, reset password, thông báo bot...) hoạt động. \newline - \textbf{BR-UC10.4-3:} Đơn vị tiền tệ mặc định ảnh hưởng đến tất cả các giao dịch tài chính trong hệ thống. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.4-1 (Usability):} Giao diện Cài đặt chung cần được tổ chức khoa học, dễ tìm kiếm các mục cấu hình. \newline - \textbf{NFR-UC10.4-2 (Security):} Quyền truy cập vào Cài đặt chung, đặc biệt là các cài đặt kỹ thuật và email, phải được kiểm soát chặt chẽ. \newline - \textbf{NFR-UC10.4-3 (Impact):} Các thay đổi trong Cài đặt chung có thể có ảnh hưởng sâu rộng đến toàn bộ hệ thống, cần thực hiện cẩn thận. \\
+\hline
+\end{longtable}
+
+\subsubsubsection{Use Case UC-MD10-05: Cấu hình Tích hợp Bên thứ ba}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-05: Cấu hình Tích hợp Bên thứ ba} \label{tab:uc_md10_05} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Tích hợp Bên thứ ba \\
+\hline
+Use Case ID & UC-MD10-05 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hoặc Quản lý cấp cao nhập và quản lý các thông tin cấu hình cần thiết (như API Keys, Secret Tokens, Endpoints) để kết nối và trao đổi dữ liệu với các dịch vụ bên thứ ba được sử dụng trong hệ thống, cụ thể là Cổng thanh toán, Dịch vụ Bot Call, và Shipday. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have (Đối với các tích hợp cần thiết như Cổng thanh toán, Bot Call, Shipday) \\
+\hline
+Trigger & - Thiết lập lần đầu cho một tích hợp bên thứ ba. \newline - Thông tin API Key hoặc cấu hình của dịch vụ bên thứ ba thay đổi. \newline - Cần bật/tắt hoặc thay đổi cài đặt của một tích hợp. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập với quyền quản trị cài đặt hoặc cấu hình module liên quan. \newline - Đã có tài khoản và thông tin API cần thiết từ nhà cung cấp dịch vụ bên thứ ba. \\
+\hline
+Post-Condition & - Thông tin cấu hình tích hợp được lưu trữ an toàn trong hệ thống Odoo. \newline - Hệ thống Odoo có thể sử dụng thông tin này để xác thực và giao tiếp với API của dịch vụ bên thứ ba. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-10/US-01) truy cập vào khu vực Cài đặt (Settings) của module tương ứng với tích hợp cần cấu hình (ví dụ: Cài đặt của Point of Sale cho Cổng thanh toán, Cài đặt của Đặt chỗ/Tích hợp cho Bot Call, Cài đặt của Giao hàng/Tích hợp cho Shipday). \newline 2. Người dùng tìm đến phần cấu hình dành riêng cho dịch vụ bên thứ ba đó (ví dụ: "Payment Acquirers", "Bot Call Service", "Shipday Integration"). \newline 3. Hệ thống hiển thị các trường để nhập thông tin cấu hình. Các trường cụ thể sẽ khác nhau tùy thuộc vào dịch vụ: \newline    - \textbf{Cổng thanh toán:} Chọn loại cổng thanh toán (Stripe, Paypal, VNPay...), nhập API Key/Secret Key, cấu hình chế độ (Test/Production). \newline    - \textbf{Bot Call:} Nhập API Endpoint, API Key/Token (Như UC-MD04-05). \newline    - \textbf{Shipday:} Nhập API Key (Như UC-MD07-13). \newline 4. Người dùng nhập hoặc cập nhật các thông tin cấu hình chính xác do nhà cung cấp dịch vụ cung cấp. \newline 5. (Tùy chọn) Người dùng có thể sử dụng nút "Kiểm tra kết nối" (Test Connection) nếu có để xác thực thông tin vừa nhập. \newline 6. Người dùng chọn "Lưu" (Save). \newline 7. Hệ thống lưu lại cấu hình tích hợp. \newline 8. Hệ thống hiển thị thông báo lưu thành công. \\
+\hline
+Alternative Flow & \textbf{1a. Cấu hình tập trung:} \newline    1. Có thể có một khu vực cài đặt tập trung ("Integrations", "API Keys") quản lý tất cả các kết nối bên thứ ba thay vì nằm rải rác trong từng module. \\
+\hline
+Exception Flow & \textbf{7a. Lỗi lưu cấu hình:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi lưu. \newline    2. Hệ thống báo lỗi chung. \newline \textbf{5a. Kiểm tra kết nối thất bại:} \newline    1. Nếu có nút kiểm tra kết nối và kết quả trả về là thất bại (sai API key, sai endpoint...). \newline    2. Hệ thống báo lỗi cụ thể. Người dùng cần kiểm tra lại thông tin đã nhập. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.5-1:} Thông tin cấu hình API (Keys, Tokens) phải chính xác và được cập nhật nếu nhà cung cấp dịch vụ thay đổi. \newline - \textbf{BR-UC10.5-2:} Cần phân biệt rõ ràng giữa môi trường thử nghiệm (Test/Sandbox) và môi trường thực tế (Production/Live) khi cấu hình, đặc biệt là với cổng thanh toán. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.5-1 (Security):} API Keys và Secret Tokens là thông tin cực kỳ nhạy cảm, phải được lưu trữ an toàn (mã hóa, không hiển thị dạng text), và quyền truy cập vào khu vực cấu hình này phải được hạn chế tối đa. \newline - \textbf{NFR-UC10.5-2 (Usability):} Giao diện cấu hình cho từng tích hợp nên rõ ràng, chỉ yêu cầu những thông tin cần thiết. Tính năng kiểm tra kết nối rất hữu ích. \\
+\hline
+\end{longtable}
+
+\subsubsubsection{Use Case UC-MD10-06: Cấu hình Tham số Nghiệp vụ Đặc thù}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-06: Cấu hình Tham số Nghiệp vụ Đặc thù} \label{tab:uc_md10_06} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Tham số Nghiệp vụ Đặc thù \\
+\hline
+Use Case ID & UC-MD10-06 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hoặc Quản lý nhà hàng tùy chỉnh các tham số, quy tắc riêng biệt của ứng dụng nhà hàng được xây dựng trên nền Odoo, bao gồm các tham số đã được đề cập trong các module nghiệp vụ khác như tỷ lệ đặt cọc, giá bàn, và số ngày gọi bot. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Cần thiết lập ban đầu các quy tắc kinh doanh riêng của nhà hàng. \newline - Khi nhà hàng muốn thay đổi chính sách về đặt cọc, giá bàn, hoặc quy trình xác nhận. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập với quyền quản trị cấu hình module Đặt chỗ hoặc các module tùy chỉnh liên quan. \\
+\hline
+Post-Condition & - Các quy tắc và tham số nghiệp vụ riêng của nhà hàng được cập nhật trong hệ thống. \newline - Các module nghiệp vụ khác (Đặt chỗ, Bot Call, Tính toán...) sẽ hoạt động dựa trên các tham số mới này. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-10/US-01) truy cập vào khu vực Cài đặt (Settings) của module Đặt chỗ (Reservations) hoặc một module cấu hình tùy chỉnh riêng cho nhà hàng. \newline 2. Hệ thống hiển thị các trường cấu hình đặc thù: \newline    - \textbf{Tỷ lệ Đặt cọc Bàn (%):} Nhập giá trị phần trăm (ví dụ: 15). \newline    - \textbf{Tỷ lệ Đặt cọc Món ăn (%):} Nhập giá trị phần trăm (ví dụ: 15). \newline    - \textbf{Số ngày gọi Bot xác nhận trước:} Nhập số nguyên dương (ví dụ: 1). \newline    - (Có thể có) Các trường để quản lý Giá trị Bàn (có thể liên kết đến quản lý tài nguyên/bàn). \newline    - (Có thể có) Các cấu hình khác liên quan đến chính sách hủy, hoàn cọc, v.v. \newline 3. Người dùng nhập hoặc cập nhật các giá trị mong muốn. \newline 4. Người dùng chọn "Lưu" (Save). \newline 5. Hệ thống kiểm tra tính hợp lệ của dữ liệu (ví dụ: tỷ lệ là số, số ngày là số nguyên). \newline 6. Hệ thống lưu lại các cấu hình mới. \newline 7. Hệ thống hiển thị thông báo lưu thành công. \\
+\hline
+Alternative Flow & \textbf{2a. Quản lý Giá trị Bàn ở nơi khác:} \newline    1. Việc nhập giá trị cho từng bàn có thể nằm ở một menu cấu hình riêng biệt, ví dụ như trong quản lý Sơ đồ tầng hoặc quản lý Tài nguyên. Use case này chỉ tập trung vào các tỷ lệ và tham số chung. \\
+\hline
+Exception Flow & \textbf{5a. Lỗi Xác thực Dữ liệu:} \newline    1. Người dùng nhập giá trị không hợp lệ (ví dụ: tỷ lệ âm, số ngày không phải số nguyên). \newline    2. Hệ thống báo lỗi. Không lưu cấu hình. \newline \textbf{6a. Lỗi Hệ thống khi Lưu:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi lưu cấu hình. \newline    2. Hệ thống báo lỗi chung. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.6-1:} Các tham số này (tỷ lệ cọc, giá bàn, số ngày gọi bot) ảnh hưởng trực tiếp đến quy trình đặt chỗ, tính toán và xác nhận. Cần cấu hình chính xác theo chính sách của nhà hàng. \newline - \textbf{BR-UC10.6-2:} Các giá trị cấu hình phải được các module liên quan (Tính toán cọc UC-MD03-08, Lên lịch gọi bot UC-MD04-01) đọc và sử dụng đúng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.6-1 (Usability):} Các trường cấu hình nghiệp vụ đặc thù nên được nhóm lại một cách logic, dễ tìm và dễ hiểu ý nghĩa. \newline - \textbf{NFR-UC10.6-2 (Flexibility):} Hệ thống nên cho phép dễ dàng thay đổi các tham số này khi chính sách kinh doanh thay đổi. \\
+\hline
+\end{longtable}
+
+\subsubsubsection{Use Case UC-MD10-07: Xem Nhật ký Hệ thống (Logs)}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-07: Xem Nhật ký Hệ thống (Logs)} \label{tab:uc_md10_07} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Xem Nhật ký Hệ thống (Logs) \\
+\hline
+Use Case ID & UC-MD10-07 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) truy cập và xem các bản ghi nhật ký (logs) do hệ thống Odoo tự động tạo ra, bao gồm thông tin về các lỗi kỹ thuật, các cảnh báo, và có thể cả các hoạt động quan trọng của người dùng (nếu audit log được bật), nhằm mục đích theo dõi, chẩn đoán và khắc phục sự cố. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Should Have (Rất quan trọng cho việc vận hành và bảo trì) \\
+\hline
+Trigger & - Cần điều tra nguyên nhân của một lỗi vừa xảy ra trong hệ thống. \newline - Cần theo dõi hoạt động của một tính năng hoặc một người dùng cụ thể. \newline - Kiểm tra định kỳ tình trạng hoạt động của hệ thống. \\
+\hline
+Pre-Condition & - Người dùng US-10 đã đăng nhập với quyền quản trị hệ thống cao nhất. \newline - Hệ thống Odoo đang hoạt động và có cơ chế ghi log (thường là mặc định). \\
+\hline
+Post-Condition & - Quản trị viên xem được danh sách các bản ghi nhật ký hệ thống. \newline - Quản trị viên có thể lọc, tìm kiếm và xem chi tiết từng bản ghi log để phục vụ việc chẩn đoán sự cố. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10 truy cập vào khu vực kỹ thuật của hệ thống, thường yêu cầu bật Developer Mode. \newline 2. US-10 tìm đến mục "Nhật ký" (Logging) hoặc "Hành động Hệ thống" (System Actions) hoặc xem trực tiếp file log trên server (tùy cách triển khai Odoo). \newline 3. \textbf{Nếu xem qua giao diện Odoo (ví dụ: model ir.logging):} \newline    a. Hệ thống hiển thị danh sách các bản ghi log, thường sắp xếp theo thời gian giảm dần. \newline    b. Mỗi bản ghi hiển thị thông tin tóm tắt: Thời gian, Mức độ (Level: INFO, WARNING, ERROR, CRITICAL), Tên logger, Nội dung thông điệp. \newline    c. US-10 xem danh sách, có thể sử dụng bộ lọc (theo Mức độ, theo Logger, theo Thời gian) hoặc tìm kiếm theo nội dung thông điệp để tìm log cần quan tâm. \newline    d. US-10 có thể nhấp vào một bản ghi để xem chi tiết đầy đủ (bao gồm cả traceback nếu là lỗi). \newline 4. \textbf{Nếu xem qua file log trên server:} \newline    a. US-10 truy cập vào máy chủ Odoo qua SSH hoặc giao diện quản lý file. \newline    b. US-10 mở file log của Odoo (ví dụ: odoo.log). \newline    c. US-10 sử dụng các công cụ dòng lệnh (tail, grep, less...) hoặc trình soạn thảo văn bản để xem, lọc và tìm kiếm nội dung log. \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể ngoài hai cách tiếp cận chính là qua giao diện Odoo (nếu có) hoặc qua file log trực tiếp. \\
+\hline
+Exception Flow & \textbf{3e. Lỗi tải/hiển thị log qua giao diện Odoo:} \newline    1. Hệ thống gặp lỗi khi truy vấn hoặc hiển thị dữ liệu log (có thể do lượng log quá lớn). \newline    2. Hệ thống báo lỗi. Việc xem log qua giao diện bị gián đoạn. Cần xem xét xem log qua file trực tiếp. \newline \textbf{4d. Không thể truy cập file log trên server:} \newline    1. US-10 không có quyền truy cập máy chủ hoặc file log bị lỗi/không tồn tại. \newline    2. Không thể xem log theo cách này. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.7-1:} Hệ thống Odoo cần được cấu hình để ghi log ở mức độ phù hợp (ví dụ: INFO hoặc DEBUG trong môi trường phát triển/thử nghiệm, WARNING hoặc ERROR trong môi trường production) để cân bằng giữa việc có đủ thông tin và dung lượng lưu trữ log. \newline - \textbf{BR-UC10.7-2:} Log lỗi (ERROR, CRITICAL) cần cung cấp đủ thông tin (traceback) để lập trình viên có thể xác định nguyên nhân sự cố. \newline - \textbf{BR-UC10.7-3:} Cần có chính sách quản lý file log (ví dụ: xoay vòng log - log rotation) để tránh việc file log quá lớn chiếm hết dung lượng đĩa. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.7-1 (Security):} Quyền truy cập vào nhật ký hệ thống (đặc biệt là file log trên server) phải được kiểm soát chặt chẽ, chỉ dành cho quản trị viên hệ thống. \newline - \textbf{NFR-UC10.7-2 (Performance):} Việc ghi log không được ảnh hưởng đáng kể đến hiệu năng chung của hệ thống. Việc truy vấn log (nếu qua giao diện) cũng cần hiệu quả. \newline - \textbf{NFR-UC10.7-3 (Maintainability):} Log hệ thống là công cụ quan trọng cho việc bảo trì và khắc phục sự cố. \\
+\hline
+\end{longtable}
+

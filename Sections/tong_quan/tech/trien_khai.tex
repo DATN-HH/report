@@ -1,0 +1,54 @@
+\subsubsection{Công nghệ triển khai}
+\subsubsubsection{GitHub Actions}
+    \begin{enumerate}[(a)]
+        \item \textit{Giới thiệu}
+
+        GitHub Actions là một nền tảng tích hợp sẵn trong GitHub, được giới thiệu vào năm 2018, cho phép các nhà phát triển tự động hóa các quy trình trong vòng đời phát triển phần mềm trực tiếp trên kho lưu trữ của họ. Nó hỗ trợ việc xây dựng, kiểm thử và triển khai ứng dụng thông qua việc tạo ra các workflow (quy trình làm việc) được định nghĩa bằng tệp YAML \cite{Viblo}.
+
+        GitHub Actions cung cấp một hệ sinh thái phong phú với nhiều actions (hành động) có sẵn từ cộng đồng, cho phép người dùng dễ dàng tích hợp các công cụ và dịch vụ bên ngoài vào quy trình làm việc của họ. Ngoài ra, nó hỗ trợ chạy trên nhiều hệ điều hành như Windows, macOS và Ubuntu, giúp kiểm thử ứng dụng trên các môi trường khác nhau \cite{Viblo}.
+
+        Với GitHub Actions, các nhà phát triển có thể thiết lập các quy trình CI/CD (Continuous Integration/Continuous Deployment) một cách linh hoạt và hiệu quả, tự động hóa các tác vụ như xây dựng, kiểm thử và triển khai ứng dụng, từ đó nâng cao hiệu suất làm việc và chất lượng sản phẩm.
+
+        \item \textit{Ưu điểm}
+
+        \begin{itemize}
+            \item \textbf{Tích hợp liền mạch với GitHub}: Là một tính năng gốc của nền tảng GitHub, GitHub Actions cho phép các nhà phát triển tự động hóa workflow trực tiếp trong kho lưu trữ của họ. Sự tích hợp chặt chẽ này giúp đơn giản hóa các tác vụ như build, test và deploy code mà không cần sử dụng các công cụ bên ngoài.
+            \item \textbf{Marketplace phong phú}: GitHub Marketplace cung cấp hơn 10.000 actions được xây dựng sẵn, giúp các nhà phát triển dễ dàng tích hợp nhiều công cụ và dịch vụ vào workflow của họ. Thư viện rộng lớn này giúp đơn giản hóa quá trình thiết lập các pipeline phức tạp bằng cách cung cấp các thành phần có thể tái sử dụng \cite{GitHubActionsIntro}.
+            \item \textbf{Tự động hóa linh hoạt}: GitHub Actions hỗ trợ workflow dựa trên sự kiện (event-driven workflows), cho phép tự động hóa theo phản hồi của các sự kiện trong kho lưu trữ, chẳng hạn như push, pull request hoặc issue creation. Tính linh hoạt này giúp các nhà phát triển tùy chỉnh workflow để phù hợp với yêu cầu cụ thể của dự án.
+            \item \textbf{Hỗ trợ đa nền tảng}: GitHub Actions cung cấp runners cho môi trường Linux, Windows và macOS, cho phép các nhà phát triển test và deploy ứng dụng trên nhiều hệ điều hành khác nhau. Khả năng hỗ trợ đa nền tảng này giúp đảm bảo ứng dụng hoạt động ổn định trong các môi trường khác nhau \cite{GitHubActionsDocs}.
+        \end{itemize}
+        
+        % \item \textit{Nhược điểm} \cite{GitHubActionsMerits}
+
+        % \begin{itemize}
+        %     \item \textbf{Độ phức tạp trong workflow phức tạp}: Thiết kế workflow với nhiều bước và điều kiện có thể trở nên rối rắm, gây khó khăn trong việc bảo trì, đặc biệt đối với những người mới làm quen với các khái niệm về Continuous Integration/Continuous Deployment (CI/CD).
+        %     \item \textbf{Giới hạn tài nguyên}: GitHub Actions áp đặt các giới hạn về mức sử dụng tài nguyên, bao gồm thời gian thực thi tối đa và dung lượng ổ đĩa có sẵn. Những hạn chế này có thể cản trở các workflow yêu cầu nhiều tài nguyên tính toán.
+        %     \item \textbf{Phụ thuộc vào hệ sinh thái GitHub}: Do GitHub Actions được tích hợp chặt chẽ với nền tảng GitHub, bất kỳ sự cố gián đoạn hoặc downtime nào trên GitHub đều có thể ảnh hưởng trực tiếp đến các workflow CI/CD. Sự phụ thuộc này làm dấy lên lo ngại về độ tin cậy và khả năng sẵn sàng của hệ thống.
+        %     \item \textbf{Thách thức trong quá trình debugging}: Việc xác định và khắc phục sự cố trong GitHub Actions có thể gặp khó khăn do khả năng quan sát (observability) và cơ chế phản hồi (feedback) còn hạn chế. Các nhà phát triển thường cần chèn nhiều log statement và chờ workflow thực thi để chẩn đoán vấn đề, dẫn đến chu kỳ phát triển kéo dài hơn.
+        % \end{itemize}
+    \end{enumerate}
+
+\subsubsubsection{Docker}
+    \begin{enumerate}[(a)]
+        \item \textit{Giới thiệu}
+
+        Docker là một nền tảng mã nguồn mở giúp các nhà phát triển tự động hóa việc triển khai, mở rộng và quản lý các ứng dụng trong các container nhẹ và di động. Các container này đóng gói ứng dụng và các phụ thuộc của nó, đảm bảo ứng dụng hoạt động nhất quán trên nhiều môi trường khác nhau.
+        
+        \item \textit{Ưu điểm} \cite{DockerAdvantages}
+
+        \begin{itemize}
+            \item \textbf{Tính di động và nhất quán}: Các container Docker đóng gói ứng dụng và các phụ thuộc của chúng, đảm bảo chúng chạy nhất quán trên nhiều môi trường khác nhau, từ phát triển đến sản xuất. Điều này loại bỏ vấn đề "it works on my machine" thường gặp. 
+            \item \textbf{Hiệu quả tài nguyên}: Khác với các máy ảo truyền thống, các container Docker chia sẻ nhân hệ thống của máy chủ, giúp chúng nhẹ và hiệu quả hơn. Điều này cho phép khởi động nhanh hơn và chạy nhiều container hơn trên cùng một phần cứng, dẫn đến việc sử dụng tài nguyên tốt hơn. 
+            \item \textbf{Triển khai nhanh chóng và khả năng mở rộng}: Docker cho phép triển khai và mở rộng ứng dụng một cách nhanh chóng. Các container có thể được khởi động hoặc dừng gần như ngay lập tức, tạo điều kiện cho việc mở rộng nhanh chóng dựa trên nhu cầu. Sự linh hoạt này rất quan trọng đối với các ứng dụng yêu cầu khả năng mở rộng động.
+            \item \textbf{Tách biệt và bảo mật}: Docker cung cấp mức độ tách biệt cao giữa các ứng dụng, giảm thiểu rủi ro xung đột và tăng cường bảo mật. Mỗi container hoạt động độc lập, giảm thiểu tác động của các lỗ hổng và đảm bảo hiệu suất ứng dụng ổn định.
+            \item \textbf{Quản lý phiên bản và hợp tác đơn giản}: Các image Docker có thể được quản lý phiên bản, cho phép các nhà phát triển theo dõi thay đổi và quay lại các trạng thái trước đó nếu cần. Quản lý phiên bản này đảm bảo tính nhất quán trên các giai đoạn khác nhau của vòng đời phát triển và tăng cường hợp tác giữa các nhóm phát triển.
+        \end{itemize}
+        
+        % \item \textit{Nhược điểm}
+
+        % \begin{itemize}
+        %     \item \textbf{Hạn chế với ứng dụng GUI}: Docker chủ yếu hỗ trợ các ứng dụng dựa trên dòng lệnh và không phù hợp với các ứng dụng yêu cầu giao diện người dùng đồ họa phong phú. Việc chạy ứng dụng GUI trong Docker có thể gặp khó khăn và không được hỗ trợ tốt.
+        %     \item \textbf{Phụ thuộc vào hệ điều hành Linux}: Docker hoạt động tốt nhất trên hệ điều hành Linux. Trên Windows và macOS, Docker cần sử dụng máy ảo Linux để chạy các container, điều này có thể ảnh hưởng đến hiệu suất và khả năng tương thích.
+        %     \item \textbf{Quản lý tài nguyên phức tạp}: Việc chia sẻ tài nguyên giữa các container có thể dẫn đến xung đột hoặc giảm hiệu suất nếu không được quản lý đúng cách. Nếu một container chiếm dụng quá nhiều tài nguyên, nó có thể ảnh hưởng đến các container khác trên cùng hệ thống.
+        % \end{itemize}
+    \end{enumerate}

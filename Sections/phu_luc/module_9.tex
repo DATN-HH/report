@@ -1,0 +1,308 @@
+\subsection{Module MD-09: Quản lý Phiên \& Báo cáo}
+
+\subsubsection{Use Case UC-MD09-03: Xem Báo cáo Doanh thu Phiên POS}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD09-03: Xem Báo cáo Doanh thu Phiên POS} \label{tab:uc_md09_03} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Báo cáo Doanh thu Phiên POS \\
+\hline
+Use Case ID & UC-MD09-03 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng hoặc Kế toán xem lại thông tin tổng kết chi tiết của một hoặc nhiều phiên làm việc POS đã đóng, bao gồm doanh thu, số lượng đơn hàng, chi tiết thanh toán theo từng phương thức, tiền mặt đối chiếu (nếu có), và tiền boa. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-06 (Kế toán) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Cần xem lại kết quả kinh doanh của một ngày/ca làm việc cụ thể, đối soát doanh thu, hoặc kiểm tra thông tin của một phiên POS đã đóng. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-06) đã đăng nhập vào hệ thống Odoo với quyền truy cập báo cáo POS. \newline - Có ít nhất một phiên làm việc POS đã được đóng (UC-MD05-13 thành công). \\
+\hline
+Post-Condition & - Báo cáo chi tiết của (các) phiên POS đã chọn được hiển thị. \newline - Người dùng nắm được thông tin tổng kết về hiệu quả hoạt động của phiên đó. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-06) truy cập vào module Point of Sale. \newline 2. Người dùng chọn mục "Báo cáo" (Reporting) > "Phiên làm việc" (Sessions) hoặc tương tự. \newline 3. Hệ thống hiển thị danh sách các phiên POS đã đóng, thường sắp xếp theo ngày giờ đóng phiên. Danh sách hiển thị thông tin tóm tắt như ID phiên, Người mở/đóng, Thời gian mở/đóng, Tổng doanh thu. \newline 4. Người dùng chọn (nhấp vào) một phiên cụ thể muốn xem chi tiết. \newline 5. Hệ thống hiển thị báo cáo chi tiết cho phiên đã chọn, bao gồm các thông tin: \newline    - Thông tin chung: ID phiên, POS, Người mở/đóng, Thời gian mở/đóng. \newline    - Tóm tắt Doanh thu: Tổng doanh thu (đã bao gồm thuế), Tổng thuế, Doanh thu thuần (chưa thuế). \newline    - Chi tiết Thanh toán: Tổng số tiền nhận được theo từng phương thức thanh toán (Tiền mặt, Thẻ, Ví...). \newline    - (Nếu có kiểm soát tiền mặt): Số dư đầu ca, Tiền mặt dự kiến cuối ca, Tiền mặt thực tế cuối ca, Chênh lệch. \newline    - Số lượng đơn hàng đã xử lý trong phiên. \newline    - Tổng tiền boa (Tip) thu được (nếu có). \newline    - (Tùy chọn) Danh sách các đơn hàng thuộc phiên đó. \newline    - (Tùy chọn) Các thông tin khác như giảm giá, hủy đơn... \newline 6. Người dùng xem xét báo cáo. \\
+\hline
+Alternative Flow & \textbf{3a. Lọc/Tìm kiếm phiên:} \newline    1. Người dùng sử dụng bộ lọc (theo ngày, theo POS, theo trạng thái) hoặc tìm kiếm (theo ID phiên, theo người dùng) để tìm phiên mong muốn. \newline    2. Hệ thống hiển thị kết quả lọc/tìm kiếm. \newline    3. Use Case tiếp tục từ bước 4. \newline \textbf{3b. Xem báo cáo tổng hợp nhiều phiên:} \newline    1. Thay vì chọn một phiên, người dùng chọn xem báo cáo tổng hợp cho một khoảng thời gian (ví dụ: theo ngày, theo tuần). \newline    2. Hệ thống tổng hợp dữ liệu từ tất cả các phiên trong khoảng thời gian đó và hiển thị báo cáo tổng kết. \newline \textbf{6a. In báo cáo:} \newline    1. Giao diện báo cáo có nút "In" (Print). \newline    2. Người dùng nhấn nút In. \newline    3. Hệ thống tạo bản PDF hoặc gửi lệnh in trực tiếp báo cáo chi tiết phiên. \\
+\hline
+Exception Flow & \textbf{3a. Không có phiên nào đã đóng:} \newline    1. Nếu chưa có phiên nào được đóng, danh sách ở bước 3 sẽ trống. \newline    2. Hệ thống hiển thị thông báo "Không có dữ liệu phiên." \newline \textbf{4a. Lỗi tải chi tiết phiên:} \newline    1. Hệ thống gặp lỗi khi truy vấn hoặc tính toán dữ liệu chi tiết của phiên đã chọn. \newline    2. Hệ thống hiển thị thông báo lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC9.3-1:} Báo cáo phải hiển thị chính xác các số liệu tài chính đã được tổng kết khi đóng phiên. \newline - \textbf{BR-UC9.3-2:} Dữ liệu thanh toán theo từng phương thức phải khớp với tổng số tiền đã thu qua các phương thức đó trong suốt phiên. \newline - \textbf{BR-UC9.3-3:} Nếu có kiểm soát tiền mặt, báo cáo phải hiển thị rõ ràng số tiền đối chiếu và khoản chênh lệch (nếu có). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC9.3-1 (Usability):} Giao diện báo cáo phải rõ ràng, dễ đọc, các số liệu quan trọng phải dễ nhận biết. Việc lọc và tìm kiếm phiên phải thuận tiện. \newline - \textbf{NFR-UC9.3-2 (Performance):} Thời gian tải danh sách phiên và chi tiết một phiên phải nhanh chóng. Việc tổng hợp báo cáo cho khoảng thời gian dài cần có hiệu năng chấp nhận được. \newline - \textbf{NFR-UC9.3-3 (Accuracy):} Mọi số liệu trong báo cáo phải chính xác và nhất quán với dữ liệu giao dịch gốc. \newline - \textbf{NFR-UC9.3-4 (Security):} Chỉ người dùng có quyền hạn (Quản lý, Kế toán) mới được phép truy cập các báo cáo tài chính này. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD09-04: Xem Báo cáo Bán hàng theo Sản phẩm/Danh mục}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD09-04: Xem Báo cáo Bán hàng theo Sản phẩm/Danh mục} \label{tab:uc_md09_04} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Báo cáo Bán hàng theo Sản phẩm/Danh mục \\
+\hline
+Use Case ID & UC-MD09-04 \\
+\hline
+Use Case Description & Cung cấp báo cáo thống kê chi tiết về số lượng bán ra và doanh thu (trước và sau thuế, trước và sau giảm giá) của từng sản phẩm (món ăn/đồ uống) hoặc nhóm theo Danh mục Sản phẩm POS trong một khoảng thời gian do người dùng lựa chọn. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-06 (Kế toán) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Cần phân tích hiệu quả bán hàng của từng món ăn, xác định món bán chạy/chậm, hoặc xem xét cơ cấu doanh thu theo từng nhóm món. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-06) đã đăng nhập với quyền truy cập báo cáo POS/Bán hàng. \newline - Đã có dữ liệu giao dịch bán hàng từ các phiên POS đã đóng. \newline - Các sản phẩm và danh mục POS đã được định nghĩa. \\
+\hline
+Post-Condition & - Báo cáo thống kê bán hàng theo sản phẩm hoặc danh mục được hiển thị cho khoảng thời gian đã chọn. \newline - Người dùng có thông tin để đánh giá hiệu quả kinh doanh của từng mặt hàng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Xem theo Sản phẩm) & 1. Người dùng (US-01/US-06) truy cập vào mục Báo cáo (Reporting) của POS hoặc Sales. \newline 2. Người dùng chọn loại báo cáo "Bán hàng theo Sản phẩm" (Sales by Product) hoặc tương tự. \newline 3. Hệ thống yêu cầu hoặc cho phép người dùng chọn Khoảng thời gian (Date Range) muốn xem báo cáo (ví dụ: Hôm nay, Tuần này, Tháng này, Tùy chọn). \newline 4. Người dùng chọn khoảng thời gian và nhấn "Xem báo cáo" / "Apply". \newline 5. Hệ thống truy vấn và tổng hợp dữ liệu từ các dòng đơn hàng (POS Order Lines) trong các phiên POS đã đóng thuộc khoảng thời gian đã chọn. \newline 6. Hệ thống hiển thị báo cáo dưới dạng bảng, mỗi dòng là một Sản phẩm (hoặc Biến thể sản phẩm), với các cột thông tin như: \newline    - Tên Sản phẩm/Biến thể. \newline    - Số lượng đã bán (Quantity Sold). \newline    - Doanh thu thuần (Untaxed Total / Net Sales). \newline    - Tổng giảm giá (Total Discount - nếu có). \newline    - Tổng doanh thu (bao gồm thuế - Total Price / Gross Sales). \newline 7. Báo cáo thường có dòng tổng cộng ở cuối. \newline 8. Người dùng xem xét và phân tích báo cáo. \\
+\hline
+Alternative Flow & \textbf{2a. Xem theo Danh mục POS:} \newline    1. Người dùng chọn loại báo cáo "Bán hàng theo Danh mục POS" (Sales by POS Category). \newline    2. Các bước chọn thời gian và xem báo cáo tương tự, nhưng bảng kết quả sẽ nhóm theo từng Danh mục POS, hiển thị tổng số lượng và doanh thu cho mỗi danh mục. \newline \textbf{6a. Sắp xếp/Lọc báo cáo:} \newline    1. Giao diện báo cáo cho phép nhấp vào tiêu đề cột để sắp xếp (ví dụ: sắp xếp theo Số lượng bán giảm dần để xem món bán chạy nhất). \newline    2. Có thể có các bộ lọc bổ sung (ví dụ: lọc theo một POS cụ thể nếu có nhiều điểm bán). \newline \textbf{6b. Xem dạng biểu đồ:} \newline    1. Giao diện báo cáo có thể cung cấp tùy chọn xem dữ liệu dưới dạng biểu đồ (tròn, cột...) để trực quan hóa cơ cấu doanh thu hoặc top sản phẩm bán chạy. \\
+\hline
+Exception Flow & \textbf{5a. Lỗi truy vấn/tổng hợp dữ liệu:} \newline    1. Hệ thống gặp lỗi khi lấy hoặc tính toán dữ liệu bán hàng. \newline    2. Hệ thống hiển thị thông báo lỗi. \newline \textbf{5b. Không có dữ liệu bán hàng:} \newline    1. Không có giao dịch bán hàng nào trong khoảng thời gian được chọn. \newline    2. Hệ thống hiển thị báo cáo trống hoặc thông báo "Không có dữ liệu". \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC9.4-1:} Báo cáo phải tổng hợp dữ liệu từ tất cả các đơn hàng đã được thanh toán và đóng trong khoảng thời gian và phạm vi (POS) được chọn. \newline - \textbf{BR-UC9.4-2:} Doanh thu hiển thị cần rõ ràng là doanh thu trước thuế (thuần) hay sau thuế, trước hay sau giảm giá, để phục vụ đúng mục đích phân tích. \newline - \textbf{BR-UC9.4-3:} Nếu sản phẩm có biến thể, báo cáo nên có tùy chọn xem chi tiết doanh thu theo từng biến thể cụ thể hoặc tổng hợp theo sản phẩm gốc. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC9.4-1 (Usability):} Giao diện báo cáo cần dễ sử dụng, cho phép chọn khoảng thời gian linh hoạt, dễ dàng sắp xếp và lọc dữ liệu. Biểu đồ (nếu có) cần rõ ràng. \newline - \textbf{NFR-UC9.4-2 (Performance):} Thời gian tạo báo cáo phải hợp lý, ngay cả khi xử lý lượng lớn dữ liệu giao dịch (ví dụ: báo cáo tháng). Cần tối ưu hóa truy vấn cơ sở dữ liệu. \newline - \textbf{NFR-UC9.4-3 (Accuracy):} Số liệu thống kê (số lượng, doanh thu) phải chính xác 100%. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD09-05: Xem Báo cáo Hiệu suất Nhân viên (POS)}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD09-05: Xem Báo cáo Hiệu suất Nhân viên (POS)} \label{tab:uc_md09_05} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Báo cáo Hiệu suất Nhân viên (POS) \\
+\hline
+Use Case ID & UC-MD09-05 \\
+\hline
+Use Case Description & Cung cấp báo cáo thống kê về hoạt động bán hàng trên POS của từng nhân viên (phục vụ hoặc thu ngân) trong một khoảng thời gian do người dùng lựa chọn, thường bao gồm tổng doanh thu, số lượng đơn hàng đã xử lý, và có thể cả tiền boa nhận được. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & Quản lý muốn đánh giá hiệu suất làm việc của từng nhân viên tại điểm bán hàng, theo dõi doanh số hoặc tính toán hoa hồng/thưởng (nếu có). \\
+\hline
+Pre-Condition & - Người dùng (US-01) đã đăng nhập với quyền truy cập báo cáo POS/Nhân viên. \newline - Dữ liệu giao dịch POS đã được ghi nhận và liên kết đúng với nhân viên thực hiện (ví dụ: người đăng nhập POS khi tạo/thanh toán đơn hàng). \\
+\hline
+Post-Condition & - Báo cáo thống kê hiệu suất theo từng nhân viên được hiển thị. \newline - Quản lý có thông tin để đánh giá và đưa ra quyết định liên quan đến nhân sự. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01) truy cập vào mục Báo cáo (Reporting) của POS. \newline 2. Người dùng chọn loại báo cáo "Doanh thu theo Nhân viên" (Sales by Employee/Salesperson) hoặc tương tự. \newline 3. Hệ thống yêu cầu hoặc cho phép người dùng chọn Khoảng thời gian muốn xem báo cáo. \newline 4. Người dùng chọn khoảng thời gian và nhấn "Xem báo cáo" / "Apply". \newline 5. Hệ thống truy vấn và tổng hợp dữ liệu từ các đơn hàng POS đã đóng trong khoảng thời gian đó, nhóm theo nhân viên đã thực hiện (ví dụ: nhân viên đăng nhập vào POS). \newline 6. Hệ thống hiển thị báo cáo dưới dạng bảng, mỗi dòng là một Nhân viên, với các cột thông tin như: \newline    - Tên Nhân viên. \newline    - Số lượng đơn hàng đã xử lý. \newline    - Tổng doanh thu (trước/sau thuế - tùy cấu hình báo cáo). \newline    - (Tùy chọn) Tổng tiền boa nhận được. \newline 7. Báo cáo có thể có dòng tổng cộng. \newline 8. Người dùng xem xét báo cáo. \\
+\hline
+Alternative Flow & \textbf{6a. Xem chi tiết đơn hàng của nhân viên:} \newline    1. Từ báo cáo tổng hợp, người dùng có thể nhấp vào tên nhân viên để xem danh sách các đơn hàng cụ thể mà nhân viên đó đã xử lý trong kỳ. \newline \textbf{6b. Lọc theo nhân viên/vai trò:} \newline    1. Báo cáo cho phép lọc để chỉ xem một hoặc một nhóm nhân viên cụ thể. \\
+\hline
+Exception Flow & Tương tự UC-MD09-04 (Lỗi truy vấn/tổng hợp, Không có dữ liệu). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC9.5-1:} Dữ liệu báo cáo phải được tổng hợp dựa trên việc ghi nhận chính xác nhân viên nào đã xử lý đơn hàng nào trên POS (thường là người đăng nhập vào phiên hoặc người được gán cho đơn hàng). \newline - \textbf{BR-UC9.5-2:} Các chỉ số hiệu suất (doanh thu, số đơn) cần được định nghĩa rõ ràng (tính trước hay sau thuế, có bao gồm đơn hủy không...). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC9.5-1 (Usability):} Báo cáo dễ đọc, dễ so sánh hiệu suất giữa các nhân viên. \newline - \textbf{NFR-UC9.5-2 (Performance):} Thời gian tạo báo cáo phải hợp lý. \newline - \textbf{NFR-UC9.5-3 (Accuracy):} Số liệu phải chính xác. \newline - \textbf{NFR-UC9.5-4 (Security):} Thông tin hiệu suất nhân viên có thể nhạy cảm, cần kiểm soát quyền truy cập báo cáo này. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD09-06: Xem Báo cáo Tiền đặt cọc}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD09-06: Xem Báo cáo Tiền đặt cọc} \label{tab:uc_md09_06} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Báo cáo Tiền đặt cọc \\
+\hline
+Use Case ID & UC-MD09-06 \\
+\hline
+Use Case Description & Cung cấp báo cáo tổng hợp về tình hình thu và sử dụng tiền đặt cọc từ các lượt đặt chỗ trong một khoảng thời gian, bao gồm tổng tiền cọc đã thu, tổng tiền cọc đã được áp dụng (trừ vào hóa đơn thanh toán), và tổng tiền cọc bị mất (do khách hủy và không được hoàn). \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-06 (Kế toán) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Cần theo dõi dòng tiền đặt cọc, đối soát doanh thu từ cọc, hoặc phân tích tỷ lệ khách hủy đặt chỗ sau khi đã đặt cọc. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-06) đã đăng nhập với quyền truy cập báo cáo Đặt chỗ/Tài chính. \newline - Hệ thống có chức năng đặt chỗ với yêu cầu đặt cọc và ghi nhận trạng thái thanh toán cọc (MD-03). \newline - Có dữ liệu về các lượt đặt chỗ đã thanh toán cọc, đã được sử dụng hoặc đã bị hủy. \\
+\hline
+Post-Condition & - Báo cáo tổng hợp về tình hình tiền đặt cọc được hiển thị. \newline - Người dùng có thông tin để quản lý và đối soát dòng tiền này. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-06) truy cập vào khu vực Báo cáo của module Đặt chỗ hoặc Kế toán. \newline 2. Người dùng chọn loại báo cáo "Tiền đặt cọc" (Deposits Report) hoặc tương tự. \newline 3. Hệ thống yêu cầu hoặc cho phép chọn Khoảng thời gian báo cáo. \newline 4. Người dùng chọn khoảng thời gian và nhấn "Xem báo cáo". \newline 5. Hệ thống truy vấn dữ liệu từ các bản ghi Đặt chỗ và các giao dịch thanh toán/áp dụng cọc liên quan trong khoảng thời gian đó. \newline 6. Hệ thống hiển thị báo cáo tổng hợp, bao gồm các số liệu chính: \newline    - Tổng số tiền đặt cọc đã thu (Total Deposits Received). \newline    - Tổng số tiền đặt cọc đã áp dụng vào hóa đơn (Total Deposits Applied). \newline    - Tổng số tiền đặt cọc bị mất/không hoàn lại (Total Forfeited Deposits - ví dụ từ các đặt chỗ bị hủy không hoàn cọc). \newline    - (Tùy chọn) Số dư tiền đặt cọc chưa sử dụng (nếu có trường hợp này). \newline    - (Tùy chọn) Danh sách chi tiết các giao dịch đặt cọc trong kỳ. \newline 7. Người dùng xem xét báo cáo. \\
+\hline
+Alternative Flow & \textbf{6a. Phân tích chi tiết hơn:} \newline    1. Báo cáo có thể cho phép xem chi tiết các lượt đặt chỗ ứng với từng loại giao dịch cọc (đã thu, đã áp dụng, đã mất). \\
+\hline
+Exception Flow & Tương tự UC-MD09-04 (Lỗi truy vấn/tổng hợp, Không có dữ liệu). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC9.6-1:} Báo cáo phải phân biệt rõ ràng giữa các trạng thái của tiền đặt cọc (đã thu, đã áp dụng, đã mất). \newline - \textbf{BR-UC9.6-2:} Dữ liệu phải được tổng hợp chính xác từ các bản ghi đặt chỗ và trạng thái thanh toán/hủy tương ứng. \newline - \textbf{BR-UC9.6-3:} Logic xác định tiền cọc bị mất phải dựa trên trạng thái hủy đặt chỗ và chính sách hoàn cọc của nhà hàng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC9.6-1 (Accuracy):} Số liệu báo cáo tiền đặt cọc phải tuyệt đối chính xác để phục vụ đối soát tài chính. \newline - \textbf{NFR-UC9.6-2 (Usability):} Báo cáo cần trình bày các số liệu một cách rõ ràng, dễ hiểu. \newline - \textbf{NFR-UC9.6-3 (Performance):} Tốc độ tạo báo cáo cần chấp nhận được. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD09-07: Xem Báo cáo Doanh thu theo Loại hình (Eat-in, Takeout, Delivery)}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD09-07: Xem Báo cáo Doanh thu theo Loại hình (Eat-in, Takeout, Delivery)} \label{tab:uc_md09_07} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xem Báo cáo Doanh thu theo Loại hình (Eat-in, Takeout, Delivery) \\
+\hline
+Use Case ID & UC-MD09-07 \\
+\hline
+Use Case Description & Cung cấp báo cáo phân tích tổng doanh thu (và có thể cả số lượng đơn hàng) được tạo ra từ mỗi loại hình phục vụ khác nhau mà nhà hàng hỗ trợ: Ăn tại chỗ (Eat-in), Mang về (Takeout), và Giao hàng (Delivery) trong một khoảng thời gian. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-06 (Kế toán) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Cần phân tích hiệu quả kinh doanh và đóng góp doanh thu của từng kênh/loại hình phục vụ. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-06) đã đăng nhập với quyền truy cập báo cáo POS/Bán hàng. \newline - Hệ thống POS có khả năng phân loại và ghi nhận loại hình cho mỗi đơn hàng (Eat-in, Takeout, Delivery - từ MD-05, MD-06, MD-07). \newline - Đã có dữ liệu giao dịch từ các loại hình đơn hàng khác nhau. \\
+\hline
+Post-Condition & - Báo cáo phân tích doanh thu theo từng loại hình được hiển thị. \newline - Người dùng có thông tin để so sánh hiệu quả giữa các kênh bán hàng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-06) truy cập vào mục Báo cáo (Reporting) của POS hoặc Sales. \newline 2. Người dùng chọn loại báo cáo "Doanh thu theo Loại hình" (Sales by Order Type / Channel) hoặc tương tự. \newline 3. Hệ thống yêu cầu hoặc cho phép chọn Khoảng thời gian báo cáo. \newline 4. Người dùng chọn khoảng thời gian và nhấn "Xem báo cáo". \newline 5. Hệ thống truy vấn dữ liệu từ các đơn hàng POS đã đóng trong khoảng thời gian đó, nhóm theo trường "Loại hình đơn hàng" (Order Type). \newline 6. Hệ thống hiển thị báo cáo, thường dưới dạng bảng hoặc biểu đồ, thể hiện: \newline    - Loại hình (Eat-in, Takeout, Delivery). \newline    - Tổng Doanh thu (trước/sau thuế) cho từng loại hình. \newline    - (Tùy chọn) Số lượng đơn hàng cho từng loại hình. \newline    - (Tùy chọn) Tỷ trọng đóng góp doanh thu của từng loại hình. \newline 7. Người dùng xem xét báo cáo. \\
+\hline
+Alternative Flow & \textbf{6a. Xem chi tiết hơn:} \newline    1. Báo cáo có thể cho phép nhấp vào một loại hình để xem chi tiết hơn (ví dụ: xem danh sách sản phẩm bán chạy nhất của kênh Delivery). \\
+\hline
+Exception Flow & Tương tự UC-MD09-04 (Lỗi truy vấn/tổng hợp, Không có dữ liệu). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC9.7-1:} Hệ thống phải có khả năng ghi nhận và phân loại chính xác loại hình (Eat-in, Takeout, Delivery) cho mỗi đơn hàng POS. \newline - \textbf{BR-UC9.7-2:} Báo cáo phải tổng hợp đúng doanh thu và số lượng đơn cho từng loại hình dựa trên dữ liệu đã ghi nhận. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC9.7-1 (Usability):} Báo cáo cần trình bày dữ liệu so sánh giữa các loại hình một cách trực quan (biểu đồ tròn/cột thường hữu ích). \newline - \textbf{NFR-UC9.7-2 (Performance):} Việc tạo báo cáo phân tích theo loại hình cần có hiệu năng tốt. \newline - \textbf{NFR-UC9.7-3 (Accuracy):} Số liệu phân loại phải chính xác. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD09-08: Xuất dữ liệu Báo cáo}
+
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD09-08: Xuất dữ liệu Báo cáo} \label{tab:uc_md09_08} \\
+\hline
+
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Use Case Name & Xuất dữ liệu Báo cáo \\
+\hline
+Use Case ID & UC-MD09-08 \\
+\hline
+Use Case Description & Cho phép Người dùng (Quản lý, Kế toán) đang xem một báo cáo trong hệ thống Odoo (ví dụ: báo cáo doanh thu phiên, báo cáo bán hàng theo sản phẩm...) xuất (export) dữ liệu của báo cáo đó ra một tệp tin theo định dạng phổ biến như Excel (.xlsx) hoặc CSV (.csv). \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-06 (Kế toán) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & Người dùng muốn lưu trữ dữ liệu báo cáo, chia sẻ với người khác, hoặc thực hiện các phân tích phức tạp hơn bằng công cụ bên ngoài (như Microsoft Excel). \\
+\hline
+Pre-Condition & - Người dùng đang xem một giao diện báo cáo hoặc danh sách dữ liệu trong Odoo (ví dụ: kết quả của UC-MD09-03, UC-MD09-04...). \newline - Giao diện đó có chức năng/nút "Xuất" (Export). \\
+\hline
+Post-Condition & - Một tệp tin chứa dữ liệu của báo cáo được tạo ra và tải về máy tính của người dùng theo định dạng đã chọn (Excel/CSV). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-06) đang xem một báo cáo hoặc danh sách dữ liệu muốn xuất. \newline 2. Người dùng tìm và nhấp vào nút/liên kết "Xuất" (Export) hoặc biểu tượng tương ứng. \newline 3. Hệ thống (có thể) hiển thị một hộp thoại/tùy chọn cho phép: \newline    - Chọn các trường dữ liệu muốn xuất (mặc định là các cột đang hiển thị). \newline    - Chọn định dạng tệp xuất (Excel hoặc CSV). \newline    - (Tùy chọn) Đặt tên tệp. \newline 4. Người dùng lựa chọn các tùy chọn mong muốn (hoặc giữ mặc định) và nhấn nút "Xuất" / "Export". \newline 5. Hệ thống xử lý yêu cầu, truy xuất dữ liệu tương ứng từ cơ sở dữ liệu. \newline 6. Hệ thống tạo ra tệp tin theo định dạng đã chọn (Excel/CSV) chứa dữ liệu đó. \newline 7. Hệ thống kích hoạt trình duyệt của người dùng để tải tệp tin về máy. \newline 8. Người dùng lưu tệp tin vào vị trí mong muốn trên máy tính. \\
+\hline
+Alternative Flow & \textbf{3a. Xuất nhanh với định dạng mặc định:} \newline    1. Nút "Xuất" có thể xuất trực tiếp ra định dạng mặc định (ví dụ: Excel) mà không cần qua bước chọn tùy chọn. \\
+\hline
+Exception Flow & \textbf{5a. Lỗi truy xuất dữ liệu / tạo tệp:} \newline    1. Hệ thống gặp lỗi khi lấy dữ liệu hoặc khi tạo tệp tin xuất ra (ví dụ: dữ liệu quá lớn, lỗi định dạng, lỗi ghi tệp). \newline    2. Hệ thống hiển thị thông báo lỗi cho người dùng. \newline    3. Tệp tin không được tạo ra hoặc bị lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC9.8-1:} Hệ thống phải hỗ trợ xuất dữ liệu ra ít nhất hai định dạng phổ biến là Excel (.xlsx) và CSV (.csv). \newline - \textbf{BR-UC9.8-2:} Dữ liệu trong tệp xuất ra phải khớp với dữ liệu đang hiển thị trên báo cáo/danh sách tại thời điểm xuất. \newline - \textbf{BR-UC9.8-3:} Cấu trúc cột trong tệp Excel/CSV nên tương ứng với các cột đang hiển thị trên giao diện Odoo. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC9.8-1 (Usability):} Chức năng xuất dữ liệu phải dễ dàng tìm thấy và sử dụng. \newline - \textbf{NFR-UC9.8-2 (Performance):} Thời gian tạo và tải tệp xuất phải hợp lý, tùy thuộc vào khối lượng dữ liệu. Đối với dữ liệu rất lớn, có thể cần cơ chế xử lý nền (background job). \newline - \textbf{NFR-UC9.8-3 (Compatibility):} Tệp Excel/CSV xuất ra phải tương thích và mở được bằng các phần mềm bảng tính phổ biến (Microsoft Excel, Google Sheets, LibreOffice Calc). \newline - \textbf{NFR-UC9.8-4 (Security):} Quyền xuất dữ liệu từ các báo cáo nhạy cảm cần được kiểm soát. \\
+\hline
+\end{longtable}
+

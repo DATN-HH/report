@@ -1,0 +1,350 @@
+% \subsubsection{Yêu cầu chức năng}
+
+% Trong phạm vi đồ án này, chúng em sẽ tập trung vào các đối tượng chính sử dụng hệ thống, bao gồm Khách hàng, Nhân viên phục vụ, Nhân viên thu ngân, Nhân viên chăm sóc khách hàng, Nhân viên bếp, Quản lý chi nhánh và Quản lý tổng, nhằm đảm bảo hệ thống đáp ứng tốt nhu cầu vận hành và trải nghiệm của từng vai trò.
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=15cm]{Images/nguoi-dung-he-thong.png}
+%     \vspace{0.5cm}
+%     \caption{Các đối tượng người dùng của hệ thống}
+%     \label{fig:my_label}
+% \end{figure}
+
+% \textbf{Đối với Khách hàng}
+% \begin{itemize}
+%     \item Đăng ký, đăng nhập
+%     \item Gửi yêu cầu đặt bàn trực tuyến, xem được tổng quan vị trí, trạng thái bàn thông qua các sơ đồ
+%     \item Hủy yêu cầu đặt bàn cho đến khi trước thời gian hẹn 2 tiếng
+%     \item Quét QR để truy cập vào menu và đặt món, không cần gọi nhân viên
+%     \item Xem danh sách món ăn và đồ uống, kèm theo hình ảnh, mô tả và giá cả
+%     \item Tìm kiếm món ăn theo tên hoặc danh mục, giá cả
+%     \item Chọn món, số lượng và tùy chọn (size, topping, gia vị)
+%     \item Gợi ý món ăn phù hợp dựa trên lịch sử đơn hàng và số liệu phân tích
+%     \item Thêm món vào giỏ hàng
+%     \item Xem lại giỏ hàng trước khi xác nhận đặt món
+%     \item Đặt món nhiều lần trong cùng một lượt sử dụng tại nhà hàng, để có thể thay đổi món ăn trong suốt quá trình ăn
+%     \item Gửi yêu cầu hủy đơn hoặc hủy/thay đổi các món cụ thể
+%     \item Xem lại các đơn hàng đã đặt trước đó
+%     \item Xem chi tiết các món đã đặt, tổng tiền và các khuyến mãi (nếu có)
+%     \item Gửi yêu cầu thanh toán bằng cách quét mã QR, hoặc thao tác trên ứng dụng
+%     \item Nhận thông báo về các khuyến mãi và ưu đãi
+%     \item Gửi phản hồi về món ăn hoặc dịch vụ
+%     \item Gửi khiếu nại nếu có sự cố
+%     \item Trò chuyện trực tiếp với nhân viên chăm sóc khách hàng
+% \end{itemize}
+
+% \textbf{Đối với Phục vụ}
+% \begin{itemize}
+%     \item Xem danh sách trạng thái bàn
+%     \item Hỗ trợ khách hàng đặt món, thanh toán
+%     \item Xem danh sách đơn hàng của khách
+%     \item Nhận thông báo khi món ăn đã sẵn sàng
+%     \item Xử lý yêu cầu hủy đơn hoặc hủy/thay đổi món của khách
+%     \item Chuyển vị trí đơn hàng sang bàn khác.
+%     \item Đặt lại trạng thái bàn
+% \end{itemize}
+
+% \textbf{Đối với Thu ngân}
+% \begin{itemize}
+%     \item Nhận thông báo khi có yêu cầu thanh toán
+%     \item Xem chi tiết đơn hàng và tổng hóa đơn
+%     \item Áp dụng khuyến mãi và giảm giá khi thanh toán
+%     \item Quản lý các phương thức thanh toán
+%     \item Nhận thông báo về thanh toán thành công với phương thức quét QR, quẹt thẻ
+%     \item Cập nhật trạng thái thanh toán với phương thức thanh toán tiền mặt
+%     \item In hóa đơn cho khách hàng
+%     \item Xử lý yêu cầu hoàn tiền (vấn đề phát sinh)
+%     \item Tạo báo cáo doanh thu hàng ngày
+% \end{itemize}
+
+% \textbf{Đối với Nhân viên chăm sóc khách hàng}
+% \begin{itemize}
+%     \item Tiếp nhận và xử lý yêu cầu từ khách hàng
+%     \item Theo dõi và quản lý khiếu nại \& phản hồi từ khách hàng
+%     \item Trả lời tin nhắn trực tuyến với khách hàng
+%     \item Cập nhật thông tin khách hàng
+%     \item Theo dõi và nhắc nhở khách hàng về các chương trình ưu đãi qua tài khoản và email
+% \end{itemize}
+
+% \textbf{Đối với Nhân viên bếp}
+% \begin{itemize}
+%     \item Nhận đơn hàng từ hệ thống quản lý đơn hàng
+%     \item Xem tất cả danh sách món ăn được sắp xếp theo thứ tự ưu tiên
+%     \item Xem được các yêu cầu đặc biệt của từng món ăn cần làm
+%     \item Cập nhật trạng thái chế biến của từng món ăn (chưa làm, đang chế biến, hoàn thành...)
+% \end{itemize}
+
+% \textbf{Đối với Quản lý chi nhánh}
+% \begin{itemize}
+%     \item Thêm/Chỉnh sửa sơ đồ nhà hàng
+%     \item Xử lý, xác nhận các yêu cầu đặt bàn của khách hàng tại chi nhánh
+%     \item Xem báo cáo kinh doanh và doanh thu của chi nhánh
+%     \item Điều chỉnh và thiết lập các chương trình khuyến mãi, marketing chi nhánh
+%     \item Theo dõi các phản hồi của khách hàng
+%     \item Xem danh sách nhân viên
+%     \item Phân chia công việc cho các tài khoản nhân viên
+% \end{itemize}
+
+% \textbf{Đối với Quản lý tổng}
+% \begin{itemize}
+%     \item Quản lý thông tin chi nhánh
+%     \item Thêm/Xóa chi nhánh
+%     \item Quản lý các tài khoản nhân viên và khách hàng
+%     \item Xem báo cáo tổng quan tất cả các chi nhánh
+%     \item Xem báo cáo chi tiết của một chi nhánh tổng
+% \end{itemize}
+
+% % User Story là một kỹ thuật phát triển phần mềm tập trung vào nhu cầu của người dùng trong quá trình sử dụng sản phẩm. Mục đích của User Story là giúp các nhà phát triển phần mềm hiểu rõ những tính năng cốt lõi của sản phẩm và xác định được các chức năng cần thiết để hiện thực đầu tiên của ứng dụng.\\
+
+% % Để đưa ra danh sách User Story của ứng dụng, nhóm chúng em đã tiến hành thảo luận, nghiên cứu và phân tích yêu cầu của người dùng. Chúng tôi bắt đầu xây dựng hệ thống tuyển dụng bằng cách xác định các tính năng cơ bản cần phải có trong ứng dụng để đáp ứng nhu cầu và mong muốn của người dùng.\\
+
+% % \textbf{Một số user story cơ bản như sau:}
+% % \begin{itemize}
+% %     \item Đối với Khách hàng
+% %     \begin{enumerate}
+% %         \item Là Khách Hàng, tôi muốn quét mã QR trên bàn để truy cập vào menu và đặt món.
+% %         \item Là Khách Hàng, tôi muốn xem danh sách các món ăn và đồ uống, kèm theo hình ảnh, mô tả và giá cả.
+% %         \item Là Khách Hàng, tôi muốn tìm kiếm món ăn theo tên hoặc danh mục.
+% %         \item Là Khách Hàng, tôi muốn chọn món, số lượng và các tùy chọn (ví dụ: size, topping, gia vị).
+% %         \item Là Khách Hàng, tôi muốn thêm các món đã chọn vào giỏ hàng.
+% %         \item Là Khách Hàng, tôi muốn xem lại giỏ hàng trước khi xác nhận đặt món.
+% %         \item Là Khách Hàng, tôi muốn đặt món nhiều lần trong cùng một lượt sử dụng tại nhà hàng.
+% %         \item Là Khách Hàng, tôi muốn xem lại các order đã đặt trước đó (nếu đã đăng nhập).
+% %         \item Là Khách Hàng, tôi muốn xem chi tiết các món đã đặt, tổng tiền và các khuyến mãi (nếu có).
+% %         \item Là Khách Hàng, tôi muốn thanh toán bằng cách quét mã QR hoặc thanh toán tiền mặt.
+% %         \item Là Khách Hàng, tôi muốn xem lại hóa đơn sau khi đã thanh toán.
+% %         \item Là Khách Hàng, tôi muốn đăng ký tài khoản thành viên để tham gia chương trình khách hàng thân thiết.
+% %         \item Là Khách Hàng, tôi muốn đăng nhập để xem lịch sử đặt món, nhận khuyến mãi và các ưu đãi khác.
+% %     \end{enumerate}
+% %     \item Đối với Nhân Viên Thu Ngân/Phục Vụ
+% %     \begin{enumerate}
+% %         \item Là Nhân Viên Thu Ngân/Phục Vụ, tôi muốn xem danh sách các order mới và đang chờ xử lý.
+% %         \item Là Nhân Viên Thu Ngân/Phục Vụ, tôi muốn xem chi tiết các order của khách hàng.
+% %         \item Là Nhân Viên Thu Ngân/Phục Vụ, tôi muốn gộp các order của một bàn thành một hóa đơn duy nhất.
+% %         \item Là Nhân Viên Thu Ngân/Phục Vụ, tôi muốn xóa bỏ các order nếu cần.
+% %         \item Là Nhân Viên Thu Ngân/Phục Vụ, tôi muốn xác nhận thanh toán bằng QR.
+% %         \item Là Nhân Viên Thu Ngân/Phục Vụ, tôi muốn xác nhận thanh toán bằng tiền mặt (tự thao tác).
+% %         \item Là Nhân Viên Thu Ngân/Phục Vụ, tôi muốn in hóa đơn cho khách hàng (có mã QR để thanh toán).
+% %         \item Là Nhân Viên Thu Ngân/Phục Vụ, tôi muốn check-in (chấm công) đầu ca và check-out (chấm công) cuối ca.
+% %         \item Là Nhân Viên Thu Ngân/Phục Vụ, tôi muốn chuyển order từ bàn này sang bàn khác (nếu khách hàng muốn đổi bàn).
+% %     \end{enumerate}
+% %     \item Đối với Quản Lý Chi Nhánh
+% %     \begin{enumerate}
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn nhập kho, xem danh sách các nguyên liệu trong kho.
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn theo dõi số lượng còn lại của từng nguyên liệu.
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn xem báo cáo nhập/xuất kho hàng ngày.
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn xem danh sách nhân viên.
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn phân công ca làm cho nhân viên.
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn xem lịch sử check-in/check-out của nhân viên.
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn xem các báo cáo về doanh thu và số lượng món ăn bán được trong chi nhánh.
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn xem các báo cáo về kho nguyên liệu.
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn xem danh sách bàn đang có.
+% %         \item Là Quản Lý Chi Nhánh, tôi muốn sắp xếp bàn cho khách hàng và quản lý bàn trống.
+% %     \end{enumerate}
+% %     \item Đối với Quản Lý Tổng
+% %     \begin{enumerate}
+% %         \item Là Quản Lý Tổng, tôi muốn xem tổng doanh thu của tất cả các chi nhánh.
+% %         \item Là Quản Lý Tổng, tôi muốn xem chi tiết doanh thu của từng chi nhánh, theo ngày, tuần, tháng, năm.
+% %         \item Là Quản Lý Tổng, tôi muốn xem các báo cáo tổng quan về hoạt động của nhà hàng.
+% %         \item Là Quản Lý Tổng, tôi muốn xuất báo cáo tổng quan về doanh thu, chi phí và lợi nhuận.
+% %         \item Là Quản Lý Tổng, tôi muốn xem danh sách tất cả các chi nhánh.
+% %         \item Là Quản Lý Tổng, tôi muốn thêm, sửa hoặc xóa thông tin chi nhánh.
+% %         \item Là Quản Lý Tổng, tôi muốn xem các báo cáo tổng quan từ các chi nhánh.
+% %         \item Là Quản Lý Tổng, tôi muốn thêm, chỉnh sửa hoặc xóa các món ăn và đồ uống trong thực đơn.
+% %         \item Là Quản Lý Tổng, tôi muốn thay đổi giá cả, mô tả và hình ảnh của món ăn.
+% %     \end{enumerate}
+% %     \item Các Tính Năng Mở Rộng (Optional)
+% %     \begin{enumerate}
+% %         \item Là Khách Hàng, tôi muốn hệ thống gợi ý món ăn dựa trên lịch sử đặt món của mình.
+% %         \item Là Quản Lý (Tổng/Chi Nhánh), tôi muốn tạo và quản lý các chương trình khuyến mãi, giảm giá.
+% %         \item Là Khách Hàng, tôi muốn đặt bàn trước thông qua ứng dụng.
+% %         \item Là Khách Hàng, tôi muốn đánh giá chất lượng món ăn và dịch vụ của nhà hàng.
+% %         \item Là Quản Lý (Tổng/Chi Nhánh), tôi muốn hệ thống tự động xuất dữ liệu sang hệ thống kế toán.
+% %     \end{enumerate}
+% % \end{itemize}
+
+% % \textbf{Một số usecase diagram cơ bản như sau:}
+
+% % \begin{figure}[H]
+% %     \centering
+% %     \includegraphics[width=15cm]{Images/us-dat-mon.png}
+% %     \vspace{0.5cm}
+% %     \caption{Các use case liên quan đến đặt món}
+% %     \label{fig:my_label}
+% % \end{figure}
+
+% % \begin{figure}[H]
+% %     \centering
+% %     \includegraphics[width=15cm]{Images/us-tai-khoan.png}
+% %     \vspace{0.5cm}
+% %     \caption{Các use case liên quan đến quản lý tài khoản}
+% %     \label{fig:my_label}
+% % \end{figure}
+
+% % \begin{figure}[H]
+% %     \centering
+% %     \includegraphics[width=15cm]{Images/us-quan-ly.png}
+% %     \vspace{0.5cm}
+% %     \caption{Các use case liên quan đến quản lý}
+% %     \label{fig:my_label}
+% % \end{figure}
+
+% % \begin{enumerate}[(a)]
+% %     \item Khách hàng
+% %     \begin{itemize}
+% %         \item Quét mã QR
+% %         \begin{itemize}
+% %             \item Khách hàng quét mã QR trên bàn để truy cập vào menu và đặt món.
+% %         \end{itemize}
+% %         \item Xem menu
+% %         \begin{itemize}
+% %             \item Xem danh sách các món ăn và đồ uống, kèm theo hình ảnh, mô tả, giá cả.
+% %             \item Tìm kiếm món ăn theo tên hoặc danh mục.
+% %         \end{itemize}
+% %         \item Đặt món
+% %         \begin{itemize}
+% %             \item Chọn món, số lượng, tùy chọn (ví dụ: size, topping, gia vị)
+% %             \item Thêm món vào giỏ hàng.
+% %             \item Xem lại giỏ hàng trước khi xác nhận đặt món.
+% %             \item Đặt món nhiều lần trong cùng một lượt sử dụng.
+% %         \end{itemize}
+% %         \item Xem lịch sử đặt món
+% %         \begin{itemize}
+% %             \item Xem lại các order đã đặt trước đó (nếu đã đăng nhập).
+% %         \end{itemize}
+% %         \item Xem hóa đơn
+% %         \begin{itemize}
+% %             \item Xem chi tiết các món đã đặt, tổng tiền, các khuyến mãi (nếu có).
+% %         \end{itemize}
+% %         \item Thanh toán
+% %         \begin{itemize}
+% %             \item Thanh toán bằng cách quét mã QR hoặc thanh toán tiền mặt.
+% %             \item Xem lại hóa đơn sau khi đã thanh toán.
+% %         \end{itemize}
+% %         \item Đăng ký/Đăng nhập (Tùy chọn)
+% %         \begin{itemize}
+% %             \item Đăng ký tài khoản thành viên để tham gia chương trình khách hàng thân thiết.
+% %             \item Đăng nhập để xem lịch sử đặt món, nhận khuyến mãi và các ưu đãi khác.
+% %         \end{itemize}
+% %     \end{itemize}
+% %     \item Nhân viên thu ngân/phục vụ
+% %     \begin{itemize}
+% %         \item Quản lý order
+% %         \begin{itemize}
+% %             \item Xem danh sách các order mới và đang chờ xử lý.
+% %             \item Xem chi tiết các order của khách hàng.
+% %         \end{itemize}
+% %         \item Gộp hóa đơn
+% %         \begin{itemize}
+% %             \item Gộp các order của một bàn thành một hóa đơn duy nhất.
+% %             \item Xóa bỏ các order (nếu cần)
+% %         \end{itemize}
+% %         \item Xác nhận thanh toán
+% %         \begin{itemize}
+% %             \item Xác nhận thanh toán bằng QR.
+% %             \item Xác nhận thanh toán bằng tiền mặt (tự thao tác).
+% %         \end{itemize}
+% %         \item In hóa đơn
+% %         \begin{itemize}
+% %             \item In hóa đơn cho khách hàng (có mã QR để thanh toán).
+% %         \end{itemize}
+% %         \item Check-in/Check-out
+% %         \begin{itemize}
+% %             \item Chấm công đầu ca và cuối ca.
+% %         \end{itemize}
+% %         \item Chuyển Order
+% %         \begin{itemize}
+% %             \item Có thể chuyển order từ bàn này sang bàn khác (nếu khách hàng muốn đổi bàn)
+% %         \end{itemize}
+% %     \end{itemize}
+% %     \item Chức năng cho quản lý chi nhánh
+% %     \begin{itemize}
+% %         \item Quản lý kho nguyên liệu
+% %         \begin{itemize}
+% %             \item Nhập kho, xem danh sách các nguyên liệu trong kho.
+% %             \item Theo dõi số lượng còn lại của từng nguyên liệu.
+% %             \item Báo cáo nhập/xuất kho hàng ngày.
+% %         \end{itemize}
+% %         \item Quản lý nhân viên
+% %         \begin{itemize}
+% %             \item Xem danh sách nhân viên.
+% %             \item Phân công ca làm.
+% %             \item Xem lịch sử check-in/check-out của nhân viên.
+% %         \end{itemize}
+% %         \item Xem báo cáo
+% %         \begin{itemize}
+% %             \item Xem các báo cáo về doanh thu, số lượng món ăn bán được trong chi nhánh.
+% %             \item Xem các báo cáo về kho nguyên liệu.
+% %         \end{itemize}
+% %         \item Quản lý bàn
+% %         \begin{itemize}
+% %             \item Xem danh sách bàn đang có.
+% %             \item Có thể sắp xếp bàn cho khách hàng, quản lý bàn trống.
+% %         \end{itemize}
+% %     \end{itemize}
+% %     \item Chức năng cho quản lý tổng
+% %     \begin{itemize}
+% %         \item Quản lý doanh thu
+% %         \begin{itemize}
+% %             \item Xem tổng doanh thu của tất cả các chi nhánh.
+% %             \item Xem chi tiết doanh thu của từng chi nhánh, theo ngày, tuần, tháng, năm.
+% %         \end{itemize}
+% %         \item Xem báo cáo
+% %         \begin{itemize}
+% %             \item Xem các báo cáo tổng quan về hoạt động của nhà hàng.
+% %             \item Xuất báo cáo tổng quan về doanh thu, chi phí, lợi nhuận.
+% %         \end{itemize}
+% %         \item Quản lý chi nhánh
+% %         \begin{itemize}
+% %             \item Xem danh sách tất cả các chi nhánh.
+% %             \item Thêm/sửa/xóa thông tin chi nhánh.
+% %             \item Xem các báo cáo tổng quan từ các chi nhánh.
+% %         \end{itemize}
+% %         \item Quản lý thực đơn
+% %         \begin{itemize}
+% %             \item Thêm, chỉnh sửa, xóa các món ăn và đồ uống trong thực đơn.
+% %             \item Thay đổi giá cả, mô tả, hình ảnh của món ăn.
+% %         \end{itemize}
+% %     \end{itemize}
+% %     \item Mở rộng (có thể làm nếu kịp thời gian)
+% %     \begin{itemize}
+% %         \item Hệ thống gợi ý món ăn: Dựa trên lịch sử đặt món của khách hàng, hệ thống có thể gợi ý các món ăn phù hợp.
+% %         \item Hệ thống quản lý khuyến mãi: Cho phép tạo và quản lý các chương trình khuyến mãi, giảm giá.
+% %         \item Hệ thống đặt bàn: Cho phép khách hàng đặt bàn trước thông qua ứng dụng.
+% %         \item Hệ thống quản lý đánh giá: Cho phép khách hàng đánh giá chất lượng món ăn và dịch vụ của nhà hàng.
+% %         \item Tích hợp với hệ thống kế toán: Tự động xuất dữ liệu sang hệ thống kế toán.
+% %     \end{itemize}
+% % \end{enumerate}
+
+% \subsubsection{Yêu cầu phi chức năng}
+% \begin{itemize}
+%     \item Bảo mật:
+%     \begin{itemize}
+%         \item Dữ liệu người dùng và dữ liệu giao dịch phải được bảo vệ.
+%         \item Hệ thống sử dụng HTTPS để đảm bảo an toàn cho quá trình truyền dữ liệu.
+%     \end{itemize}
+
+%     \item Hiệu năng:
+%     \begin{itemize}
+%         \item Hệ thống phải có tốc độ xử lý nhanh và ổn định.
+%         \item Khả năng đáp ứng nhanh chóng khi nhiều người dùng truy cập cùng một lúc.    
+%     \end{itemize}
+
+%     \item Tính khả dụng:
+%     \begin{itemize}
+%         \item Hệ thống hoạt động ổn định và có thời gian uptime cao.
+%         \item Giao diện thân thiện và dễ sử dụng trên cả web và mobile.
+%     \end{itemize}
+
+%     \item Khả năng mở rộng:
+%     \begin{itemize}
+%         \item Hệ thống có thể mở rộng để hỗ trợ thêm nhiều chi nhánh và người dùng.
+%         \item Dễ dàng thêm các tính năng mới khi cần thiết.
+%     \end{itemize}
+
+% \end{itemize}
+
+
+
+
+
