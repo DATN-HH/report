@@ -110,140 +110,278 @@ Khách hàng có thể gửi yêu cầu hỗ trợ (SUPPORT TICKET) với tiêu 
 \end{figure}
 \end{landscape}
 
-\subsubsection{Các ràng buộc}
-\paragraph{Ràng buộc miền trị (Domain Constraints – Attribute Domains):}
+% \subsubsection{Các ràng buộc}
+% \paragraph{Ràng buộc miền trị (Domain Constraints – Attribute Domains):}
 
-\begin{itemize}
-  \item \textbf{Trạng thái (SHIFT - STAFF)}
-    \begin{itemize}
-        \item \texttt{DRAFT}: Ca làm việc đang trong quá trình tạo, chưa được công bố.
-        \item \texttt{PUBLISHED}: Ca làm việc đã được công bố và có hiệu lực.
-        \item \texttt{CONFLICTED}: Ca làm việc bị xung đột về thời gian hoặc nhân sự.
-    \end{itemize}
+% \begin{itemize}
+%   \item \textbf{Trạng thái (SHIFT - STAFF)}
+%     \begin{itemize}
+%         \item \texttt{DRAFT}: Ca làm việc đang trong quá trình tạo, chưa được công bố.
+%         \item \texttt{PUBLISHED}: Ca làm việc đã được công bố và có hiệu lực.
+%         \item \texttt{CONFLICTED}: Ca làm việc bị xung đột về thời gian hoặc nhân sự.
+%     \end{itemize}
 
-  \item \textbf{Trạng thái (SUPPORT TICKET)}
-    \begin{itemize}
-        \item \texttt{PENDING}: Yêu cầu đang chờ xử lý.
-        \item \texttt{RECEIVED}: Yêu cầu đã được tiếp nhận.
-        \item \texttt{IN\_PROGRESS}: Yêu cầu đang trong quá trình xử lý.
-        \item \texttt{RESOLVED}: Yêu cầu đã được xử lý xong.
-    \end{itemize}
+%   \item \textbf{Trạng thái (SUPPORT TICKET)}
+%     \begin{itemize}
+%         \item \texttt{PENDING}: Yêu cầu đang chờ xử lý.
+%         \item \texttt{RECEIVED}: Yêu cầu đã được tiếp nhận.
+%         \item \texttt{IN\_PROGRESS}: Yêu cầu đang trong quá trình xử lý.
+%         \item \texttt{RESOLVED}: Yêu cầu đã được xử lý xong.
+%     \end{itemize}
 
-  \item \textbf{Đánh giá (Feedback)}
-    \begin{itemize}
-        \item Các giá trị từ \texttt{1} đến \texttt{5}, thể hiện mức độ hài lòng của khách hàng.
-    \end{itemize}
+%   \item \textbf{Đánh giá (Feedback)}
+%     \begin{itemize}
+%         \item Các giá trị từ \texttt{1} đến \texttt{5}, thể hiện mức độ hài lòng của khách hàng.
+%     \end{itemize}
 
-  \item \textbf{Mô tả (Feedback)}
-    \begin{itemize}
-        \item Chuỗi văn bản tối đa \texttt{500} ký tự để khách hàng mô tả chi tiết phản hồi.
-    \end{itemize}
+%   \item \textbf{Mô tả (Feedback)}
+%     \begin{itemize}
+%         \item Chuỗi văn bản tối đa \texttt{500} ký tự để khách hàng mô tả chi tiết phản hồi.
+%     \end{itemize}
 
-  \item \textbf{Loại đối tượng phản hồi (Target\_Type)}
-    \begin{itemize}
-        \item \texttt{FEEDBACK\_BOOKING\_TABLE}: Phản hồi về việc đặt bàn.
-        \item \texttt{FEEDBACK\_BOOKING\_PRODUCT}: Phản hồi về món ăn đặt trước.
-        \item \texttt{FEEDBACK\_ORDER}: Phản hồi về đơn hàng đã gọi.
-        \item \texttt{GENERAL\_FEEDBACK}: Phản hồi chung, không phân loại cụ thể.
-    \end{itemize}
+%   \item \textbf{Loại đối tượng phản hồi (Target\_Type)}
+%     \begin{itemize}
+%         \item \texttt{FEEDBACK\_BOOKING\_TABLE}: Phản hồi về việc đặt bàn.
+%         \item \texttt{FEEDBACK\_BOOKING\_PRODUCT}: Phản hồi về món ăn đặt trước.
+%         \item \texttt{FEEDBACK\_ORDER}: Phản hồi về đơn hàng đã gọi.
+%         \item \texttt{GENERAL\_FEEDBACK}: Phản hồi chung, không phân loại cụ thể.
+%     \end{itemize}
 
-  \item \textbf{Trạng thái (TABLE)}
-    \begin{itemize}
-        \item \texttt{AVAILABLE}: Bàn sẵn sàng sử dụng.
-        \item \texttt{OCCUPIED}: Bàn đang có khách.
-        \item \texttt{NEEDS\_CLEANING}: Bàn cần được dọn dẹp.
-    \end{itemize}
+%   \item \textbf{Trạng thái (TABLE)}
+%     \begin{itemize}
+%         \item \texttt{AVAILABLE}: Bàn sẵn sàng sử dụng.
+%         \item \texttt{OCCUPIED}: Bàn đang có khách.
+%         \item \texttt{NEEDS\_CLEANING}: Bàn cần được dọn dẹp.
+%     \end{itemize}
 
-  \item \textbf{Loại hình (BOOKING PRODUCT và ORDER)}
-    \begin{itemize}
-        \item \texttt{DINE\_IN}: Dùng món tại nhà hàng.
-        \item \texttt{TAKE\_AWAY}: Mua mang về.
-        \item \texttt{DELIVERY}: Giao hàng tận nơi.
-    \end{itemize}
+%   \item \textbf{Loại hình (BOOKING PRODUCT và ORDER)}
+%     \begin{itemize}
+%         \item \texttt{DINE\_IN}: Dùng món tại nhà hàng.
+%         \item \texttt{TAKE\_AWAY}: Mua mang về.
+%         \item \texttt{DELIVERY}: Giao hàng tận nơi.
+%     \end{itemize}
 
-  \item \textbf{Trạng thái (BOOKING TABLE và BOOKING PRODUCT)}
-    \begin{itemize}
-        \item \texttt{BOOKED}: Đã đặt.
-        \item \texttt{DEPOSIT\_PAID}: Đã thanh toán tiền cọc.
-        \item \texttt{CANCELLED}: Đã hủy.
-        \item \texttt{COMPLETED}: Đã hoàn tất dịch vụ.
-    \end{itemize}
+%   \item \textbf{Trạng thái (BOOKING TABLE và BOOKING PRODUCT)}
+%     \begin{itemize}
+%         \item \texttt{BOOKED}: Đã đặt.
+%         \item \texttt{DEPOSIT\_PAID}: Đã thanh toán tiền cọc.
+%         \item \texttt{CANCELLED}: Đã hủy.
+%         \item \texttt{COMPLETED}: Đã hoàn tất dịch vụ.
+%     \end{itemize}
 
-  \item \textbf{Loại sản phẩm (PRODUCT)}
-    \begin{itemize}
-        \item \texttt{CONSUMABLE}: Món ăn đếm được, ví dụ: chai rượu, hộp bánh.
-        \item \texttt{STOCKABLE}: Món ăn không đếm đơn vị, ví dụ: tô cơm, nồi canh.
-        \item \texttt{SERVICE}: Các dịch vụ khác.
-    \end{itemize}
+%   \item \textbf{Loại sản phẩm (PRODUCT)}
+%     \begin{itemize}
+%         \item \texttt{CONSUMABLE}: Món ăn đếm được, ví dụ: chai rượu, hộp bánh.
+%         \item \texttt{STOCKABLE}: Món ăn không đếm đơn vị, ví dụ: tô cơm, nồi canh.
+%         \item \texttt{SERVICE}: Các dịch vụ khác.
+%     \end{itemize}
 
-  \item \textbf{Trạng thái (ORDER)}
-    \begin{itemize}
-        \item \texttt{PLACED}: Đơn hàng đã được tạo.
-        \item \texttt{PREPARING}: Đơn hàng đang được chuẩn bị.
-        \item \texttt{COMPLETED}: Đơn hàng đã hoàn tất.
-        \item \texttt{CANCELLED}: Đơn hàng đã bị hủy.
-    \end{itemize}
+%   \item \textbf{Trạng thái (ORDER)}
+%     \begin{itemize}
+%         \item \texttt{PLACED}: Đơn hàng đã được tạo.
+%         \item \texttt{PREPARING}: Đơn hàng đang được chuẩn bị.
+%         \item \texttt{COMPLETED}: Đơn hàng đã hoàn tất.
+%         \item \texttt{CANCELLED}: Đơn hàng đã bị hủy.
+%     \end{itemize}
 
-  \item \textbf{Trạng thái (PRODUCT-ORDER)}
-    \begin{itemize}
-        \item \texttt{PENDING}: Món chờ chuẩn bị.
-        \item \texttt{PREPARING}: Đang được chuẩn bị.
-        \item \texttt{COMPLETED}: Đã chuẩn bị xong.
-        \item \texttt{SERVED}: Đã phục vụ cho khách.
-        \item \texttt{CANCELLED}: Đã hủy.
-    \end{itemize}
+%   \item \textbf{Trạng thái (PRODUCT-ORDER)}
+%     \begin{itemize}
+%         \item \texttt{PENDING}: Món chờ chuẩn bị.
+%         \item \texttt{PREPARING}: Đang được chuẩn bị.
+%         \item \texttt{COMPLETED}: Đã chuẩn bị xong.
+%         \item \texttt{SERVED}: Đã phục vụ cho khách.
+%         \item \texttt{CANCELLED}: Đã hủy.
+%     \end{itemize}
 
-  \item \textbf{Loại hóa đơn (INVOICE)}
-    \begin{itemize}
-        \item \texttt{NORMAL}: Hóa đơn bình thường cho một đơn hàng.
-        \item \texttt{MERGED}: Hóa đơn gộp từ nhiều đơn hàng.
-        \item \texttt{SPLIT}: Hóa đơn chia nhỏ từ một đơn hàng.
-    \end{itemize}
+%   \item \textbf{Loại hóa đơn (INVOICE)}
+%     \begin{itemize}
+%         \item \texttt{NORMAL}: Hóa đơn bình thường cho một đơn hàng.
+%         \item \texttt{MERGED}: Hóa đơn gộp từ nhiều đơn hàng.
+%         \item \texttt{SPLIT}: Hóa đơn chia nhỏ từ một đơn hàng.
+%     \end{itemize}
 
-  \item \textbf{Mục đích thanh toán (Payment\_For)}
-    \begin{itemize}
-        \item \texttt{DEPOSIT\_BOOKING\_TABLE}: Tiền cọc cho việc đặt bàn.
-        \item \texttt{DEPOSIT\_BOOKING\_PRODUCT}: Tiền cọc cho đặt món trước.
-        \item \texttt{INVOICE\_PAYMENT}: Thanh toán cho hóa đơn.
-    \end{itemize}
+%   \item \textbf{Mục đích thanh toán (Payment\_For)}
+%     \begin{itemize}
+%         \item \texttt{DEPOSIT\_BOOKING\_TABLE}: Tiền cọc cho việc đặt bàn.
+%         \item \texttt{DEPOSIT\_BOOKING\_PRODUCT}: Tiền cọc cho đặt món trước.
+%         \item \texttt{INVOICE\_PAYMENT}: Thanh toán cho hóa đơn.
+%     \end{itemize}
 
-  \item \textbf{Phương thức thanh toán (Payment\_Method)}
-    \begin{itemize}
-        \item \texttt{CASH}: Thanh toán bằng tiền mặt.
-        \item \texttt{CARD}: Thanh toán qua thẻ (ghi nợ hoặc tín dụng).
-        \item \texttt{EBANKING}: Thanh toán qua ngân hàng điện tử.
-        \item \texttt{E\_WALLET}: Thanh toán qua ví điện tử (Momo, ZaloPay, v.v.)
-    \end{itemize}
-\end{itemize}
+%   \item \textbf{Phương thức thanh toán (Payment\_Method)}
+%     \begin{itemize}
+%         \item \texttt{CASH}: Thanh toán bằng tiền mặt.
+%         \item \texttt{CARD}: Thanh toán qua thẻ (ghi nợ hoặc tín dụng).
+%         \item \texttt{EBANKING}: Thanh toán qua ngân hàng điện tử.
+%         \item \texttt{E\_WALLET}: Thanh toán qua ví điện tử (Momo, ZaloPay, v.v.)
+%     \end{itemize}
+% \end{itemize}
 
-\paragraph{Ràng buộc tham chiếu/thời gian (Referential/Temporal Constraints):}
-\begin{itemize}
-  \item \textbf{POS Session}: Thời gian phiên làm việc phải trùng với thời gian của một ca làm việc (shift) tại cùng chi nhánh (branch).
-  \item \textbf{Thời gian bắt đầu/kết thúc}: Mọi thời điểm kết thúc (end\_time) phải luôn lớn hơn thời điểm bắt đầu (start\_time).
-  \item \textbf{Ràng buộc khuyến mãi (Promotion)}: Trong cùng một khoảng thời gian, mỗi sản phẩm (product) chỉ được áp dụng tối đa một khuyến mãi duy nhất.
-\end{itemize}
+% \paragraph{Ràng buộc tham chiếu/thời gian (Referential/Temporal Constraints):}
+% \begin{itemize}
+%   \item \textbf{POS Session}: Thời gian phiên làm việc phải trùng với thời gian của một ca làm việc (shift) tại cùng chi nhánh (branch).
+%   \item \textbf{Thời gian bắt đầu/kết thúc}: Mọi thời điểm kết thúc (end\_time) phải luôn lớn hơn thời điểm bắt đầu (start\_time).
+%   \item \textbf{Ràng buộc khuyến mãi (Promotion)}: Trong cùng một khoảng thời gian, mỗi sản phẩm (product) chỉ được áp dụng tối đa một khuyến mãi duy nhất.
+% \end{itemize}
 
-\paragraph{Thuộc tính dẫn xuất (Derived Attributes):}
-\begin{itemize}
-  \item \textbf{closing\_cash (POS Session - Thu ngân)}: Tổng doanh thu trong phiên, sau khi đã trừ các khoản khuyến mãi và voucher.
+% \paragraph{Thuộc tính dẫn xuất (Derived Attributes):}
+% \begin{itemize}
+%   \item \textbf{closing\_cash (POS Session - Thu ngân)}: Tổng doanh thu trong phiên, sau khi đã trừ các khoản khuyến mãi và voucher.
 
-  \item \textbf{total\_amount (Order)}: Tính bằng tổng \textit{(đơn giá món ăn hoặc giá khuyến mãi nếu có) \texttimes số lượng} cộng với \textit{giá trị combo \texttimes số lượng}, sau đó trừ đi khoản đặt cọc (nếu có).
+%   \item \textbf{total\_amount (Order)}: Tính bằng tổng \textit{(đơn giá món ăn hoặc giá khuyến mãi nếu có) \texttimes số lượng} cộng với \textit{giá trị combo \texttimes số lượng}, sau đó trừ đi khoản đặt cọc (nếu có).
 
-  \item \textbf{total\_amount (Invoice)}: Tính từ \textit{total\_amount} của đơn hàng, áp dụng voucher tương ứng. Nếu là hóa đơn gộp thì cộng tổng nhiều đơn hàng. Nếu là hóa đơn chia thì lấy phần giá trị được chia.
+%   \item \textbf{total\_amount (Invoice)}: Tính từ \textit{total\_amount} của đơn hàng, áp dụng voucher tương ứng. Nếu là hóa đơn gộp thì cộng tổng nhiều đơn hàng. Nếu là hóa đơn chia thì lấy phần giá trị được chia.
 
-  \item \textbf{tax\_amount (Invoice)}: Bằng \textit{total\_amount \texttimes thuế suất} do chi nhánh cấu hình.
+%   \item \textbf{tax\_amount (Invoice)}: Bằng \textit{total\_amount \texttimes thuế suất} do chi nhánh cấu hình.
 
-  \item \textbf{total\_used (Voucher)}: Tổng số lần voucher đã được sử dụng trong các hóa đơn.
+%   \item \textbf{total\_used (Voucher)}: Tổng số lần voucher đã được sử dụng trong các hóa đơn.
 
-  \item \textbf{amount (Payment)}:
-    \begin{itemize}
-        \item \texttt{DEPOSIT\_BOOKING\_TABLE}: Số bàn \texttimes giá trị đặt cọc của chi nhánh.
-        \item \texttt{DEPOSIT\_BOOKING\_PRODUCT}: Tổng giá trị món ăn \texttimes phần trăm đặt cọc theo chi nhánh.
-        \item \texttt{INVOICE\_PAYMENT}: Bằng tổng \textit{total\_amount + tax\_amount} của hóa đơn.
-    \end{itemize}
-\end{itemize}
+%   \item \textbf{amount (Payment)}:
+%     \begin{itemize}
+%         \item \texttt{DEPOSIT\_BOOKING\_TABLE}: Số bàn \texttimes giá trị đặt cọc của chi nhánh.
+%         \item \texttt{DEPOSIT\_BOOKING\_PRODUCT}: Tổng giá trị món ăn \texttimes phần trăm đặt cọc theo chi nhánh.
+%         \item \texttt{INVOICE\_PAYMENT}: Bằng tổng \textit{total\_amount + tax\_amount} của hóa đơn.
+%     \end{itemize}
+% \end{itemize}
 
-\subsubsection{Relational Mapping}
+\subsubsection{Thiết kế luận lý}
+
+Thiết kế luận lý thể hiện cấu trúc cơ sở dữ liệu dưới dạng các bảng quan hệ, bao gồm tên bảng, các thuộc tính, khóa chính, khóa ngoại và mối quan hệ giữa chúng. Trong phần này, chúng tôi trình bày \textbf{một số bảng quan trọng tiêu biểu} trong hệ thống quản lý đặt món cho chuỗi nhà hàng, tập trung vào những bảng cốt lõi phục vụ chức năng đặt món, đặt bàn và xử lý đơn hàng.
+    
+\begin{longtable}{|l|p{6cm}|l|l|}
+\hline
+\textbf{Tên thuộc tính} & \textbf{Mô tả} & \textbf{Loại khóa} & \textbf{Bảng liên quan} \\
+\hline
+\endfirsthead
+
+% \multicolumn{4}{c}%
+% {{\bfseries \tablename\ \thetable{} -- tiếp theo}} \\
+\hline
+\textbf{Tên thuộc tính} & \textbf{Mô tả} & \textbf{Loại khóa} & \textbf{Bảng liên quan} \\
+\hline
+\endhead
+
+\hline \multicolumn{4}{|r|}{{Còn tiếp ...}} \\
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+\multicolumn{4}{|c|}{\textbf{Bảng branch}} \\
+\hline
+id & Định danh chi nhánh & PK & - \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng category}} \\
+\hline
+id & Định danh danh mục & PK & - \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng promotion}} \\
+\hline
+id & Định danh khuyến mãi & PK & - \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng combo}} \\
+\hline
+id & Định danh combo & PK & - \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng product}} \\
+\hline
+id & Định danh sản phẩm & PK & - \\
+category\_id & Danh mục sản phẩm & FK & category \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng product\_promotion}} \\
+\hline
+id & Định danh liên kết giữa khuyến mãi và sản phẩm & PK & - \\
+product\_id & Liên kết tới sản phẩm & FK & product \\
+promotion\_id & Liên kết tới khuyến mãi & FK & promotion \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng combo\_product}} \\
+\hline
+id & Định danh liên kết giữa combo và sản phẩm & PK & - \\
+product\_id & Liên kết tới sản phẩm & FK & product \\
+combo\_id & Liên kết tới conbo & FK & combo \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng orders}} \\
+\hline
+id & Định danh đơn hàng & PK & - \\
+customer\_id & Người đặt hàng & FK & user \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng order\_product}} \\
+\hline
+id & Định danh dòng món trong đơn hàng & PK & - \\
+order\_id & Liên kết tới đơn hàng & FK & orders \\
+product\_id & Liên kết tới sản phẩm & FK & product \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng restaurant\_table}} \\
+\hline
+id & Định danh bàn ăn & PK & - \\
+branch\_id & Thuộc chi nhánh & FK & branch \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng order\_table}} \\
+\hline
+id & Định danh liên kết giữa bàn và đơn hàng & PK & - \\
+order\_id & Liên kết tới đơn hàng & FK & orders \\
+table\_id & Liên kết tới bàn ăn & FK & restaurant\_table \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng booking\_table}} \\
+\hline
+id & Định danh đặt bàn & PK & - \\
+customer\_id & Người đặt bàn & FK & user \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng booking\_table\_table}} \\
+\hline
+id & Định danh dòng liên kết bàn và đặt bàn & PK & - \\
+booking\_table\_id & Liên kết tới đặt bàn & FK & booking\_table \\
+table\_id & Liên kết tới bàn ăn & FK & restaurant\_table \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng booking\_product}} \\
+\hline
+id & Định danh đặt món trước & PK & - \\
+customer\_id & Người đặt món & FK & user \\
+branch\_id & Chi nhánh thực hiện & FK & branch \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng booking\_product\_product}} \\
+\hline
+id & Định danh dòng món trong đặt món trước & PK & - \\
+booking\_product\_id & Liên kết tới đặt món & FK & booking\_product \\
+product\_id & Liên kết tới sản phẩm & FK & product \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng invoice}} \\
+\hline
+id & Định danh hóa đơn & PK & - \\
+order\_id & Liên kết tới hóa đơn & FK & order \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng voucher}} \\
+\hline
+id & Định danh voucher & PK & - \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Bảng invoice\_voucher}} \\
+\hline
+id & Định danh dòng liên hóa đơn và voucher & PK & - \\
+invoice\_id & Liên kết tới hóa đơn & FK & invoice \\
+voucher\_id & Liên kết tới voucher & FK & voucher \\
+\hline
+
+\caption{Tổng hợp các khóa chính và khóa ngoại của các bảng chính}
+\end{longtable}
+
+Hình dưới đây thể hiện lược đồ quan hệ luận lý cho hệ thống cơ sở dữ liệu quản lý đặt món nhà hàng, bao gồm các bảng, khóa chính, khóa ngoại và các mối quan hệ giữa các bảng một cách đầy đủ.
 
 \begin{landscape}
 
@@ -251,19 +389,137 @@ Khách hàng có thể gửi yêu cầu hỗ trợ (SUPPORT TICKET) với tiêu 
     \centering
     \includegraphics[height=0.9\textheight]{Images/relation.png}
     \vspace{0.5cm}
-    \caption{Relational Mapping}
+    \caption{Lược đồ quan hệ cơ sở dữ liệu luận lý}
     \label{fig:my_label}
 \end{figure}
 
 \end{landscape}
 
 
-\subsubsection{Lược đồ quan hệ}
+\subsubsection{Thiết kế vật lý}
+
+Dưới đây là chi tiết thiết kế vật lý \textbf{một số bảng quan trọng} trong hệ thống. Mỗi bảng thể hiện rõ các thuộc tính, kiểu dữ liệu cụ thể, các ràng buộc và khóa ngoại (nếu có).
+
+\begin{longtable}{|p{3.5cm}|p{3.5cm}|p{7.5cm}|}
+\hline
+\textbf{Thuộc tính} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc / CHECK} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Thuộc tính} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc / CHECK} \\
+\hline
+\endhead
+
+% \hline \multicolumn{4}{|r|}{{Còn tiếp ...}} \\
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+\multicolumn{3}{|l|}{\textbf{product}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+name & varchar(255) & NOT NULL \\
+price & numeric(38,2) & \\
+type & varchar(255) & CHECK IN ('COUNTABLE', 'UNCOUNTABLE', 'SERVICE') \\
+category\_id & bigint & NOT NULL, FK \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{voucher}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+code & varchar(100) & NOT NULL \\
+discount\_value & numeric(38,2) & \\
+discount\_percent & double precision & \\
+start\_date & date & NOT NULL \\
+end\_date & date & NOT NULL \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{invoice}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+order\_id & bigint & NOT NULL, FK \\
+invoice\_type & varchar(255) & CHECK IN ('NORMAL', 'MERGED', 'SPLIT') \\
+total\_amount & numeric(38,2) & \\
+tax\_amount & numeric(38,2) & \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{combo}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+name & varchar(255) & NOT NULL \\
+price & numeric(38,2) & NOT NULL \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{orders}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+type & varchar(255) & CHECK IN ('DINE\_IN', 'TAKE\_AWAY', 'DELIVERY') \\
+oder\_status & varchar(255) & CHECK IN ('PLACED', 'PREPARING', 'COMPLETED', 'CANCELLED') \\
+total\_amount & numeric(38,2) & \\
+customer\_id & bigint & NOT NULL, FK \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{order\_product}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+order\_id & bigint & NOT NULL, FK \\
+product\_id & bigint & NOT NULL, FK \\
+product\_status & varchar(255) & CHECK IN ('PENDING', 'PREPARING', 'COMPLETED', 'SERVED', 'CANCELLED') \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{restaurant\_table}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+capacity & integer & \\
+table\_status & varchar(255) & CHECK IN ('AVAILABLE', 'OCCUPIED', 'NEEDS\_CLEANING') \\
+table\_type & varchar(255) & CHECK IN ('STANDARD', 'VIP') \\
+branch\_id & bigint & NOT NULL, FK \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{booking\_table}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+booking\_status & varchar(255) & CHECK IN ('BOOKED', 'DEPOSIT\_PAID', 'CANCELLED', 'COMPLETED') \\
+time\_start & timestamp & NOT NULL \\
+time\_end & timestamp & \\
+customer\_id & bigint & NOT NULL, FK \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{booking\_product}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+booking\_status & varchar(255) & CHECK IN ('BOOKED', 'DEPOSIT\_PAID', 'CANCELLED', 'COMPLETED') \\
+booking\_type & varchar(255) & CHECK IN ('DINE\_IN','TAKE\_AWAY','DELIVERY') \\
+customer\_id & bigint & NOT NULL, FK \\
+branch\_id & bigint & NOT NULL, FK \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{combo\_product}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+combo\_id & bigint & NOT NULL, FK \\
+product\_id & bigint & NOT NULL, FK \\
+quantity & integer & \\
+\hline
+
+\multicolumn{3}{|l|}{\textbf{invoice\_voucher}} \\
+\hline
+id & bigint & NOT NULL, PK \\
+voucher\_id & bigint & NOT NULL, FK \\
+invoice\_id & bigint & NOT NULL, FK \\
+quantity & integer & \\
+\hline
+\end{longtable}
+
+Sau khi hoàn thiện các bước thiết kế cơ sở dữ liệu từ mô hình khái niệm đến mô hình luận lý và vật lý, hệ thống đã được triển khai trên phần mềm quản lý cơ sở dữ liệu để trực quan hóa quan hệ giữa các bảng. Hình dưới đây thể hiện lược đồ quan hệ đầy đủ của hệ thống cơ sở dữ liệu, được xuất từ công cụ DBeaver sau khi định nghĩa và thiết lập các bảng, khóa chính, khóa ngoại và các liên kết liên quan.
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=0.9\textheight]{Images/ldqh.png}
     \vspace{0.5cm}
-    \caption{Lược đồ quan hệ}
-    \label{fig:my_label}
+    \caption{Lược đồ quan hệ cơ sở dữ liệu vật lý}
+    \label{fig:logical_schema}
 \end{figure}
