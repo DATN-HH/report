@@ -1,0 +1,693 @@
+\subsection{Module MD-11: Quản lý Quan hệ Khách hàng (CRM)}
+
+% === Quản lý Hồ sơ Khách hàng (CRM View) - Tách nhỏ ===
+\subsubsection{Use Case UC-MD11-01: Tạo mới Hồ sơ Khách hàng (CRM)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-01: Tạo mới Hồ sơ Khách hàng (CRM)} \label{tab:uc_md11_01_create_customer_crm} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Tạo mới Hồ sơ Khách hàng (CRM) \\
+\hline
+Use Case ID & UC-MD11-01 \\
+\hline
+Use Case Description & Cho phép Người dùng được phân quyền (US-01: Quản lý, US-03: Lễ tân, US-10: Quản trị viên) tạo một bản ghi hồ sơ khách hàng mới trong hệ thống CRM của nhà hàng. Hồ sơ này bao gồm các thông tin liên hệ cơ bản và có thể được bổ sung các thông tin chi tiết khác để phục vụ việc quản lý quan hệ và chăm sóc khách hàng. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-03 (Nhân viên lễ tân), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Có một khách hàng mới đến nhà hàng hoặc liên hệ (ví dụ: đặt bàn qua điện thoại lần đầu) và nhân viên muốn tạo hồ sơ để lưu trữ thông tin. \newline - Nhân viên nhập thông tin khách hàng từ một nguồn khác (ví dụ: danh sách khách mời sự kiện). \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập vào hệ thống với quyền tạo hồ sơ khách hàng trong module CRM. \\
+\hline
+Post-Condition & - Một bản ghi hồ sơ khách hàng mới được tạo và lưu thành công trong cơ sở dữ liệu. \newline - Hồ sơ mới này chứa các thông tin cơ bản do người dùng nhập (ví dụ: Tên, Số điện thoại, Email). \newline - Hồ sơ sẵn sàng để được liên kết với các giao dịch (đặt chỗ, đơn hàng) hoặc được cập nhật thêm thông tin chi tiết (sở thích, lịch sử...). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-03/US-10) truy cập module CRM (hoặc Contacts). \newline 2. Người dùng chọn hành động "Tạo mới" (Create) Khách hàng. \newline 3. Hệ thống hiển thị form nhập thông tin khách hàng mới. \newline 4. Người dùng nhập các thông tin bắt buộc: \newline    - Tên Khách hàng (Customer Name). \newline    - Số Điện thoại (Phone Number) (BR-UC11.1-1). \newline 5. Người dùng nhập các thông tin tùy chọn (nếu có): \newline    - Địa chỉ Email. \newline    - Địa chỉ nhà/công ty. \newline    - Ngày sinh. \newline    - Giới tính. \newline    - Công ty (nếu là khách hàng doanh nghiệp). \newline    - Ghi chú ban đầu về khách hàng. \newline 6. Người dùng chọn "Lưu" (Save). \newline 7. Hệ thống kiểm tra tính hợp lệ của dữ liệu (ví dụ: SĐT không được để trống, có thể kiểm tra trùng SĐT/Email - BR-UC11.1-2). \newline 8. Hệ thống lưu bản ghi hồ sơ khách hàng mới. \newline 9. Hệ thống hiển thị thông báo tạo thành công và có thể chuyển sang giao diện chi tiết của khách hàng vừa tạo. \\
+\hline
+Alternative Flow & \textbf{6a. Lưu và Tạo mới (Save \& New):} \newline    1. Người dùng chọn "Lưu và Tạo mới" để tiếp tục nhập hồ sơ khách hàng khác. \\
+\hline
+Exception Flow & \textbf{7a. Dữ liệu không hợp lệ:} \newline    1. Hệ thống phát hiện thiếu thông tin bắt buộc hoặc dữ liệu trùng lặp (nếu có kiểm tra). \newline    2. Hệ thống báo lỗi, yêu cầu người dùng sửa. Use Case quay lại bước 4. \newline \textbf{8a. Lỗi hệ thống khi lưu:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi lưu. \newline    2. Hệ thống báo lỗi chung. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.1-1:} Số điện thoại của khách hàng nên là thông tin bắt buộc để liên hệ. \newline - \textbf{BR-UC11.1-2:} Hệ thống nên có cơ chế kiểm tra trùng lặp khách hàng dựa trên Số điện thoại hoặc Email để tránh tạo nhiều hồ sơ cho cùng một người. \newline - \textbf{BR-UC11.1-3:} Khách hàng tạo qua CRM sẽ có loại là "Contact" hoặc "Customer", khác với "User" nội bộ. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.1-1 (Usability):} Form tạo khách hàng phải đơn giản, rõ ràng. \newline - \textbf{NFR-UC11.1-2 (Performance):} Lưu hồ sơ mới phải nhanh. \newline - \textbf{NFR-UC11.1-3 (Data Integrity):} Dữ liệu khách hàng phải được lưu chính xác. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-02: Xem Danh sách Hồ sơ Khách hàng (CRM)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-02: Xem Danh sách Hồ sơ Khách hàng (CRM)} \label{tab:uc_md11_02_view_customer_list_crm} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Xem Danh sách Hồ sơ Khách hàng (CRM) \\
+\hline
+Use Case ID & UC-MD11-02 \\
+\hline
+Use Case Description & Cho phép Người dùng được phân quyền (US-01, US-03, US-06, US-10) xem danh sách tất cả các hồ sơ khách hàng đã được tạo và lưu trữ trong hệ thống CRM, với các thông tin tóm tắt và khả năng tìm kiếm, lọc. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-03 (Nhân viên lễ tân), US-06 (Kế toán), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Cần tra cứu thông tin của một nhóm khách hàng. \newline - Cần tìm kiếm một khách hàng cụ thể. \newline - Chuẩn bị cho các thao tác quản lý khác (xem chi tiết, sửa, phân loại). \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập vào hệ thống với quyền xem hồ sơ khách hàng trong module CRM. \\
+\hline
+Post-Condition & - Danh sách các hồ sơ khách hàng (theo bộ lọc mặc định) được hiển thị. \newline - Người dùng có thể xem thông tin tóm tắt và thực hiện các hành động tiếp theo. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng truy cập module CRM (hoặc Contacts). \newline 2. Hệ thống mặc định hiển thị danh sách các khách hàng (có thể là tất cả hoặc theo một bộ lọc mặc định). \newline 3. Với mỗi khách hàng, hiển thị thông tin tóm tắt: Tên, SĐT, Email (nếu có), Công ty (nếu có). \newline 4. Người dùng xem xét danh sách. \\
+\hline
+Alternative Flow & \textbf{4a. Tìm kiếm khách hàng:} \newline    1. Người dùng nhập tên, SĐT, email, hoặc mã khách hàng vào ô tìm kiếm. \newline    2. Hệ thống lọc và hiển thị kết quả. \newline \textbf{4b. Lọc khách hàng:} \newline    1. Người dùng sử dụng các bộ lọc có sẵn (ví dụ: theo Loại khách hàng, theo Thẻ tag, theo Nhân viên phụ trách - nếu có). \newline    2. Hệ thống áp dụng bộ lọc. \newline \textbf{4c. Sắp xếp danh sách:} \newline    1. Người dùng nhấp vào tiêu đề cột để sắp xếp. \\
+\hline
+Exception Flow & \textbf{2a. Lỗi tải danh sách:} Hệ thống báo lỗi. \newline \textbf{2b. Không có khách hàng nào:} Hiển thị danh sách trống. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.2-1:} Danh sách phải hiển thị chính xác các hồ sơ khách hàng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.2-1 (Usability):} Giao diện dễ đọc, tìm kiếm/lọc hiệu quả. \newline - \textbf{NFR-UC11.2-2 (Performance):} Tải danh sách nhanh, kể cả với số lượng lớn. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-03: Xem Chi tiết Hồ sơ Khách hàng (CRM)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-03: Xem Chi tiết Hồ sơ Khách hàng (CRM)} \label{tab:uc_md11_03_view_customer_detail_crm} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Xem Chi tiết Hồ sơ Khách hàng (CRM) \\
+\hline
+Use Case ID & UC-MD11-03 \\
+\hline
+Use Case Description & Cho phép Người dùng được phân quyền (US-01, US-03, US-06, US-10) xem thông tin chi tiết đầy đủ của một hồ sơ khách hàng cụ thể đã được chọn từ danh sách, bao gồm thông tin liên hệ, lịch sử giao dịch, các ghi chú, thẻ tag, và các thông tin CRM khác. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-03 (Nhân viên lễ tân), US-06 (Kế toán), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Người dùng nhấp vào một khách hàng từ danh sách (UC-MD11-02) để xem hoặc chuẩn bị sửa đổi thông tin. \\
+\hline
+Pre-Condition & - Người dùng đang xem danh sách hồ sơ khách hàng (UC-MD11-02 thành công). \newline - Người dùng có quyền xem chi tiết hồ sơ khách hàng. \\
+\hline
+Post-Condition & - Form chi tiết (Contact Form View) của khách hàng được chọn được hiển thị. \newline - Người dùng nắm được mọi thông tin đã cấu hình và lịch sử liên quan đến khách hàng đó. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng đang xem danh sách hồ sơ khách hàng (UC-MD11-02). \newline 2. Người dùng nhấp vào tên hoặc một vùng có thể nhấp được của dòng khách hàng muốn xem chi tiết. \newline 3. Hệ thống truy xuất toàn bộ thông tin của hồ sơ khách hàng đó. \newline 4. Hệ thống hiển thị Form chi tiết khách hàng, thường được tổ chức thành nhiều tab hoặc phần thông tin: \newline    - \textbf{Thông tin liên hệ:} Tên, SĐT, Email, Địa chỉ, Công ty... \newline    - \textbf{Thông tin nội bộ/CRM:} Loại khách hàng, Thẻ tag, Nhân viên phụ trách, Ghi chú nội bộ... \newline    - \textbf{Lịch sử Giao dịch (Smart Buttons/Tabs):} Số lượt đặt chỗ, Tổng doanh thu, Đơn hàng gần nhất, Cơ hội (nếu dùng Sales), Hóa đơn... \newline    - (Tùy chọn) Thông tin sở thích, ngày kỷ niệm... \newline 5. Người dùng xem xét các thông tin chi tiết. \\
+\hline
+Alternative Flow & \textbf{5a. Nhấp vào các nút thông minh (Smart Buttons):} \newline    1. US-01/US-03/US-06/US-10 nhấp vào một nút thông minh (ví dụ: "X Đặt chỗ", "Y Hóa đơn") để xem danh sách các bản ghi liên quan. \\
+\hline
+Exception Flow & \textbf{3a. Lỗi tải chi tiết hồ sơ khách hàng.} \newline \textbf{3b. Khách hàng không tồn tại/không có quyền xem.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.3-1:} Form chi tiết phải hiển thị đầy đủ và chính xác thông tin. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.3-1 (Usability):} Thông tin trên form phải được tổ chức logic. \newline - \textbf{NFR-UC11.3-2 (Performance):} Thời gian tải form chi tiết phải nhanh. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-04: Sửa Thông tin Hồ sơ Khách hàng (CRM)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-04: Sửa Thông tin Hồ sơ Khách hàng (CRM)} \label{tab:uc_md11_04_edit_customer_crm} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Sửa Thông tin Hồ sơ Khách hàng (CRM) \\
+\hline
+Use Case ID & UC-MD11-04 \\
+\hline
+Use Case Description & Cho phép Người dùng được phân quyền (US-01, US-03, US-10) cập nhật các thông tin trong một hồ sơ khách hàng đã tồn tại, ví dụ: thay đổi SĐT, email, địa chỉ, thêm ghi chú, cập nhật sở thích, hoặc thay đổi phân loại. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-03 (Nhân viên lễ tân), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Thông tin liên hệ của khách hàng thay đổi. \newline - Cần bổ sung thông tin mới vào hồ sơ khách hàng (ví dụ: sở thích, ghi chú chăm sóc). \newline - Cần sửa lỗi nhập liệu trước đó. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập với quyền sửa hồ sơ khách hàng. \newline - Hồ sơ khách hàng cần sửa đã tồn tại và người dùng đang xem form chi tiết của khách hàng đó (UC-MD11-03). \\
+\hline
+Post-Condition & - Các thông tin của hồ sơ khách hàng được cập nhật thành công. \newline - Thay đổi sẽ được phản ánh trong các giao dịch và báo cáo liên quan. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng đang xem form chi tiết hồ sơ khách hàng (UC-MD11-03). \newline 2. Người dùng chọn hành động "Sửa" (Edit). \newline 3. Hệ thống cho phép chỉnh sửa các trường thông tin trên form. \newline 4. Người dùng thực hiện các thay đổi mong muốn (Tên, SĐT, Email, Địa chỉ, Ghi chú, Thẻ tag...). \newline 5. Người dùng chọn hành động "Lưu" (Save). \newline 6. Hệ thống kiểm tra tính hợp lệ của dữ liệu (ví dụ: SĐT/Email có thể cần duy nhất nếu thay đổi). \newline 7. Hệ thống lưu các thay đổi. \newline 8. Hệ thống chuyển form về chế độ xem với thông tin đã cập nhật. \\
+\hline
+Alternative Flow & Không có. \\
+\hline
+Exception Flow & \textbf{6a. Lỗi Xác thực Dữ liệu:} Hệ thống báo lỗi (ví dụ: SĐT/Email mới đã tồn tại). \newline \textbf{7a. Lỗi Hệ thống khi Cập nhật.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.4-1:} Thông tin SĐT/Email sau khi sửa (nếu thay đổi) nên được kiểm tra tính duy nhất. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.4-1 (Usability):} Form sửa dễ sử dụng. \newline - \textbf{NFR-UC11.4-2 (Performance):} Lưu thay đổi nhanh. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-05: Xóa/Lưu trữ Hồ sơ Khách hàng (CRM)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-05: Xóa/Lưu trữ Hồ sơ Khách hàng (CRM)} \label{tab:uc_md11_05_delete_archive_customer_crm} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Xóa/Lưu trữ Hồ sơ Khách hàng (CRM) \\
+\hline
+Use Case ID & UC-MD11-05 \\
+\hline
+Use Case Description & Cho phép Người dùng được phân quyền (US-01, US-10) xóa vĩnh viễn một hồ sơ khách hàng (nếu khách hàng đó chưa có bất kỳ giao dịch nào liên quan) hoặc lưu trữ (ẩn đi) hồ sơ khách hàng không còn tương tác hoặc không còn phù hợp, trong khi vẫn giữ lại dữ liệu lịch sử. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & - Cần dọn dẹp dữ liệu khách hàng không còn liên quan. \newline - Một hồ sơ khách hàng được tạo nhầm. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập với quyền xóa/lưu trữ hồ sơ khách hàng. \newline - Hồ sơ khách hàng cần xử lý đã tồn tại. \\
+\hline
+Post-Condition & - \textbf{Nếu Xóa thành công:} Bản ghi hồ sơ khách hàng bị xóa khỏi cơ sở dữ liệu. \newline - \textbf{Nếu Lưu trữ thành công:} Hồ sơ khách hàng được đánh dấu là "đã lưu trữ" (archived), không hiển thị trong danh sách mặc định nhưng dữ liệu vẫn còn. \newline - \textbf{Nếu không thể Xóa (do có giao dịch):} Hệ thống báo lỗi, người dùng có thể chọn Lưu trữ. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Lưu trữ) & 1. Người dùng đang xem chi tiết hồ sơ khách hàng (UC-MD11-03) hoặc đã chọn khách hàng từ danh sách (UC-MD11-02). \newline 2. Người dùng chọn hành động "Lưu trữ" (Archive) từ menu Hành động. \newline 3. Hệ thống (có thể) yêu cầu xác nhận. Người dùng xác nhận. \newline 4. Hệ thống cập nhật trạng thái `active = False` (hoặc tương đương) cho hồ sơ khách hàng. \newline 5. Hệ thống báo thành công. Hồ sơ biến mất khỏi danh sách mặc định. \\
+\hline
+Alternative Flow & \textbf{Basic Flow (Xóa - Nếu được phép và không có ràng buộc):} \newline    1. Người dùng chọn hành động "Xóa" (Delete). \newline    2. Hệ thống kiểm tra xem khách hàng có giao dịch nào liên quan không (BR-UC11.5-1). \newline    3. \textbf{Nếu không có giao dịch:} Hệ thống yêu cầu xác nhận xóa. Người dùng xác nhận. Hệ thống xóa bản ghi. \newline    4. \textbf{Nếu có giao dịch:} Hệ thống báo lỗi "Không thể xóa khách hàng này vì đã có giao dịch. Bạn có muốn Lưu trữ thay thế không?". Người dùng có thể chọn Lưu trữ (chuyển sang Basic Flow). \\
+\hline
+Exception Flow & \textbf{Lỗi hệ thống khi xóa/lưu trữ.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.5-1:} Không thể xóa vĩnh viễn hồ sơ khách hàng nếu đã có các bản ghi liên quan (đặt chỗ, hóa đơn...). Nên sử dụng Lưu trữ. \newline - \textbf{BR-UC11.5-2:} Lưu trữ giúp ẩn khách hàng nhưng vẫn giữ lại lịch sử. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.5-1 (Data Integrity):} Ràng buộc không cho xóa khi có liên kết là quan trọng. \newline - \textbf{NFR-UC11.5-2 (Usability):} Thông báo lỗi/hướng dẫn rõ ràng. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-06: Phân loại/Gắn thẻ Khách hàng}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-06: Phân loại/Gắn thẻ Khách hàng} \label{tab:uc_md11_06_categorize_tag_customer} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Phân loại/Gắn thẻ Khách hàng \\
+\hline
+Use Case ID & UC-MD11-06 \\
+\hline
+Use Case Description & Cho phép Người dùng được phân quyền (US-01, US-06, US-10) gán các thẻ (tags) hoặc phân loại (ví dụ: VIP, Thường xuyên, Khách công ty) cho một hoặc nhiều hồ sơ khách hàng. Việc này giúp nhóm khách hàng cho các mục đích marketing, chăm sóc đặc biệt, hoặc phân tích. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-06 (Kế toán), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & - Cần nhóm các khách hàng có đặc điểm chung. \newline - Chuẩn bị cho một chiến dịch marketing nhắm mục tiêu. \newline - Đánh dấu các khách hàng quan trọng. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập với quyền sửa hồ sơ khách hàng/gắn thẻ. \newline - Các thẻ/phân loại đã được tạo sẵn trong hệ thống (thường là một chức năng cấu hình riêng của CRM/Contacts). \newline - Hồ sơ khách hàng cần gắn thẻ đã tồn tại. \\
+\hline
+Post-Condition & - Hồ sơ khách hàng được chọn được liên kết với (các) thẻ/phân loại đã chọn. \newline - Thông tin này có thể được sử dụng để lọc, tìm kiếm, hoặc trong các quy trình tự động khác. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Gắn thẻ cho một khách hàng) & 1. Người dùng đang xem chi tiết hồ sơ khách hàng (UC-MD11-03), ở chế độ Sửa. \newline 2. Người dùng tìm đến trường "Thẻ" (Tags) hoặc "Phân loại" (Category). \newline 3. Người dùng nhấp vào trường đó. Hệ thống hiển thị danh sách các thẻ/phân loại có sẵn và/hoặc cho phép nhập tên thẻ mới. \newline 4. Người dùng chọn (tick) vào (các) thẻ muốn gán hoặc nhập tên thẻ mới rồi chọn tạo. \newline 5. Người dùng chọn "Lưu". \newline 6. Hệ thống lưu liên kết thẻ với khách hàng. \\
+\hline
+Alternative Flow & \textbf{1a. Gắn thẻ hàng loạt từ danh sách khách hàng:} \newline    1. Người dùng đang xem danh sách khách hàng (UC-MD11-02). \newline    2. Người dùng chọn (tick) một hoặc nhiều khách hàng. \newline    3. Người dùng chọn hành động "Gắn thẻ" / "Add Tags" từ menu chung. \newline    4. Hệ thống hiển thị popup chọn thẻ. Người dùng chọn thẻ. \newline    5. Hệ thống áp dụng thẻ cho tất cả khách hàng đã chọn. \\
+\hline
+Exception Flow & \textbf{6a. Lỗi hệ thống khi lưu thẻ.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.6-1:} Một khách hàng có thể được gán nhiều thẻ. \newline - \textbf{BR-UC11.6-2:} Danh sách thẻ/phân loại nên được quản lý tập trung. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.6-1 (Usability):} Việc chọn/gắn thẻ phải dễ dàng. \newline - \textbf{NFR-UC11.6-2 (Performance):} Gắn thẻ hàng loạt (nếu có) phải hiệu quả. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-07: Xem Lịch sử Tương tác/Đặt chỗ của Khách hàng}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-07: Xem Lịch sử Tương tác/Đặt chỗ của Khách hàng} \label{tab:uc_md11_07_view_customer_history} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Xem Lịch sử Tương tác/Đặt chỗ của Khách hàng \\
+\hline
+Use Case ID & UC-MD11-07 \\
+\hline
+Use Case Description & Cho phép Người dùng được phân quyền (US-01, US-06, US-10) truy cập và xem lại toàn bộ lịch sử các hoạt động và giao dịch liên quan đến một khách hàng cụ thể, bao gồm các lượt đặt chỗ đã thực hiện, các hóa đơn đã thanh toán, các phản hồi/đánh giá đã gửi (nếu có), và các ghi chú tương tác khác. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-06 (Kế toán), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Cần hiểu rõ hơn về một khách hàng trước khi tương tác hoặc đưa ra quyết định chăm sóc. \newline - Kiểm tra lại một giao dịch cũ của khách hàng. \newline - Phân tích hành vi và sở thích của khách hàng. \\
+\hline
+Pre-Condition & - Người dùng đang xem chi tiết hồ sơ của một khách hàng cụ thể (UC-MD11-03). \\
+\hline
+Post-Condition & - Người dùng thấy được danh sách hoặc các tab thông tin chi tiết về lịch sử hoạt động của khách hàng đó với nhà hàng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng đang xem form chi tiết hồ sơ khách hàng (UC-MD11-03). \newline 2. Trên form này, có các nút thông minh (smart buttons) hoặc các tab riêng biệt hiển thị số lượng các bản ghi liên quan, ví dụ: "X Đặt chỗ", "Y Hóa đơn", "Z Đánh giá". \newline 3. Người dùng nhấp vào một nút thông minh hoặc một tab (ví dụ: nhấp vào "X Đặt chỗ"). \newline 4. Hệ thống chuyển hướng người dùng đến danh sách tất cả các lượt đặt chỗ của khách hàng đó, được lọc sẵn. \newline 5. Tương tự, người dùng có thể nhấp vào các nút/tab khác để xem lịch sử Hóa đơn, Đánh giá, Ghi chú liên hệ, v.v. \\
+\hline
+Alternative Flow & \textbf{2a. Hiển thị lịch sử dạng dòng thời gian (timeline):} \newline    1. Một số hệ thống CRM có thể hiển thị lịch sử tương tác dưới dạng một dòng thời gian trực quan trong hồ sơ khách hàng. \\
+\hline
+Exception Flow & \textbf{4a. Lỗi tải danh sách lịch sử.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.7-1:} Lịch sử phải bao gồm tất cả các giao dịch và tương tác quan trọng. \newline - \textbf{BR-UC11.7-2:} Dữ liệu lịch sử phải được liên kết chính xác với đúng khách hàng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.7-1 (Usability):} Việc truy cập và xem lịch sử phải dễ dàng, thông tin trình bày rõ ràng. \newline - \textbf{NFR-UC11.7-2 (Performance):} Tải lịch sử (kể cả khi nhiều) phải nhanh. \\
+\hline
+\end{longtable}
+
+% === Quản lý Voucher/Khuyến mãi ===
+\subsubsection{Use Case UC-MD11-08: Tạo mới Chương trình Khuyến mãi/Voucher}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-08: Tạo mới Chương trình Khuyến mãi/Voucher} \label{tab:uc_md11_08_create_promo_voucher} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Tạo mới Chương trình Khuyến mãi/Voucher \\
+\hline
+Use Case ID & UC-MD11-08 \\
+\hline
+Use Case Description & Cho phép Người dùng được phân quyền (US-01: Quản lý, US-10: Quản trị viên) định nghĩa một chương trình khuyến mãi mới hoặc một lô mã voucher mới trong hệ thống. Bao gồm việc đặt tên, mô tả, và loại hình khuyến mãi (ví dụ: giảm giá theo phần trăm, giảm một số tiền cố định, mua X tặng Y, hoặc tạo các mã giảm giá riêng lẻ/hàng loạt). \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Nhà hàng muốn triển khai một chương trình khuyến mãi mới để thu hút khách hàng. \newline - Cần tạo các mã voucher để tặng khách hoặc sử dụng trong các chiến dịch marketing. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập vào hệ thống với quyền quản lý chương trình khuyến mãi/voucher (thường trong module Sales, Point of Sale, hoặc một module Marketing riêng). \\
+\hline
+Post-Condition & - Một bản ghi chương trình khuyến mãi mới hoặc một lô mã voucher mới được tạo và lưu trong hệ thống (có thể ở trạng thái "Nháp" hoặc "Chờ kích hoạt"). \newline - Chương trình/voucher này sẵn sàng để được cấu hình các điều kiện áp dụng chi tiết (UC-MD11-09). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Tạo chương trình khuyến mãi chung) & 1. Người dùng (US-01/US-10) truy cập module quản lý Khuyến mãi/Giá (ví dụ: Sales > Promotions hoặc POS > Promotions). \newline 2. Người dùng chọn hành động "Tạo mới" (Create) Chương trình Khuyến mãi. \newline 3. Hệ thống hiển thị form nhập thông tin. \newline 4. Người dùng nhập Tên Chương trình (Program Name) (ví dụ: "Giảm 20\% Thứ Ba Vui Vẻ"). \newline 5. Người dùng chọn Loại Khuyến mãi (Discount Type): \newline    - Giảm giá phần trăm (Percentage Discount). \newline    - Giảm giá số tiền cố định (Fixed Amount Discount). \newline    - Mua X Tặng Y (Buy X Get Y Free). \newline    - (Có thể có) Các loại khác như Miễn phí vận chuyển, Tặng điểm thưởng... \newline 6. Nếu là giảm giá, người dùng nhập Giá trị giảm (ví dụ: 20 cho 20\%, hoặc 50000 cho 50,000 VNĐ). \newline 7. (Tùy chọn) Người dùng nhập Mô tả chi tiết về chương trình. \newline 8. Người dùng chọn "Lưu". \newline 9. Hệ thống lưu chương trình khuyến mãi mới. \\
+\hline
+Alternative Flow & \textbf{Basic Flow (Tạo Voucher/Mã giảm giá):} \newline    1. Người dùng chọn loại "Chương trình Voucher" hoặc "Tạo Mã Giảm giá". \newline    2. Người dùng nhập thông tin chung cho lô voucher (Tên, Loại giảm giá, Giá trị). \newline    3. (Tùy chọn) Người dùng cấu hình cách tạo mã: \newline       a. Tạo một mã cụ thể (ví dụ: "WELCOME20"). \newline       b. Tạo hàng loạt mã ngẫu nhiên (ví dụ: nhập số lượng mã cần tạo, tiền tố/hậu tố nếu có). \newline    4. Hệ thống tạo ra các mã voucher tương ứng. \newline    5. Use Case tiếp tục từ bước 8 của Basic Flow. \\
+\hline
+Exception Flow & \textbf{8a. Lỗi lưu chương trình/voucher.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.8-1:} Tên chương trình/voucher phải rõ ràng. \newline - \textbf{BR-UC11.8-2:} Loại và giá trị khuyến mãi phải được định nghĩa chính xác. \newline - \textbf{BR-UC11.8-3:} Mã voucher (nếu tạo) phải đảm bảo tính duy nhất. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.8-1 (Usability):} Giao diện tạo khuyến mãi/voucher phải linh hoạt. \newline - \textbf{NFR-UC11.8-2 (Performance):} Tạo mã voucher hàng loạt (nếu có) phải hiệu quả. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-09: Thiết lập Điều kiện Áp dụng Khuyến mãi/Voucher}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-09: Thiết lập Điều kiện Áp dụng Khuyến mãi/Voucher} \label{tab:uc_md11_09_set_promo_conditions} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Thiết lập Điều kiện Áp dụng Khuyến mãi/Voucher \\
+\hline
+Use Case ID & UC-MD11-09 \\
+\hline
+Use Case Description & Sau khi một chương trình khuyến mãi hoặc lô voucher đã được tạo (UC-MD11-08), cho phép Người dùng được phân quyền (US-01, US-10) cấu hình các điều kiện và quy tắc chi tiết để chương trình/voucher đó có thể được áp dụng. Các điều kiện có thể bao gồm: khoảng thời gian hiệu lực, giá trị đơn hàng tối thiểu/tối đa, giới hạn số lần sử dụng, các sản phẩm hoặc danh mục sản phẩm cụ thể được áp dụng, hoặc đối tượng khách hàng cụ thể. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Một chương trình khuyến mãi/voucher vừa được tạo và cần được hoàn thiện các quy tắc. \newline - Cần thay đổi điều kiện áp dụng của một chương trình/voucher hiện có. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập với quyền quản lý khuyến mãi/voucher. \newline - Chương trình khuyến mãi hoặc lô voucher đã tồn tại trong hệ thống (đã tạo ở UC-MD11-08). \\
+\hline
+Post-Condition & - Các điều kiện và quy tắc áp dụng cho chương trình khuyến mãi/voucher được cập nhật và lưu lại. \newline - Hệ thống (POS, Đặt chỗ Online) sẽ sử dụng các điều kiện này để xác định xem một chương trình/voucher có hợp lệ để áp dụng cho một đơn hàng cụ thể hay không. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-10) truy cập vào danh sách các chương trình khuyến mãi/voucher. \newline 2. Người dùng chọn chương trình/voucher muốn cấu hình điều kiện và mở chi tiết (hoặc vào chế độ Sửa). \newline 3. Hệ thống hiển thị các trường/tab cho phép thiết lập điều kiện: \newline    - \textbf{Thời gian hiệu lực:} Ngày bắt đầu, Ngày kết thúc. \newline    - \textbf{Điều kiện Đơn hàng:} Giá trị đơn hàng tối thiểu, Giá trị đơn hàng tối đa. \newline    - \textbf{Giới hạn Sử dụng:} Tổng số lần sử dụng cho toàn chương trình, Số lần sử dụng cho mỗi khách hàng, Số lần sử dụng cho mỗi mã voucher (nếu là voucher). \newline    - \textbf{Sản phẩm Áp dụng:} Chọn tất cả sản phẩm, hoặc chỉ một số sản phẩm cụ thể, hoặc các sản phẩm thuộc một/nhiều Danh mục Sản phẩm POS. \newline    - \textbf{Khách hàng Áp dụng:} Cho tất cả khách hàng, hoặc chỉ một số khách hàng cụ thể, hoặc khách hàng thuộc một/nhiều Thẻ tag/Phân loại khách hàng. \newline    - (Tùy chọn) Các điều kiện khác như kênh bán hàng (POS, Online)... \newline 4. Người dùng nhập/chọn các giá trị cho các điều kiện mong muốn. \newline 5. Người dùng chọn "Lưu". \newline 6. Hệ thống lưu lại các điều kiện. \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể. \\
+\hline
+Exception Flow & \textbf{4a. Nhập điều kiện không hợp lệ/mâu thuẫn:} \newline    1. Ví dụ: Ngày kết thúc trước ngày bắt đầu. \newline    2. Hệ thống báo lỗi. \newline \textbf{6a. Lỗi hệ thống khi lưu điều kiện.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.9-1:} Các điều kiện phải được định nghĩa rõ ràng và không mâu thuẫn. \newline - \textbf{BR-UC11.9-2:} Hệ thống phải kiểm tra tất cả các điều kiện khi có yêu cầu áp dụng khuyến mãi/voucher (ở POS hoặc online). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.9-1 (Usability):} Giao diện thiết lập điều kiện phải linh hoạt nhưng dễ hiểu. \newline - \textbf{NFR-UC11.9-2 (Flexibility):} Hệ thống nên hỗ trợ nhiều loại điều kiện phổ biến. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-10: Quản lý Danh sách Mã Voucher}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-10: Quản lý Danh sách Mã Voucher} \label{tab:uc_md11_10_manage_voucher_codes} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Quản lý Danh sách Mã Voucher \\
+\hline
+Use Case ID & UC-MD11-10 \\
+\hline
+Use Case Description & Cho phép Người dùng được phân quyền (US-01, US-10) xem danh sách các mã voucher đã được tạo trong một chương trình voucher cụ thể, kiểm tra trạng thái của từng mã (ví dụ: còn hiệu lực, đã sử dụng, hết hạn), số lần đã sử dụng (nếu cho phép nhiều lần), và có thể thực hiện các hành động như xuất danh sách mã ra file, hoặc vô hiệu hóa thủ công một số mã voucher. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Should Have (Nếu sử dụng nhiều mã voucher riêng lẻ) \\
+\hline
+Trigger & - Cần kiểm tra tình trạng sử dụng của các mã voucher đã phát hành. \newline - Cần xuất danh sách mã voucher để gửi cho đối tác hoặc cho mục đích marketing. \newline - Cần vô hiệu hóa một số mã voucher vì lý do nào đó. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập với quyền quản lý voucher. \newline - Đã có ít nhất một chương trình voucher với các mã đã được tạo (từ UC-MD11-08). \\
+\hline
+Post-Condition & - Người dùng xem được danh sách và trạng thái các mã voucher. \newline - (Nếu thực hiện) Danh sách mã được xuất ra file hoặc một số mã được cập nhật trạng thái (ví dụ: vô hiệu hóa). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Xem danh sách mã voucher) & 1. Người dùng (US-01/US-10) truy cập vào chi tiết một Chương trình Voucher cụ thể. \newline 2. Trong giao diện của chương trình voucher, có một tab hoặc một nút "Danh sách Mã" (Coupon Codes / Vouchers). Người dùng chọn vào đó. \newline 3. Hệ thống hiển thị danh sách các mã voucher thuộc chương trình đó, với các cột thông tin: Mã Voucher, Trạng thái (Active, Used, Expired, Disabled), Ngày tạo, Ngày hết hạn (nếu có), Số lần đã sử dụng / Số lần cho phép. \newline 4. Người dùng xem xét danh sách. \\
+\hline
+Alternative Flow & \textbf{4a. Xuất danh sách mã voucher:} \newline    1. Giao diện danh sách có nút "Xuất Excel" / "Export CSV". \newline    2. Người dùng nhấp vào. Hệ thống tạo và cho tải về file chứa danh sách mã. \newline \textbf{4b. Vô hiệu hóa/Kích hoạt lại mã voucher:} \newline    1. Người dùng chọn một hoặc nhiều mã voucher. \newline    2. Người dùng chọn hành động "Vô hiệu hóa" (Disable) hoặc "Kích hoạt lại" (Enable) (nếu đã bị vô hiệu hóa). \newline    3. Hệ thống cập nhật trạng thái của các mã đã chọn. \\
+\hline
+Exception Flow & \textbf{3a. Lỗi tải danh sách mã.} \newline \textbf{Alternative Flow 4b - Step 3a. Lỗi cập nhật trạng thái mã.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.10-1:} Trạng thái của mã voucher phải được cập nhật tự động khi mã được sử dụng hoặc hết hạn. \newline - \textbf{BR-UC11.10-2:} Cần kiểm soát quyền được phép vô hiệu hóa/kích hoạt lại mã. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.10-1 (Usability):} Danh sách mã dễ quản lý, dễ lọc/tìm kiếm. \newline - \textbf{NFR-UC11.10-2 (Performance):} Hiển thị/xuất danh sách mã lớn phải hiệu quả. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-11: Áp dụng Khuyến mãi/Voucher vào Đơn hàng POS}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-11: Áp dụng Khuyến mãi/Voucher vào Đơn hàng POS} \label{tab:uc_md11_11_apply_promo_pos} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Áp dụng Khuyến mãi/Voucher vào Đơn hàng POS \\
+\hline
+Use Case ID & UC-MD11-11 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-02: Phục vụ, US-05: Thu ngân) tại điểm bán hàng (POS) áp dụng một chương trình khuyến mãi hợp lệ hoặc nhập một mã voucher hợp lệ vào đơn hàng hiện tại của khách, để hệ thống tự động tính toán lại tổng giá trị đơn hàng sau khi đã trừ đi khoản giảm giá. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khách hàng cung cấp mã voucher khi thanh toán. \newline - Nhân viên xác định đơn hàng của khách đủ điều kiện để áp dụng một chương trình khuyến mãi đang diễn ra. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS hoặc màn hình thanh toán. \newline - Đã có ít nhất một món trong đơn hàng. \newline - Các chương trình khuyến mãi/voucher và điều kiện áp dụng đã được cấu hình (UC-MD11-08, UC-MD11-09). \\
+\hline
+Post-Condition & - Khoản giảm giá từ chương trình khuyến mãi/voucher được áp dụng thành công vào đơn hàng. \newline - Tổng số tiền cần thanh toán của đơn hàng được cập nhật (giảm đi). \newline - Nếu là voucher, trạng thái của mã voucher đó được cập nhật (ví dụ: số lần sử dụng tăng lên, hoặc chuyển sang "Đã sử dụng" nếu chỉ dùng 1 lần). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Áp dụng Voucher) & 1. Nhân viên (US-02/US-05) đang ở màn hình đơn hàng hoặc thanh toán. \newline 2. Khách hàng cung cấp mã voucher. \newline 3. Nhân viên tìm và nhấp vào nút "Nhập Mã Voucher" / "Apply Coupon" trên giao diện. \newline 4. Hệ thống hiển thị ô để nhập mã voucher. Nhân viên nhập mã. \newline 5. Nhân viên nhấn "Áp dụng" / "Enter". \newline 6. Hệ thống (System) kiểm tra tính hợp lệ của mã voucher: \newline    - Mã có tồn tại không? \newline    - Mã còn hiệu lực không (chưa hết hạn, chưa bị vô hiệu hóa)? \newline    - Mã còn lượt sử dụng không? \newline    - Đơn hàng hiện tại có thỏa mãn các điều kiện áp dụng của voucher không (giá trị tối thiểu, sản phẩm áp dụng...)? \newline 7. \textbf{Nếu mã hợp lệ và đơn hàng đủ điều kiện:} \newline    a. Hệ thống tính toán số tiền được giảm dựa trên loại và giá trị của voucher. \newline    b. Hệ thống áp dụng khoản giảm giá vào đơn hàng (hiển thị một dòng giảm giá). \newline    c. Hệ thống cập nhật lại tổng tiền cần thanh toán. \newline    d. Hệ thống cập nhật trạng thái/số lần sử dụng của mã voucher. \newline    e. Hệ thống báo "Áp dụng voucher thành công." \newline 8. \textbf{Nếu mã không hợp lệ hoặc đơn hàng không đủ điều kiện:} \newline    a. Hệ thống báo lỗi cụ thể (ví dụ: "Mã voucher không hợp lệ", "Đơn hàng chưa đủ điều kiện", "Voucher đã hết lượt sử dụng"). \\
+\hline
+Alternative Flow & \textbf{Basic Flow (Áp dụng chương trình khuyến mãi tự động/chọn từ danh sách):} \newline    1. Hệ thống POS (có thể) tự động kiểm tra xem đơn hàng hiện tại có đủ điều kiện cho bất kỳ chương trình khuyến mãi nào đang hoạt động không. \newline    2. Nếu có, hệ thống có thể tự động áp dụng (nếu cấu hình) hoặc hiển thị danh sách các khuyến mãi khả dụng cho nhân viên chọn. \newline    3. Nhân viên chọn một chương trình khuyến mãi từ danh sách. \newline    4. Hệ thống thực hiện các bước 7a-7e. \newline \textbf{3a. Xóa bỏ khuyến mãi/voucher đã áp dụng:} \newline    1. Nếu nhân viên áp dụng nhầm hoặc khách đổi ý. \newline    2. Nhân viên chọn dòng giảm giá đã áp dụng và chọn "Xóa" / "Remove Discount". \newline    3. Hệ thống hoàn tác lại việc áp dụng, cập nhật lại tổng tiền và trạng thái voucher (nếu có). \\
+\hline
+Exception Flow & \textbf{6a. Lỗi hệ thống khi kiểm tra voucher/khuyến mãi.} \newline \textbf{7f. Lỗi hệ thống khi áp dụng giảm giá/cập nhật trạng thái voucher.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.11-1 (System):} Hệ thống phải kiểm tra nghiêm ngặt tất cả các điều kiện trước khi cho phép áp dụng. \newline - \textbf{BR-UC11.11-2 (System):} Một đơn hàng có thể được áp dụng nhiều loại khuyến mãi khác nhau hay không tùy thuộc vào cấu hình "Stackable promotions". \newline - \textbf{BR-UC11.11-3 (System):} Việc cập nhật trạng thái voucher sau khi sử dụng là bắt buộc. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.11-1 (Usability):} Thao tác áp dụng/nhập voucher phải nhanh và đơn giản. \newline - \textbf{NFR-UC11.11-2 (Performance):} Kiểm tra điều kiện và áp dụng phải nhanh. \newline - \textbf{NFR-UC11.11-3 (Accuracy):} Tính toán giảm giá phải chính xác. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-12: Khách hàng Sử dụng Voucher khi Đặt chỗ Online}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-12: Khách hàng Sử dụng Voucher khi Đặt chỗ Online} \label{tab:uc_md11_12_customer_uses_voucher_online} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Khách hàng Sử dụng Voucher khi Đặt chỗ Online \\
+\hline
+Use Case ID & UC-MD11-12 \\
+\hline
+Use Case Description & Cho phép Khách hàng (US-08) khi đang thực hiện quy trình đặt chỗ hoặc đặt món trước trực tuyến (qua website/app của nhà hàng), nhập một mã voucher hợp lệ để được hưởng ưu đãi/giảm giá trên tổng giá trị đơn đặt chỗ hoặc tiền đặt cọc. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Should Have (Nếu muốn tăng cường đặt chỗ online) \\
+\hline
+Trigger & Khách hàng có một mã voucher và muốn sử dụng nó để được giảm giá khi đặt chỗ/đặt món online. \\
+\hline
+Pre-Condition & - Khách hàng đang trong luồng đặt chỗ online (ví dụ: ở bước xem tóm tắt đơn hàng trước khi thanh toán cọc - UC-MD03-04). \newline - Giao diện đặt chỗ online có một trường để nhập mã voucher/khuyến mãi. \newline - Các mã voucher hợp lệ và điều kiện áp dụng đã được cấu hình trong hệ thống (UC-MD11-08, UC-MD11-09). \\
+\hline
+Post-Condition & - Nếu mã voucher hợp lệ và đơn đặt chỗ đủ điều kiện, khoản giảm giá được áp dụng. \newline - Tổng giá trị đơn đặt chỗ hoặc số tiền đặt cọc cần thanh toán được cập nhật (giảm đi). \newline - Trạng thái của mã voucher được cập nhật. \newline - Khách hàng có thể tiếp tục hoàn tất đặt chỗ với giá đã được giảm. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Khách hàng (US-08) đang ở trang tóm tắt đơn đặt chỗ/giỏ hàng online, trước bước thanh toán. \newline 2. Giao diện hiển thị một ô "Nhập mã giảm giá" / "Voucher Code". \newline 3. US-08 nhập mã voucher mình có vào ô đó. \newline 4. US-08 nhấn nút "Áp dụng" / "Apply". \newline 5. Hệ thống (System) thực hiện kiểm tra tính hợp lệ của mã voucher và đơn hàng (tương tự bước 6 của UC-MD11-11). \newline 6. \textbf{Nếu mã hợp lệ và đủ điều kiện:} \newline    a. Hệ thống tính toán và áp dụng khoản giảm giá vào tổng giá trị đơn đặt chỗ hoặc tiền đặt cọc. \newline    b. Giao diện cập nhật lại các số tiền, hiển thị rõ khoản giảm giá. \newline    c. Hệ thống cập nhật trạng thái/số lần sử dụng của mã voucher. \newline    d. Hệ thống báo "Áp dụng mã giảm giá thành công." \newline 7. \textbf{Nếu mã không hợp lệ hoặc không đủ điều kiện:} \newline    a. Hệ thống hiển thị thông báo lỗi cụ thể cho khách hàng. \\
+\hline
+Alternative Flow & \textbf{3a. Xóa mã voucher đã nhập:} \newline    1. Nếu khách hàng muốn xóa mã voucher đã áp dụng để dùng mã khác hoặc không dùng nữa. \newline    2. Giao diện có nút "Xóa mã" / "Remove voucher". Khách hàng nhấp vào. \newline    3. Hệ thống hoàn tác giảm giá, cập nhật lại số tiền và trạng thái voucher. \\
+\hline
+Exception Flow & \textbf{5a. Lỗi hệ thống khi kiểm tra/áp dụng voucher online.} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.12-1 (System):} Quy trình kiểm tra và áp dụng voucher online phải đồng bộ và nhất quán với quy trình áp dụng tại POS. \newline - \textbf{BR-UC11.12-2 (System):} Giảm giá từ voucher có thể ảnh hưởng đến số tiền đặt cọc cần thanh toán. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.12-1 (Usability):} Ô nhập voucher dễ thấy, thông báo rõ ràng. \newline - \textbf{NFR-UC11.12-2 (Performance):} Phản hồi khi áp dụng voucher phải nhanh. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD11-13: Xem Báo cáo Hiệu quả Khuyến mãi/Voucher}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-13: Xem Báo cáo Hiệu quả Khuyến mãi/Voucher} \label{tab:uc_md11_13_report_promo_effectiveness} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Xem Báo cáo Hiệu quả Khuyến mãi/Voucher \\
+\hline
+Use Case ID & UC-MD11-13 \\
+\hline
+Use Case Description & Cung cấp cho Quản lý nhà hàng (US-01) báo cáo thống kê chi tiết về tình hình sử dụng và hiệu quả của các chương trình khuyến mãi hoặc các lô mã voucher đã được triển khai. Báo cáo bao gồm số lần áp dụng, tổng giá trị giảm giá, và có thể cả doanh thu từ các đơn hàng có áp dụng khuyến mãi, trong một khoảng thời gian. (Đây là chức năng được mở rộng và chi tiết hóa từ UC-MD09-09, tập trung vào góc độ CRM/Marketing). \\
+\hline
+Actor & US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Cần đánh giá hiệu quả thực tế của một hoặc nhiều chương trình khuyến mãi/voucher. \newline - Cần so sánh hiệu quả giữa các chương trình khác nhau. \newline - Cần dữ liệu để lập kế hoạch cho các chiến dịch khuyến mãi trong tương lai. \\
+\hline
+Pre-Condition & - US-01 đã đăng nhập với quyền truy cập báo cáo Khuyến mãi/Marketing. \newline - Đã có dữ liệu về các đơn hàng đã áp dụng khuyến mãi/voucher. \\
+\hline
+Post-Condition & - Báo cáo thống kê chi tiết về hiệu quả của các chương trình khuyến mãi/voucher được hiển thị. \newline - US-01 có thông tin để đưa ra các quyết định kinh doanh và marketing. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-01 truy cập vào mục "Báo cáo" (Reporting) của module CRM/Marketing hoặc Sales. \newline 2. US-01 chọn loại báo cáo "Hiệu quả Khuyến mãi" / "Voucher Usage Report". \newline 3. US-01 chọn Khoảng thời gian muốn xem báo cáo. \newline 4. (Tùy chọn) US-01 có thể lọc theo một Chương trình Khuyến mãi cụ thể hoặc một Lô Voucher cụ thể. \newline 5. US-01 nhấn "Xem báo cáo". \newline 6. Hệ thống truy vấn và tổng hợp dữ liệu từ các đơn hàng đã áp dụng khuyến mãi/voucher trong khoảng thời gian và theo bộ lọc đã chọn. \newline 7. Hệ thống hiển thị báo cáo, có thể bao gồm các thông tin cho mỗi chương trình/lô voucher: \newline    - Tên Chương trình/Lô Voucher. \newline    - Số lần được áp dụng (Số đơn hàng/Số mã đã dùng). \newline    - Tổng giá trị đã giảm giá. \newline    - (Tùy chọn) Tổng doanh thu từ các đơn hàng có áp dụng. \newline    - (Tùy chọn) Tỷ lệ chuyển đổi (nếu có dữ liệu về số người thấy/nhận). \newline    - (Tùy chọn) Danh sách chi tiết các đơn hàng/mã voucher đã áp dụng. \newline 8. US-01 xem xét và phân tích báo cáo. \\
+\hline
+Alternative Flow & \textbf{7a. Xem biểu đồ so sánh hiệu quả:} Giao diện có thể cung cấp biểu đồ để so sánh các chỉ số giữa các chương trình khác nhau. \\
+\hline
+Exception Flow & Tương tự UC-MD09-03 (Lỗi truy vấn/tổng hợp, Không có dữ liệu). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.13-1:} Báo cáo phải phân tách rõ ràng dữ liệu của từng chương trình/lô voucher. \newline - \textbf{BR-UC11.13-2:} Các chỉ số tính toán (ví dụ: tổng giảm giá, doanh thu liên quan) phải chính xác. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.13-1 (Usability):} Báo cáo dễ hiểu, có khả năng drill-down xem chi tiết. \newline - \textbf{NFR-UC11.13-2 (Performance):} Tạo báo cáo nhanh. \\
+\hline
+\end{longtable}
+
+% === Thu thập & Quản lý Đánh giá/Phản hồi ===
+\subsubsection{Use Case UC-MD11-14: Khách hàng Gửi Đánh giá/Review sau Khi sử dụng Dịch vụ}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD11-14: Khách hàng Gửi Đánh giá/Review sau Khi sử dụng Dịch vụ} \label{tab:uc_md11_14_customer_submit_review} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Use Case Name & Khách hàng Gửi Đánh giá/Review sau Khi sử dụng Dịch vụ \\
+\hline
+Use Case ID & UC-MD11-14 \\
+\hline
+Use Case Description & Cho phép Khách hàng (US-08), sau khi đã trải nghiệm dịch vụ tại nhà hàng (ăn tại chỗ, mang về, hoặc nhận giao hàng), gửi các ý kiến đánh giá, nhận xét, hoặc xếp hạng (rating) về chất lượng món ăn, thái độ phục vụ, không gian nhà hàng, và các khía cạnh khác. Việc này có thể được thực hiện thông qua một liên kết trong email mời đánh giá tự động, một mã QR trên hóa đơn, hoặc một mục "Gửi phản hồi" trên website/app. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & - Khách hàng nhận được email mời gửi đánh giá sau khi hoàn tất một giao dịch. \newline - Khách hàng chủ động muốn chia sẻ ý kiến của mình về trải nghiệm tại nhà hàng. \\
+\hline
+Pre-Condition & - Khách hàng có kết nối internet để truy cập form đánh giá. \newline - Hệ thống có một form/giao diện trực tuyến cho phép khách hàng nhập và gửi đánh giá. \newline - (Nếu qua email mời) Hệ thống đã gửi email mời đánh giá có chứa liên kết duy nhất đến form (có thể liên kết với đơn hàng/đặt chỗ cụ thể). \\
+\hline
+Post-Condition & - Đánh giá của khách hàng (bao gồm xếp hạng sao, nhận xét bằng văn bản, và có thể cả các lựa chọn cho từng tiêu chí) được ghi nhận vào hệ thống. \newline - Đánh giá này được liên kết với hồ sơ khách hàng (nếu khách hàng đăng nhập hoặc email được định danh) và/hoặc với đơn hàng/đặt chỗ cụ thể (nếu gửi qua link mời). \newline - Đánh giá mới sẵn sàng để được Quản lý xem xét (UC-MD11-15). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Khách hàng (US-08) truy cập vào form đánh giá trực tuyến của nhà hàng (qua email, QR code, hoặc link trên website). \newline 2. Hệ thống hiển thị form đánh giá, có thể bao gồm các phần: \newline    - Xếp hạng tổng thể (ví dụ: 1-5 sao). \newline    - Xếp hạng cho các tiêu chí cụ thể (Món ăn, Phục vụ, Không gian, Giá cả...). \newline    - Ô văn bản để nhập nhận xét chi tiết. \newline    - (Tùy chọn) Thông tin đơn hàng/đặt chỗ liên quan (nếu gửi qua link mời). \newline    - (Tùy chọn) Yêu cầu nhập thông tin liên hệ (Tên, Email, SĐT) nếu đánh giá ẩn danh hoặc không qua link mời. \newline 3. US-08 thực hiện đánh giá: chọn số sao, nhập nhận xét. \newline 4. US-08 nhấn nút "Gửi Đánh giá" / "Submit Review". \newline 5. Hệ thống (System) kiểm tra tính hợp lệ cơ bản của dữ liệu (ví dụ: các trường bắt buộc như xếp hạng tổng thể phải được chọn). \newline 6. Hệ thống lưu bản ghi đánh giá mới vào cơ sở dữ liệu. \newline 7. Hệ thống hiển thị thông báo cảm ơn khách hàng đã gửi đánh giá. \\
+\hline
+Alternative Flow & \textbf{2a. Đăng nhập để gửi đánh giá:} \newline    1. Nếu khách hàng đã có tài khoản và đăng nhập, form có thể tự động điền một số thông tin hoặc liên kết đánh giá với tài khoản của họ. \newline \textbf{3a. Tải lên hình ảnh kèm theo đánh giá (nếu hỗ trợ):} \newline    1. Form cho phép khách hàng tải lên một hoặc nhiều hình ảnh liên quan đến trải nghiệm của họ. \\
+\hline
+Exception Flow & \textbf{5a. Lỗi xác thực dữ liệu trên form đánh giá:} \newline    1. Khách hàng bỏ trống trường bắt buộc. \newline    2. Hệ thống báo lỗi, yêu cầu hoàn thiện. \newline \textbf{6a. Lỗi hệ thống khi lưu đánh giá:} \newline    1. Hệ thống gặp lỗi kỹ thuật. \newline    2. Hệ thống báo lỗi chung. Đánh giá có thể không được lưu. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC11.14-1:} Form đánh giá nên được thiết kế để thu thập được cả thông tin định lượng (xếp hạng sao) và định tính (nhận xét văn bản). \newline - \textbf{BR-UC11.14-2:} Cần có cơ chế để liên kết đánh giá với một đơn hàng/đặt chỗ cụ thể (nếu có thể) để dễ dàng đối chiếu và xử lý. \newline - \textbf{BR-UC11.14-3:} Nhà hàng cần có chính sách về việc xử lý và phản hồi các đánh giá của khách hàng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC11.14-1 (Usability):} Form đánh giá phải đơn giản, dễ sử dụng, và không quá dài dòng để khuyến khích khách hàng hoàn thành. Tương thích tốt trên thiết bị di động. \newline - \textbf{NFR-UC11.14-2 (Accessibility):} Form đánh giá dễ dàng truy cập từ nhiều kênh (email, web, QR). \\
+\hline
+\end{longtable}
+
+% Phần tiếp theo sẽ là các Use Case còn lại của  Module MD-11 mà bạn đã yêu cầu.
+

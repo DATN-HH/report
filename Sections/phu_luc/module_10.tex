@@ -1,0 +1,932 @@
+\subsection{Module MD-10: Quản lý Hệ thống \& Người dùng}
+
+\subsubsection{Use Case UC-MD10-01: Tạo mới Tài khoản Người dùng (Nhân viên)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-01: Tạo mới Tài khoản Người dùng (Nhân viên)} \label{tab:uc_md10_01_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Tạo mới Tài khoản Người dùng (Nhân viên) \\
+\hline
+Use Case ID & UC-MD10-01 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) tạo một tài khoản đăng nhập mới trong hệ thống cho một nhân viên của nhà hàng, bao gồm việc nhập thông tin cơ bản và chuẩn bị cho việc gán các quyền truy cập ban đầu. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Có nhân viên mới gia nhập nhà hàng và cần được cấp tài khoản để truy cập và sử dụng hệ thống theo vai trò công việc. \\
+\hline
+Pre-Condition & - Người dùng US-10 đã đăng nhập vào hệ thống với quyền quản trị người dùng (thường là quyền "Administration / Settings" hoặc tương đương). \\
+\hline
+Post-Condition & - Một tài khoản người dùng mới cho nhân viên được tạo thành công trong cơ sở dữ liệu của hệ thống. \newline - Tài khoản này được liên kết với các thông tin cơ bản do US-10 nhập (Tên, Địa chỉ Email đăng nhập). \newline - Tài khoản người dùng mới này sẵn sàng để được US-10 gán các Nhóm Quyền truy cập cụ thể (thông qua UC-MD10-04) nhằm xác định phạm vi hoạt động của nhân viên đó trong hệ thống. \newline - Nhân viên có thể nhận được thông tin đăng nhập ban đầu (ví dụ: qua email mời được hệ thống tự động gửi hoặc do US-10 cung cấp trực tiếp) để bắt đầu sử dụng hệ thống. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10 truy cập vào mục "Cài đặt" (Settings) trên giao diện chính của hệ thống. \newline 2. US-10 điều hướng đến khu vực "Quản lý Người dùng \& Công ty" (Users \& Companies) và chọn mục "Người dùng" (Users). \newline 3. Hệ thống hiển thị danh sách các tài khoản người dùng hiện có trong hệ thống (tham chiếu UC-MD10-02). \newline 4. US-10 chọn hành động "Tạo mới" (Create) trên giao diện danh sách người dùng. \newline 5. Hệ thống hiển thị một form trống để US-10 nhập thông tin cho người dùng mới. \newline 6. US-10 nhập Tên đầy đủ của người dùng (ví dụ: "Nguyễn Văn B") vào trường "Tên" (Name) (Bắt buộc). \newline 7. US-10 nhập Địa chỉ Email sẽ được sử dụng làm tên đăng nhập (Login / Email Address) cho người dùng này (Bắt buộc, và địa chỉ email này phải là duy nhất trong toàn hệ thống - BR-UC10.1-1). \newline 8. (Tùy chọn) US-10 có thể chọn liên kết tài khoản người dùng này với một bản ghi "Nhân viên" (Employee record) đã tồn tại trong module Quản lý Nhân sự (HR) (nếu module này được sử dụng và hồ sơ nhân viên đã được tạo trước). \newline 9. (Tùy chọn) US-10 có thể cấu hình các tùy chọn khác trên form người dùng như Ngôn ngữ ưu tiên, Múi giờ, Ảnh đại diện, hoặc các thông tin liên hệ khác. \newline 10. (Quan trọng) US-10 sẽ cần thực hiện việc gán các Nhóm Quyền truy cập phù hợp cho người dùng này sau khi lưu hoặc trong cùng bước này nếu giao diện cho phép (hành động gán quyền chi tiết được mô tả ở UC-MD10-04). Ví dụ, nếu đây là nhân viên thu ngân, US-10 cần chuẩn bị để gán quyền "Point of Sale / User". \newline 11. (Tùy chọn) US-10 chọn phương thức thiết lập mật khẩu ban đầu cho người dùng mới: \newline     a. Chọn tùy chọn "Gửi email mời" (Send password reset instructions / Send invitation email): Hệ thống sẽ tự động gửi một email đến địa chỉ email đã nhập ở bước 7, chứa một liên kết cho phép người dùng tự đặt mật khẩu cho lần đăng nhập đầu tiên. \newline     b. Hoặc, US-10 có thể bỏ qua việc gửi email mời và sẽ đặt mật khẩu thủ công cho người dùng sau khi bản ghi người dùng được lưu (sử dụng chức năng "Đặt lại mật khẩu" - UC-MD10-07). \newline 12. US-10 chọn hành động "Lưu" (Save) trên form tạo người dùng. \newline 13. Hệ thống kiểm tra tính hợp lệ của các thông tin đã nhập, đặc biệt là tính duy nhất của Địa chỉ Email đăng nhập và việc các trường bắt buộc đã được điền. \newline 14. Nếu tất cả thông tin hợp lệ, hệ thống tạo một bản ghi người dùng mới trong cơ sở dữ liệu. Theo mặc định, tài khoản người dùng mới này thường ở trạng thái hoạt động (Active). \newline 15. Hệ thống hiển thị thông báo "Người dùng <Tên người dùng> đã được tạo thành công." và có thể chuyển sang giao diện chi tiết của người dùng vừa tạo hoặc quay lại danh sách người dùng. \\
+\hline
+Alternative Flow & \textbf{11c. Không thực hiện hành động thiết lập mật khẩu ngay:} \newline    1. US-10 có thể chọn lưu người dùng mà không gửi email mời hoặc đặt mật khẩu ngay. Trong trường hợp này, tài khoản được tạo nhưng người dùng chưa thể đăng nhập cho đến khi mật khẩu được US-10 thiết lập sau đó (UC-MD10-07). \\
+\hline
+Exception Flow & \textbf{13a. Lỗi xác thực dữ liệu khi lưu:} \newline    1. Hệ thống phát hiện Địa chỉ Email đăng nhập mà US-10 nhập đã được sử dụng bởi một tài khoản người dùng khác trong hệ thống, hoặc một trường bắt buộc (như Tên người dùng) bị bỏ trống. \newline    2. Hệ thống hiển thị một thông báo lỗi cụ thể cho US-10, chỉ rõ trường thông tin không hợp lệ (ví dụ: "Địa chỉ email này đã được sử dụng. Vui lòng chọn một địa chỉ email khác." hoặc "Trường Tên không được để trống."). \newline    3. Hệ thống không cho phép lưu bản ghi người dùng. US-10 cần phải sửa lại các thông tin không hợp lệ. Use Case quay lại bước 6 hoặc 7. \newline \textbf{14a. Lỗi hệ thống trong quá trình tạo người dùng:} \newline    1. Hệ thống gặp phải một lỗi kỹ thuật không mong muốn (ví dụ: lỗi kết nối đến cơ sở dữ liệu, lỗi logic nội bộ) khi cố gắng thực hiện hành động lưu bản ghi người dùng mới. \newline    2. Hệ thống hiển thị một thông báo lỗi chung cho US-10 (ví dụ: "Không thể tạo người dùng. Đã xảy ra lỗi hệ thống. Vui lòng thử lại sau."). \newline    3. Tài khoản người dùng có thể chưa được tạo thành công hoặc được tạo không đầy đủ. US-10 có thể cần thử lại hoặc liên hệ bộ phận hỗ trợ kỹ thuật. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.1-1:} Địa chỉ Email được sử dụng để đăng nhập của mỗi người dùng phải là duy nhất trên toàn bộ hệ thống để đảm bảo tính định danh. \newline - \textbf{BR-UC10.1-2:} Khi tạo người dùng mới, việc gán các Nhóm Quyền truy cập phù hợp (thông qua UC-MD10-04) là bước cực kỳ quan trọng để đảm bảo người dùng chỉ có thể truy cập những chức năng và dữ liệu mà họ được phép theo vai trò công việc của mình. \newline - \textbf{BR-UC10.1-3:} Mật khẩu ban đầu cho người dùng mới (nếu được Quản trị viên đặt trực tiếp) nên tuân thủ các chính sách bảo mật của nhà hàng (ví dụ: độ dài tối thiểu, yêu cầu ký tự đặc biệt) và người dùng nên được khuyến khích hoặc bắt buộc thay đổi mật khẩu này ngay sau lần đăng nhập đầu tiên. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.1-1 (Usability):} Giao diện (form) tạo người dùng mới phải được thiết kế rõ ràng, các trường thông tin bắt buộc phải dễ nhận biết. Các tùy chọn liên quan đến thiết lập mật khẩu và gán quyền ban đầu cần trực quan. \newline - \textbf{NFR-UC10.1-2 (Security):} Quy trình tạo tài khoản người dùng và thiết lập mật khẩu ban đầu phải được thực hiện một cách an toàn, đảm bảo thông tin đăng nhập không bị lộ. \newline - \textbf{NFR-UC10.1-3 (Performance):} Thời gian hệ thống cần để tạo và lưu một bản ghi người dùng mới phải nhanh chóng, không gây chờ đợi lâu cho Quản trị viên. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-02: Xem Danh sách Người dùng}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-02: Xem Danh sách Người dùng} \label{tab:uc_md10_02_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Xem Danh sách Người dùng \\
+\hline
+Use Case ID & UC-MD10-02 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) xem danh sách tất cả các tài khoản người dùng (bao gồm cả nhân viên và có thể cả các loại người dùng khác nếu có) đã được tạo trong hệ thống, với các thông tin tóm tắt của mỗi tài khoản. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Quản trị viên cần kiểm tra danh sách các người dùng hiện có trong hệ thống, tìm kiếm một người dùng cụ thể, hoặc chuẩn bị cho các thao tác quản lý khác như sửa đổi thông tin, phân quyền, hoặc vô hiệu hóa tài khoản. \\
+\hline
+Pre-Condition & - US-10 đã đăng nhập vào hệ thống với quyền quản trị người dùng. \\
+\hline
+Post-Condition & - Danh sách các tài khoản người dùng (theo bộ lọc mặc định, thường là các tài khoản đang hoạt động) được hiển thị trên giao diện cho US-10. \newline - US-10 có thể xem các thông tin cơ bản của từng người dùng trong danh sách và có thể chọn một người dùng cụ thể để xem chi tiết hoặc thực hiện các hành động quản lý khác. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10 truy cập vào mục "Cài đặt" (Settings) trên giao diện chính. \newline 2. US-10 điều hướng đến khu vực "Quản lý Người dùng \& Công ty" (Users \& Companies) và chọn mục "Người dùng" (Users). \newline 3. Hệ thống truy vấn cơ sở dữ liệu và hiển thị danh sách các tài khoản người dùng hiện có. Theo mặc định, danh sách này thường chỉ bao gồm các người dùng đang ở trạng thái hoạt động (Active=True). \newline 4. Với mỗi người dùng trong danh sách (thường được hiển thị ở dạng List View hoặc Kanban View), hệ thống hiển thị các thông tin tóm tắt cơ bản như: \newline    - Tên người dùng (Name). \newline    - Địa chỉ Email đăng nhập (Login / Email Address). \newline    - (Tùy chọn) Ảnh đại diện (Avatar/Image) nếu có. \newline    - (Tùy chọn) Tên Công ty mà người dùng thuộc về (nếu hệ thống được cấu hình để quản lý đa công ty). \newline    - (Tùy chọn) Thời gian đăng nhập lần cuối (Last Login). \newline 5. US-10 xem xét danh sách các người dùng. \\
+\hline
+Alternative Flow & \textbf{3a. Tìm kiếm người dùng trong danh sách:} \newline    1. Giao diện danh sách người dùng cung cấp một ô tìm kiếm. \newline    2. US-10 nhập tên, địa chỉ email, hoặc một phần thông tin của người dùng cần tìm vào ô tìm kiếm. \newline    3. US-10 nhấn Enter hoặc hệ thống tự động lọc khi nhập. \newline    4. Hệ thống hiển thị danh sách các người dùng khớp với từ khóa tìm kiếm. \newline \textbf{3b. Lọc danh sách người dùng theo các tiêu chí:} \newline    1. Giao diện danh sách người dùng cung cấp các bộ lọc (Filters) có sẵn hoặc tùy chỉnh. \newline    2. US-10 có thể chọn các bộ lọc như: \newline       - Lọc theo Trạng thái tài khoản (ví dụ: "Hoạt động" - Active, "Đã lưu trữ/Vô hiệu hóa" - Archived). \newline       - Lọc theo một hoặc nhiều Nhóm Quyền truy cập (ví dụ: hiển thị tất cả người dùng thuộc nhóm "Point of Sale / User"). \newline       - (Nếu có) Lọc theo Công ty (trong môi trường đa công ty). \newline    3. Hệ thống áp dụng các bộ lọc đã chọn và hiển thị lại danh sách kết quả. \newline \textbf{3c. Sắp xếp danh sách người dùng:} \newline    1. US-10 nhấp vào tiêu đề của các cột trong danh sách (ví dụ: cột "Tên người dùng", cột "Email") để sắp xếp danh sách theo thứ tự tăng dần hoặc giảm dần theo nội dung của cột đó. \\
+\hline
+Exception Flow & \textbf{3d. Lỗi hệ thống khi tải danh sách người dùng:} \newline    1. Hệ thống gặp lỗi kỹ thuật (ví dụ: lỗi truy vấn cơ sở dữ liệu, lỗi kết nối máy chủ) khi cố gắng tải danh sách người dùng. \newline    2. Hệ thống hiển thị một thông báo lỗi chung cho US-10. \newline    3. US-10 không thể xem được danh sách người dùng. Use Case kết thúc không thành công. \newline \textbf{3e. Không có người dùng nào (ngoại trừ tài khoản admin ban đầu):} \newline    1. Nếu hệ thống vừa được cài đặt và chưa có bất kỳ tài khoản người dùng nào khác được tạo (ngoài tài khoản quản trị viên mặc định). \newline    2. Hệ thống hiển thị danh sách chỉ chứa một hoặc một vài tài khoản quản trị viên mặc định, hoặc có thể hiển thị thông báo "Chưa có người dùng nào khác được tạo." \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.2-1 (V2):} Theo mặc định, giao diện danh sách người dùng nên chỉ hiển thị các tài khoản đang ở trạng thái hoạt động (Active=True). Quản trị viên phải có khả năng dễ dàng sử dụng bộ lọc để xem cả các tài khoản đã bị vô hiệu hóa (Archived/Active=False). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.2-1 (V2 - Usability):} Giao diện hiển thị danh sách người dùng phải rõ ràng, dễ đọc và dễ dàng điều hướng. Các chức năng tìm kiếm, lọc, và sắp xếp phải hoạt động hiệu quả và trực quan. \newline - \textbf{NFR-UC10.2-2 (V2 - Performance):} Thời gian hệ thống cần để tải và hiển thị danh sách người dùng (ngay cả khi có số lượng lớn tài khoản trong hệ thống) phải nhanh chóng, không gây chờ đợi cho Quản trị viên. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-03: Sửa Thông tin Tài khoản Người dùng}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-03: Sửa Thông tin Tài khoản Người dùng} \label{tab:uc_md10_03_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Sửa Thông tin Tài khoản Người dùng \\
+\hline
+Use Case ID & UC-MD10-03 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) cập nhật các thông tin liên quan đến một tài khoản người dùng đã tồn tại trong hệ thống, ví dụ như thay đổi tên hiển thị, địa chỉ email đăng nhập (nếu được phép và đảm bảo tính duy nhất), ảnh đại diện, ngôn ngữ ưu tiên, múi giờ, hoặc các thông tin liên hệ khác. (Việc thay đổi nhóm quyền được xử lý riêng ở UC-MD10-04). \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Thông tin cá nhân hoặc thông tin liên hệ của một nhân viên thay đổi (ví dụ: nhân viên đổi họ sau khi kết hôn, cập nhật địa chỉ email hoặc số điện thoại mới). \newline - Cần sửa lại các lỗi nhập liệu đã xảy ra khi tạo tài khoản người dùng ban đầu. \newline - Cần cập nhật ảnh đại diện mới cho người dùng hoặc thay đổi các cài đặt ưu tiên cá nhân của họ. \\
+\hline
+Pre-Condition & - US-10 đã đăng nhập vào hệ thống với quyền quản trị người dùng. \newline - Tài khoản Người dùng cần được sửa thông tin đã tồn tại trong hệ thống (đã được tạo qua UC-MD10-01). \\
+\hline
+Post-Condition & - Các thông tin của tài khoản Người dùng được chọn đã được cập nhật thành công và lưu lại trong cơ sở dữ liệu của hệ thống. \newline - Nếu thông tin Địa chỉ Email đăng nhập bị thay đổi, người dùng đó sẽ cần phải sử dụng địa chỉ email mới cho các lần đăng nhập tiếp theo. \newline - Các thay đổi về Ngôn ngữ hoặc Múi giờ sẽ ảnh hưởng đến trải nghiệm hiển thị của người dùng đó khi họ sử dụng hệ thống. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10 truy cập vào danh sách Người dùng hiện có trong hệ thống (UC-MD10-02). \newline 2. US-10 tìm kiếm (nếu cần) và chọn (nhấp vào) tài khoản Người dùng cụ thể mà mình muốn sửa thông tin. \newline 3. Hệ thống hiển thị form chi tiết thông tin của Người dùng đã chọn (thường ở chế độ chỉ xem - read-only). \newline 4. US-10 chọn hành động "Sửa" (Edit) trên form chi tiết Người dùng. \newline 5. Hệ thống chuyển form sang chế độ cho phép chỉnh sửa, các trường thông tin trở nên có thể thay đổi được. US-10 có thể chỉnh sửa các thông tin như: \newline    - Tên người dùng (Name). \newline    - Địa chỉ Email đăng nhập (Login / Email Address) (Lưu ý Business Rule BR-UC10.1-1 về tính duy nhất). \newline    - Ảnh đại diện (Avatar/Image) - có thể tải lên ảnh mới. \newline    - Ngôn ngữ ưu tiên (Language) cho giao diện của người dùng đó. \newline    - Múi giờ (Timezone) của người dùng đó. \newline    - (Nếu có liên kết) Thông tin liên quan đến Hồ sơ Nhân viên (Employee record) trong module HR. \newline    - Các thông tin liên hệ khác như Số điện thoại, Địa chỉ công tác (nếu có). \newline 6. US-10 thực hiện các thay đổi mong muốn trên các trường thông tin. \newline 7. Sau khi hoàn tất việc chỉnh sửa, US-10 chọn hành động "Lưu" (Save) trên form. \newline 8. Hệ thống kiểm tra tính hợp lệ của các dữ liệu đã được thay đổi (ví dụ: nếu Địa chỉ Email đăng nhập được thay đổi, hệ thống phải kiểm tra xem email mới này đã tồn tại trong hệ thống hay chưa). \newline 9. Nếu tất cả các thay đổi là hợp lệ, hệ thống cập nhật thông tin mới cho bản ghi người dùng trong cơ sở dữ liệu. \newline 10. Hệ thống chuyển form trở lại chế độ chỉ xem, hiển thị các thông tin đã được cập nhật, và có thể kèm theo một thông báo "Thông tin người dùng đã được cập nhật thành công." \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể cho hành động sửa thông tin cơ bản này. Việc sửa đổi các Nhóm Quyền được thực hiện trong UC-MD10-04. \\
+\hline
+Exception Flow & \textbf{8a. Lỗi Xác thực Dữ liệu khi Lưu:} \newline    1. Hệ thống phát hiện rằng Địa chỉ Email đăng nhập mới (nếu US-10 đã thay đổi) đã được sử dụng bởi một tài khoản người dùng khác trong hệ thống, hoặc một trường thông tin bắt buộc (như Tên người dùng) bị xóa trắng. \newline    2. Hệ thống hiển thị một thông báo lỗi cụ thể, chỉ rõ trường thông tin gây ra lỗi. \newline    3. Hệ thống không cho phép lưu các thay đổi. US-10 cần phải sửa lại các thông tin không hợp lệ đó. Use Case quay lại bước 6. \newline \textbf{9a. Lỗi Hệ thống trong quá trình Cập nhật:} \newline    1. Hệ thống gặp phải một lỗi kỹ thuật không mong muốn (ví dụ: lỗi kết nối cơ sở dữ liệu) khi cố gắng thực hiện hành động lưu các thay đổi vào bản ghi người dùng. \newline    2. Hệ thống hiển thị một thông báo lỗi chung. \newline    3. Các thay đổi thông tin người dùng có thể chưa được lưu thành công. US-10 có thể cần thử lại thao tác. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.3-1 (V2):} Nếu Quản trị viên thay đổi Địa chỉ Email đăng nhập của một người dùng, địa chỉ email mới đó vẫn phải đảm bảo tính duy nhất trên toàn bộ hệ thống (không trùng với email đăng nhập của bất kỳ người dùng nào khác). \newline - \textbf{BR-UC10.3-2 (V2):} Việc thay đổi các thông tin cá nhân như Ngôn ngữ ưu tiên hoặc Múi giờ sẽ trực tiếp ảnh hưởng đến cách giao diện hệ thống được hiển thị cho người dùng đó trong các lần đăng nhập tiếp theo của họ. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.3-1 (V2 - Usability):} Form sửa thông tin người dùng phải cho phép Quản trị viên dễ dàng tìm thấy và cập nhật các trường thông tin cần thiết. Việc tải lên hoặc thay đổi ảnh đại diện cần đơn giản. \newline - \textbf{NFR-UC10.3-2 (V2 - Performance):} Thời gian hệ thống cần để lưu các thay đổi thông tin người dùng phải nhanh chóng, không gây chờ đợi. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-04: Gán/Gỡ bỏ Nhóm Quyền cho Người dùng}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-04: Gán/Gỡ bỏ Nhóm Quyền cho Người dùng} \label{tab:uc_md10_04_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Gán/Gỡ bỏ Nhóm Quyền cho Người dùng \\
+\hline
+Use Case ID & UC-MD10-04 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) thay đổi các Nhóm Quyền truy cập (Access Groups) mà một người dùng (nhân viên) cụ thể thuộc về. Hành động này trực tiếp xác định những ứng dụng, menu, chức năng và dữ liệu mà người dùng đó có thể truy cập và thao tác trong toàn bộ hệ thống. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khi một người dùng mới được tạo (UC-MD10-01), cần phải gán các quyền truy cập ban đầu. \newline - Khi vai trò công việc hoặc trách nhiệm của một nhân viên thay đổi, cần phải cập nhật lại các nhóm quyền của họ cho phù hợp. \newline - Khi cần cấp thêm quyền truy cập vào một ứng dụng hoặc chức năng mới cho một nhân viên. \newline - Khi cần thu hồi bớt quyền truy cập của một nhân viên vì lý do bảo mật hoặc thay đổi nhiệm vụ. \\
+\hline
+Pre-Condition & - US-10 đã đăng nhập vào hệ thống với quyền quản trị người dùng. \newline - Tài khoản Người dùng cần được phân quyền đã tồn tại trong hệ thống. \newline - Các Nhóm Quyền truy cập phù hợp với các vai trò công việc trong nhà hàng đã tồn tại trong hệ thống (do hệ thống cung cấp sẵn hoặc đã được tùy chỉnh - UC-MD10-08). \\
+\hline
+Post-Condition & - Danh sách các Nhóm Quyền mà Người dùng được chọn thuộc về được cập nhật trong cơ sở dữ liệu. \newline - Quyền truy cập thực tế của Người dùng đó sẽ thay đổi theo các nhóm quyền mới được gán hoặc gỡ bỏ (thường có hiệu lực ngay lập tức, nhưng đôi khi người dùng có thể cần đăng xuất và đăng nhập lại để thấy đầy đủ các thay đổi về giao diện menu). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10 truy cập form chi tiết của Người dùng cần phân quyền (thông qua UC-MD10-02 rồi chọn một người dùng). \newline 2. US-10 chọn hành động "Sửa" (Edit) trên form Người dùng. \newline 3. US-10 tìm đến phần "Quyền Truy cập" (Access Rights) trên form. Phần này thường được tổ chức theo từng Ứng dụng (Application) chính của hệ thống. \newline 4. Đối với mỗi Ứng dụng, US-10 xem xét các tùy chọn Nhóm Quyền có sẵn (thường là dạng checkbox hoặc danh sách thả xuống như "User", "Manager", "Administrator" cho ứng dụng đó). \newline 5. US-10 đánh dấu (tick) vào các ô checkbox của những Nhóm Quyền mà mình muốn gán cho Người dùng này cho từng ứng dụng, hoặc bỏ dấu tick khỏi những Nhóm Quyền muốn gỡ bỏ. \newline 6. US-10 chọn hành động "Lưu" (Save) trên form Người dùng. \newline 7. Hệ thống lưu lại các thay đổi về việc gán/gỡ bỏ Nhóm Quyền cho Người dùng này. \newline 8. Hệ thống hiển thị thông báo "Thông tin người dùng đã được cập nhật thành công." \\
+\hline
+Alternative Flow & \textbf{1a. Phân quyền bằng cách thêm Người dùng vào một Nhóm Quyền cụ thể:} \newline    1. US-10 truy cập vào danh sách các Nhóm Quyền (UC-MD10-08). \newline    2. US-10 chọn một Nhóm Quyền cụ thể. \newline    3. Hệ thống hiển thị form chi tiết của Nhóm Quyền. US-10 chọn tab "Người dùng" (Users). \newline    4. US-10 chọn "Sửa", sau đó "Thêm một dòng". \newline    5. US-10 tìm và chọn (các) Người dùng muốn thêm vào Nhóm Quyền này. \newline    6. US-10 chọn "Lưu" trên form Nhóm Quyền. \\
+\hline
+Exception Flow & \textbf{7a. Lỗi hệ thống khi lưu thay đổi phân quyền:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng lưu các thay đổi. \newline    2. Hệ thống hiển thị thông báo lỗi chung. Thay đổi có thể không được lưu. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.4-1 (V2):} Quản trị viên phải tuân theo nguyên tắc phân quyền tối thiểu. \newline - \textbf{BR-UC10.4-2 (V2):} Quản trị viên cần hiểu rõ ý nghĩa của từng Nhóm Quyền. \newline - \textbf{BR-UC10.4-3 (V2):} Quyền hạn mới thường có hiệu lực sau khi người dùng đăng xuất và đăng nhập lại. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.4-1 (V2 - Usability):} Giao diện gán quyền phải trực quan. \newline - \textbf{NFR-UC10.4-2 (V2 - Security):} Phân quyền chính xác là yếu tố then chốt. \newline - \textbf{NFR-UC10.4-3 (V2 - Maintainability):} Phân quyền theo nhóm giúp dễ quản lý. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-05: Vô hiệu hóa Tài khoản Người dùng}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-05: Vô hiệu hóa Tài khoản Người dùng} \label{tab:uc_md10_05_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Vô hiệu hóa Tài khoản Người dùng \\
+\hline
+Use Case ID & UC-MD10-05 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) tạm thời hoặc vĩnh viễn khóa khả năng đăng nhập vào hệ thống của một tài khoản người dùng (nhân viên). \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Một nhân viên nghỉ việc. \newline - Một nhân viên tạm nghỉ dài hạn. \newline - Phát hiện hành vi đáng ngờ từ một tài khoản. \\
+\hline
+Pre-Condition & - US-10 đã đăng nhập với quyền quản trị người dùng. \newline - Tài khoản Người dùng cần vô hiệu hóa đang ở trạng thái hoạt động (Active=True). \\
+\hline
+Post-Condition & - Trạng thái của tài khoản Người dùng được cập nhật thành "Không hoạt động" (Active=False) / "Đã lưu trữ" (Archived). \newline - Người dùng đó không thể đăng nhập vào hệ thống nữa. \newline - Dữ liệu lịch sử của người dùng vẫn được giữ lại. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Từ Form chi tiết Người dùng) & 1. US-10 truy cập danh sách Người dùng (UC-MD10-02). \newline 2. US-10 tìm và chọn người dùng muốn vô hiệu hóa. \newline 3. Hệ thống hiển thị form chi tiết người dùng. \newline 4. US-10 tìm menu "Hành động" (Action). \newline 5. US-10 chọn "Lưu trữ" (Archive). \newline 6. Hệ thống (có thể) yêu cầu xác nhận. US-10 xác nhận. \newline 7. Hệ thống cập nhật trạng thái `active` của người dùng thành `False`. \newline 8. Hệ thống báo "Người dùng đã được lưu trữ thành công." \newline 9. Người dùng đó không còn xuất hiện trong danh sách người dùng hoạt động mặc định. \\
+\hline
+Alternative Flow & \textbf{Basic Flow (Từ Danh sách Người dùng - List View):} \newline    1. US-10 đang xem danh sách Người dùng. \newline    2. US-10 chọn (tick) một hoặc nhiều người dùng muốn vô hiệu hóa. \newline    3. US-10 chọn menu "Hành động" chung của danh sách. \newline    4. US-10 chọn "Lưu trữ". \newline    5. Hệ thống (có thể) yêu cầu xác nhận. US-10 xác nhận. \newline    6. Hệ thống cập nhật `active = False` cho các người dùng đã chọn. \newline    7. Hệ thống làm mới danh sách. \newline    8. Hệ thống báo thành công. \\
+\hline
+Exception Flow & \textbf{7a. Lỗi hệ thống khi cập nhật trạng thái:} \newline    1. Hệ thống gặp lỗi khi cập nhật trường `active`. \newline    2. Hệ thống báo lỗi chung. Trạng thái có thể không thay đổi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.5-1 (V2):} Vô hiệu hóa (Archive) là phương pháp được khuyến nghị khi nhân viên nghỉ việc, thay vì xóa hẳn, để bảo toàn lịch sử dữ liệu. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.5-1 (V2 - Usability):} Hành động Vô hiệu hóa phải dễ dàng thực hiện. \newline - \textbf{NFR-UC10.5-2 (V2 - Security):} Đảm bảo người dùng bị vô hiệu hóa không thể đăng nhập được nữa. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-06: Kích hoạt lại Tài khoản Người dùng đã Vô hiệu hóa}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-06: Kích hoạt lại Tài khoản Người dùng đã Vô hiệu hóa} \label{tab:uc_md10_06_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Kích hoạt lại Tài khoản Người dùng đã Vô hiệu hóa \\
+\hline
+Use Case ID & UC-MD10-06 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) mở lại khả năng đăng nhập cho một tài khoản người dùng (nhân viên) đã bị vô hiệu hóa (lưu trữ) trước đó. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & - Một nhân viên quay trở lại làm việc sau thời gian tạm nghỉ. \newline - Một tài khoản bị vô hiệu hóa nhầm cần được kích hoạt lại. \\
+\hline
+Pre-Condition & - US-10 đã đăng nhập với quyền quản trị người dùng. \newline - Tài khoản Người dùng cần kích hoạt lại đang ở trạng thái "Không hoạt động" (Active=False) / "Đã lưu trữ" (Archived). \\
+\hline
+Post-Condition & - Trạng thái của tài khoản Người dùng được cập nhật thành "Hoạt động" (Active=True). \newline - Người dùng đó có thể đăng nhập lại vào hệ thống bằng thông tin đăng nhập cũ (trừ khi mật khẩu cũng cần đặt lại). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Từ Form chi tiết Người dùng) & 1. US-10 truy cập danh sách Người dùng (UC-MD10-02) và sử dụng bộ lọc để hiển thị các người dùng đã bị lưu trữ (ví dụ: bỏ bộ lọc "Active=True" hoặc thêm bộ lọc "Archived=True"). \newline 2. US-10 tìm và chọn người dùng muốn kích hoạt lại. \newline 3. Hệ thống hiển thị form chi tiết người dùng. \newline 4. US-10 tìm menu "Hành động" (Action). \newline 5. US-10 chọn tùy chọn "Hủy lưu trữ" (Unarchive). \newline 6. Hệ thống (có thể) yêu cầu xác nhận. US-10 xác nhận. \newline 7. Hệ thống cập nhật trạng thái `active` của người dùng thành `True`. \newline 8. Hệ thống báo "Người dùng đã được hủy lưu trữ thành công." \newline 9. Người dùng đó sẽ xuất hiện trở lại trong danh sách người dùng hoạt động mặc định. \\
+\hline
+Alternative Flow & \textbf{Basic Flow (Từ Danh sách Người dùng - List View):} \newline    1. US-10 lọc danh sách Người dùng để hiển thị các tài khoản đã lưu trữ. \newline    2. US-10 chọn (tick) một hoặc nhiều người dùng muốn kích hoạt lại. \newline    3. US-10 chọn menu "Hành động" chung của danh sách. \newline    4. US-10 chọn "Hủy lưu trữ". \newline    5. Hệ thống (có thể) yêu cầu xác nhận. US-10 xác nhận. \newline    6. Hệ thống cập nhật `active = True` cho các người dùng đã chọn. \newline    7. Hệ thống làm mới danh sách. \newline    8. Hệ thống báo thành công. \\
+\hline
+Exception Flow & \textbf{7a. Lỗi hệ thống khi cập nhật trạng thái:} \newline    1. Hệ thống gặp lỗi khi cập nhật trường `active`. \newline    2. Hệ thống báo lỗi chung. Trạng thái có thể không thay đổi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.6-1 (V2):} Chỉ những tài khoản đang ở trạng thái "Lưu trữ" / "Không hoạt động" mới có thể được Hủy lưu trữ / Kích hoạt lại. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.6-1 (V2 - Usability):} Việc tìm và kích hoạt lại tài khoản phải dễ dàng. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-07: Đặt lại Mật khẩu cho Người dùng (bởi Admin)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-07: Đặt lại Mật khẩu cho Người dùng (bởi Admin)} \label{tab:uc_md10_07_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Đặt lại Mật khẩu cho Người dùng (bởi Admin) \\
+\hline
+Use Case ID & UC-MD10-07 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) hỗ trợ một người dùng (nhân viên) đặt lại mật khẩu đăng nhập vào hệ thống khi người dùng đó quên mật khẩu hoặc cần thay đổi mật khẩu vì lý do bảo mật. Admin có thể gửi link tự đặt lại hoặc đặt mật khẩu mới trực tiếp. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Một nhân viên thông báo cho US-10 rằng họ đã quên mật khẩu đăng nhập. \newline - Cần chủ động đặt lại mật khẩu cho một tài khoản vì lý do bảo mật. \\
+\hline
+Pre-Condition & - US-10 đã đăng nhập vào hệ thống với quyền quản trị người dùng. \newline - Tài khoản Người dùng cần đặt lại mật khẩu đã tồn tại trong hệ thống. \\
+\hline
+Post-Condition & - Mật khẩu của người dùng được chọn đã được đặt lại. \newline - Người dùng có thể nhận được mật khẩu mới (nếu admin đặt) hoặc một liên kết để tự đặt mật khẩu mới qua email. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Gửi email hướng dẫn đặt lại mật khẩu) & 1. US-10 truy cập danh sách Người dùng (UC-MD10-02). \newline 2. US-10 tìm và chọn người dùng cần đặt lại mật khẩu. \newline 3. Hệ thống hiển thị form chi tiết người dùng. \newline 4. US-10 tìm menu "Hành động" (Action) trên form. \newline 5. US-10 chọn tùy chọn "Gửi Hướng dẫn Đặt lại Mật khẩu" (Send Password Reset Instructions) hoặc "Đặt lại Mật khẩu" (sau đó hệ thống sẽ có tùy chọn gửi email). \newline 6. Hệ thống (có thể) yêu cầu US-10 xác nhận hành động. US-10 xác nhận. \newline 7. Hệ thống tự động tạo một liên kết đặt lại mật khẩu dùng một lần và gửi một email đến địa chỉ email đã đăng ký của người dùng đó, chứa liên kết này cùng hướng dẫn. \newline 8. Hệ thống hiển thị thông báo "Email hướng dẫn đặt lại mật khẩu đã được gửi đến [Email người dùng]." \\
+\hline
+Alternative Flow & \textbf{5a. Quản trị viên đặt mật khẩu mới trực tiếp (Nếu hệ thống cho phép và chính sách bảo mật chấp nhận):} \newline    1. Từ form chi tiết người dùng (chế độ Sửa), US-10 chọn nút "Thay đổi Mật khẩu" (Change Password). \newline    2. Hệ thống hiển thị hộp thoại yêu cầu nhập Mật khẩu mới và Xác nhận Mật khẩu mới. \newline    3. US-10 nhập mật khẩu mới (tuân thủ chính sách độ phức tạp nếu có). \newline    4. US-10 chọn "Thay đổi Mật khẩu". \newline    5. Hệ thống cập nhật mật khẩu mới cho người dùng. \newline    6. US-10 cần thông báo mật khẩu mới này cho người dùng một cách an toàn. \\
+\hline
+Exception Flow & \textbf{7a. Lỗi hệ thống khi gửi email / Lỗi máy chủ email:} \newline    1. Hệ thống không thể gửi email đặt lại mật khẩu (do lỗi cấu hình Outgoing Email Server - UC-MD10-10, hoặc địa chỉ email người dùng không hợp lệ). \newline    2. Hệ thống báo lỗi "Không thể gửi email." US-10 có thể cần thử phương án đặt mật khẩu trực tiếp (Alternative Flow 5a) hoặc kiểm tra lại cấu hình email. \newline \textbf{Alternative Flow 5a - Step 5a. Lỗi hệ thống khi thay đổi mật khẩu trực tiếp:} \newline    1. Hệ thống gặp lỗi khi cố gắng lưu mật khẩu mới. \newline    2. Hệ thống báo lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.7-1 (V2):} Phương thức gửi email cho người dùng tự đặt lại mật khẩu thường được ưu tiên hơn vì lý do bảo mật (admin không cần biết mật khẩu của người dùng). \newline - \textbf{BR-UC10.7-2 (V2):} Liên kết đặt lại mật khẩu gửi qua email phải có thời hạn sử dụng và chỉ dùng được một lần. \newline - \textbf{BR-UC10.7-3 (V2):} Mật khẩu mới (dù do người dùng hay admin đặt) nên tuân thủ chính sách độ mạnh mật khẩu của hệ thống (nếu có). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.7-1 (V2 - Security):} Quy trình đặt lại mật khẩu phải được thiết kế an toàn, tránh việc người không có thẩm quyền có thể chiếm quyền tài khoản. \newline - \textbf{NFR-UC10.7-2 (V2 - Usability):} Hướng dẫn đặt lại mật khẩu cho người dùng cuối (qua email) phải rõ ràng và dễ thực hiện. Giao diện cho admin đặt lại mật khẩu cũng phải đơn giản. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-08: Xem Chi tiết một Nhóm Quyền Truy cập}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-08: Xem Chi tiết một Nhóm Quyền Truy cập} \label{tab:uc_md10_08_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Xem Chi tiết một Nhóm Quyền Truy cập \\
+\hline
+Use Case ID & UC-MD10-08 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) xem chi tiết cấu hình và các quyền hạn cụ thể được định nghĩa trong một Nhóm Quyền truy cập (Access Group) đã tồn tại trong hệ thống. Điều này giúp Quản trị viên hiểu rõ phạm vi tác động của nhóm quyền trước khi gán cho người dùng. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Should Have (Để hiểu rõ hệ thống phân quyền) \\
+\hline
+Trigger & - Quản trị viên cần tìm hiểu xem một Nhóm Quyền cụ thể cho phép người dùng làm những gì trước khi thực hiện gán quyền cho một tài khoản (UC-MD10-04). \newline - Khi cần rà soát lại cấu trúc phân quyền của hệ thống. \\
+\hline
+Pre-Condition & - US-10 đã đăng nhập vào hệ thống với quyền quản trị hệ thống cao nhất. \newline - US-10 đã kích hoạt Chế độ Nhà phát triển (Developer Mode) trong hệ thống để có thể thấy các menu kỹ thuật. \\
+\hline
+Post-Condition & - Quản trị viên nắm được thông tin chi tiết về các quyền hạn (truy cập menu, quyền CRUD trên đối tượng, quy tắc bản ghi...) được định nghĩa trong Nhóm Quyền đã chọn. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10 (đã kích hoạt Developer Mode) truy cập vào "Cài đặt" (Settings). \newline 2. US-10 điều hướng đến menu "Kỹ thuật" (Technical) > "Bảo mật" (Security) > "Nhóm" (Groups). \newline 3. Hệ thống hiển thị danh sách tất cả các Nhóm Quyền hiện có. \newline 4. US-10 tìm và chọn (nhấp vào) một Nhóm Quyền cụ thể muốn xem chi tiết. \newline 5. Hệ thống hiển thị form chi tiết của Nhóm Quyền đã chọn, bao gồm các tab/phần thông tin như: \newline    - Tên Nhóm, Ứng dụng liên quan. \newline    - Các nhóm được kế thừa (Implied Groups). \newline    - Danh sách Người dùng hiện thuộc nhóm này. \newline    - Các Menu mà nhóm này được phép truy cập. \newline    - Các Quyền Truy cập đối tượng (Access Rights: Read, Write, Create, Delete trên các Models). \newline    - Các Quy tắc Bản ghi (Record Rules) áp dụng. \newline    - Các Chế độ xem (Views) được phép. \newline 6. US-10 xem xét các thông tin chi tiết này. \\
+\hline
+Alternative Flow & \textbf{4a. Lọc/Tìm kiếm Nhóm Quyền:} \newline    1. US-10 sử dụng các bộ lọc (theo Ứng dụng) hoặc ô tìm kiếm để nhanh chóng tìm thấy Nhóm Quyền cần xem. \\
+\hline
+Exception Flow & \textbf{2a. Chưa kích hoạt Developer Mode:} \newline    1. Menu "Kỹ thuật" và "Nhóm" không hiển thị. US-10 không thể truy cập. \newline \textbf{5a. Lỗi hệ thống khi tải chi tiết Nhóm Quyền:} \newline    1. Hệ thống gặp lỗi kỹ thuật. \newline    2. Hệ thống báo lỗi chung. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.8-1 (V2 - System):} Hệ thống phân quyền là một cơ chế phức tạp và mạnh mẽ, dựa trên sự kết hợp của các Nhóm Quyền, quyền truy cập mô hình, và quy tắc bản ghi. \newline - \textbf{BR-UC10.8-2 (V2):} Việc hiểu rõ cách các nhóm quyền được định nghĩa và kế thừa là rất quan trọng cho việc phân quyền chính xác và an toàn. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.8-1 (V2 - Usability):} Mặc dù là chức năng kỹ thuật, giao diện hiển thị chi tiết nhóm quyền nên cố gắng trình bày thông tin một cách có cấu trúc và dễ theo dõi nhất có thể. \newline - \textbf{NFR-UC10.8-2 (V2 - Security):} Quyền truy cập để xem (và đặc biệt là sửa) Nhóm Quyền phải được giới hạn ở mức quản trị cao nhất. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-09: Cấu hình Thông tin Chung của Nhà hàng}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-09: Cấu hình Thông tin Chung của Nhà hàng} \label{tab:uc_md10_09_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Thông tin Chung của Nhà hàng \\
+\hline
+Use Case ID & UC-MD10-09 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) hoặc Quản lý nhà hàng (US-01) thiết lập và cập nhật các thông tin cơ bản và chung nhất của nhà hàng/công ty, ví dụ như tên đầy đủ của nhà hàng, địa chỉ, số điện thoại, địa chỉ email liên hệ, website, logo, và đơn vị tiền tệ mặc định sẽ được sử dụng trong toàn bộ hệ thống. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khi thiết lập hệ thống lần đầu tiên cho nhà hàng. \newline - Khi có sự thay đổi về thông tin pháp lý hoặc thông tin liên hệ của nhà hàng (ví dụ: đổi địa chỉ, cập nhật logo mới, thay đổi SĐT). \newline - Khi cần thay đổi đơn vị tiền tệ chính mà hệ thống sử dụng. \\
+\hline
+Pre-Condition & - Người dùng (US-10 hoặc US-01 có quyền) đã đăng nhập vào hệ thống với quyền truy cập vào phần Cài đặt Chung (General Settings). \\
+\hline
+Post-Condition & - Các thông tin chung của nhà hàng (tên, địa chỉ, logo, tiền tệ...) được cập nhật và lưu trữ trong cấu hình hệ thống. \newline - Các thông tin này sẽ được hệ thống tự động sử dụng và hiển thị trên các tài liệu chính thức (ví dụ: hóa đơn, báo cáo, email gửi đi), cũng như ảnh hưởng đến cách các giao dịch tài chính được ghi nhận (ví dụ: theo đơn vị tiền tệ đã chọn). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-10 hoặc US-01) truy cập vào mục "Cài đặt" (Settings) trên giao diện chính. \newline 2. Hệ thống hiển thị trang Cài đặt Chung (General Settings). Người dùng có thể cần tìm đến phần "Công ty" (Companies) hoặc "Thông tin Công ty" (Company Information). \newline 3. US-10/US-01 chọn công ty/nhà hàng hiện tại để chỉnh sửa (trong trường hợp hệ thống quản lý đa công ty, nếu không thì sẽ là công ty mặc định). \newline 4. Hệ thống hiển thị form cho phép US-10/US-01 nhập hoặc cập nhật các thông tin sau: \newline    - Tên Công ty/Nhà hàng (Company Name). \newline    - Địa chỉ chi tiết (Address). \newline    - Số điện thoại (Phone). \newline    - Địa chỉ Email (Email). \newline    - Trang web (Website). \newline    - Mã số thuế (VAT/Tax ID). \newline    - Logo của nhà hàng (cho phép tải lên tệp hình ảnh). \newline    - Đơn vị tiền tệ mặc định của công ty (Company Currency). \newline    - (Tùy chọn) Các thông tin khác như tài khoản mạng xã hội, thông tin ngân hàng... \newline 5. US-10/US-01 thực hiện nhập mới hoặc chỉnh sửa các thông tin cần thiết. \newline 6. Sau khi hoàn tất, US-10/US-01 chọn hành động "Lưu" (Save) để áp dụng các thay đổi. \newline 7. Hệ thống kiểm tra tính hợp lệ cơ bản của dữ liệu (ví dụ: định dạng email, SĐT nếu có). \newline 8. Hệ thống lưu lại các thông tin cấu hình chung mới. \newline 9. Hệ thống hiển thị thông báo "Cài đặt đã được lưu thành công." \\
+\hline
+Alternative Flow & \textbf{4a. Quản lý nhiều công ty (nếu có):} \newline    1. Nếu hệ thống được cấu hình cho nhiều công ty, US-10/US-01 có thể cần chọn đúng bản ghi công ty từ danh sách trước khi chỉnh sửa. \\
+\hline
+Exception Flow & \textbf{7a. Lỗi xác thực dữ liệu khi lưu:} \newline    1. Người dùng nhập giá trị không hợp lệ cho một trường nào đó (ví dụ: định dạng email không đúng, thiếu tên công ty). \newline    2. Hệ thống hiển thị thông báo lỗi, chỉ rõ trường bị sai. \newline    3. Hệ thống không lưu các thay đổi. US-10/US-01 cần sửa lại. \newline \textbf{8a. Lỗi hệ thống trong quá trình lưu cấu hình:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng lưu các thông tin cấu hình chung. \newline    2. Hệ thống hiển thị thông báo lỗi chung. Các thay đổi có thể không được lưu. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.9-1 (V2):} Thông tin Công ty/Nhà hàng (đặc biệt là Tên, Địa chỉ, Mã số thuế, Logo) sẽ được hệ thống tự động sử dụng để hiển thị trên các tài liệu chính thức như hóa đơn bán hàng, phiếu đặt chỗ, báo cáo tài chính, và các giao tiếp khác với khách hàng. \newline - \textbf{BR-UC10.9-2 (V2):} Đơn vị tiền tệ mặc định của công ty (Company Currency) là đơn vị tiền tệ chính được sử dụng cho tất cả các giao dịch tài chính và báo cáo trong hệ thống. Việc thay đổi đơn vị tiền tệ này sau khi đã có giao dịch là một thao tác phức tạp và cần cân nhắc kỹ. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.9-1 (V2 - Usability):} Giao diện cấu hình thông tin chung phải dễ dàng cho người dùng tìm thấy và cập nhật các thông tin cần thiết. Việc tải lên logo cần đơn giản. \newline - \textbf{NFR-UC10.9-2 (V2 - Impact):} Quản trị viên/Quản lý cần ý thức rằng các thay đổi trong phần Cài đặt chung này có thể có ảnh hưởng trên toàn bộ hệ thống và cách hệ thống hiển thị thông tin ra bên ngoài. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-10: Cấu hình Máy chủ Gửi Email (Outgoing Email Server)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-10: Cấu hình Máy chủ Gửi Email (Outgoing Email Server)} \label{tab:uc_md10_10_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Máy chủ Gửi Email (Outgoing Email Server) \\
+\hline
+Use Case ID & UC-MD10-10 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) hoặc Quản lý nhà hàng (US-01) thiết lập và quản lý thông tin cấu hình cho máy chủ gửi email (SMTP server). Cấu hình này là bắt buộc để hệ thống có thể tự động gửi đi các email giao dịch như xác nhận đặt chỗ, thông báo lịch làm việc, email đặt lại mật khẩu, v.v. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have (Để các tính năng gửi email tự động hoạt động) \\
+\hline
+Trigger & - Khi thiết lập hệ thống lần đầu tiên và cần kích hoạt khả năng gửi email. \newline - Khi nhà hàng thay đổi nhà cung cấp dịch vụ email hoặc thông tin máy chủ SMTP. \newline - Khi cần khắc phục sự cố liên quan đến việc gửi email từ hệ thống. \\
+\hline
+Pre-Condition & - Người dùng (US-10 hoặc US-01 có quyền) đã đăng nhập vào hệ thống với quyền truy cập vào phần Cài đặt Kỹ thuật hoặc Cài đặt Email. \newline - Nhà hàng đã có thông tin chi tiết về máy chủ SMTP muốn sử dụng (ví dụ: từ Gmail, Microsoft 365, hoặc một dịch vụ SMTP relay chuyên dụng như SendGrid, Mailgun), bao gồm: địa chỉ máy chủ, cổng, thông tin đăng nhập (tên người dùng, mật khẩu/API key), và loại mã hóa. \\
+\hline
+Post-Condition & - Thông tin cấu hình máy chủ gửi email (Outgoing Email Server) được lưu trữ chính xác trong hệ thống. \newline - Nếu cấu hình đúng và máy chủ SMTP hoạt động, hệ thống có thể gửi email đi thành công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10/US-01 (đã kích hoạt Developer Mode nếu cần) truy cập vào "Cài đặt" (Settings). \newline 2. US-10/US-01 điều hướng đến menu "Kỹ thuật" (Technical) > "Email" > "Máy chủ Thư đi" (Outgoing Email Servers). \newline 3. Hệ thống hiển thị danh sách các máy chủ gửi email đã được cấu hình (nếu có). \newline 4. US-10/US-01 chọn "Tạo mới" (Create) để thêm một cấu hình máy chủ mới, hoặc chọn một cấu hình hiện có để "Sửa" (Edit). \newline 5. Hệ thống hiển thị form để nhập thông tin cấu hình máy chủ gửi email. Các trường chính bao gồm: \newline    - \textbf{Mô tả (Description):} Một tên gợi nhớ cho cấu hình này (ví dụ: "Gmail SMTP Server"). \newline    - \textbf{Ưu tiên (Priority):} Nếu có nhiều máy chủ, máy chủ có ưu tiên thấp hơn (số nhỏ hơn) sẽ được thử trước. \newline    - \textbf{Máy chủ SMTP (SMTP Server):} Địa chỉ của máy chủ SMTP (ví dụ: smtp.gmail.com). \newline    - \textbf{Cổng SMTP (SMTP Port):} Số cổng SMTP (ví dụ: 587 hoặc 465). \newline    - \textbf{Bảo mật Kết nối (Connection Security):} Chọn loại mã hóa (ví dụ: None, SSL/TLS, STARTTLS). \newline    - \textbf{Tên người dùng (Username):} Địa chỉ email hoặc tên người dùng để xác thực với máy chủ SMTP. \newline    - \textbf{Mật khẩu (Password):} Mật khẩu tương ứng (hoặc App Password nếu dùng Gmail với 2FA). \newline 6. US-10/US-01 nhập đầy đủ và chính xác các thông tin cấu hình này. \newline 7. (Rất quan trọng) US-10/US-01 sử dụng nút "Kiểm tra Kết nối" (Test Connection) trên form. \newline 8. Hệ thống cố gắng thiết lập một kết nối thử nghiệm đến máy chủ SMTP với các thông tin đã cung cấp. \newline 9. Hệ thống hiển thị kết quả kiểm tra: \newline    a. \textbf{Nếu thành công:} Thông báo "Kết nối thành công!" hoặc tương tự. \newline    b. \textbf{Nếu thất bại:} Thông báo lỗi chi tiết (ví dụ: "Xác thực thất bại", "Không thể kết nối đến máy chủ", "Cổng sai"...). US-10/US-01 cần sửa lại thông tin cấu hình (quay lại bước 6). \newline 10. Sau khi kiểm tra kết nối thành công (bước 9a), US-10/US-01 chọn "Lưu" (Save). \newline 11. Hệ thống lưu lại cấu hình máy chủ gửi email. \\
+\hline
+Alternative Flow & Không có luồng thay thế đáng kể cho việc cấu hình trực tiếp này. \\
+\hline
+Exception Flow & \textbf{10a. Lỗi hệ thống khi lưu cấu hình:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng lưu thông tin cấu hình. \newline    2. Hệ thống hiển thị thông báo lỗi chung. Cấu hình có thể chưa được lưu. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.10-1 (V2):} Việc cấu hình chính xác ít nhất một Máy chủ Gửi Email đang hoạt động là điều kiện tiên quyết để hệ thống có thể gửi đi bất kỳ email nào (ví dụ: xác nhận đặt chỗ cho khách, thông báo lịch làm việc cho nhân viên, email đặt lại mật khẩu). \newline - \textbf{BR-UC10.10-2 (V2):} Thông tin xác thực (Tên người dùng, Mật khẩu/API Key) cho máy chủ SMTP phải chính xác và còn hiệu lực. \newline - \textbf{BR-UC10.10-3 (V2):} Cài đặt về Bảo mật Kết nối (SSL/TLS, STARTTLS) và Cổng SMTP phải khớp với yêu cầu của nhà cung cấp dịch vụ SMTP. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.10-1 (V2 - Security):} Mật khẩu hoặc API Key của máy chủ SMTP là thông tin nhạy cảm và phải được hệ thống lưu trữ một cách an toàn (ví dụ: được mã hóa trong cơ sở dữ liệu và không hiển thị dạng text thuần trên giao diện sau khi lưu). \newline - \textbf{NFR-UC10.10-2 (V2 - Usability):} Giao diện cấu hình Máy chủ Gửi Email phải cung cấp đủ các trường cần thiết. Chức năng "Kiểm tra Kết nối" là cực kỳ quan trọng và hữu ích để người dùng xác thực cấu hình trước khi lưu. \newline - \textbf{NFR-UC10.10-3 (V2 - Reliability):} Sau khi được cấu hình đúng, hệ thống gửi email của hệ thống phải hoạt động đáng tin cậy. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-11: Cấu hình Tích hợp Cổng Thanh toán}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-11: Cấu hình Tích hợp Cổng Thanh toán} \label{tab:uc_md10_11_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Tích hợp Cổng Thanh toán \\
+\hline
+Use Case ID & UC-MD10-11 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) hoặc Quản lý nhà hàng (US-01) thiết lập và quản lý thông tin cấu hình để kết nối hệ thống với một hoặc nhiều Cổng thanh toán trực tuyến (Payment Acquirers) bên ngoài (ví dụ: Stripe, PayPal, VNPay, MoMo...). Cấu hình này cần thiết để khách hàng có thể thanh toán tiền đặt cọc online (UC-MD03-04). \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have (Nếu có yêu cầu thanh toán đặt cọc online) \\
+\hline
+Trigger & - Khi nhà hàng quyết định sử dụng một cổng thanh toán trực tuyến mới để nhận tiền đặt cọc. \newline - Khi cần cập nhật thông tin cấu hình (ví dụ: API Keys, Secret Keys) của một cổng thanh toán đã tích hợp. \newline - Khi cần kích hoạt hoặc vô hiệu hóa một cổng thanh toán nào đó. \\
+\hline
+Pre-Condition & - Người dùng (US-10 hoặc US-01 có quyền) đã đăng nhập vào hệ thống với quyền quản trị cài đặt Kế toán/Thanh toán hoặc cài đặt Website/eCommerce (nơi thường quản lý các cổng thanh toán). \newline - Nhà hàng đã đăng ký và có tài khoản với nhà cung cấp dịch vụ cổng thanh toán và đã nhận được các thông tin API cần thiết (API Key, Secret Key, Merchant ID...). \\
+\hline
+Post-Condition & - Thông tin cấu hình cho (các) cổng thanh toán trực tuyến được lưu trữ an toàn và chính xác trong hệ thống. \newline - Nếu cổng thanh toán được kích hoạt và cấu hình đúng, khách hàng sẽ có thể chọn và sử dụng cổng thanh toán đó để thực hiện giao dịch thanh toán tiền đặt cọc trên giao diện đặt chỗ online. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10/US-01 truy cập vào mục "Cài đặt" (Settings) hoặc module "Kế toán" (Accounting) hoặc "Website" / "eCommerce" (tùy theo nơi hệ thôngs quản lý Payment Acquirers). \newline 2. US-10/US-01 tìm đến phần "Cổng thanh toán" (Payment Acquirers) hoặc "Phương thức thanh toán trực tuyến". \newline 3. Hệ thống hiển thị danh sách các cổng thanh toán đã được cài đặt hoặc hỗ trợ. \newline 4. US-10/US-01 chọn một cổng thanh toán muốn cấu hình (ví dụ: "Stripe", "VNPay") và chọn "Cấu hình" (Configure) hoặc "Sửa" (Edit). (Nếu cổng chưa có, có thể cần "Cài đặt" - Install - cổng đó trước nếu là một module riêng). \newline 5. Hệ thống hiển thị form cấu hình riêng cho cổng thanh toán đã chọn. Các trường thông tin sẽ khác nhau tùy thuộc vào từng cổng, nhưng thường bao gồm: \newline    - \textbf{Tên hiển thị cho khách hàng} (Displayed as). \newline    - \textbf{Trạng thái (State):} "Disabled", "Enabled in Test Mode", "Enabled in Production Mode". \newline    - \textbf{API Keys/Credentials:} Các trường để nhập API Key, Secret Key, Merchant ID, Public Key... do cổng thanh toán cung cấp. \newline    - (Tùy chọn) \textbf{Callback/Webhook URL:} URL mà cổng thanh toán sẽ gửi thông báo kết quả giao dịch. \newline    - (Tùy chọn) Các cài đặt khác như loại thẻ chấp nhận, quốc gia áp dụng... \newline 6. US-10/US-01 nhập hoặc cập nhật các thông tin cấu hình chính xác. \newline 7. (Rất quan trọng) US-10/US-01 chọn đúng Trạng thái hoạt động (ví dụ: "Enabled in Production Mode" khi muốn chạy thật). \newline 8. US-10/US-01 chọn "Lưu" (Save) để áp dụng cấu hình. \newline 9. Hệ thống lưu lại cấu hình cho cổng thanh toán. \\
+\hline
+Alternative Flow & \textbf{4a. Cài đặt cổng thanh toán mới (nếu là module):} \newline    1. Nếu cổng thanh toán mong muốn là một module cần cài đặt, US-10/US-01 vào mục Apps, tìm và cài đặt module đó trước. Sau đó mới thực hiện cấu hình. \\
+\hline
+Exception Flow & \textbf{6a. Thiếu thông tin API Key/Credentials bắt buộc:} \newline    1. US-10/US-01 cố gắng lưu cấu hình mà chưa nhập đủ các thông tin API Key cần thiết. \newline    2. Hệ thống báo lỗi yêu cầu nhập đủ. \newline \textbf{9a. Lỗi hệ thống khi lưu cấu hình cổng thanh toán:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi lưu. \newline    2. Hệ thống báo lỗi chung. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.11-1 (V2):} Thông tin API Keys/Credentials phải chính xác và tương ứng với môi trường (Test hoặc Production) của cổng thanh toán. \newline - \textbf{BR-UC10.11-2 (V2):} Cổng thanh toán phải được đặt ở trạng thái "Enabled in Production Mode" thì khách hàng mới có thể sử dụng để thanh toán thật. Chế độ "Test Mode" dùng để thử nghiệm. \newline - \textbf{BR-UC10.11-3 (V2 - System):} Hệ thống phải xử lý chính xác các Callback/Webhook từ cổng thanh toán để cập nhật trạng thái giao dịch (thành công/thất bại). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.11-1 (V2 - Security):} API Keys, Secret Keys của cổng thanh toán là thông tin cực kỳ nhạy cảm, phải được hệ thống lưu trữ mã hóa và không hiển thị đầy đủ sau khi đã lưu. Quyền truy cập cấu hình này phải được giới hạn nghiêm ngặt. \newline - \textbf{NFR-UC10.11-2 (V2 - Usability):} Giao diện cấu hình cho từng cổng thanh toán nên rõ ràng, hướng dẫn người dùng nhập đúng các thông tin cần thiết. \newline - \textbf{NFR-UC10.11-3 (V2 - Reliability):} Tích hợp với cổng thanh toán phải ổn định và xử lý giao dịch một cách đáng tin cậy. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-12: Cấu hình Tích hợp Dịch vụ Bot Call}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-12: Cấu hình Tích hợp Dịch vụ Bot Call} \label{tab:uc_md10_12_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Tích hợp Dịch vụ Bot Call \\
+\hline
+Use Case ID & UC-MD10-12 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) hoặc Quản lý nhà hàng (US-01) thiết lập các tham số cần thiết để kết nối hệ thống với một dịch vụ Bot Call bên ngoài. Cấu hình này bao gồm thông tin API, và các tham số vận hành như kịch bản thoại sẽ sử dụng, số ngày gọi trước. (Một phần của FR-MD04-05). \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have (Để chức năng Bot Call tự động hoạt động) \\
+\hline
+Trigger & - Khi nhà hàng quyết định triển khai chức năng gọi bot tự động xác nhận đặt chỗ. \newline - Khi cần thay đổi nhà cung cấp dịch vụ Bot Call hoặc cập nhật thông tin kết nối API. \newline - Khi cần điều chỉnh các tham số vận hành của Bot Call. \\
+\hline
+Pre-Condition & - Người dùng (US-10 hoặc US-01 có quyền) đã đăng nhập vào với quyền quản trị cài đặt. \newline - Nhà hàng đã chọn và đăng ký tài khoản với một nhà cung cấp dịch vụ Bot Call bên ngoài, và có được các thông tin cần thiết (API Key, API Endpoint, ID Kịch bản thoại...). \\
+\hline
+Post-Condition & - Các tham số cấu hình cho việc tích hợp và vận hành dịch vụ Bot Call được lưu trữ trong hệ thống. \newline - Hệ thống có đủ thông tin để có thể gửi yêu cầu thực hiện cuộc gọi đến dịch vụ Bot Call (UC-MD04-01) và để dịch vụ Bot Call có thể gọi lại webhook của hệ thống. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10/US-01 truy cập vào khu vực "Cài đặt" (Settings) của hệ thống hoặc của module Đặt chỗ/Tích hợp. \newline 2. US-10/US-01 tìm đến phần cấu hình có tên liên quan đến "Xác nhận Đặt chỗ bằng Bot Call" (Bot Call Confirmation Settings) hoặc "Tích hợp Voice Bot". \newline 3. Hệ thống hiển thị form cấu hình với các trường cần thiết. Các trường này đã được liệt kê trong UC-MD04-05 (Basic Flow, bước 3), bao gồm: \newline    - Kích hoạt/Tắt chức năng Bot Call. \newline    - Thông tin API của Nhà cung cấp Bot Call (Endpoint, API Key/Token). \newline    - ID hoặc tên của Kịch bản thoại sẽ được Bot sử dụng. \newline    - Số ngày N sẽ gọi trước ngày khách đặt bàn. \newline    - Số điện thoại của nhà hàng sẽ nhận cuộc gọi khi khách bấm phím "Hỗ trợ". \newline 4. US-10/US-01 nhập hoặc cập nhật các giá trị cấu hình này một cách chính xác. \newline 5. (Tùy chọn) US-10/US-01 có thể sử dụng nút "Kiểm tra Kết nối API" (nếu có) để xác thực thông tin API với dịch vụ Bot Call. \newline 6. US-10/US-01 chọn hành động "Lưu" (Save) để áp dụng các thay đổi cấu hình. \newline 7. Hệ thống kiểm tra tính hợp lệ cơ bản của dữ liệu (ví dụ: N là số dương, API Key không trống nếu kích hoạt). \newline 8. Hệ thống lưu lại các thông tin cấu hình mới. \newline 9. Hệ thống hiển thị thông báo "Cấu hình Bot Call đã được lưu thành công." \\
+\hline
+Alternative Flow & \textbf{3a. Cấu hình kịch bản thoại trực tiếp trong hệ thống:} \newline    1. Thay vì chỉ nhập ID kịch bản, hệ thống có thể cung cấp một giao diện cho phép US-10/US-01 tự soạn thảo hoặc tùy chỉnh nội dung văn bản của kịch bản thoại (sẽ được Bot sử dụng qua text-to-speech) và định nghĩa các hành động tương ứng với phím bấm của khách. \\
+\hline
+Exception Flow & \textbf{7a. Lỗi xác thực dữ liệu khi lưu:} \newline    1. Hệ thống phát hiện giá trị cấu hình không hợp lệ (ví dụ: Số ngày N không phải số, thiếu API Key khi đang kích hoạt). \newline    2. Hệ thống hiển thị thông báo lỗi. Cấu hình không được lưu. \newline \textbf{8a. Lỗi hệ thống khi lưu cấu hình:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi lưu. \newline    2. Hệ thống báo lỗi chung. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.12-1 (V2):} Thông tin API Key/Credentials của dịch vụ Bot Call phải được cung cấp chính xác để hệ thống có thể gửi yêu cầu gọi đi. \newline - \textbf{BR-UC10.12-2 (V2):} ID Kịch bản thoại phải khớp với một kịch bản đã được tạo và cấu hình trên nền tảng của nhà cung cấp dịch vụ Bot Call (trừ khi kịch bản được cấu hình trực tiếp trong hệ thống). \newline - \textbf{BR-UC10.12-3 (V2):} Số điện thoại Hỗ trợ phải là số điện thoại thực tế có người trực để tiếp nhận cuộc gọi từ khách hàng khi họ cần hỗ trợ. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.12-1 (V2 - Security):} Thông tin API Key/Token của dịch vụ Bot Call cần được lưu trữ an toàn. \newline - \textbf{NFR-UC10.12-2 (V2 - Usability):} Giao diện cấu hình Bot Call nên rõ ràng, các trường dễ hiểu. Nếu có tùy chọn kiểm tra kết nối API thì rất hữu ích. \newline - \textbf{NFR-UC10.12-3 (V2 - Flexibility):} Hệ thống nên được thiết kế để có thể dễ dàng thay đổi hoặc cập nhật thông tin cấu hình khi cần (ví dụ: đổi nhà cung cấp Bot Call, cập nhật kịch bản). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-13: Cấu hình Tích hợp Dịch vụ Giao hàng (Shipday)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-13: Cấu hình Tích hợp Dịch vụ Giao hàng (Shipday)} \label{tab:uc_md10_13_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Tích hợp Dịch vụ Giao hàng (Shipday) \\
+\hline
+Use Case ID & UC-MD10-13 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) hoặc Quản lý nhà hàng (US-01) thiết lập các tham số cần thiết để kết nối và trao đổi dữ liệu giữa hệ thống và nền tảng quản lý giao hàng Shipday. Điều này bao gồm việc nhập thông tin xác thực API (API Key) và các cài đặt liên quan khác để đảm bảo luồng gửi đơn hàng và nhận cập nhật trạng thái hoạt động chính xác. (Tương ứng FR-MD07-15). \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have (Để chức năng giao hàng qua Shipday hoạt động) \\
+\hline
+Trigger & - Khi nhà hàng bắt đầu triển khai tích hợp với Shipday để quản lý đơn hàng giao đi. \newline - Khi cần cập nhật thông tin API Key của Shipday (ví dụ: do API Key cũ hết hạn hoặc được Shipday cấp mới). \newline - Khi cần thay đổi các cài đặt khác liên quan đến việc đồng bộ dữ liệu giữa hai hệ thống. \\
+\hline
+Pre-Condition & - Người dùng (US-10 hoặc US-01 có quyền) đã đăng nhập với quyền quản trị cài đặt. \newline - Nhà hàng đã có tài khoản Shipday và đã lấy được API Key từ trang quản trị Shipday của mình. \\
+\hline
+Post-Condition & - Thông tin cấu hình tích hợp với Shipday (đặc biệt là API Key) được lưu trữ an toàn trong hệ thống. \newline - Hệ thống sẵn sàng để gửi thông tin đơn hàng giao đi sang Shipday (UC-MD07-08) và nhận lại các cập nhật trạng thái giao hàng từ Shipday (thông qua webhook đã được cấu hình ở phía Shipday để trỏ về - UC-MD07-09). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. US-10/US-01 truy cập vào khu vực "Cài đặt" (Settings) của hệ thống, có thể trong mục cài đặt chung hoặc cài đặt của module Giao hàng (Delivery) hoặc Tích hợp (Integrations). \newline 2. US-10/US-01 tìm đến phần cấu hình có tên "Shipday Integration", "Delivery Service Configuration" hoặc tương tự. \newline 3. Hệ thống hiển thị form cấu hình tích hợp Shipday. Các trường chính thường bao gồm: \newline    - Ô kiểm "Kích hoạt Tích hợp Shipday" (Enable Shipday Integration). \newline    - Trường nhập "Shipday API Key". \newline    - (Có thể có) URL API Endpoint của Shipday (thường cố định và có thể điền sẵn). \newline    - (Hiển thị) URL của Webhook Endpoint mà người dùng cần sao chép để cấu hình trên Shipday. \newline    - (Tùy chọn) Các cài đặt về ánh xạ trường dữ liệu, tự động gửi đơn, v.v. \newline 4. US-10/US-01 đánh dấu "Kích hoạt" và nhập chính xác API Key của Shipday. \newline 5. US-10/US-01 sao chép Webhook URL của hệ thống (nếu được hiển thị) để thực hiện cấu hình tương ứng trên tài khoản Shipday. \newline 6. (Tùy chọn) US-10/US-01 có thể nhấn nút "Kiểm tra Kết nối API" (nếu có) để xác thực API Key với Shipday. \newline 7. US-10/US-01 chọn "Lưu" (Save) trên form cấu hình. \newline 8. Hệ thống kiểm tra và lưu lại cấu hình. \newline 9. Hệ thống báo "Cấu hình Shipday đã được lưu." \\
+\hline
+Alternative Flow & \textbf{6a. Kết quả Kiểm tra Kết nối API:} \newline    1. Nếu kiểm tra thành công, hệ thống báo "Kết nối thành công." \newline    2. Nếu thất bại, hệ thống báo "Kết nối thất bại: [Lý do]" và US-10/US-01 cần sửa lại API Key hoặc kiểm tra kết nối mạng. \\
+\hline
+Exception Flow & \textbf{8a. Lỗi xác thực/lưu cấu hình:} \newline    1. Thiếu API Key khi đã kích hoạt, hoặc lỗi hệ thống khi lưu. \newline    2. Hệ thống báo lỗi. Cấu hình không được lưu. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.13-1 (V2):} API Key của Shipday phải chính xác và còn hiệu lực. \newline - \textbf{BR-UC10.13-2 (V2):} Webhook URL phải được cấu hình đúng trên Shipday để hệ thống nhận được cập nhật trạng thái đơn hàng. \newline - \textbf{BR-UC10.13-3 (V2):} Việc ánh xạ các trường dữ liệu (ví dụ: các thành phần địa chỉ) giữa hệ thống và Shipday phải chính xác. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.13-1 (V2 - Security):} API Key của Shipday phải được lưu trữ an toàn trong hệ thống. \newline - \textbf{NFR-UC10.13-2 (V2 - Usability):} Giao diện cấu hình phải rõ ràng. Tính năng kiểm tra kết nối là hữu ích. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-14: Cấu hình Tham số Nghiệp vụ Đặc thù cho Đặt chỗ}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-14: Cấu hình Tham số Nghiệp vụ Đặc thù cho Đặt chỗ} \label{tab:uc_md10_14_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Tham số Nghiệp vụ Đặc thù cho Đặt chỗ \\
+\hline
+Use Case ID & UC-MD10-14 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) hoặc Quản lý nhà hàng (US-01) thiết lập và tùy chỉnh các tham số, quy tắc kinh doanh riêng của nhà hàng liên quan trực tiếp đến chức năng Đặt chỗ (Reservations / Bookings). Điều này bao gồm các tham số như tỷ lệ phần trăm đặt cọc cho bàn, tỷ lệ phần trăm đặt cọc cho món ăn đặt trước, giá trị tham chiếu của từng bàn (để tính cọc), và số ngày Bot Call sẽ tự động gọi xác nhận trước ngày khách đặt. (Tương ứng FR-MD03-15 và một phần FR-MD04-05). \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have (Để chức năng đặt chỗ và các tính năng liên quan hoạt động đúng theo chính sách nhà hàng) \\
+\hline
+Trigger & - Khi cần thiết lập các quy tắc kinh doanh ban đầu cho hệ thống đặt chỗ của nhà hàng. \newline - Khi nhà hàng có sự thay đổi về chính sách đặt cọc, cách tính giá trị bàn cho việc cọc, hoặc quy trình gọi bot xác nhận. \\
+\hline
+Pre-Condition & - Người dùng (US-10 hoặc US-01 có quyền) đã đăng nhập vào hệ thống với quyền quản trị cấu hình của module Đặt chỗ (Reservations) hoặc một module cài đặt tùy chỉnh liên quan đến các tham số này. \\
+\hline
+Post-Condition & - Các quy tắc và tham số nghiệp vụ đặc thù cho chức năng đặt chỗ của nhà hàng được cập nhật và lưu trữ trong cấu hình hệ thống. \newline - Các module và chức năng khác của hệ thống (ví dụ: module Đặt chỗ MD-03 khi khách hàng đặt online, module Bot Call MD-04 khi lên lịch gọi) sẽ đọc và hoạt động dựa trên các tham số mới này. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-10 hoặc US-01) truy cập vào khu vực "Cài đặt" (Settings) của module Đặt chỗ (Reservations) hoặc một khu vực cấu hình nghiệp vụ tùy chỉnh riêng của nhà hàng (nếu có). \newline 2. Hệ thống hiển thị một form hoặc một nhóm các trường cấu hình cho phép người dùng nhập hoặc thay đổi các tham số nghiệp vụ đặc thù liên quan đến đặt chỗ. Các trường này có thể bao gồm: \newline    a. \textbf{Tỷ lệ Đặt cọc cho Bàn (\%):} Trường nhập số, cho phép nhập giá trị phần trăm (ví dụ: 15 cho 15\%). \newline    b. \textbf{Tỷ lệ Đặt cọc cho Món ăn Đặt trước (\%):} Trường nhập số, cho phép nhập giá trị phần trăm (ví dụ: 15 cho 15\%). \newline    c. \textbf{Số ngày Bot Call gọi xác nhận trước:} Trường nhập số nguyên dương (ví dụ: 1, 2, 3 ngày). \newline    d. (Có thể có) Các trường để thiết lập giá trị tham chiếu cho từng loại bàn hoặc từng bàn cụ thể (Table Value for Deposit Calculation). Việc nhập giá trị cụ thể cho từng bàn có thể được thực hiện ở một giao diện quản lý tài nguyên bàn riêng biệt, và ở đây chỉ là bật/tắt hoặc chọn phương thức tính. \newline    e. (Có thể có) Các cấu hình khác liên quan đến chính sách hủy đặt chỗ, điều kiện hoàn cọc, thời gian tối thiểu/tối đa cho phép đặt trước, giới hạn số lượng khách mỗi đặt chỗ online, v.v. (Các cấu hình này cũng đã được đề cập trong UC-MD03-15 nhưng có thể được quản lý tập trung hơn ở đây nếu thiết kế module theo hướng đó). \newline 3. US-10/US-01 nhập hoặc cập nhật các giá trị mong muốn cho các tham số này theo đúng chính sách của nhà hàng. \newline 4. Sau khi hoàn tất việc nhập liệu, US-10/US-01 chọn hành động "Lưu" (Save) trên giao diện cấu hình. \newline 5. Hệ thống kiểm tra tính hợp lệ của các dữ liệu đã nhập (ví dụ: tỷ lệ phần trăm phải là số, số ngày phải là số nguyên dương, các giá trị nằm trong khoảng cho phép nếu có). \newline 6. Nếu dữ liệu hợp lệ, hệ thống lưu lại các thông tin cấu hình mới này. \newline 7. Hệ thống hiển thị thông báo "Các tham số nghiệp vụ đã được lưu thành công." \\
+\hline
+Alternative Flow & \textbf{2f. Quản lý Giá trị Bàn ở một giao diện riêng:} \newline    1. Nếu việc thiết lập giá trị cụ thể cho từng bàn (để tính cọc) được thực hiện ở một menu hoặc giao diện khác (ví dụ: trong quản lý Sơ đồ tầng hoặc quản lý Tài sản/Bàn). \newline    2. Trong trường hợp đó, Use Case này chỉ tập trung vào việc thiết lập các tỷ lệ phần trăm và các tham số chung khác. Việc nhập giá trị cho từng bàn sẽ là một Use Case riêng (có thể thuộc MD-02 hoặc một phần của cấu hình POS). \\
+\hline
+Exception Flow & \textbf{5a. Lỗi Xác thực Dữ liệu khi Lưu:} \newline    1. Hệ thống phát hiện một hoặc nhiều giá trị cấu hình mà người dùng nhập không hợp lệ (ví dụ: tỷ lệ đặt cọc không phải là số, số ngày gọi bot là số âm). \newline    2. Hệ thống hiển thị thông báo lỗi cụ thể, chỉ rõ trường hoặc giá trị không hợp lệ. \newline    3. Hệ thống không lưu các thay đổi. US-10/US-01 cần sửa lại các thông tin không hợp lệ. \newline \textbf{6a. Lỗi Hệ thống trong quá trình Lưu Cấu hình:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng lưu các tham số cấu hình. \newline    2. Hệ thống hiển thị một thông báo lỗi chung. Các thay đổi có thể không được lưu. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.14-1 (V2):} Các tham số nghiệp vụ được cấu hình ở đây (như tỷ lệ đặt cọc, giá trị bàn, số ngày gọi bot) sẽ ảnh hưởng trực tiếp đến logic hoạt động của các module khác trong hệ thống, bao gồm: \newline    - Module Đặt chỗ (MD-03): Cách hệ thống tự động tính toán tiền đặt cọc (UC-MD03-04). \newline    - Module Xác nhận qua Bot (MD-04): Thời điểm hệ thống lên lịch và kích hoạt cuộc gọi xác nhận (UC-MD04-01). \newline - \textbf{BR-UC10.14-2 (V2):} Các giá trị cấu hình phải được nhập một cách chính xác để phản ánh đúng chính sách kinh doanh của nhà hàng. Sai sót trong cấu hình có thể dẫn đến tính toán sai tiền đặt cọc hoặc quy trình xác nhận không hiệu quả. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.14-1 (V2 - Usability):} Giao diện cấu hình các tham số nghiệp vụ đặc thù này nên được nhóm lại một cách logic, dễ dàng cho Quản trị viên hoặc Quản lý tìm thấy và hiểu rõ ý nghĩa của từng tham số. Nên có các gợi ý hoặc giải thích ngắn (tooltip) cho mỗi trường cấu hình. \newline - \textbf{NFR-UC10.14-2 (V2 - Flexibility):} Hệ thống nên cho phép dễ dàng thay đổi và cập nhật các tham số này khi chính sách kinh doanh của nhà hàng có sự điều chỉnh, mà không cần can thiệp vào mã nguồn. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-15: Xem Nhật ký Hoạt động Hệ thống (Logs)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-15: Xem Nhật ký Hoạt động Hệ thống (Logs)} \label{tab:uc_md10_15_full_v2_latex_fixed_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Xem Nhật ký Hoạt động Hệ thống (Logs) \\
+\hline
+Use Case ID & UC-MD10-15 \\
+\hline
+Use Case Description & Cho phép Quản trị viên hệ thống (US-10) truy cập và xem xét các bản ghi nhật ký (logs) do hệ thống tự động tạo ra trong quá trình hoạt động. Các log này có thể bao gồm thông tin về các lỗi kỹ thuật đã xảy ra, các cảnh báo hệ thống, và có thể cả các hoạt động quan trọng của người dùng (nếu tính năng audit log được kích hoạt và cấu hình). Mục đích là để theo dõi tình trạng hệ thống, chẩn đoán nguyên nhân sự cố và hỗ trợ khắc phục lỗi. \\
+\hline
+Actor & US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Should Have (Rất quan trọng cho việc vận hành, bảo trì và khắc phục sự cố hệ thống) \\
+\hline
+Trigger & - Khi hệ thống gặp một lỗi hoặc hoạt động không như mong đợi, US-10 cần điều tra nguyên nhân. \newline - Khi cần theo dõi hoạt động của một tính năng cụ thể hoặc kiểm tra các sự kiện hệ thống đã xảy ra. \newline - Thực hiện kiểm tra định kỳ tình trạng hoạt động và các vấn đề tiềm ẩn của hệ thống. \\
+\hline
+Pre-Condition & - US-10 đã đăng nhập vào hệ thống với quyền quản trị hệ thống cao nhất. \newline - Hệ thống đang hoạt động và đã được cấu hình để ghi nhận nhật ký ở một mức độ chi tiết nhất định (log level). \\
+\hline
+Post-Condition & - Quản trị viên xem được danh sách các bản ghi nhật ký hệ thống, được sắp xếp theo thời gian. \newline - Quản trị viên có thể sử dụng các công cụ lọc, tìm kiếm để tìm các log cụ thể và xem chi tiết nội dung của từng bản ghi log, bao gồm cả thông điệp lỗi và (nếu có) dấu vết ngăn xếp (stack trace) để phục vụ việc chẩn đoán sự cố. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Xem log qua giao diện, nếu có) & 1. US-10 (thường cần kích hoạt Developer Mode) truy cập vào khu vực kỹ thuật của hệ thống trong menu "Cài đặt" (Settings). \newline 2. US-10 tìm đến mục "Nhật ký" (Logging), "System Logs", hoặc một mục tương tự quản lý các bản ghi `ir.logging` của hệ thống. \newline 3. Hệ thống hiển thị danh sách các bản ghi nhật ký, thường được sắp xếp theo thời gian tạo giảm dần (log mới nhất ở trên cùng). \newline 4. Mỗi bản ghi trong danh sách thường hiển thị các thông tin tóm tắt như: \newline    - Thời gian ghi log (Timestamp). \newline    - Mức độ của log (Log Level: INFO, WARNING, ERROR, CRITICAL, DEBUG...). \newline    - Tên của thành phần/module ghi log (Logger Name). \newline    - Một phần nội dung của thông điệp log (Message). \newline 5. US-10 xem xét danh sách các log. US-10 có thể sử dụng các công cụ lọc (ví dụ: lọc theo Mức độ log để chỉ xem các lỗi ERROR, CRITICAL; lọc theo Logger Name để xem log của một module cụ thể; lọc theo khoảng Thời gian) hoặc sử dụng ô tìm kiếm để nhập từ khóa liên quan đến vấn đề đang điều tra. \newline 6. US-10 nhấp vào một bản ghi log cụ thể để xem thông tin chi tiết đầy đủ của nó, bao gồm toàn bộ thông điệp log và, nếu đó là một log lỗi, có thể cả thông tin dấu vết ngăn xếp (stack trace) chi tiết để giúp xác định vị trí gây lỗi trong mã nguồn. \\
+\hline
+Alternative Flow & \textbf{Basic Flow (Xem file log trực tiếp trên máy chủ):} \newline    1. Nếu hệ thống được triển khai trên một máy chủ mà US-10 có quyền truy cập. \newline    2. US-10 sử dụng các công cụ như SSH để đăng nhập vào máy chủ hệ thống. \newline    3. US-10 điều hướng đến thư mục chứa file log của hệ thống (vị trí file log này được xác định trong file cấu hình của hệ thống, ví dụ: `abc.conf`, và tên file thường là `abc.log` hoặc tương tự). \newline    4. US-10 sử dụng các công cụ dòng lệnh của hệ điều hành (ví dụ: `tail -f` để xem log theo thời gian thực, `grep` để tìm kiếm từ khóa, `less` hoặc `cat` để xem nội dung file) hoặc mở file log bằng một trình soạn thảo văn bản để xem, lọc và tìm kiếm nội dung log. \newline \textbf{5a. Xuất log:} \newline    1. Giao diện xem log của hệ thống có thể cung cấp chức năng cho phép US-10 xuất một phần hoặc toàn bộ các log đang hiển thị ra một tệp (ví dụ: CSV, TXT) để lưu trữ hoặc phân tích ngoại tuyến. \\
+\hline
+Exception Flow & \textbf{3a. Lỗi hệ thống khi tải hoặc hiển thị log qua giao diện:} \newline    1. Hệ thống gặp lỗi kỹ thuật (ví dụ: do lượng log quá lớn không thể hiển thị hết qua giao diện, lỗi truy vấn bảng log) khi US-10 cố gắng xem log. \newline    2. Hệ thống hiển thị một thông báo lỗi chung. Việc xem log qua giao diện có thể bị gián đoạn hoặc không thực hiện được. Trong trường hợp này, US-10 có thể cần phải chuyển sang xem file log trực tiếp trên máy chủ (Alternative Flow). \newline \textbf{Alternative Flow - Step 2a. Không có quyền truy cập máy chủ hoặc file log:} \newline    1. US-10 không có thông tin đăng nhập hoặc không được cấp quyền truy cập vào máy chủ hệ thống, hoặc file log của hệ thống bị lỗi, bị xóa, hoặc không được cấu hình để ghi. \newline    2. US-10 không thể xem được log theo phương pháp này. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.15-1 (V2 - System):} Hệ thống cần được cấu hình để ghi nhận nhật ký ở một mức độ chi tiết phù hợp (log level). Ví dụ: trong môi trường phát triển hoặc thử nghiệm (development/staging), log level có thể được đặt là INFO hoặc DEBUG để có nhiều thông tin. Trong môi trường sản phẩm thực tế (production), log level thường được đặt là WARNING hoặc ERROR để giảm dung lượng log và tập trung vào các vấn đề quan trọng. \newline - \textbf{BR-UC10.15-2 (V2 - System):} Các bản ghi log lỗi (đặc biệt là ERROR, CRITICAL) cần cung cấp đủ thông tin, bao gồm cả dấu vết ngăn xếp (stack trace) nếu có, để các nhà phát triển hoặc quản trị viên có thể dễ dàng xác định nguyên nhân và vị trí gây ra sự cố trong mã nguồn. \newline - \textbf{BR-UC10.15-3:} Cần có chính sách và cơ chế quản lý vòng đời của các file log trên máy chủ (ví dụ: xoay vòng log - log rotation, nén log cũ, giới hạn dung lượng tối đa) để tránh việc file log phát triển quá lớn, chiếm hết dung lượng đĩa của máy chủ và ảnh hưởng đến hoạt động của hệ thống. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.15-1 (V2 - Security):} Quyền truy cập vào nhật ký hệ thống, đặc biệt là quyền truy cập vào file log trực tiếp trên máy chủ, phải được kiểm soát cực kỳ chặt chẽ và chỉ được cấp cho những Quản trị viên hệ thống có thẩm quyền và trách nhiệm. Log có thể chứa thông tin nhạy cảm. \newline - \textbf{NFR-UC10.15-2 (V2 - Performance):} Quá trình ghi log của hệ thống không được làm ảnh hưởng đáng kể đến hiệu năng chung của ứng dụng. Việc truy vấn và hiển thị log cũng cần được tối ưu để hoạt động hiệu quả, ngay cả khi có lượng lớn bản ghi log. \newline - \textbf{NFR-UC10.15-3 (V2 - Maintainability \& Diagnostics):} Nhật ký hệ thống là một công cụ không thể thiếu cho việc bảo trì, theo dõi hoạt động, chẩn đoán và khắc phục sự cố của hệ thống. Chất lượng và mức độ chi tiết của log ảnh hưởng trực tiếp đến khả năng giải quyết vấn đề. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-16: Đăng nhập vào Hệ thống}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-16: Đăng nhập vào Hệ thống} \label{tab:uc_md10_16_login_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Đăng nhập vào Hệ thống \\
+\hline
+Use Case ID & UC-MD10-16 \\
+\hline
+Use Case Description & Cho phép một Người dùng đã có tài khoản (Nhân viên các cấp, Quản lý, Quản trị viên) cung cấp thông tin xác thực (tên đăng nhập/email và mật khẩu) để truy cập vào các chức năng và dữ liệu của hệ thống theo quyền hạn đã được cấp. \\
+\hline
+Actor & US-01, US-02, US-03, US-04, US-05, US-06, US-07, US-09, US-10 (Bất kỳ Người dùng nội bộ nào có tài khoản) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Người dùng muốn bắt đầu một phiên làm việc và truy cập vào các tài nguyên của hệ thống. \\
+\hline
+Pre-Condition & - Người dùng đã có một tài khoản hợp lệ trong hệ thống (đã được tạo qua UC-MD10-01). \newline - Người dùng biết Tên đăng nhập (thường là địa chỉ email) và Mật khẩu của mình. \newline - Giao diện trang Đăng nhập của hệ thống đang được hiển thị cho người dùng. \\
+\hline
+Post-Condition & - \textbf{Thành công:} Người dùng được xác thực thành công. Hệ thống tạo một phiên làm việc (session) cho người dùng. Người dùng được chuyển hướng đến giao diện chính của hệ thống (dashboard hoặc màn hình làm việc mặc định) tương ứng với vai trò và quyền hạn của họ. \newline - \textbf{Thất bại:} Người dùng không được xác thực. Hệ thống hiển thị thông báo lỗi (ví dụ: "Tên đăng nhập hoặc mật khẩu không đúng") và vẫn giữ người dùng ở trang Đăng nhập. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng mở trình duyệt web và truy cập vào địa chỉ URL của hệ thống. \newline 2. Hệ thống hiển thị trang Đăng nhập, yêu cầu nhập Tên đăng nhập (Email) và Mật khẩu. \newline 3. Người dùng nhập Tên đăng nhập (Email) của mình vào trường tương ứng. \newline 4. Người dùng nhập Mật khẩu của mình vào trường Mật khẩu. \newline 5. Người dùng nhấp vào nút "Đăng nhập" (Login). \newline 6. Hệ thống (System) kiểm tra thông tin Tên đăng nhập và Mật khẩu mà người dùng cung cấp so với dữ liệu đã lưu trong cơ sở dữ liệu người dùng. \newline 7. \textbf{Nếu thông tin xác thực là chính xác và tài khoản đang hoạt động:} \newline    a. Hệ thống tạo một phiên làm việc (session) mới cho người dùng. \newline    b. Hệ thống ghi nhận thời gian đăng nhập. \newline    c. Hệ thống chuyển hướng người dùng đến trang làm việc mặc định của họ (ví dụ: dashboard, màn hình POS, module Đặt chỗ...). \newline 8. \textbf{Nếu thông tin xác thực KHÔNG chính xác hoặc tài khoản đã bị vô hiệu hóa:} \newline    a. Hệ thống hiển thị một thông báo lỗi trên trang Đăng nhập (ví dụ: "Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng thử lại." hoặc "Tài khoản của bạn đã bị khóa."). \newline    b. Hệ thống không cho phép truy cập và giữ nguyên trang Đăng nhập để người dùng thử lại. \\
+\hline
+Alternative Flow & \textbf{4a. Người dùng chọn tùy chọn "Ghi nhớ tôi" (Remember me):} \newline    1. Nếu giao diện đăng nhập có tùy chọn này, người dùng có thể đánh dấu vào. \newline    2. Nếu đăng nhập thành công, hệ thống có thể lưu một cookie để tự động điền tên đăng nhập hoặc duy trì phiên đăng nhập lâu hơn (tùy cấu hình bảo mật). \newline \textbf{8c. Tài khoản bị khóa tạm thời do nhập sai mật khẩu nhiều lần:} \newline    1. Nếu hệ thống có chính sách khóa tài khoản sau một số lần nhập sai mật khẩu liên tiếp. \newline    2. Sau N lần nhập sai, hệ thống hiển thị thông báo "Tài khoản của bạn đã bị khóa tạm thời. Vui lòng thử lại sau X phút hoặc liên hệ quản trị viên." \\
+\hline
+Exception Flow & \textbf{6a. Lỗi hệ thống trong quá trình xác thực:} \newline    1. Hệ thống gặp lỗi kỹ thuật (ví dụ: lỗi kết nối cơ sở dữ liệu) khi đang kiểm tra thông tin đăng nhập. \newline    2. Hệ thống hiển thị một thông báo lỗi chung (ví dụ: "Đã xảy ra lỗi. Vui lòng thử lại sau."). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.16-1 (V2):} Mật khẩu phải được lưu trữ trong cơ sở dữ liệu dưới dạng mã hóa (hashed) an toàn, không lưu dạng text thuần. \newline - \textbf{BR-UC10.16-2 (V2):} Hệ thống nên có chính sách về độ mạnh mật khẩu và có thể yêu cầu người dùng thay đổi mật khẩu định kỳ hoặc sau lần đăng nhập đầu tiên (nếu mật khẩu ban đầu do admin cấp). \newline - \textbf{BR-UC10.16-3 (V2):} Cần có cơ chế xử lý trường hợp nhập sai mật khẩu nhiều lần (ví dụ: khóa tài khoản tạm thời, yêu cầu captcha) để chống tấn công brute-force. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.16-1 (V2 - Security):} Quá trình xác thực phải được thực hiện qua kết nối an toàn (HTTPS). Mật khẩu không được truyền đi dưới dạng text thuần. \newline - \textbf{NFR-UC10.16-2 (V2 - Performance):} Thời gian phản hồi của hệ thống khi người dùng nhấn nút "Đăng nhập" phải nhanh chóng (dưới 2-3 giây). \newline - \textbf{NFR-UC10.16-3 (V2 - Usability):} Giao diện đăng nhập phải đơn giản, rõ ràng. Thông báo lỗi phải dễ hiểu và có hướng dẫn cho người dùng. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-17: Đăng xuất khỏi Hệ thống}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-17: Đăng xuất khỏi Hệ thống} \label{tab:uc_md10_17_logout_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Đăng xuất khỏi Hệ thống \\
+\hline
+Use Case ID & UC-MD10-17 \\
+\hline
+Use Case Description & Cho phép một Người dùng đang đăng nhập (Nhân viên các cấp, Quản lý, Quản trị viên) kết thúc phiên làm việc hiện tại của mình và thoát khỏi hệ thống một cách an toàn. \\
+\hline
+Actor & US-01, US-02, US-03, US-04, US-05, US-06, US-07, US-09, US-10 (Bất kỳ Người dùng nội bộ nào đã đăng nhập) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Người dùng muốn kết thúc công việc với hệ thống, đặc biệt khi sử dụng máy tính chung hoặc muốn bảo vệ tài khoản của mình. \\
+\hline
+Pre-Condition & - Người dùng đã đăng nhập thành công vào hệ thống (đã thực hiện UC-MD10-16). \newline - Giao diện hệ thống đang hiển thị, và có một nút/liên kết "Đăng xuất" (Logout) rõ ràng. \\
+\hline
+Post-Condition & - Phiên làm việc (session) hiện tại của người dùng trên máy chủ bị hủy bỏ hoặc vô hiệu hóa. \newline - Mọi cookie hoặc token liên quan đến phiên đăng nhập trên trình duyệt của người dùng được xóa hoặc làm cho không hợp lệ. \newline - Người dùng được chuyển hướng về trang Đăng nhập của hệ thống (UC-MD10-16) hoặc một trang chủ công khai (nếu có). \newline - Để tiếp tục sử dụng các chức năng yêu cầu đăng nhập, người dùng sẽ phải thực hiện lại quy trình Đăng nhập. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng đang ở một trang bất kỳ trong hệ thống sau khi đã đăng nhập. \newline 2. Người dùng tìm đến nút, biểu tượng hoặc mục menu có nhãn "Đăng xuất" (Logout), "Thoát", hoặc tương tự (thường nằm ở góc trên bên phải giao diện, trong menu người dùng). \newline 3. Người dùng nhấp vào nút/liên kết "Đăng xuất". \newline 4. Hệ thống (System) nhận được yêu cầu đăng xuất. \newline 5. Hệ thống thực hiện các hành động sau: \newline    a. Hủy bỏ hoặc vô hiệu hóa phiên làm việc (session) hiện tại của người dùng trên máy chủ. \newline    b. Xóa các cookie hoặc token xác thực liên quan khỏi trình duyệt của người dùng. \newline 6. Hệ thống chuyển hướng người dùng về trang Đăng nhập của hệ thống. \\
+\hline
+Alternative Flow & \textbf{3a. Hệ thống yêu cầu xác nhận trước khi đăng xuất:} \newline    1. Sau khi người dùng nhấp "Đăng xuất", hệ thống hiển thị một hộp thoại hỏi "Bạn có chắc chắn muốn đăng xuất không?". \newline    2. Người dùng chọn "Có" / "Đồng ý". \newline    3. Use Case tiếp tục từ bước 4. \newline    4. Nếu người dùng chọn "Không" / "Hủy", họ vẫn ở lại trang hiện tại. \\
+\hline
+Exception Flow & \textbf{5c. Lỗi hệ thống trong quá trình đăng xuất:} \newline    1. Hệ thống gặp lỗi kỹ thuật (ví dụ: lỗi máy chủ) khi cố gắng hủy phiên làm việc. \newline    2. Hệ thống có thể hiển thị một thông báo lỗi chung. \newline    3. Trong trường hợp xấu nhất, phiên làm việc có thể không được hủy hoàn toàn trên máy chủ, nhưng người dùng vẫn có thể bị chuyển về trang đăng nhập. (Việc này ít khi xảy ra với các hệ thống hiện đại). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.17-1 (V2):} Chức năng đăng xuất phải luôn sẵn có cho người dùng đã đăng nhập. \newline - \textbf{BR-UC10.17-2 (V2):} Việc đăng xuất phải đảm bảo kết thúc hoàn toàn phiên làm việc, không cho phép truy cập lại các trang yêu cầu xác thực bằng cách sử dụng nút "Back" của trình duyệt (trừ khi trang đó được cache và không thực sự yêu cầu session mới). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.17-1 (V2 - Security):} Quá trình đăng xuất phải hiệu quả trong việc vô hiệu hóa phiên làm việc để ngăn chặn truy cập trái phép sau đó. \newline - \textbf{NFR-UC10.17-2 (V2 - Usability):} Nút/liên kết đăng xuất phải dễ dàng tìm thấy. \newline - \textbf{NFR-UC10.17-3 (V2 - Performance):} Hành động đăng xuất và chuyển hướng phải diễn ra nhanh chóng. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-18: (Tùy chọn) Người dùng Yêu cầu Đặt lại Mật khẩu (Quên Mật khẩu)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-18: (Tùy chọn) Người dùng Yêu cầu Đặt lại Mật khẩu (Quên Mật khẩu)} \label{tab:uc_md10_18_forgot_password_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & (Tùy chọn) Người dùng Yêu cầu Đặt lại Mật khẩu (Quên Mật khẩu) \\
+\hline
+Use Case ID & UC-MD10-18 \\
+\hline
+Use Case Description & Cho phép một Người dùng (Nhân viên các cấp, Quản lý, Quản trị viên) không thể nhớ mật khẩu của mình, tự yêu cầu hệ thống gửi hướng dẫn đặt lại mật khẩu đến địa chỉ email đã đăng ký với tài khoản của họ. \\
+\hline
+Actor & US-01, US-02, US-03, US-04, US-05, US-06, US-07, US-09, US-10 (Bất kỳ Người dùng nội bộ nào có tài khoản và quên mật khẩu) \\
+\hline
+Priority & Must Have (Nếu không, người dùng quên mật khẩu sẽ hoàn toàn phụ thuộc vào Admin - UC-MD10-07) \\
+\hline
+Trigger & Người dùng nhập sai mật khẩu khi cố gắng đăng nhập (UC-MD10-16) hoặc chủ động nhận ra mình đã quên mật khẩu. \\
+\hline
+Pre-Condition & - Người dùng đang ở trang Đăng nhập của hệ thống. \newline - Giao diện trang Đăng nhập có một liên kết/nút "Quên mật khẩu?" (Forgot Password?) hoặc tương tự. \newline - Người dùng nhớ địa chỉ email đã sử dụng để đăng ký tài khoản. \newline - Hệ thống đã được cấu hình Máy chủ Gửi Email (Outgoing Email Server - UC-MD10-10) và có thể gửi email đi. \\
+\hline
+Post-Condition & - \textbf{Thành công:} Nếu địa chỉ email người dùng cung cấp khớp với một tài khoản hiện có trong hệ thống, hệ thống sẽ gửi một email đến địa chỉ đó. Email này chứa một liên kết đặc biệt (có thời hạn và dùng một lần) cho phép người dùng truy cập vào một trang để tự đặt mật khẩu mới. \newline - \textbf{Thất bại (Email không tồn tại):} Hệ thống có thể hiển thị thông báo "Nếu email của bạn tồn tại trong hệ thống, bạn sẽ nhận được hướng dẫn đặt lại mật khẩu." (để tránh tiết lộ email nào có/không có trong hệ thống) hoặc một thông báo lỗi cụ thể hơn tùy chính sách. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng đang ở trang Đăng nhập của hệ thống. \newline 2. Người dùng nhấp vào liên kết/nút "Quên mật khẩu?" / "Đặt lại mật khẩu". \newline 3. Hệ thống chuyển hướng người dùng đến một trang/form yêu cầu nhập Địa chỉ Email đã đăng ký tài khoản. \newline 4. Người dùng nhập địa chỉ email của mình vào trường cung cấp. \newline 5. Người dùng nhấp vào nút "Gửi hướng dẫn" / "Đặt lại mật khẩu". \newline 6. Hệ thống (System) kiểm tra xem địa chỉ email người dùng cung cấp có tồn tại trong cơ sở dữ liệu người dùng và tài khoản đó có đang hoạt động hay không. \newline 7. \textbf{Nếu địa chỉ email tồn tại và hợp lệ:} \newline    a. Hệ thống tạo một token/liên kết đặt lại mật khẩu duy nhất, có thời hạn sử dụng ngắn. \newline    b. Hệ thống soạn và gửi một email đến địa chỉ email đó. Nội dung email bao gồm liên kết đặt lại mật khẩu và hướng dẫn người dùng nhấp vào liên kết để đặt mật khẩu mới. \newline    c. Hệ thống hiển thị một thông báo cho người dùng trên trang web (ví dụ: "Hướng dẫn đặt lại mật khẩu đã được gửi đến địa chỉ email của bạn. Vui lòng kiểm tra hộp thư đến (và cả mục Spam/Junk)."). \newline 8. \textbf{Nếu địa chỉ email không tồn tại trong hệ thống hoặc tài khoản không hợp lệ:} \newline    a. Hệ thống (để bảo mật, tránh xác nhận email nào có/không có) vẫn có thể hiển thị thông báo tương tự như bước 7c. Hoặc, tùy theo cấu hình, có thể hiển thị "Địa chỉ email không được tìm thấy." \\
+\hline
+Alternative Flow & \textbf{Bước tiếp theo (Người dùng nhận email và đặt lại mật khẩu - thường là một luồng riêng nhưng liên quan chặt chẽ):} \newline    1. Người dùng kiểm tra email và nhấp vào liên kết đặt lại mật khẩu. \newline    2. Hệ thống mở một trang yêu cầu người dùng nhập Mật khẩu mới và Xác nhận Mật khẩu mới. \newline    3. Người dùng nhập mật khẩu mới (tuân thủ chính sách độ mạnh). \newline    4. Người dùng nhấn "Lưu mật khẩu mới" / "Đặt lại". \newline    5. Hệ thống xác thực token, cập nhật mật khẩu mới cho tài khoản người dùng. \newline    6. Hệ thống báo "Mật khẩu của bạn đã được đặt lại thành công. Bạn có thể đăng nhập ngay bây giờ." và có thể chuyển hướng về trang Đăng nhập. \\
+\hline
+Exception Flow & \textbf{7d. Lỗi hệ thống khi gửi email:} \newline    1. Hệ thống không thể gửi email (do lỗi cấu hình Máy chủ Gửi Email - UC-MD10-10, hoặc lỗi dịch vụ email). \newline    2. Hệ thống hiển thị thông báo lỗi chung "Không thể gửi email hướng dẫn. Vui lòng liên hệ quản trị viên." Người dùng không nhận được email. \newline \textbf{Alternative Flow - Step 5a. Token đặt lại mật khẩu không hợp lệ/hết hạn:} \newline    1. Người dùng nhấp vào liên kết trong email nhưng token đã hết hạn hoặc không hợp lệ. \newline    2. Hệ thống báo lỗi "Liên kết đặt lại mật khẩu không hợp lệ hoặc đã hết hạn. Vui lòng yêu cầu lại." \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.18-1 (V2):} Liên kết đặt lại mật khẩu phải là duy nhất, chỉ sử dụng được một lần và có thời hạn hiệu lực ngắn (ví dụ: 1 giờ, 24 giờ) để tăng cường bảo mật. \newline - \textbf{BR-UC10.18-2 (V2):} Mật khẩu mới do người dùng tự đặt phải tuân thủ các chính sách về độ mạnh mật khẩu của hệ thống (nếu được cấu hình). \newline - \textbf{BR-UC10.18-3 (V2):} Chức năng này chỉ nên áp dụng cho các tài khoản đang hoạt động hoặc ít nhất là không bị khóa vĩnh viễn. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.18-1 (V2 - Security):} Toàn bộ quy trình phải được thiết kế an toàn để ngăn chặn việc chiếm đoạt tài khoản. Email gửi đi phải sử dụng HTTPS cho liên kết. \newline - \textbf{NFR-UC10.18-2 (V2 - Usability):} Quy trình phải đơn giản và dễ thực hiện cho người dùng cuối. Hướng dẫn trong email và trên trang đặt lại mật khẩu phải rõ ràng. \newline - \textbf{NFR-UC10.18-3 (V2 - Reliability):} Hệ thống gửi email và xử lý token đặt lại mật khẩu phải đáng tin cậy. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD10-19: Khách hàng Tự Đăng ký Tài khoản}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD10-19: Khách hàng Tự Đăng ký Tài khoản} \label{tab:uc_md10_19_customer_registration_in_codeblock} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\midrule
+\endfoot % Footer cho bảng
+\bottomrule
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Khách hàng Tự Đăng ký Tài khoản \\
+\hline
+Use Case ID & UC-MD10-19 \\
+\hline
+Use Case Description & Cho phép một Khách hàng mới (US-08) chưa có tài khoản, tự tạo một tài khoản người dùng trên giao diện web/app của nhà hàng để có thể đặt chỗ, quản lý các lượt đặt chỗ cá nhân và các thông tin khác. \\
+\hline
+Actor & US-08 (Khách hàng) \\
+\hline
+Priority & Must Have (Nếu muốn khách hàng quản lý đặt chỗ online) \\
+\hline
+Trigger & Khách hàng mới muốn tạo tài khoản để sử dụng các dịch vụ online của nhà hàng. \\
+\hline
+Pre-Condition & - Giao diện web/app của nhà hàng có chức năng "Đăng ký" (Sign Up / Register). \newline - Hệ thống đã được cấu hình Máy chủ Gửi Email (UC-MD10-10) để gửi email xác thực (nếu có). \\
+\hline
+Post-Condition & - \textbf{Thành công (và có xác thực email):} Một tài khoản người dùng mới cho khách hàng được tạo trong hệ thống (có thể ở trạng thái "Chờ xác thực"). Một email xác thực được gửi đến địa chỉ email khách hàng cung cấp. Sau khi khách hàng xác thực qua email, tài khoản được kích hoạt và khách hàng có thể đăng nhập. \newline - \textbf{Thành công (không cần xác thực email):} Tài khoản người dùng mới cho khách hàng được tạo và kích hoạt ngay. Khách hàng có thể đăng nhập ngay. \newline - \textbf{Thất bại:} Tài khoản không được tạo do lỗi nhập liệu hoặc lỗi hệ thống. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Có xác thực email) & 1. Khách hàng (US-08) truy cập giao diện web/app của nhà hàng và chọn nút/liên kết "Đăng ký". \newline 2. Hệ thống hiển thị form đăng ký, yêu cầu nhập các thông tin: \newline    - Họ và Tên (Full Name). \newline    - Địa chỉ Email (Email Address - sẽ dùng làm tên đăng nhập). \newline    - Mật khẩu (Password). \newline    - Xác nhận Mật khẩu (Confirm Password). \newline    - (Tùy chọn) Số điện thoại. \newline    - (Tùy chọn) Đồng ý với Điều khoản Dịch vụ. \newline 3. US-08 nhập đầy đủ các thông tin yêu cầu. \newline 4. US-08 nhấn nút "Đăng ký" / "Tạo tài khoản". \newline 5. Hệ thống (System) kiểm tra tính hợp lệ của dữ liệu: \newline    - Các trường bắt buộc đã được điền. \newline    - Định dạng email hợp lệ. \newline    - Mật khẩu và Xác nhận mật khẩu khớp nhau. \newline    - Độ mạnh mật khẩu (nếu có chính sách). \newline    - Địa chỉ Email chưa được sử dụng bởi một tài khoản khác. \newline 6. \textbf{Nếu dữ liệu hợp lệ:} \newline    a. Hệ thống tạo một bản ghi người dùng mới cho khách hàng (thường là loại "Portal User" hoặc "Public User" trong hệ thống), có thể với trạng thái "Chờ xác thực" hoặc "Không hoạt động". \newline    b. Hệ thống tạo một token xác thực email duy nhất, có thời hạn. \newline    c. Hệ thống gửi một email đến địa chỉ email US-08 đã cung cấp, chứa một liên kết xác thực kèm token. \newline    d. Hệ thống hiển thị thông báo cho US-08: "Đăng ký gần hoàn tất. Vui lòng kiểm tra email của bạn để xác thực tài khoản." \newline 7. \textbf{Nếu dữ liệu không hợp lệ (bước 5):} \newline    a. Hệ thống hiển thị thông báo lỗi cụ thể (ví dụ: "Email đã được sử dụng", "Mật khẩu không khớp", "Vui lòng nhập tên"). \newline    b. Hệ thống giữ nguyên form để US-08 sửa lại. Use Case quay lại bước 3. \\
+\hline
+Alternative Flow & \textbf{Luồng Xác thực Email (Tiếp nối từ Basic Flow bước 6d):} \newline    1. US-08 kiểm tra hộp thư đến và nhấp vào liên kết xác thực trong email. \newline    2. Hệ thống nhận yêu cầu xác thực, kiểm tra tính hợp lệ của token (còn hạn, đúng token). \newline    3. Nếu token hợp lệ, hệ thống kích hoạt tài khoản người dùng (ví dụ: đặt trạng thái "Hoạt động"). \newline    4. Hệ thống hiển thị thông báo "Tài khoản của bạn đã được xác thực thành công. Bạn có thể đăng nhập ngay bây giờ." và có thể chuyển hướng đến trang đăng nhập. \newline \textbf{Basic Flow (Không yêu cầu xác thực email):} \newline    1. Các bước 1-5 tương tự Basic Flow. \newline    2. Nếu dữ liệu hợp lệ (bước 6), hệ thống tạo bản ghi người dùng mới và kích hoạt ngay. \newline    3. Hệ thống hiển thị thông báo "Đăng ký thành công. Bạn có thể đăng nhập ngay." và có thể chuyển hướng đến trang đăng nhập. \\
+\hline
+Exception Flow & \textbf{6e. Lỗi hệ thống khi tạo người dùng hoặc gửi email xác thực:} \newline    1. Hệ thống gặp lỗi kỹ thuật. \newline    2. Hệ thống hiển thị thông báo lỗi chung "Đã xảy ra lỗi trong quá trình đăng ký. Vui lòng thử lại sau." \newline \textbf{Alternative Flow - Step 3a (Xác thực Email). Token không hợp lệ/hết hạn:} \newline    1. US-08 nhấp vào liên kết nhưng token đã hết hạn hoặc không đúng. \newline    2. Hệ thống báo lỗi "Liên kết xác thực không hợp lệ hoặc đã hết hạn. Vui lòng thử đăng ký lại hoặc yêu cầu gửi lại email xác thực (nếu có chức năng)." \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC10.19-1 (V2):} Địa chỉ Email khách hàng cung cấp phải là duy nhất trong hệ thống đối với các tài khoản khách hàng. \newline - \textbf{BR-UC10.19-2 (V2):} Chính sách mật khẩu (độ dài, độ phức tạp) nên được áp dụng khi khách hàng tạo mật khẩu. \newline - \textbf{BR-UC10.19-3 (V2):} Việc yêu cầu xác thực email là một biện pháp bảo mật tốt để đảm bảo email là của khách hàng và giảm thiểu tài khoản ảo. Liên kết xác thực phải có thời hạn. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC10.19-1 (V2 - Security):} Quá trình đăng ký phải được thực hiện qua HTTPS. Mật khẩu phải được hash trước khi lưu. \newline - \textbf{NFR-UC10.19-2 (V2 - Usability):} Form đăng ký phải đơn giản, dễ hiểu. Thông báo lỗi và hướng dẫn phải rõ ràng. \newline - \textbf{NFR-UC10.19-3 (V2 - Performance):} Tốc độ xử lý đăng ký và gửi email phải nhanh. \\
+\hline
+\end{longtable}

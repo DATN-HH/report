@@ -1,25 +1,22 @@
 \subsection{Module MD-05: Quản lý Bán hàng Tại chỗ (POS - Eat-in)}
-
-\subsubsection{Use Case UC-MD05-01: Mở phiên làm việc POS}
-
+\subsubsection{Use Case UC-MD05-01: Mở Phiên làm việc POS}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-01: Mở phiên làm việc POS} \label{tab:uc_md05_01} \\
+\caption{Đặc tả Use Case UC-MD05-01: Mở Phiên làm việc POS} \label{tab:uc_md05_01_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Mở phiên làm việc POS \\
+Use Case Name & Mở Phiên làm việc POS \\
 \hline
 Use Case ID & UC-MD05-01 \\
 \hline
-Use Case Description & Cho phép Nhân viên được phân quyền (Thu ngân, Quản lý) bắt đầu một phiên làm việc mới trên giao diện Point of Sale. Nếu tính năng kiểm soát tiền mặt được bật, hệ thống yêu cầu nhập số dư tiền mặt đầu ca trong ngăn kéo. \\
+Use Case Description & Cho phép Nhân viên được phân quyền (US-05: Thu ngân, US-01: Quản lý nhà hàng) bắt đầu một phiên làm việc mới trên giao diện Point of Sale. Nếu tính năng kiểm soát tiền mặt được bật, hệ thống yêu cầu người dùng nhập số dư tiền mặt đầu ca có trong ngăn kéo. \\
 \hline
 Actor & US-05 (Nhân viên thu ngân), US-01 (Quản lý nhà hàng) \\
 \hline
@@ -27,199 +24,191 @@ Priority & Must Have \\
 \hline
 Trigger & Bắt đầu một ca làm việc mới hoặc khi cần mở lại POS sau khi phiên trước đã đóng. \\
 \hline
-Pre-Condition & - Người dùng đã đăng nhập vào hệ thống Odoo với tài khoản được phép truy cập Point of Sale. \newline - Ít nhất một cấu hình Point of Sale (ví dụ: "Restaurant") đã được thiết lập. \newline - Phiên làm việc POS trước đó (nếu có) đã được đóng đúng cách. \\
+Pre-Condition & - Người dùng đã đăng nhập vào hệ thống với tài khoản được phép truy cập Point of Sale. \newline - Ít nhất một cấu hình Point of Sale (ví dụ: "Restaurant") đã được thiết lập trong hệ thống. \newline - Phiên làm việc POS trước đó (nếu có cho cấu hình POS này) đã được đóng đúng cách. \\
 \hline
-Post-Condition & - Một phiên làm việc POS mới được tạo và ở trạng thái "Đang hoạt động" (In Progress). \newline - Giao diện chính của POS (ví dụ: sơ đồ tầng) được hiển thị, sẵn sàng cho việc nhận đơn hàng. \newline - Nếu có kiểm soát tiền mặt, số dư tiền mặt đầu ca được ghi nhận. \newline - Hệ thống bắt đầu ghi nhận các giao dịch thuộc về phiên làm việc này. \\
+Post-Condition & - Một phiên làm việc POS mới được tạo và ghi nhận trong hệ thống với trạng thái "Đang hoạt động" (In Progress). \newline - Giao diện chính của POS (ví dụ: sơ đồ tầng hoặc màn hình chọn sản phẩm) được hiển thị, sẵn sàng cho việc nhận đơn hàng. \newline - Nếu tính năng kiểm soát tiền mặt được bật, số dư tiền mặt đầu ca do người dùng nhập được ghi nhận cho phiên làm việc này. \newline - Hệ thống bắt đầu ghi nhận tất cả các giao dịch bán hàng và thanh toán thuộc về phiên làm việc mới này. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Có kiểm soát tiền mặt) & 1. Người dùng (US-05/US-01) truy cập module Point of Sale. \newline 2. Người dùng chọn cấu hình POS muốn mở (ví dụ: "Restaurant"). \newline 3. Hệ thống kiểm tra xem có phiên nào đang mở cho cấu hình này không. Nếu không, hệ thống hiển thị tùy chọn "Mở phiên mới" (New Session) hoặc "Tiếp tục phiên cũ" (Resume) nếu có phiên chưa đóng đúng cách. Người dùng chọn "Mở phiên mới". \newline 4. Do có kiểm soát tiền mặt, hệ thống hiển thị hộp thoại yêu cầu nhập "Số dư tiền mặt đầu ca" (Opening Cash Balance). \newline 5. Người dùng đếm số tiền mặt thực tế có trong ngăn kéo và nhập số tiền đó vào hệ thống. \newline 6. Người dùng nhấn nút "Mở phiên" (Open Session) hoặc "Xác nhận". \newline 7. Hệ thống ghi nhận số dư tiền mặt đầu ca và tạo bản ghi phiên POS mới với trạng thái "In Progress". \newline 8. Hệ thống tải và hiển thị giao diện chính của POS (ví dụ: Sơ đồ tầng - FR-MD05-02). \\
+Basic Flow (Có kiểm soát tiền mặt) & 1. Người dùng (US-05 hoặc US-01) truy cập module Point of Sale từ giao diện chính. \newline 2. Người dùng chọn cấu hình POS cụ thể mà họ muốn mở (ví dụ: "Nhà hàng Chính"). \newline 3. Hệ thống kiểm tra. Nếu không có phiên nào đang mở cho cấu hình này, hệ thống hiển thị tùy chọn "Mở phiên mới" (New Session). Người dùng chọn "Mở phiên mới". \newline 4. Do tính năng kiểm soát tiền mặt được kích hoạt cho cấu hình POS này, hệ thống hiển thị hộp thoại/màn hình yêu cầu nhập "Số dư tiền mặt đầu ca" (Opening Cash Balance). \newline 5. Người dùng đếm số tiền mặt thực tế có trong ngăn kéo tại thời điểm đó và nhập chính xác số tiền này vào trường được cung cấp. \newline 6. Người dùng nhấn nút "Mở phiên" (Open Session) hoặc "Xác nhận" (Confirm). \newline 7. Hệ thống ghi nhận số dư tiền mặt đầu ca vào bản ghi của phiên POS mới. \newline 8. Hệ thống tạo bản ghi phiên POS mới với trạng thái "Đang hoạt động" (In Progress), liên kết với cấu hình POS đã chọn và người dùng đang thực hiện. \newline 9. Hệ thống tải và hiển thị giao diện chính của POS cho người dùng (thường là Sơ đồ tầng - UC-MD05-02). \\
 \hline
-Alternative Flow & \textbf{Basic Flow (Không kiểm soát tiền mặt):} \newline    1. Các bước 1-3 tương tự. \newline    2. Hệ thống bỏ qua bước 4, 5 (không yêu cầu nhập số dư đầu ca). \newline    3. Người dùng nhấn nút "Mở phiên" (Open Session) ở bước 6. \newline    4. Hệ thống tạo bản ghi phiên POS mới (bước 7) và hiển thị giao diện chính (bước 8). \newline \textbf{3a. Tiếp tục phiên cũ:} \newline    1. Nếu có phiên trước đó chưa được đóng đúng cách (ví dụ: do mất điện, lỗi trình duyệt), hệ thống hiển thị tùy chọn "Tiếp tục phiên cũ". \newline    2. Người dùng chọn "Tiếp tục phiên cũ". \newline    3. Hệ thống mở lại phiên làm việc đó và tải lại trạng thái gần nhất (các đơn hàng đang mở...). \newline    4. Use Case kết thúc, người dùng tiếp tục làm việc trên phiên cũ. \\
+Alternative Flow & \textbf{Basic Flow (Không kiểm soát tiền mặt):} \newline    1. Các bước 1-3 tương tự. \newline    2. Hệ thống bỏ qua bước 4 và 5 (không yêu cầu nhập số dư tiền mặt đầu ca). \newline    3. Người dùng nhấn nút "Mở phiên" (Open Session) ở bước 6 (nếu có bước xác nhận riêng) hoặc hệ thống trực tiếp mở phiên sau bước 3. \newline    4. Hệ thống thực hiện bước 8 và 9. \newline \textbf{3a. Tiếp tục phiên làm việc còn dang dở:} \newline    1. Nếu hệ thống phát hiện có một phiên làm việc trước đó cho cấu hình POS này chưa được đóng đúng cách (ví dụ: do sự cố mất điện, trình duyệt bị đóng đột ngột). \newline    2. Hệ thống hiển thị tùy chọn "Tiếp tục phiên cũ" (Resume Session) bên cạnh "Mở phiên mới". \newline    3. Người dùng chọn "Tiếp tục phiên cũ". \newline    4. Hệ thống mở lại phiên làm việc đó và cố gắng khôi phục trạng thái các đơn hàng đang mở (nếu có thể). \newline    5. Giao diện POS chính được hiển thị. Use Case kết thúc. \\
 \hline
-Exception Flow & \textbf{6a. Lỗi khi mở phiên:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng tạo bản ghi phiên mới hoặc ghi nhận số dư tiền mặt. \newline    2. Hệ thống hiển thị thông báo lỗi chung (ví dụ: "Không thể mở phiên làm việc. Vui lòng thử lại hoặc liên hệ quản trị viên."). \newline    3. Use Case kết thúc không thành công. \newline \textbf{6b. Số dư tiền mặt không hợp lệ:} \newline    1. Người dùng nhập giá trị không phải số hoặc số âm vào ô số dư tiền mặt. \newline    2. Hệ thống báo lỗi yêu cầu nhập số tiền hợp lệ. \newline    3. Use Case quay lại bước 5. \\
+Exception Flow & \textbf{6a. Lỗi khi mở phiên làm việc:} \newline    1. Hệ thống gặp lỗi kỹ thuật trong quá trình tạo bản ghi phiên mới hoặc ghi nhận số dư tiền mặt (ví dụ: lỗi kết nối cơ sở dữ liệu, lỗi logic nội bộ). \newline    2. Hệ thống hiển thị thông báo lỗi chi tiết (ví dụ: "Không thể mở phiên làm việc. Lỗi: [Mô tả lỗi]. Vui lòng thử lại hoặc liên hệ quản trị viên."). \newline    3. Use Case kết thúc không thành công. Phiên làm việc không được mở. \newline \textbf{5a. Nhập số dư tiền mặt không hợp lệ:} \newline    1. Người dùng nhập một giá trị không phải là số (ví dụ: chữ cái) hoặc một số âm vào trường "Số dư tiền mặt đầu ca". \newline    2. Hệ thống hiển thị thông báo lỗi tại trường đó, yêu cầu "Vui lòng nhập một số tiền hợp lệ." \newline    3. Hệ thống không cho phép tiếp tục. Use Case quay lại bước 5. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.1-1:} Mỗi cấu hình POS chỉ có thể có một phiên làm việc hoạt động (In Progress) tại một thời điểm. \newline - \textbf{BR-UC5.1-2:} Việc có yêu cầu nhập số dư tiền mặt đầu ca hay không phụ thuộc vào cấu hình "Cash Control" của Point of Sale đó. \newline - \textbf{BR-UC5.1-3:} Số dư tiền mặt đầu ca là cơ sở để đối chiếu tiền mặt cuối ca khi đóng phiên (UC-MD05-13). \\
+Business Rule & - \textbf{BR-UC5.1-1:} Mỗi cấu hình Point of Sale chỉ được phép có một phiên làm việc đang ở trạng thái "Đang hoạt động" (In Progress) tại một thời điểm. \newline - \textbf{BR-UC5.1-2:} Việc hệ thống có yêu cầu nhập số dư tiền mặt đầu ca hay không hoàn toàn phụ thuộc vào cài đặt "Kiểm soát Tiền mặt" (Cash Control) trong cấu hình của Point of Sale đó. \newline - \textbf{BR-UC5.1-3:} Số dư tiền mặt đầu ca là một trong những cơ sở quan trọng để thực hiện đối chiếu tiền mặt cuối ca khi người dùng thực hiện đóng phiên (UC-MD05-18). \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.1-1 (Usability):} Quy trình mở phiên phải đơn giản. Nếu có kiểm soát tiền mặt, việc nhập số dư phải rõ ràng. \newline - \textbf{NFR-UC5.1-2 (Performance):} Thời gian từ lúc nhấn "Mở phiên" đến khi giao diện POS chính hiển thị phải nhanh chóng (dưới 5 giây). \newline - \textbf{NFR-UC5.1-3 (Security):} Chỉ người dùng được cấp quyền mới có thể mở phiên POS. Việc kiểm soát tiền mặt tăng cường tính bảo mật và trách nhiệm. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.1-1 (Usability):} Quy trình mở phiên phải đơn giản và nhanh chóng cho người dùng. Nếu có yêu cầu nhập số dư tiền mặt, giao diện phải rõ ràng và dễ nhập liệu. \newline - \textbf{NFR-UC5.1-2 (Performance):} Thời gian từ lúc người dùng xác nhận mở phiên đến khi giao diện chính của POS sẵn sàng hoạt động phải ngắn (ví dụ: dưới 5 giây). \newline - \textbf{NFR-UC5.1-3 (Security):} Chỉ những người dùng được cấp quyền phù hợp (ví dụ: Thu ngân, Quản lý POS) mới có thể thực hiện hành động mở phiên làm việc. \newline - \textbf{NFR-UC5.1-4 (Reliability):} Hệ thống cần có khả năng xử lý trường hợp phiên cũ chưa đóng đúng cách và cho phép tiếp tục một cách an toàn (nếu có thể) hoặc buộc đóng phiên cũ trước khi mở phiên mới. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-02: Truy cập Sơ đồ tầng \& Chọn bàn}
-
+\subsubsection{Use Case UC-MD05-02: Chọn Bàn từ Sơ đồ tầng POS}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-02: Truy cập Sơ đồ tầng \& Chọn bàn} \label{tab:uc_md05_02} \\
+\caption{Đặc tả Use Case UC-MD05-02: Chọn Bàn từ Sơ đồ tầng POS} \label{tab:uc_md05_02_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Truy cập Sơ đồ tầng \& Chọn bàn \\
+Use Case Name & Chọn Bàn từ Sơ đồ tầng POS \\
 \hline
 Use Case ID & UC-MD05-02 \\
 \hline
-Use Case Description & Cho phép Nhân viên Phục vụ hoặc Lễ tân xem sơ đồ mặt bằng trực quan của nhà hàng trên giao diện POS, nắm bắt trạng thái của từng bàn (trống, đang có khách, đã đặt trước) và chọn một bàn cụ thể để thực hiện hành động tiếp theo (xếp khách, nhận đơn hàng...). \\
+Use Case Description & Cho phép Nhân viên Phục vụ (US-02) hoặc Nhân viên Lễ tân (US-03) xem sơ đồ mặt bằng trực quan của nhà hàng trên giao diện POS, nắm bắt trạng thái hiện tại của từng bàn (trống, đang có khách, đã đặt trước) và chọn một bàn cụ thể để thực hiện hành động tiếp theo như xếp khách hoặc nhận đơn hàng. \\
 \hline
 Actor & US-02 (Nhân viên phục vụ), US-03 (Nhân viên lễ tân) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & - Nhân viên vừa mở phiên POS (UC-MD05-01). \newline - Nhân viên hoàn thành một giao dịch và quay lại màn hình chính. \newline - Nhân viên cần xếp khách vào bàn hoặc kiểm tra tình trạng bàn. \\
+Trigger & - Nhân viên vừa mở phiên POS và giao diện mặc định là sơ đồ tầng. \newline - Nhân viên hoàn thành một giao dịch và hệ thống quay lại màn hình sơ đồ tầng. \newline - Nhân viên cần xếp khách mới vào bàn hoặc kiểm tra tình trạng các bàn. \\
 \hline
-Pre-Condition & - Phiên làm việc POS đang hoạt động (UC-MD05-01 thành công). \newline - Sơ đồ tầng (Floor Plan) với các bàn đã được cấu hình cho POS này trong backend (liên quan đến case study JBS). \newline - Hệ thống có thể lấy được trạng thái mới nhất của các bàn (ví dụ: thông tin từ module Đặt chỗ MD-03 về các bàn đã được đặt trước). \\
+Pre-Condition & - Phiên làm việc POS đang hoạt động (UC-MD05-01 thành công). \newline - Sơ đồ tầng (Floor Plan) với cách bố trí các bàn đã được cấu hình chính xác trong backend cho cấu hình POS này. \newline - Hệ thống có khả năng truy cập và hiển thị trạng thái mới nhất của các bàn, bao gồm thông tin đồng bộ từ module Đặt chỗ (MD-03) về các bàn đã được đặt trước. \\
 \hline
-Post-Condition & - Sơ đồ tầng của nhà hàng được hiển thị trên màn hình POS. \newline - Trạng thái của từng bàn (trống, có khách, đặt trước) được hiển thị trực quan (ví dụ: qua màu sắc, biểu tượng). \newline - Nếu nhân viên chọn một bàn, hệ thống sẽ chuyển sang ngữ cảnh của bàn đó (ví dụ: mở đơn hàng - UC-MD05-03). \\
+Post-Condition & - Sơ đồ tầng của nhà hàng (hoặc của tầng/khu vực đang chọn) được hiển thị rõ ràng trên màn hình POS. \newline - Trạng thái của từng bàn (ví dụ: trống, đang có khách, đã đặt trước, chờ dọn...) được hiển thị trực quan thông qua màu sắc, biểu tượng hoặc văn bản. \newline - Nếu nhân viên chọn một bàn, hệ thống sẽ chuyển sang ngữ cảnh của bàn đó, thường là mở giao diện đơn hàng (UC-MD05-03). \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow & 1. Sau khi mở phiên POS (UC-MD05-01) hoặc khi quay lại màn hình chính, hệ thống hiển thị giao diện Sơ đồ tầng (Floor Plan) mặc định. \newline 2. Giao diện hiển thị cách bố trí các bàn (hình vuông, tròn...) theo đúng cấu hình backend, có thể có hình nền là sơ đồ thực tế. \newline 3. Mỗi biểu tượng bàn hiển thị thông tin trạng thái: \newline    - \textbf{Trống (Available):} Màu sắc/hiển thị cho biết bàn sẵn sàng cho khách mới. \newline    - \textbf{Đang có khách (Occupied):} Màu sắc/hiển thị khác, có thể kèm thông tin thời gian khách ngồi hoặc số tiền tạm tính. \newline    - \textbf{Đã đặt trước (Reserved):} Màu sắc/hiển thị khác, có thể kèm thông tin giờ đặt và tên khách. \newline    - (Có thể có các trạng thái khác như: Chờ dọn, Chờ thanh toán...). \newline 4. Nhân viên (US-02/US-03) xem xét sơ đồ tầng để nắm tình hình. \newline 5. Nhân viên nhấp vào một biểu tượng bàn cụ thể. \\
+Basic Flow & 1. Sau khi mở phiên POS (UC-MD05-01) hoặc khi quay lại màn hình chính từ một giao dịch khác, hệ thống hiển thị giao diện Sơ đồ tầng (Floor Plan) mặc định (thường là tầng/khu vực chính). \newline 2. Giao diện hiển thị các biểu tượng bàn (hình vuông, tròn, chữ nhật...) được sắp xếp theo đúng cấu hình trong backend. Có thể có hình nền là sơ đồ thực tế của nhà hàng. \newline 3. Mỗi biểu tượng bàn hiển thị thông tin trạng thái trực quan: \newline    - \textbf{Trống (Available):} Ví dụ, màu xanh lá cây, cho biết bàn sẵn sàng cho khách mới. \newline    - \textbf{Đang có khách (Occupied):} Ví dụ, màu cam/vàng, có thể kèm thông tin về thời gian khách đã ngồi hoặc tổng số tiền tạm tính của đơn hàng. \newline    - \textbf{Đã đặt trước (Reserved):} Ví dụ, màu xanh dương/tím, có thể kèm thông tin về giờ khách đặt và tên khách (nếu có). \newline    - (Tùy chọn) Các trạng thái khác như: "Cần dọn dẹp" (To be Cleaned), "Chờ thanh toán" (Bill Printed). \newline 4. Nhân viên (US-02 hoặc US-03) xem xét sơ đồ tầng để nắm bắt tình hình chung. \newline 5. Nhân viên nhấp (hoặc chạm trên màn hình cảm ứng) vào một biểu tượng bàn cụ thể mà họ muốn tương tác. \\
 \hline
-Alternative Flow & \textbf{1a. Chuyển đổi giữa các tầng/khu vực:} \newline    1. Nếu nhà hàng có nhiều tầng hoặc khu vực (ví dụ: Trong nhà, Sân vườn) được cấu hình thành các Floor Plan riêng biệt. \newline    2. Giao diện POS có các nút/tab để chuyển đổi qua lại giữa các sơ đồ tầng này. \newline    3. Nhân viên chọn tầng/khu vực muốn xem. \newline    4. Hệ thống hiển thị sơ đồ tầng tương ứng. Use Case tiếp tục từ bước 2. \newline \textbf{4a. Xem thông tin nhanh của bàn (Hover):} \newline    1. Nhân viên di chuột (hoặc chạm giữ trên tablet) lên một biểu tượng bàn. \newline    2. Hệ thống hiển thị một tooltip/popup nhỏ chứa thông tin tóm tắt về bàn đó (số bàn, số ghế, trạng thái, tên khách nếu có...). \\
+Alternative Flow & \textbf{1a. Chuyển đổi giữa các tầng/khu vực (nếu có nhiều Floor Plan):} \newline    1. Nếu nhà hàng có nhiều sơ đồ tầng được cấu hình (ví dụ: Tầng 1, Tầng 2, Sân vườn). \newline    2. Giao diện POS cung cấp các nút hoặc tab để người dùng chọn và chuyển đổi qua lại giữa các sơ đồ tầng này. \newline    3. Nhân viên chọn tầng/khu vực muốn xem. \newline    4. Hệ thống tải và hiển thị sơ đồ tầng tương ứng. Use Case tiếp tục từ bước 2. \newline \textbf{4a. Xem thông tin nhanh của bàn khi di chuột qua (Hover/Tooltip):} \newline    1. Nhân viên di con trỏ chuột qua một biểu tượng bàn (hoặc chạm và giữ trên thiết bị cảm ứng). \newline    2. Hệ thống hiển thị một cửa sổ nhỏ (tooltip/popover) chứa thông tin tóm tắt về bàn đó (ví dụ: Số bàn, Số ghế tối đa, Trạng thái hiện tại, Tên khách đặt nếu có, Giờ đặt nếu là bàn Reserved). \\
 \hline
-Exception Flow & \textbf{1a. Lỗi tải sơ đồ tầng/trạng thái bàn:} \newline    1. Hệ thống gặp lỗi khi lấy dữ liệu cấu hình sơ đồ tầng hoặc dữ liệu trạng thái bàn hiện tại. \newline    2. Hệ thống hiển thị thông báo lỗi hoặc không thể hiển thị sơ đồ đúng cách. \newline    3. Nhân viên không thể thao tác chọn bàn. Use Case kết thúc không thành công. Cần kiểm tra cấu hình hoặc kết nối. \\
+Exception Flow & \textbf{1a. Lỗi tải sơ đồ tầng hoặc trạng thái bàn:} \newline    1. Hệ thống gặp sự cố khi cố gắng lấy dữ liệu cấu hình sơ đồ tầng từ backend hoặc khi truy vấn dữ liệu trạng thái bàn hiện tại (ví dụ: lỗi kết nối mạng, lỗi cơ sở dữ liệu, cấu hình sai). \newline    2. Hệ thống hiển thị thông báo lỗi (ví dụ: "Không thể tải sơ đồ tầng. Vui lòng thử lại.") hoặc sơ đồ tầng không hiển thị đúng cách, các bàn không có trạng thái. \newline    3. Nhân viên không thể thực hiện thao tác chọn bàn. Use Case kết thúc không thành công. Cần kiểm tra lại cấu hình hệ thống hoặc kết nối mạng. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.2-1:} Bố cục và thông tin các bàn (số bàn, số ghế) hiển thị trên POS phải khớp với cấu hình Floor Plan trong backend. \newline - \textbf{BR-UC5.2-2:} Trạng thái bàn phải được cập nhật gần thời gian thực nhất có thể, phản ánh đúng tình trạng khách ngồi, đặt trước, hoặc bàn trống. \newline - \textbf{BR-UC5.2-3:} Màu sắc hoặc biểu tượng sử dụng để biểu thị trạng thái bàn phải rõ ràng, dễ phân biệt và nhất quán. \newline - \textbf{BR-UC5.2-4:} Thông tin về đặt chỗ (Reserved) phải được đồng bộ từ module Đặt chỗ (MD-03) để hiển thị đúng trên sơ đồ tầng POS. \\
+Business Rule & - \textbf{BR-UC5.2-1:} Cách bố trí các bàn, số bàn, và số ghế của mỗi bàn hiển thị trên giao diện POS phải khớp chính xác với cấu hình Floor Plan đã được thiết lập trong backend. \newline - \textbf{BR-UC5.2-2:} Trạng thái của các bàn phải được cập nhật một cách nhanh chóng và gần với thời gian thực nhất có thể, phản ánh đúng tình trạng thực tế (khách đang ngồi, bàn đã được đặt trước, bàn trống). \newline - \textbf{BR-UC5.2-3:} Các màu sắc hoặc biểu tượng được sử dụng để biểu thị trạng thái của bàn phải rõ ràng, dễ phân biệt, và nhất quán trong toàn bộ hệ thống. \newline - \textbf{BR-UC5.2-4:} Thông tin về các lượt đặt chỗ (ví dụ: bàn nào đã được đặt trước, giờ đặt, tên khách) phải được đồng bộ từ module Đặt chỗ (MD-03) để hiển thị chính xác trên sơ đồ tầng của POS. \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.2-1 (Usability):} Sơ đồ tầng phải trực quan, dễ nhìn, dễ thao tác (chạm/click). Việc chuyển đổi giữa các tầng (nếu có) phải thuận tiện. \newline - \textbf{NFR-UC5.2-2 (Performance):} Thời gian tải sơ đồ tầng và cập nhật trạng thái bàn phải nhanh chóng, không gây chậm trễ cho nhân viên. \newline - \textbf{NFR-UC5.2-3 (Accuracy):} Thông tin trạng thái bàn hiển thị phải chính xác. \newline - \textbf{NFR-UC5.2-4 (Responsiveness):} Sơ đồ tầng cần hiển thị tốt trên các thiết bị POS có kích thước màn hình khác nhau (PC, tablet). \\
+Non-Functional Requirement & - \textbf{NFR-UC5.2-1 (Usability):} Sơ đồ tầng phải trực quan, dễ nhìn, và dễ dàng thao tác (chạm hoặc click) trên các thiết bị POS. Việc chuyển đổi giữa các tầng/khu vực (nếu có) phải thuận tiện và nhanh chóng. \newline - \textbf{NFR-UC5.2-2 (Performance):} Thời gian tải sơ đồ tầng (kể cả khi có nhiều bàn và nhiều tầng) và thời gian cập nhật trạng thái của các bàn phải nhanh, không gây ra độ trễ ảnh hưởng đến công việc của nhân viên. \newline - \textbf{NFR-UC5.2-3 (Accuracy):} Thông tin trạng thái bàn hiển thị trên POS phải chính xác và đáng tin cậy. \newline - \textbf{NFR-UC5.2-4 (Responsiveness):} Sơ đồ tầng cần hiển thị tốt và dễ tương tác trên các loại thiết bị POS có kích thước màn hình khác nhau (ví dụ: màn hình PC, máy tính bảng). \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-03: Bắt đầu/Mở đơn hàng tại bàn}
-
+\subsubsection{Use Case UC-MD05-03: Khởi tạo/Mở Đơn hàng cho Bàn}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-03: Bắt đầu/Mở đơn hàng tại bàn} \label{tab:uc_md05_03} \\
+\caption{Đặc tả Use Case UC-MD05-03: Khởi tạo/Mở Đơn hàng cho Bàn} \label{tab:uc_md05_03_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Bắt đầu/Mở đơn hàng tại bàn \\
+Use Case Name & Khởi tạo/Mở Đơn hàng cho Bàn \\
 \hline
 Use Case ID & UC-MD05-03 \\
 \hline
-Use Case Description & Sau khi Nhân viên Phục vụ chọn một bàn từ sơ đồ tầng (UC-MD05-02), hệ thống sẽ mở giao diện đơn hàng cho bàn đó. Nếu bàn trống, hệ thống tạo đơn hàng mới. Nếu bàn đang có khách, hệ thống mở lại đơn hàng đang hoạt động của bàn đó. \\
+Use Case Description & Sau khi Nhân viên Phục vụ (US-02) chọn một bàn từ sơ đồ tầng (UC-MD05-02), hệ thống sẽ tự động mở giao diện đơn hàng cho bàn đó. Nếu bàn được chọn là trống hoặc có đặt trước, hệ thống tạo một đơn hàng POS mới. Nếu bàn đang có khách (occupied), hệ thống mở lại đơn hàng đang hoạt động của bàn đó. \\
 \hline
 Actor & US-02 (Nhân viên phục vụ) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Nhân viên chọn một bàn cụ thể trên sơ đồ tầng POS (UC-MD05-02). \\
+Trigger & Nhân viên chọn một bàn cụ thể trên sơ đồ tầng POS (kết thúc UC-MD05-02). \\
 \hline
-Pre-Condition & - Nhân viên đang xem sơ đồ tầng POS (UC-MD05-02 thành công). \newline - Nhân viên chọn một bàn hợp lệ. \\
+Pre-Condition & - Nhân viên đang xem sơ đồ tầng POS (UC-MD05-02 thành công). \newline - Nhân viên chọn một biểu tượng bàn hợp lệ trên sơ đồ. \\
 \hline
-Post-Condition & - Giao diện đơn hàng (Order Screen) cho bàn đã chọn được hiển thị. \newline - Nếu là bàn mới, một bản ghi đơn hàng mới được tạo trong bộ nhớ hoặc cơ sở dữ liệu, liên kết với bàn đó và phiên POS hiện tại. \newline - Nếu là bàn đang có khách, đơn hàng hiện tại của bàn đó được tải lên giao diện. \newline - Hệ thống sẵn sàng để nhân viên thêm món (UC-MD05-05) hoặc tải món đặt trước (UC-MD05-04). \newline - Trạng thái của bàn trên sơ đồ tầng được cập nhật thành "Occupied" (nếu trước đó là trống hoặc đặt trước). \\
+Post-Condition & - Giao diện đơn hàng (Order Screen) cho bàn đã chọn được hiển thị cho nhân viên. \newline - Nếu là bàn mới (trống hoặc có đặt trước), một bản ghi đơn hàng POS mới được hệ thống tạo ra (trong bộ nhớ hoặc cơ sở dữ liệu), liên kết với bàn đó, nhân viên và phiên POS hiện tại. Trạng thái bàn được cập nhật thành "Occupied". \newline - Nếu là bàn đang có khách, đơn hàng POS hiện tại của bàn đó được tải lên giao diện. \newline - Hệ thống sẵn sàng để nhân viên thực hiện các hành động tiếp theo như tải món đặt trước (UC-MD05-04) hoặc thêm món mới (UC-MD05-05). \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Chọn bàn trống hoặc bàn đặt trước) & 1. Nhân viên (US-02) nhấp vào một bàn đang ở trạng thái "Trống" (Available) hoặc "Đã đặt trước" (Reserved) trên sơ đồ tầng (UC-MD05-02). \newline 2. Hệ thống kiểm tra xem bàn này có liên kết với một đặt chỗ sắp tới từ MD-03 hay không. \newline 3. Hệ thống tạo một bản ghi đơn hàng mới (POS Order) trong hệ thống, liên kết đơn hàng này với: \newline    - Bàn đã chọn. \newline    - Nhân viên đang đăng nhập POS. \newline    - Phiên POS hiện tại. \newline    - (Nếu có) Lượt đặt chỗ liên quan (từ bước 2). \newline 4. Hệ thống cập nhật trạng thái của bàn trên sơ đồ tầng thành "Đang có khách" (Occupied). \newline 5. Hệ thống hiển thị giao diện đơn hàng (Order Screen). Giao diện này bao gồm các khu vực chính: \newline    - Danh sách các món đã gọi (hiện tại đang trống). \newline    - Khu vực hiển thị các Danh mục POS (POS Categories). \newline    - Khu vực hiển thị các Sản phẩm (món ăn/đồ uống) thuộc danh mục đang chọn. \newline    - Các nút chức năng (Thanh toán, In bill, Gửi bếp...). \\
+Basic Flow (Chọn bàn trống hoặc bàn đặt trước) & 1. Nhân viên (US-02) nhấp vào một bàn đang ở trạng thái "Trống" (Available) hoặc "Đã đặt trước" (Reserved) trên sơ đồ tầng (UC-MD05-02). \newline 2. Hệ thống (System) kiểm tra xem bàn này có liên kết với một lượt đặt chỗ sắp tới từ module Đặt chỗ (MD-03) hay không. \newline 3. Hệ thống (System) tạo một bản ghi đơn hàng POS mới, liên kết đơn hàng này với: \newline    - Bàn đã chọn. \newline    - Nhân viên đang đăng nhập POS. \newline    - Phiên POS hiện tại. \newline    - (Nếu có) Mã tham chiếu đến lượt đặt chỗ liên quan (từ bước 2). \newline 4. Hệ thống (System) tự động cập nhật trạng thái của bàn trên sơ đồ tầng thành "Đang có khách" (Occupied). \newline 5. Hệ thống hiển thị giao diện đơn hàng (Order Screen) cho US-02. Giao diện này bao gồm các khu vực chính: \newline    - Danh sách các món đã gọi (ban đầu có thể trống hoặc chứa món đặt trước - xem UC-MD05-04). \newline    - Khu vực hiển thị các Danh mục POS (POS Categories). \newline    - Khu vực hiển thị các Sản phẩm (món ăn/đồ uống) thuộc danh mục đang chọn. \newline    - Các nút chức năng (Thanh toán, In bill, Gửi bếp...). \\
 \hline
-Alternative Flow & \textbf{1a. Chọn bàn đang có khách (Occupied):} \newline    1. Nhân viên (US-02) nhấp vào một bàn đang ở trạng thái "Đang có khách" trên sơ đồ tầng. \newline    2. Hệ thống tìm và tải lại bản ghi đơn hàng POS đang hoạt động (chưa thanh toán) của bàn đó. \newline    3. Hệ thống hiển thị giao diện đơn hàng với danh sách các món đã gọi trước đó. Use Case kết thúc, sẵn sàng để thêm món mới hoặc thanh toán. \\
+Alternative Flow & \textbf{1a. Chọn bàn đang có khách (Occupied):} \newline    1. Nhân viên (US-02) nhấp vào một bàn đang ở trạng thái "Đang có khách" trên sơ đồ tầng. \newline    2. Hệ thống (System) tìm và tải lại bản ghi đơn hàng POS đang hoạt động (chưa thanh toán) của bàn đó. \newline    3. Hệ thống hiển thị giao diện đơn hàng với danh sách các món đã gọi trước đó. Use Case kết thúc, sẵn sàng để US-02 thêm món mới hoặc tiến hành các bước thanh toán. \\
 \hline
-Exception Flow & \textbf{3a. Lỗi tạo đơn hàng mới:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng tạo bản ghi đơn hàng mới trong cơ sở dữ liệu hoặc bộ nhớ. \newline    2. Hệ thống hiển thị thông báo lỗi "Không thể bắt đầu đơn hàng mới cho bàn này." \newline    3. Nhân viên không thể mở đơn hàng. Use Case kết thúc không thành công. \newline \textbf{Alternative Flow 2a. Lỗi tải lại đơn hàng cũ:} \newline    1. Hệ thống gặp lỗi khi cố gắng tải lại đơn hàng đang hoạt động của bàn đã chọn. \newline    2. Hệ thống hiển thị thông báo lỗi "Không thể mở lại đơn hàng của bàn này." \newline    3. Use Case kết thúc không thành công. \\
+Exception Flow & \textbf{3a. Lỗi hệ thống khi tạo đơn hàng mới:} \newline    1. Hệ thống gặp lỗi kỹ thuật trong quá trình cố gắng tạo bản ghi đơn hàng POS mới. \newline    2. Hệ thống hiển thị thông báo lỗi cho US-02 (ví dụ: "Không thể bắt đầu đơn hàng mới cho bàn này. Vui lòng thử lại."). \newline    3. Nhân viên không thể mở đơn hàng. Use Case kết thúc không thành công. \newline \textbf{Alternative Flow 1a - Step 2a. Lỗi hệ thống khi tải lại đơn hàng cũ:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng tải lại đơn hàng đang hoạt động của bàn đã chọn. \newline    2. Hệ thống hiển thị thông báo lỗi cho US-02 (ví dụ: "Không thể mở lại đơn hàng của bàn này. Dữ liệu có thể bị lỗi."). \newline    3. Use Case kết thúc không thành công. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.3-1:} Mỗi bàn đang có khách chỉ được liên kết với một đơn hàng POS đang hoạt động tại một thời điểm. \newline - \textbf{BR-UC5.3-2:} Khi chọn bàn trống hoặc bàn đặt trước, hệ thống phải tự động tạo đơn hàng mới và cập nhật trạng thái bàn thành Occupied. \newline - \textbf{BR-UC5.3-3:} Khi chọn bàn Occupied, hệ thống phải mở lại đúng đơn hàng đang liên kết với bàn đó. \newline - \textbf{BR-UC5.3-4:} Nếu bàn được chọn có liên kết với đặt chỗ (từ MD-03), thông tin đặt chỗ đó (ID) phải được lưu vào đơn hàng POS để phục vụ các bước sau (tải món đặt trước, áp dụng cọc). \\
+Business Rule & - \textbf{BR-UC5.3-1:} Mỗi bàn đang có khách (Occupied) chỉ được liên kết với một đơn hàng POS đang hoạt động tại một thời điểm. \newline - \textbf{BR-UC5.3-2 (System):} Khi nhân viên chọn bàn trống hoặc bàn đặt trước, hệ thống phải tự động tạo đơn hàng mới và cập nhật trạng thái bàn thành "Occupied". \newline - \textbf{BR-UC5.3-3 (System):} Khi nhân viên chọn bàn "Occupied", hệ thống phải mở lại đúng đơn hàng đang liên kết với bàn đó. \newline - \textbf{BR-UC5.3-4 (System):} Nếu bàn được chọn có liên kết với một lượt đặt chỗ (từ MD-03), thông tin định danh của đặt chỗ đó (ví dụ: Booking ID) phải được hệ thống tự động lưu vào đơn hàng POS để phục vụ các bước xử lý tiếp theo (như tải món đặt trước ở UC-MD05-04 và áp dụng tiền đặt cọc trước khi thanh toán). \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.3-1 (Performance):} Thời gian từ lúc chọn bàn đến khi giao diện đơn hàng hiển thị (dù là mới hay cũ) phải rất nhanh (dưới 1-2 giây). \newline - \textbf{NFR-UC5.3-2 (Usability):} Giao diện đơn hàng phải rõ ràng, dễ dàng phân biệt các khu vực (danh sách món gọi, danh mục, sản phẩm, nút chức năng). \newline - \textbf{NFR-UC5.3-3 (Data Integrity):} Việc liên kết đơn hàng với đúng bàn, nhân viên, phiên POS và đặt chỗ (nếu có) phải chính xác. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.3-1 (Performance):} Thời gian từ lúc nhân viên chọn bàn đến khi giao diện đơn hàng được hiển thị (dù là đơn mới hay đơn cũ) phải rất nhanh (lý tưởng dưới 1-2 giây). \newline - \textbf{NFR-UC5.3-2 (Usability):} Giao diện đơn hàng phải được thiết kế rõ ràng, dễ dàng cho nhân viên phân biệt các khu vực (danh sách món đã gọi, khu vực chọn danh mục, khu vực chọn sản phẩm, các nút chức năng). \newline - \textbf{NFR-UC5.3-3 (Data Integrity):} Việc liên kết đơn hàng với đúng bàn, đúng nhân viên, đúng phiên POS và đúng lượt đặt chỗ (nếu có) phải được đảm bảo chính xác. \\
 \hline
 \end{longtable}
 
-% ... (Continue with the rest of the Use Cases for MD-05 in the same format) ...
-
-\subsubsection{Use Case UC-MD05-04: Tải và Xác nhận Món ăn Đặt trước}
-
+\subsubsection{Use Case UC-MD05-04: Xác nhận và Thêm Món Đặt trước vào Đơn hàng POS}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-04: Tải và Xác nhận Món ăn Đặt trước} \label{tab:uc_md05_04} \\
+\caption{Đặc tả Use Case UC-MD05-04: Xác nhận và Thêm Món Đặt trước vào Đơn hàng POS} \label{tab:uc_md05_04_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Tải và Xác nhận Món ăn Đặt trước \\
+Use Case Name & Xác nhận và Thêm Món Đặt trước vào Đơn hàng POS \\
 \hline
 Use Case ID & UC-MD05-04 \\
 \hline
-Use Case Description & Khi một đơn hàng POS được mở cho bàn có liên kết với một lượt đặt chỗ (từ MD-03) mà khách hàng đã đặt món trước, hệ thống tự động hiển thị danh sách các món ăn đó trên giao diện đơn hàng POS. Nhân viên phục vụ cần xác nhận các món này với khách và có thể gửi chúng xuống bếp. \\
+Use Case Description & Khi một đơn hàng POS được mở cho bàn có liên kết với một lượt đặt chỗ (từ MD-03) mà khách hàng đã đặt món trước, hệ thống tự động hiển thị danh sách các món ăn đó trên giao diện đơn hàng POS. Nhân viên phục vụ (US-02) cần xác nhận lại các món này với khách hàng và có thể thực hiện hành động để thêm chúng vào đơn hàng chính thức (nếu hệ thống không tự động thêm) và sau đó gửi xuống bếp. \\
 \hline
-Actor & US-02 (Nhân viên phục vụ), System (Tự động tải) \\
+Actor & US-02 (Nhân viên phục vụ) \\
 \hline
-Priority & Must Have (nếu có chức năng đặt món trước) \\
+Priority & Must Have (nếu có chức năng đặt món trước online) \\
 \hline
-Trigger & Đơn hàng POS được mở thành công cho một bàn có lượt đặt chỗ liên kết chứa thông tin món ăn đặt trước (sau UC-MD05-03). \\
+Trigger & Đơn hàng POS được mở thành công cho một bàn có lượt đặt chỗ liên kết, và lượt đặt chỗ này chứa thông tin món ăn khách hàng đã đặt trước (sau UC-MD05-03). \\
 \hline
-Pre-Condition & - Đơn hàng POS đã được mở và liên kết với một bản ghi đặt chỗ (từ MD-03). \newline - Bản ghi đặt chỗ đó chứa danh sách các món ăn/đồ uống khách hàng đã chọn đặt trước (từ UC-MD03-05). \\
+Pre-Condition & - Đơn hàng POS đã được mở và hệ thống đã xác định được có liên kết với một bản ghi đặt chỗ (từ MD-03). \newline - Bản ghi đặt chỗ đó chứa danh sách các món ăn/đồ uống, biến thể, và số lượng mà khách hàng đã chọn đặt trước (từ UC-MD03-05). \\
 \hline
-Post-Condition & - Danh sách các món ăn đặt trước (tên món, biến thể, số lượng) được hiển thị trên giao diện đơn hàng POS, có thể được đánh dấu đặc biệt (ví dụ: "Pre-ordered"). \newline - Nhân viên có thể xác nhận các món này và gửi xuống bếp (thông qua UC-MD05-07). \newline - Các món này được tính vào tổng giá trị đơn hàng. \\
+Post-Condition & - Các món ăn đặt trước được hiển thị trên giao diện đơn hàng POS. \newline - Sau khi nhân viên xác nhận, các món này được chính thức thêm vào danh sách các món đã gọi của đơn hàng POS. \newline - Các món này được tính vào tổng giá trị đơn hàng và sẵn sàng để được gửi xuống bếp (UC-MD05-08). \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow & 1. Tiếp nối từ UC-MD05-03, sau khi giao diện đơn hàng POS cho bàn có đặt chỗ được hiển thị. \newline 2. Hệ thống tự động kiểm tra bản ghi đặt chỗ liên kết và truy xuất danh sách các món ăn/biến thể/số lượng đã được đặt trước. \newline 3. Hệ thống tự động thêm các món ăn đặt trước này vào danh sách các món đã gọi trên giao diện đơn hàng POS. \newline 4. Các món ăn đặt trước được hiển thị với đầy đủ thông tin (Tên, Biến thể nếu có, Số lượng, Đơn giá). Chúng có thể được đánh dấu hoặc có màu khác để phân biệt với các món gọi tại bàn sau này (BR-UC5.4-1). \newline 5. Nhân viên phục vụ (US-02) nhìn thấy danh sách các món đặt trước. \newline 6. US-02 xác nhận lại với khách hàng về các món đã đặt trước này. \newline 7. (Tùy chọn) US-02 có thể cần thực hiện một hành động để xác nhận gửi các món đặt trước này xuống bếp (ví dụ: nhấn nút "Gửi Món Đặt Trước" hoặc chúng được gửi cùng với lần gửi đơn hàng đầu tiên - UC-MD05-07). \\
+Basic Flow & 1. Tiếp nối từ UC-MD05-03, giao diện đơn hàng POS cho bàn có đặt chỗ và có món đặt trước được hiển thị. \newline 2. Hệ thống (System) tự động truy xuất danh sách các món ăn/biến thể/số lượng đã được khách đặt trước từ bản ghi đặt chỗ liên kết. \newline 3. Hệ thống hiển thị danh sách các món ăn đặt trước này trên giao diện đơn hàng POS, có thể ở một khu vực riêng biệt hoặc được tự động thêm vào danh sách món đã gọi nhưng được đánh dấu đặc biệt (ví dụ: "Pre-ordered", màu khác - BR-UC5.4-1). \newline 4. Nhân viên phục vụ (US-02) xem danh sách các món đặt trước. \newline 5. US-02 xác nhận lại với khách hàng về các món đã đặt trước này (ví dụ: "Anh/chị có đặt trước các món sau phải không ạ?..."). \newline 6. \textbf{Nếu hệ thống chưa tự động thêm vào đơn hàng chính thức (ví dụ: hiển thị dưới dạng đề xuất):} \newline    a. US-02 thực hiện hành động để thêm các món đặt trước này vào đơn hàng (ví dụ: nhấn nút "Thêm tất cả món đặt trước" hoặc chọn từng món rồi nhấn "Thêm"). \newline 7. Các món đặt trước (sau khi được thêm/xác nhận) xuất hiện trong danh sách món đã gọi của đơn hàng POS với đầy đủ thông tin (Tên, Biến thể nếu có, Số lượng, Đơn giá). \newline 8. Tổng tiền tạm tính của đơn hàng được cập nhật bao gồm cả các món đặt trước. \\
 \hline
-Alternative Flow & \textbf{6a. Khách hàng muốn thay đổi/hủy món đặt trước:} \newline    1. Nếu khách hàng muốn thay đổi số lượng hoặc hủy một món đã đặt trước ngay tại thời điểm này. \newline    2. US-02 thực hiện thao tác sửa số lượng hoặc xóa món đó khỏi danh sách trên POS (tương tự như sửa/xóa món gọi tại bàn). \newline    3. Việc thay đổi này cần được ghi nhận và có thể ảnh hưởng đến tiền đặt cọc đã tính (cần xem xét logic nghiệp vụ xử lý thay đổi món đặt trước). \newline \textbf{3a. Hiển thị dưới dạng đề xuất:} \newline    1. Thay vì tự động thêm vào đơn hàng, hệ thống hiển thị danh sách món đặt trước ở một khu vực riêng biệt trên màn hình. \newline    2. US-02 cần nhấp vào nút "Thêm tất cả món đặt trước" hoặc chọn từng món để đưa vào đơn hàng chính thức. \\
+Alternative Flow & \textbf{5a. Khách hàng muốn thay đổi/hủy món đặt trước tại bàn:} \newline    1. Nếu khách hàng muốn thay đổi số lượng, hủy một món đã đặt trước, hoặc thêm món mới ngay tại thời điểm này. \newline    2. \textit{Nếu món đặt trước đã được tự động thêm vào đơn hàng (như dòng order bình thường):} US-02 thực hiện thao tác sửa số lượng (UC-MD05-06) hoặc hủy món (UC-MD05-21) cho dòng món đó. \newline    3. \textit{Nếu món đặt trước hiển thị dưới dạng đề xuất:} US-02 có thể bỏ qua việc thêm món đó hoặc điều chỉnh số lượng trước khi thêm. \newline    4. (Quan trọng) Việc thay đổi món đã đặt trước (đặc biệt là món đã có cọc) cần tuân theo chính sách của nhà hàng (BR-UC5.4-5). Hệ thống có thể cần ghi nhận sự thay đổi này. \newline \textbf{3a. Tự động thêm và sẵn sàng gửi bếp:} \newline    1. Hệ thống có thể được cấu hình để tự động thêm tất cả món đặt trước vào đơn hàng và đánh dấu chúng là "chưa gửi bếp". Nhân viên chỉ cần nhấn nút gửi bếp chung (UC-MD05-08). \\
 \hline
-Exception Flow & \textbf{2a. Lỗi truy xuất món đặt trước:} \newline    1. Hệ thống gặp lỗi khi cố gắng đọc danh sách món ăn từ bản ghi đặt chỗ liên kết. \newline    2. Hệ thống không thể tải các món đặt trước lên giao diện POS. \newline    3. Hệ thống có thể hiển thị thông báo lỗi "Không thể tải món ăn đặt trước." \newline    4. Nhân viên cần hỏi lại khách và nhập thủ công các món đó. \newline \textbf{3b. Lỗi thêm món đặt trước vào đơn hàng POS:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng thêm các dòng món ăn vào bản ghi đơn hàng POS. \newline    2. Hệ thống hiển thị thông báo lỗi. \newline    3. Các món đặt trước không xuất hiện trên đơn hàng. \\
+Exception Flow & \textbf{2a. Lỗi hệ thống khi truy xuất món đặt trước:} \newline    1. Hệ thống gặp lỗi khi cố gắng đọc danh sách món ăn từ bản ghi đặt chỗ liên kết. \newline    2. Hệ thống không thể hiển thị hoặc tải các món đặt trước. \newline    3. Hệ thống nên hiển thị thông báo lỗi cho US-02 (ví dụ: "Không thể tải món ăn đặt trước cho đặt chỗ này."). \newline    4. US-02 cần phải hỏi lại khách hàng về các món họ đã đặt trước và nhập thủ công vào đơn hàng POS (sử dụng UC-MD05-05). \newline \textbf{6b/7a. Lỗi hệ thống khi thêm món đặt trước vào đơn hàng POS:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng tạo các dòng món ăn đặt trước trong bản ghi đơn hàng POS. \newline    2. Hệ thống hiển thị thông báo lỗi. Các món đặt trước có thể không xuất hiện đúng trên đơn hàng. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
-Business Rule & - \textbf{BR-UC5.4-1:} Các món ăn được tải từ đặt chỗ trước phải được hiển thị rõ ràng trên đơn hàng POS, có thể phân biệt được với các món gọi thêm tại bàn. \newline - \textbf{BR-UC5.4-2:} Số lượng và biến thể của món ăn hiển thị phải chính xác theo những gì khách hàng đã đặt trước. \newline - \textbf{BR-UC5.4-3:} Giá của các món đặt trước được tính vào tổng hóa đơn như các món gọi tại bàn. \newline - \textbf{BR-UC5.4-4:} Cần có quy trình rõ ràng cho việc nhân viên xác nhận và gửi các món đặt trước này xuống bếp (có thể gửi ngay khi mở bàn hoặc chờ xác nhận của nhân viên). \newline - \textbf{BR-UC5.4-5:} Cần định nghĩa rõ quy trình xử lý khi khách hàng muốn thay đổi hoặc hủy món đã đặt trước và đã trả tiền cọc cho món đó. \\
+\textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.4-1 (Performance):} Việc tải và hiển thị các món đặt trước phải diễn ra nhanh chóng ngay khi mở đơn hàng. \newline - \textbf{NFR-UC5.4-2 (Accuracy):} Dữ liệu món ăn đặt trước (tên, biến thể, số lượng, giá) phải được tải lên chính xác. \newline - \textbf{NFR-UC5.4-3 (Usability):} Cách hiển thị món đặt trước phải rõ ràng cho nhân viên. Nếu cần hành động xác nhận gửi bếp, nút bấm phải dễ thấy. \\
+Business Rule & - \textbf{BR-UC5.4-1:} Các món ăn được tải từ đặt chỗ trước phải được hiển thị rõ ràng trên đơn hàng POS, có thể cần được phân biệt trực quan (ví dụ: bằng màu sắc, biểu tượng, hoặc một ghi chú "Pre-ordered") với các món gọi thêm tại bàn. \newline - \textbf{BR-UC5.4-2:} Số lượng và các tùy chọn biến thể của món ăn hiển thị phải chính xác theo những gì khách hàng đã đặt trước. \newline - \textbf{BR-UC5.4-3:} Giá của các món đặt trước được tính vào tổng hóa đơn như các món gọi tại bàn bình thường. \newline - \textbf{BR-UC5.4-4:} Cần có một quy trình rõ ràng cho việc nhân viên xác nhận (nếu cần) và sau đó gửi các món đặt trước này xuống bếp. Mặc định, các món này nên ở trạng thái "chưa gửi bếp" cho đến khi nhân viên thực hiện hành động gửi (UC-MD05-08). \newline - \textbf{BR-UC5.4-5:} Nhà hàng cần có chính sách rõ ràng về việc cho phép khách hàng thay đổi hoặc hủy các món đã đặt trước (và đã có thể đã đặt cọc cho món đó). Hệ thống có thể chỉ cho phép nhân viên có quyền mới được sửa/xóa món đặt trước đã có cọc. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.4-1 (Performance):} Việc tải và hiển thị danh sách các món đặt trước trên giao diện POS phải diễn ra nhanh chóng ngay khi đơn hàng được mở. \newline - \textbf{NFR-UC5.4-2 (Accuracy):} Dữ liệu món ăn đặt trước (tên, biến thể, số lượng, giá) được tải lên đơn hàng POS phải hoàn toàn chính xác so với thông tin khách hàng đã đặt. \newline - \textbf{NFR-UC5.4-3 (Usability):} Cách hiển thị món đặt trước phải rõ ràng cho nhân viên. Nếu cần hành động xác nhận từ nhân viên để thêm vào đơn hàng hoặc gửi bếp, các nút/tùy chọn đó phải dễ thấy và dễ thao tác. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-05: Thêm món ăn/đồ uống vào đơn hàng}
-
+\subsubsection{Use Case UC-MD05-05: Thêm Món mới vào Đơn hàng POS}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-05: Thêm món ăn/đồ uống vào đơn hàng} \label{tab:uc_md05_05} \\
+\caption{Đặc tả Use Case UC-MD05-05: Thêm Món mới vào Đơn hàng POS} \label{tab:uc_md05_05_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Thêm món ăn/đồ uống vào đơn hàng \\
+Use Case Name & Thêm Món mới vào Đơn hàng POS \\
 \hline
 Use Case ID & UC-MD05-05 \\
 \hline
@@ -231,17 +220,17 @@ Priority & Must Have \\
 \hline
 Trigger & Khách hàng tại bàn gọi món ăn hoặc đồ uống. \\
 \hline
-Pre-Condition & - Nhân viên đang ở màn hình đơn hàng của một bàn cụ thể (UC-MD05-03 thành công). \newline - Giao diện POS hiển thị các danh mục (FR-MD02-04) và sản phẩm (MD-02) được cấu hình "Available in POS" (FR-MD02-08). \\
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng của một bàn cụ thể (UC-MD05-03 thành công). \newline - Giao diện POS hiển thị các danh mục (FR-MD02-07 đến FR-MD02-11) và sản phẩm (MD-02) được cấu hình "Available in POS" (FR-MD02-16). \\
 \hline
-Post-Condition & - Món ăn/đồ uống được chọn (cùng số lượng và biến thể nếu có) được thêm vào danh sách các món đã gọi của đơn hàng POS. \newline - Tổng tiền tạm tính của đơn hàng được cập nhật. \newline - Món ăn mới thêm sẵn sàng để được gửi xuống bếp/bar (UC-MD05-07). \\
+Post-Condition & - Món ăn/đồ uống được chọn (cùng số lượng và biến thể nếu có) được thêm vào danh sách các món đã gọi của đơn hàng POS. \newline - Tổng tiền tạm tính của đơn hàng được cập nhật. \newline - Món ăn mới thêm sẵn sàng để được gửi xuống bếp/bar (UC-MD05-08). \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng POS. \newline 2. US-02 chọn Danh mục POS (POS Category) chứa món ăn khách gọi (ví dụ: nhấp vào tab "Món chính"). \newline 3. Hệ thống hiển thị danh sách các sản phẩm thuộc danh mục đó, thường kèm hình ảnh (nếu có) và giá bán. \newline 4. US-02 tìm và nhấp vào sản phẩm (món ăn/đồ uống) mà khách hàng gọi. \newline 5. \textbf{Nếu sản phẩm không có biến thể:} \newline    a. Hệ thống thêm 1 đơn vị của sản phẩm đó vào danh sách món đã gọi ở bên trái (hoặc khu vực tương ứng). \newline    b. Giá của món ăn được cộng vào tổng tạm tính. \newline 6. \textbf{Nếu sản phẩm có biến thể (đã cấu hình ở FR-MD02-06):} \newline    a. Hệ thống hiển thị popup/dialog yêu cầu chọn các Giá trị Thuộc tính (ví dụ: Size, Độ chín...). \newline    b. US-02 chọn các giá trị theo yêu cầu của khách. \newline    c. US-02 xác nhận lựa chọn biến thể. \newline    d. Hệ thống thêm 1 đơn vị của biến thể sản phẩm cụ thể đó vào danh sách món đã gọi. \newline    e. Giá của biến thể (giá gốc + phụ thu nếu có) được cộng vào tổng tạm tính. \newline 7. Giao diện cập nhật danh sách món đã gọi và tổng tiền. \\
+Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng POS. \newline 2. US-02 chọn Danh mục POS (POS Category) chứa món ăn khách gọi (ví dụ: nhấp vào tab "Món chính"). \newline 3. Hệ thống hiển thị danh sách các sản phẩm thuộc danh mục đó, thường kèm hình ảnh (nếu có) và giá bán. \newline 4. US-02 tìm và nhấp vào sản phẩm (món ăn/đồ uống) mà khách hàng gọi. \newline 5. \textbf{Nếu sản phẩm không có biến thể:} \newline    a. Hệ thống thêm 1 đơn vị của sản phẩm đó vào danh sách món đã gọi ở bên trái (hoặc khu vực tương ứng). \newline    b. Giá của món ăn được cộng vào tổng tạm tính. \newline 6. \textbf{Nếu sản phẩm có biến thể (đã cấu hình ở FR-MD02-14, FR-MD02-15):} \newline    a. Hệ thống hiển thị popup/dialog yêu cầu chọn các Giá trị Thuộc tính (ví dụ: Size, Độ chín...). \newline    b. US-02 chọn các giá trị theo yêu cầu của khách. \newline    c. US-02 xác nhận lựa chọn biến thể. \newline    d. Hệ thống thêm 1 đơn vị của biến thể sản phẩm cụ thể đó vào danh sách món đã gọi. \newline    e. Giá của biến thể (giá gốc + phụ thu nếu có) được cộng vào tổng tạm tính. \newline 7. Giao diện cập nhật danh sách món đã gọi và tổng tiền. \\
 \hline
-Alternative Flow & \textbf{4a. Tăng số lượng nhanh:} \newline    1. Thay vì nhấp 1 lần, US-02 nhấp nhiều lần vào cùng một sản phẩm để tăng số lượng nhanh chóng (ví dụ: nhấp 3 lần để gọi 3 ly Coca). \newline    2. Hoặc sau khi món được thêm vào danh sách, US-02 nhấp vào dòng món đó để tăng số lượng. \newline \textbf{4b. Sử dụng tìm kiếm sản phẩm:} \newline    1. Thay vì duyệt danh mục, US-02 sử dụng ô tìm kiếm trên giao diện POS. \newline    2. US-02 nhập tên hoặc mã món ăn. \newline    3. Hệ thống hiển thị các sản phẩm khớp với tìm kiếm. \newline    4. US-02 chọn sản phẩm từ kết quả tìm kiếm. Use Case tiếp tục từ bước 5 hoặc 6. \newline \textbf{4c. Chọn sản phẩm tùy chọn/phụ thu (Modifier):} \newline    1. Sau khi thêm một món chính, US-02 nhấp vào dòng món đó để mở các tùy chọn (nếu được cấu hình). \newline    2. Giao diện hiển thị danh sách các sản phẩm tùy chọn/phụ thu (đã tạo ở FR-MD02-11 và được cấu hình làm modifier). \newline    3. US-02 chọn các tùy chọn theo yêu cầu của khách (ví dụ: tick vào "Thêm Phô Mai"). \newline    4. Các tùy chọn này được thêm vào đơn hàng (có thể như một dòng riêng hoặc ghi chú kèm phụ thu) và giá được cập nhật. \\
+Alternative Flow & \textbf{4a. Tăng số lượng nhanh:} \newline    1. Thay vì nhấp 1 lần, US-02 nhấp nhiều lần vào cùng một sản phẩm để tăng số lượng nhanh chóng (ví dụ: nhấp 3 lần để gọi 3 ly Coca). \newline    2. Hoặc sau khi món được thêm vào danh sách, US-02 nhấp vào dòng món đó để tăng số lượng (sử dụng UC-MD05-06). \newline \textbf{4b. Sử dụng tìm kiếm sản phẩm:} \newline    1. Thay vì duyệt danh mục, US-02 sử dụng ô tìm kiếm trên giao diện POS. \newline    2. US-02 nhập tên hoặc mã món ăn. \newline    3. Hệ thống hiển thị các sản phẩm khớp với tìm kiếm. \newline    4. US-02 chọn sản phẩm từ kết quả tìm kiếm. Use Case tiếp tục từ bước 5 hoặc 6. \newline \textbf{4c. Chọn sản phẩm tùy chọn/phụ thu (Modifier):} \newline    1. Sau khi thêm một món chính, US-02 nhấp vào dòng món đó để mở các tùy chọn (nếu được cấu hình). \newline    2. Giao diện hiển thị danh sách các sản phẩm tùy chọn/phụ thu (đã tạo ở FR-MD02-01 với mục đích làm modifier và được cấu hình liên kết). \newline    3. US-02 chọn các tùy chọn theo yêu cầu của khách (ví dụ: tick vào "Thêm Phô Mai"). \newline    4. Các tùy chọn này được thêm vào đơn hàng (có thể như một dòng riêng hoặc ghi chú kèm phụ thu) và giá được cập nhật. \\
 \hline
 Exception Flow & \textbf{4d. Chọn sản phẩm không khả dụng:} \newline    1. Sản phẩm hiển thị nhưng không thể chọn (ví dụ: do hết hàng nếu là Stockable và có kiểm tra tồn kho, hoặc sản phẩm bị vô hiệu hóa). \newline    2. Hệ thống hiển thị thông báo "Sản phẩm không khả dụng" hoặc không cho phép thêm vào đơn hàng. \newline \textbf{5c/6f. Lỗi thêm món vào đơn hàng:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng thêm dòng món ăn vào đơn hàng. \newline    2. Hệ thống hiển thị thông báo lỗi. \newline \textbf{6g. Lỗi chọn biến thể:} \newline    1. Popup chọn biến thể gặp lỗi hoặc không hiển thị đúng các tùy chọn. \newline    2. Nhân viên không thể chọn đúng biến thể. Cần báo lỗi. \\
 \hline
@@ -249,32 +238,77 @@ Exception Flow & \textbf{4d. Chọn sản phẩm không khả dụng:} \newline 
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.5-1:} Chỉ những sản phẩm được cấu hình "Available in POS" (FR-MD02-08) và thuộc về các Danh mục POS (FR-MD02-04) mới hiển thị trên giao diện chọn món. \newline - \textbf{BR-UC5.5-2:} Nếu sản phẩm có biến thể, hệ thống phải yêu cầu nhân viên chọn các giá trị thuộc tính bắt buộc trước khi thêm vào đơn hàng. \newline - \textbf{BR-UC5.5-3:} Giá và thông tin sản phẩm hiển thị trên POS phải được đồng bộ từ dữ liệu sản phẩm trong backend (MD-02). \\
+Business Rule & - \textbf{BR-UC5.5-1:} Chỉ những sản phẩm được cấu hình "Available in POS" (FR-MD02-16) và thuộc về các Danh mục POS (FR-MD02-17) mới hiển thị trên giao diện chọn món. \newline - \textbf{BR-UC5.5-2:} Nếu sản phẩm có biến thể, hệ thống phải yêu cầu nhân viên chọn các giá trị thuộc tính bắt buộc trước khi thêm vào đơn hàng. \newline - \textbf{BR-UC5.5-3:} Giá và thông tin sản phẩm hiển thị trên POS phải được đồng bộ từ dữ liệu sản phẩm trong backend (MD-02). \\
 \hline
 Non-Functional Requirement & - \textbf{NFR-UC5.5-1 (Usability):} Giao diện chọn món phải cực kỳ nhanh và dễ sử dụng, đặc biệt trên màn hình cảm ứng. Việc duyệt danh mục, tìm kiếm, chọn món, chọn biến thể phải thuận tiện. \newline - \textbf{NFR-UC5.5-2 (Performance):} Thời gian phản hồi khi chọn danh mục, tìm kiếm, thêm món vào đơn hàng phải gần như tức thời (< 1 giây). \newline - \textbf{NFR-UC5.5-3 (Accuracy):} Món ăn, số lượng, biến thể và giá cả được thêm vào đơn hàng phải chính xác tuyệt đối. \\
 \hline
 \end{longtable}
 
-% ... (Continue with the rest of the Use Cases for MD-05 in the same format) ...
-
-\subsubsection{Use Case UC-MD05-06: Xử lý Yêu cầu đặc biệt/Ghi chú bếp}
-
+\subsubsection{Use Case UC-MD05-06: Điều chỉnh Số lượng Món trong Đơn hàng POS}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-06: Xử lý Yêu cầu đặc biệt/Ghi chú bếp} \label{tab:uc_md05_06} \\
+\caption{Đặc tả Use Case UC-MD05-06: Điều chỉnh Số lượng Món trong Đơn hàng POS} \label{tab:uc_md05_06_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Điều chỉnh Số lượng Món trong Đơn hàng POS \\
+\hline
+Use Case ID & UC-MD05-06 \\
+\hline
+Use Case Description & Cho phép Nhân viên phục vụ (US-02) thay đổi số lượng của một món ăn hoặc đồ uống đã được thêm vào đơn hàng POS trước đó, ví dụ như tăng số lượng nếu khách gọi thêm hoặc giảm số lượng nếu khách đổi ý (trước khi món được gửi bếp hoặc theo chính sách cho phép). \\
+\hline
+Actor & US-02 (Nhân viên phục vụ) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khách hàng muốn gọi thêm một món giống hệt món đã gọi. \newline - Khách hàng muốn giảm bớt số lượng một món đã gọi (nếu chưa gửi bếp hoặc chính sách cho phép). \newline - Nhân viên nhập sai số lượng ban đầu và cần sửa lại. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS. \newline - Có ít nhất một dòng món ăn đã được thêm vào đơn hàng (từ UC-MD05-04 hoặc UC-MD05-05). \\
+\hline
+Post-Condition & - Số lượng của dòng món ăn được chọn được cập nhật theo yêu cầu. \newline - Thành tiền của dòng món đó và tổng tiền tạm tính của đơn hàng được tính toán lại. \newline - Nếu số lượng giảm về 0, dòng món đó có thể bị xóa khỏi đơn hàng (tùy hành vi hệ thống). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng POS, nơi hiển thị danh sách các món đã gọi. \newline 2. US-02 chọn (nhấp vào) dòng món ăn có số lượng cần điều chỉnh. \newline 3. Giao diện hiển thị các tùy chọn cho dòng món đó, bao gồm các nút "+" (tăng số lượng), "-" (giảm số lượng) và có thể là ô hiển thị số lượng hiện tại. (Hoặc, hệ thống có thể mở một keypad số để nhập số lượng mới). \newline 4. \textbf{Để tăng số lượng:} US-02 nhấp vào nút "+". Mỗi lần nhấp, số lượng tăng thêm 1. \newline 5. \textbf{Để giảm số lượng:} US-02 nhấp vào nút "-". Mỗi lần nhấp, số lượng giảm đi 1 (không thể giảm xuống dưới 0 hoặc 1 tùy cấu hình). \newline 6. \textbf{Để nhập số lượng cụ thể (nếu có keypad):} US-02 sử dụng keypad số để nhập số lượng mong muốn và nhấn "OK" hoặc "Enter". \newline 7. Hệ thống cập nhật số lượng mới cho dòng món ăn. \newline 8. Hệ thống tự động tính toán lại thành tiền cho dòng món đó và cập nhật tổng tiền tạm tính của toàn bộ đơn hàng. \newline 9. Thay đổi được hiển thị ngay trên giao diện. \\
+\hline
+Alternative Flow & \textbf{5a. Giảm số lượng về 0 và xóa dòng:} \newline    1. Nếu US-02 giảm số lượng về 0 (hoặc dưới 1), hệ thống có thể tự động xóa dòng món đó khỏi đơn hàng. \newline    2. Hoặc hệ thống yêu cầu xác nhận xóa dòng món. \\
+\hline
+Exception Flow & \textbf{5b. Không thể giảm số lượng món đã gửi bếp (Tùy chính sách):} \newline    1. Nếu món ăn đã được gửi xuống bếp (UC-MD05-08) và nhà hàng có chính sách không cho phép giảm số lượng/hủy món đã gửi. \newline    2. Khi US-02 cố gắng giảm số lượng, hệ thống hiển thị thông báo "Không thể giảm số lượng món đã gửi bếp. Vui lòng sử dụng chức năng Hủy món (Void) nếu cần." hoặc vô hiệu hóa nút "-". \newline    3. Số lượng không thay đổi. (Việc hủy món sẽ thuộc UC-MD05-21). \newline \textbf{7a. Lỗi hệ thống khi cập nhật số lượng/tính tiền:} \newline    1. Hệ thống gặp lỗi kỹ thuật. \newline    2. Hệ thống báo lỗi. Thay đổi có thể không được áp dụng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC5.6-1:} Nhân viên phải có khả năng dễ dàng tăng hoặc giảm số lượng cho từng dòng món trong đơn hàng. \newline - \textbf{BR-UC5.6-2:} Việc giảm số lượng hoặc xóa món đã gửi bếp cần tuân theo quy định của nhà hàng và có thể yêu cầu quyền hạn cao hơn hoặc quy trình riêng (Void). \newline - \textbf{BR-UC5.6-3:} Mọi thay đổi về số lượng phải dẫn đến việc tính toán lại chính xác thành tiền của món và tổng tiền đơn hàng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.6-1 (Usability):} Các nút tăng/giảm số lượng hoặc keypad phải dễ sử dụng trên màn hình cảm ứng. Phản hồi khi thay đổi số lượng phải tức thời. \newline - \textbf{NFR-UC5.6-2 (Performance):} Cập nhật số lượng và tính lại tiền phải diễn ra ngay lập tức. \newline - \textbf{NFR-UC5.6-3 (Accuracy):} Tính toán lại tiền phải chính xác. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD05-07: Thêm Ghi chú Bếp cho Món ăn/Đơn hàng POS}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD05-07: Thêm Ghi chú Bếp cho Món ăn/Đơn hàng POS} \label{tab:uc_md05_07_final} \\
+\hline
 \multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Use Case Name & Xử lý Yêu cầu đặc biệt/Ghi chú bếp \\
+\endhead % Header cho các trang tiếp theo
 \hline
-Use Case ID & UC-MD05-06 \\
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Thêm Ghi chú Bếp cho Món ăn/Đơn hàng POS \\
+\hline
+Use Case ID & UC-MD05-07 \\
 \hline
 Use Case Description & Cho phép Nhân viên phục vụ (US-02) thêm các ghi chú hoặc yêu cầu đặc biệt của khách hàng vào một món ăn cụ thể hoặc toàn bộ đơn hàng trên POS, để thông tin này được truyền xuống bộ phận bếp/bar khi gửi đơn hàng. \\
 \hline
@@ -286,7 +320,7 @@ Trigger & - Khách hàng có yêu cầu đặc biệt về cách chế biến m�
 \hline
 Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS (UC-MD05-03). \newline - Ít nhất một món ăn đã được thêm vào đơn hàng (UC-MD05-04 hoặc UC-MD05-05). \newline - (Tùy chọn) Quản lý đã cấu hình sẵn các ghi chú bếp phổ biến (Kitchen Notes) trong cài đặt POS. \\
 \hline
-Post-Condition & - Ghi chú đặc biệt được đính kèm vào dòng món ăn tương ứng hoặc vào toàn bộ đơn hàng trên giao diện POS. \newline - Khi đơn hàng được gửi đi (UC-MD05-07), ghi chú này sẽ được hiển thị trên phiếu in bếp hoặc màn hình KDS. \\
+Post-Condition & - Ghi chú đặc biệt được đính kèm vào dòng món ăn tương ứng hoặc vào toàn bộ đơn hàng trên giao diện POS. \newline - Khi đơn hàng được gửi đi (UC-MD05-08), ghi chú này sẽ được hiển thị trên phiếu in bếp hoặc màn hình KDS. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
@@ -302,295 +336,432 @@ Exception Flow & \textbf{8a. Lỗi lưu ghi chú:} \newline    1. Hệ thống g
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.6-1:} Ghi chú đính kèm vào món ăn/đơn hàng phải được truyền tải chính xác và rõ ràng đến bộ phận bếp/bar thông qua phiếu in hoặc KDS. \newline - \textbf{BR-UC5.6-2:} Nên có khả năng cấu hình sẵn các ghi chú bếp phổ biến để nhân viên chọn nhanh, giảm thiểu việc gõ phím và đảm bảo tính nhất quán. \newline - \textbf{BR-UC5.6-3:} Các ghi chú quan trọng (như dị ứng) nên được làm nổi bật trên phiếu in/KDS (ví dụ: in đậm, màu đỏ - tùy khả năng của thiết bị và cấu hình). \\
+Business Rule & - \textbf{BR-UC5.7-1:} Ghi chú đính kèm vào món ăn/đơn hàng phải được truyền tải chính xác và rõ ràng đến bộ phận bếp/bar thông qua phiếu in hoặc KDS. \newline - \textbf{BR-UC5.7-2:} Nên có khả năng cấu hình sẵn các ghi chú bếp phổ biến để nhân viên chọn nhanh, giảm thiểu việc gõ phím và đảm bảo tính nhất quán. \newline - \textbf{BR-UC5.7-3:} Các ghi chú quan trọng (như dị ứng) nên được làm nổi bật trên phiếu in/KDS (ví dụ: in đậm, màu đỏ - tùy khả năng của thiết bị và cấu hình). \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.6-1 (Usability):} Việc thêm ghi chú (cả nhập tự do và chọn sẵn) phải nhanh chóng và dễ dàng trong quá trình nhận đơn. Hiển thị ghi chú trên đơn hàng POS phải rõ ràng. \newline - \textbf{NFR-UC5.6-2 (Accuracy):} Nội dung ghi chú phải được lưu và truyền đi chính xác. \newline - \textbf{NFR-UC5.6-3 (Integration):} Dữ liệu ghi chú phải được module In ấn/KDS đọc và hiển thị đúng cách. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.7-1 (Usability):} Việc thêm ghi chú (cả nhập tự do và chọn sẵn) phải nhanh chóng và dễ dàng trong quá trình nhận đơn. Hiển thị ghi chú trên đơn hàng POS phải rõ ràng. \newline - \textbf{NFR-UC5.7-2 (Accuracy):} Nội dung ghi chú phải được lưu và truyền đi chính xác. \newline - \textbf{NFR-UC5.7-3 (Integration):} Dữ liệu ghi chú phải được module In ấn/KDS đọc và hiển thị đúng cách. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-07: Gửi đơn hàng xuống Bếp/Bar}
-
+\subsubsection{Use Case UC-MD05-08: Gửi Các Món đã chọn xuống Bếp/Bar}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-07: Gửi đơn hàng xuống Bếp/Bar} \label{tab:uc_md05_07} \\
+\caption{Đặc tả Use Case UC-MD05-08: Gửi Các Món đã chọn xuống Bếp/Bar} \label{tab:uc_md05_08_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Gửi đơn hàng xuống Bếp/Bar \\
-\hline
-Use Case ID & UC-MD05-07 \\
-\hline
-Use Case Description & Cho phép Nhân viên phục vụ (US-02) gửi thông tin về các món ăn/đồ uống mới được thêm vào đơn hàng (hoặc các món đặt trước cần xác nhận chế biến) đến các máy in hoặc màn hình KDS tại bộ phận bếp và/hoặc bar tương ứng. \\
-\hline
-Actor & US-02 (Nhân viên phục vụ), System (Xử lý định tuyến và gửi lệnh in/hiển thị) \\
-\hline
-Priority & Must Have \\
-\hline
-Trigger & Nhân viên đã nhập xong một lượt gọi món của khách (hoặc cần gửi các món đặt trước) và muốn thông báo cho bếp/bar bắt đầu chuẩn bị. \\
-\hline
-Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS (UC-MD05-03). \newline - Có ít nhất một món ăn/đồ uống mới được thêm vào đơn hàng hoặc món đặt trước cần được gửi đi. \newline - Các máy in bếp/bar hoặc KDS đã được cấu hình và kết nối (liên quan MD-09). \newline - Quy tắc định tuyến theo danh mục sản phẩm đã được thiết lập (FR-MD02-10). \\
-\hline
-Post-Condition & - Thông tin về các món ăn/đồ uống cần chuẩn bị (bao gồm tên món, số lượng, biến thể, ghi chú đặc biệt, số bàn, tên nhân viên) được in ra hoặc hiển thị trên các thiết bị tại bếp/bar tương ứng. \newline - Trạng thái của các món ăn trên đơn hàng POS được cập nhật (ví dụ: đánh dấu là đã gửi bếp). \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng POS, đã thêm các món mới hoặc xác nhận các món đặt trước. \newline 2. US-02 nhấn nút "Gửi Bếp" / "Order" / "Send" hoặc tương tự trên giao diện POS. \newline 3. Hệ thống xác định các món ăn/đồ uống trong đơn hàng chưa được gửi đi (hoặc các món đặt trước cần gửi). \newline 4. Đối với mỗi món ăn/đồ uống cần gửi: \newline    a. Hệ thống xác định Danh mục POS (POS Category) của món đó. \newline    b. Dựa vào quy tắc định tuyến đã cấu hình (FR-MD02-10), hệ thống xác định (các) Máy in hoặc KDS đích cần gửi thông tin món này đến. \newline 5. Hệ thống tạo các yêu cầu in/hiển thị riêng biệt cho từng Máy in/KDS đích, chỉ bao gồm các món ăn thuộc về đích đó. Yêu cầu chứa: \newline    - Thông tin bàn (số bàn). \newline    - Tên nhân viên phục vụ. \newline    - Thời gian gửi. \newline    - Danh sách các món (Tên món, Số lượng, Biến thể, Ghi chú đặc biệt). \newline 6. Hệ thống gửi các yêu cầu này đến IoT Box hoặc dịch vụ quản lý thiết bị tương ứng. \newline 7. IoT Box (hoặc dịch vụ) gửi lệnh in/hiển thị đến các thiết bị vật lý tại bếp/bar. \newline 8. Hệ thống cập nhật trạng thái các món ăn trên giao diện POS là "Đã gửi". \newline 9. Hệ thống có thể hiển thị thông báo gửi thành công cho nhân viên. \\
-\hline
-Alternative Flow & \textbf{2a. Tự động gửi khi thêm món (Nếu cấu hình):} \newline    1. Hệ thống có thể được cấu hình để tự động gửi món ăn xuống bếp/bar ngay khi nhân viên thêm món đó vào đơn hàng, thay vì chờ nhấn nút "Gửi Bếp" chung. \newline \textbf{3a. Chỉ gửi các món mới:} \newline    1. Nếu đơn hàng đã có món gửi đi trước đó, khi nhấn "Gửi Bếp" lần nữa, hệ thống chỉ gửi các món mới được thêm vào kể từ lần gửi trước. \\
-\hline
-Exception Flow & \textbf{6a. Lỗi gửi yêu cầu đến IoT Box/dịch vụ:} \newline    1. Hệ thống không thể kết nối hoặc gửi yêu cầu đến IoT Box/dịch vụ quản lý thiết bị. \newline    2. Hệ thống hiển thị thông báo lỗi cho nhân viên (ví dụ: "Lỗi kết nối máy in bếp. Vui lòng kiểm tra."). \newline    3. Các món ăn chưa được gửi đi, trạng thái trên POS không được cập nhật. Nhân viên cần báo bếp thủ công hoặc thử lại. \newline \textbf{7a. Lỗi tại Máy in/KDS vật lý:} \newline    1. IoT Box gửi lệnh thành công nhưng máy in hết giấy, hết mực, bị kẹt hoặc KDS bị lỗi, mất kết nối. \newline    2. Hệ thống Odoo có thể không nhận biết được lỗi này trực tiếp (trừ khi IoT Box có cơ chế phản hồi lỗi nâng cao). \newline    3. Nhân viên hoặc bộ phận bếp/bar cần phát hiện và xử lý sự cố tại thiết bị. \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Business Rule & - \textbf{BR-UC5.7-1:} Việc gửi đơn hàng phải tuân thủ đúng quy tắc định tuyến đã cấu hình: món nào gửi đến máy in/KDS nào. \newline - \textbf{BR-UC5.7-2:} Thông tin trên phiếu in/KDS phải đầy đủ, rõ ràng, dễ đọc cho nhân viên bếp/bar (Tên món, SL, Biến thể, Ghi chú, Bàn, Nhân viên). \newline - \textbf{BR-UC5.7-3:} Hệ thống cần có cơ chế đánh dấu các món đã được gửi đi để tránh gửi lại nhầm lẫn. \\
-\hline
-Non-Functional Requirement & - \textbf{NFR-UC5.7-1 (Performance):} Thời gian từ lúc nhấn nút "Gửi Bếp" đến khi yêu cầu được gửi đi và trạng thái trên POS cập nhật phải nhanh chóng (dưới 2 giây). Thời gian thực tế để phiếu in ra hoặc hiển thị trên KDS phụ thuộc vào tốc độ mạng và thiết bị. \newline - \textbf{NFR-UC5.7-2 (Reliability):} Quá trình gửi đơn hàng phải đáng tin cậy. Cần có cơ chế xử lý lỗi kết nối hoặc thông báo rõ ràng cho nhân viên khi có sự cố. \newline - \textbf{NFR-UC5.7-3 (Integration):} Tích hợp giữa POS, Backend Odoo, IoT Box và các thiết bị phần cứng phải hoạt động trơn tru. \\
-\hline
-\end{longtable}
-
-% ... (Continue with the rest of the Use Cases for MD-05 in the same format) ...
-
-\subsubsection{Use Case UC-MD05-08: Yêu cầu/In Hóa đơn Tạm tính}
-
-\begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-08: Yêu cầu/In Hóa đơn Tạm tính} \label{tab:uc_md05_08} \\
-\hline
-
-\endhead % Header cho các trang tiếp theo
-\hline
-\endfoot % Footer cho bảng
-\hline
-\endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Yêu cầu/In Hóa đơn Tạm tính \\
+Use Case Name & Gửi Các Món đã chọn xuống Bếp/Bar \\
 \hline
 Use Case ID & UC-MD05-08 \\
 \hline
-Use Case Description & Cho phép Nhân viên phục vụ (US-02) tạo và in ra một bản hóa đơn tạm thời (bill, pro-forma invoice) liệt kê tất cả các món ăn, đồ uống khách hàng đã gọi tại bàn cùng với số lượng, đơn giá, thành tiền và tổng cộng (chưa bao gồm các khoản giảm giá cuối cùng hoặc tiền tip, nhưng CÓ THỂ đã trừ tiền đặt cọc nếu quy trình yêu cầu). Mục đích là để khách hàng kiểm tra lại trước khi yêu cầu thanh toán chính thức. \\
+Use Case Description & Cho phép Nhân viên phục vụ (US-02) gửi thông tin về các món ăn/đồ uống mới được thêm vào đơn hàng (từ UC-MD05-05) hoặc các món đặt trước cần xác nhận chế biến (từ UC-MD05-04) đến các máy in hoặc màn hình KDS tại bộ phận bếp và/hoặc bar tương ứng, dựa trên cấu hình định tuyến. \\
 \hline
 Actor & US-02 (Nhân viên phục vụ) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Khách hàng yêu cầu xem hóa đơn để kiểm tra hoặc chuẩn bị thanh toán. \\
+Trigger & Nhân viên đã nhập xong một lượt gọi món của khách (hoặc đã xác nhận các món đặt trước) và muốn thông báo cho bếp/bar bắt đầu chuẩn bị. \\
 \hline
-Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS của bàn khách yêu cầu (UC-MD05-03). \newline - Đơn hàng có ít nhất một món đã gọi. \newline - Máy in hóa đơn (Receipt Printer) đã được cấu hình và kết nối với POS (liên quan MD-09). \\
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS (UC-MD05-03). \newline - Có ít nhất một món ăn/đồ uống trong đơn hàng có trạng thái "chưa gửi bếp". \newline - Các máy in bếp/bar hoặc KDS đã được cấu hình, kết nối (liên quan MD-09 cũ, nay là cấu hình chung) và quy tắc định tuyến theo danh mục sản phẩm đã được thiết lập (FR-MD02-20). \\
 \hline
-Post-Condition & - Một bản hóa đơn tạm tính được in ra từ máy in hóa đơn. \newline - Đơn hàng trên POS vẫn ở trạng thái chờ thanh toán. \\
+Post-Condition & - Thông tin về các món ăn/đồ uống cần chuẩn bị (bao gồm tên món, số lượng, biến thể, ghi chú đặc biệt, số bàn, tên nhân viên) được hệ thống gửi đến các thiết bị tại bếp/bar tương ứng. \newline - Trạng thái của các món ăn trên đơn hàng POS được cập nhật (ví dụ: đánh dấu là "Đã gửi bếp"). \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng POS của bàn khách. \newline 2. US-02 nhấn nút "In Bill" / "Print Bill" / "Hóa đơn tạm tính" hoặc tương tự. \newline 3. Hệ thống tổng hợp thông tin các món ăn/đồ uống đã gọi trong đơn hàng hiện tại (Tên món, SL, Đơn giá, Thành tiền). \newline 4. Hệ thống tính tổng tiền hàng (Subtotal). \newline 5. Hệ thống tính thuế (VAT/GST) nếu có cấu hình. \newline 6. Hệ thống kiểm tra xem có tiền đặt cọc liên quan đến đơn hàng này không (từ UC-MD05-09). \newline 7. Nếu CÓ tiền đặt cọc: Hệ thống tính toán Tổng cộng cuối cùng = Tổng tiền hàng + Thuế - Tiền đặt cọc (BR-UC5.8-1). \newline 8. Nếu KHÔNG có tiền đặt cọc: Hệ thống tính toán Tổng cộng cuối cùng = Tổng tiền hàng + Thuế. \newline 9. Hệ thống tạo dữ liệu định dạng hóa đơn tạm tính, bao gồm: \newline    - Thông tin nhà hàng (Tên, địa chỉ, SĐT). \newline    - Thông tin đơn hàng (Số bàn, Tên nhân viên, Ngày giờ). \newline    - Danh sách chi tiết các món đã gọi. \newline    - Tổng tiền hàng (Subtotal). \newline    - Thuế (VAT/GST). \newline    - (Nếu có) Số tiền đặt cọc đã trừ. \newline    - Tổng cộng cuối cùng (Amount Due). \newline    - Lời cảm ơn hoặc thông tin khác. \newline 10. Hệ thống gửi dữ liệu hóa đơn tạm tính đến máy in hóa đơn đã cấu hình. \newline 11. Máy in in ra hóa đơn tạm tính. \newline 12. Nhân viên lấy hóa đơn và đưa cho khách hàng. \\
+Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng POS, đã thêm các món mới hoặc xác nhận các món đặt trước. \newline 2. US-02 nhấn nút "Gửi Bếp" / "Order" / "Send" hoặc tương tự trên giao diện POS. \newline 3. Hệ thống (System) xác định các món ăn/đồ uống trong đơn hàng hiện tại có trạng thái "chưa gửi bếp". \newline 4. Đối với mỗi món ăn/đồ uống cần gửi: \newline    a. Hệ thống (System) xác định Danh mục POS (POS Category) của món đó. \newline    b. Dựa vào quy tắc định tuyến đã cấu hình (FR-MD02-20), hệ thống (System) xác định (các) Máy in hoặc KDS đích cần gửi thông tin món này đến. \newline 5. Hệ thống (System) tạo các yêu cầu in/hiển thị riêng biệt cho từng Máy in/KDS đích, chỉ bao gồm các món ăn thuộc về đích đó. Yêu cầu chứa: \newline    - Thông tin bàn (số bàn). \newline    - Tên nhân viên phục vụ. \newline    - Thời gian gửi. \newline    - Danh sách các món (Tên món, Số lượng, Biến thể, Ghi chú đặc biệt - từ UC-MD05-07). \newline 6. Hệ thống (System) gửi các yêu cầu này đến cơ chế quản lý thiết bị (ví dụ: IoT Box hoặc dịch vụ in/hiển thị trực tiếp nếu có). \newline 7. Cơ chế quản lý thiết bị gửi lệnh in/hiển thị đến các thiết bị vật lý tại bếp/bar. \newline 8. Hệ thống (System) cập nhật trạng thái các món ăn vừa được gửi trên giao diện POS thành "Đã gửi". \newline 9. Hệ thống có thể hiển thị thông báo "Đơn hàng đã được gửi thành công." cho US-02. \\
 \hline
-Alternative Flow & \textbf{7a. Chưa áp dụng đặt cọc ở bước này (Tùy quy trình):} \newline    1. Nếu quy trình nghiệp vụ quy định tiền đặt cọc chỉ được trừ ở bước thanh toán cuối cùng (UC-MD05-11), thì ở bước 7 và 8, hệ thống không trừ tiền đặt cọc. Hóa đơn tạm tính sẽ hiển thị tổng tiền chưa trừ cọc, nhưng có thể có dòng ghi chú về số tiền cọc đã trả. \\
+Alternative Flow & \textbf{2a. Tự động gửi khi thêm món (Nếu được cấu hình):} \newline    1. Hệ thống có thể được cấu hình để tự động thực hiện các bước 3-9 ngay khi một món ăn mới được US-02 thêm vào đơn hàng (sau UC-MD05-05), không cần US-02 nhấn nút "Gửi Bếp" riêng. \newline \textbf{3a. Chỉ gửi các món mới chưa được gửi:} \newline    1. Nếu đơn hàng đã có một số món được gửi đi trước đó. \newline    2. Khi US-02 nhấn "Gửi Bếp" lần nữa, hệ thống chỉ xác định và gửi đi các món mới được thêm vào hoặc các món có số lượng thay đổi kể từ lần gửi trước. \\
 \hline
-Exception Flow & \textbf{10a. Lỗi gửi lệnh in / Lỗi máy in:} \newline    1. Hệ thống không thể gửi lệnh in đến máy in (lỗi kết nối IoT Box, lỗi cấu hình máy in) hoặc máy in gặp sự cố (hết giấy, kẹt giấy...). \newline    2. Hệ thống hiển thị thông báo lỗi cho nhân viên (ví dụ: "Lỗi in hóa đơn. Vui lòng kiểm tra máy in."). \newline    3. Hóa đơn không được in ra. Nhân viên cần khắc phục sự cố máy in và thử lại hoặc báo cáo cho khách. \\
+Exception Flow & \textbf{6a. Lỗi hệ thống khi gửi yêu cầu đến cơ chế quản lý thiết bị:} \newline    1. Hệ thống không thể kết nối hoặc gửi yêu cầu đến IoT Box/dịch vụ quản lý thiết bị. \newline    2. Hệ thống hiển thị thông báo lỗi cho US-02 (ví dụ: "Lỗi kết nối máy in bếp. Vui lòng kiểm tra và thử lại."). \newline    3. Các món ăn chưa được gửi đi, trạng thái trên POS không được cập nhật thành "Đã gửi". Nhân viên cần thông báo cho bếp/bar bằng phương pháp thủ công hoặc thử lại sau khi sự cố được khắc phục. \newline \textbf{7a. Lỗi tại Máy in/KDS vật lý (ngoài tầm kiểm soát trực tiếp của POS):} \newline    1. Cơ chế quản lý thiết bị gửi lệnh thành công nhưng thiết bị vật lý (máy in, KDS) gặp sự cố (hết giấy, hết mực, kẹt giấy, màn hình KDS lỗi, mất kết nối mạng cục bộ của thiết bị). \newline    2. Hệ thống POS có thể không nhận biết được trực tiếp các lỗi này (trừ khi IoT Box hoặc dịch vụ quản lý thiết bị có cơ chế phản hồi lỗi nâng cao và được tích hợp để hiển thị lại trên POS). \newline    3. Nhân viên hoặc bộ phận bếp/bar cần phát hiện và xử lý sự cố tại thiết bị. Đơn hàng trên POS vẫn có thể hiển thị là "Đã gửi". \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.8-1:} Hóa đơn tạm tính phải liệt kê chi tiết từng món khách đã gọi. \newline - \textbf{BR-UC5.8-2:} Việc có trừ tiền đặt cọc ngay trên hóa đơn tạm tính hay chỉ trừ ở bước thanh toán cuối cùng cần được quyết định dựa trên quy trình vận hành mong muốn của nhà hàng và phải nhất quán. Hiển thị rõ ràng số tiền cọc đã trừ (nếu có) là quan trọng. \newline - \textbf{BR-UC5.8-3:} Hóa đơn tạm tính không phải là hóa đơn tài chính chính thức (VAT invoice) trừ khi hệ thống được cấu hình đặc biệt và tuân thủ quy định pháp luật về hóa đơn điện tử/tài chính. \newline - \textbf{BR-UC5.8-4:} Việc in hóa đơn tạm tính không làm thay đổi trạng thái của đơn hàng trên POS (vẫn chờ thanh toán). \\
+Business Rule & - \textbf{BR-UC5.8-1:} Việc gửi thông tin đơn hàng xuống bếp/bar phải tuân thủ chính xác quy tắc định tuyến theo Danh mục Sản phẩm POS đã được cấu hình (FR-MD02-20). \newline - \textbf{BR-UC5.8-2:} Thông tin được hiển thị trên phiếu in bếp hoặc màn hình KDS phải đầy đủ, rõ ràng, và dễ đọc cho nhân viên bếp/bar, bao gồm: Tên món, Số lượng, các tùy chọn Biến thể, Ghi chú đặc biệt, Số bàn (hoặc loại đơn Takeout/Delivery), và có thể cả tên nhân viên phục vụ. \newline - \textbf{BR-UC5.8-3:} Hệ thống cần có cơ chế rõ ràng để đánh dấu các món ăn đã được gửi đi, tránh việc gửi lại nhầm lẫn các món đã được bếp/bar tiếp nhận. \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.8-1 (Usability):} Nút "In Bill" phải dễ tìm trên giao diện đơn hàng. Định dạng hóa đơn in ra phải rõ ràng, dễ đọc. \newline - \textbf{NFR-UC5.8-2 (Performance):} Thời gian từ lúc nhấn nút đến khi lệnh in được gửi đi phải nhanh (dưới 2 giây). \newline - \textbf{NFR-UC5.8-3 (Accuracy):} Mọi thông tin trên hóa đơn tạm tính (món ăn, số lượng, đơn giá, thành tiền, tổng cộng, thuế, tiền cọc đã trừ - nếu có) phải chính xác tuyệt đối. \newline - \textbf{NFR-UC5.8-4 (Reliability):} Việc gửi lệnh in phải đáng tin cậy. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.8-1 (Performance):} Thời gian từ lúc nhân viên nhấn nút "Gửi Bếp" đến khi yêu cầu được hệ thống xử lý và gửi đi, đồng thời trạng thái trên POS được cập nhật, phải nhanh chóng (lý tưởng dưới 2 giây). Thời gian thực tế để phiếu in ra hoặc thông tin hiển thị trên KDS sẽ phụ thuộc vào tốc độ mạng nội bộ và hiệu năng của thiết bị cuối. \newline - \textbf{NFR-UC5.8-2 (Reliability):} Quá trình gửi thông tin đơn hàng phải đảm bảo tính đáng tin cậy. Cần có cơ chế xử lý lỗi kết nối hoặc thông báo rõ ràng cho nhân viên khi có sự cố xảy ra trong quá trình gửi. \newline - \textbf{NFR-UC5.8-3 (Integration):} Sự tích hợp giữa giao diện POS, backend, và cơ chế quản lý thiết bị (ví dụ: IoT Box) cùng các thiết bị phần cứng (máy in, KDS) phải hoạt động trơn tru và chính xác. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-09: Áp dụng Tiền Đặt cọc vào Hóa đơn}
-
+\subsubsection{Use Case UC-MD05-09: In Hóa đơn Tạm tính cho Bàn}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-09: Áp dụng Tiền Đặt cọc vào Hóa đơn} \label{tab:uc_md05_09} \\
+\caption{Đặc tả Use Case UC-MD05-09: In Hóa đơn Tạm tính cho Bàn} \label{tab:uc_md05_09_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Áp dụng Tiền Đặt cọc vào Hóa đơn \\
+Use Case Name & In Hóa đơn Tạm tính cho Bàn \\
 \hline
 Use Case ID & UC-MD05-09 \\
 \hline
-Use Case Description & Khi Nhân viên phục vụ chuẩn bị cho quá trình thanh toán cuối cùng, hệ thống tự động kiểm tra xem đơn hàng POS hiện tại có liên kết với một lượt đặt chỗ đã thanh toán tiền đặt cọc hay không. Nếu có, hệ thống sẽ tự động trừ số tiền đặt cọc đó vào tổng số tiền khách hàng cần phải trả. \\
-\hline
-Actor & System (Thực hiện chính), US-02 (Nhân viên phục vụ - Kích hoạt gián tiếp khi vào màn hình thanh toán) \\
-\hline
-Priority & Must Have \\
-\hline
-Trigger & Nhân viên phục vụ chọn hành động tiến tới màn hình thanh toán (Payment Screen) cho đơn hàng POS. \\
-\hline
-Pre-Condition & - Đơn hàng POS đang mở và được liên kết với một bản ghi đặt chỗ (từ UC-MD05-03). \newline - Bản ghi đặt chỗ liên kết có trạng thái thanh toán đặt cọc là "Đã thanh toán" và có lưu số tiền đặt cọc đã trả (từ UC-MD03-09, UC-MD03-10). \\
-\hline
-Post-Condition & - Số tiền đặt cọc được hệ thống xác định và ghi nhận là sẽ được trừ vào hóa đơn. \newline - Số tiền cuối cùng cần thanh toán (Amount Due) hiển thị trên màn hình thanh toán đã được giảm đi đúng bằng số tiền đặt cọc. \newline - Có thể có một dòng hiển thị riêng biệt trên màn hình thanh toán/hóa đơn ghi rõ số tiền đặt cọc đã được áp dụng. \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng POS và nhấp vào nút "Thanh toán" (Payment). \newline 2. Hệ thống chuẩn bị chuyển sang màn hình thanh toán. \newline 3. Hệ thống kiểm tra xem bản ghi đơn hàng POS hiện tại có liên kết (ví dụ: qua trường `booking\_id`) đến một bản ghi Đặt chỗ (Reservation/Booking) hay không. \newline 4. Nếu có liên kết, hệ thống kiểm tra trạng thái thanh toán đặt cọc và lấy giá trị số tiền đặt cọc đã thanh toán (Deposit Amount) từ bản ghi Đặt chỗ đó. \newline 5. Hệ thống tính toán Tổng số tiền phải trả ban đầu (Total Amount = Subtotal + Taxes). \newline 6. Hệ thống tính toán Số tiền cần thanh toán cuối cùng (Amount Due): \newline    `Amount Due = Total Amount - Deposit Amount` \newline 7. Hệ thống hiển thị màn hình thanh toán (Payment Screen). \newline 8. Trên màn hình thanh toán, hệ thống hiển thị rõ ràng: \newline    - Tổng tiền ban đầu (Total Amount). \newline    - Số tiền đặt cọc đã áp dụng (Deposit Applied / Paid Deposit) với giá trị âm hoặc dưới dạng khoản trừ. \newline    - Số tiền cần thanh toán cuối cùng (Amount Due). \newline 9. Nhân viên và khách hàng nhìn thấy số tiền cuối cùng cần trả đã được giảm trừ. \newline 10. Hệ thống sẵn sàng cho việc nhập số tiền khách trả và chọn phương thức thanh toán (UC-MD05-11). \\
-\hline
-Alternative Flow & \textbf{3a. Đơn hàng không có đặt chỗ liên kết hoặc đặt chỗ không có cọc:} \newline    1. Hệ thống không tìm thấy liên kết đặt chỗ hoặc đặt chỗ liên kết chưa thanh toán cọc. \newline    2. `Deposit Amount = 0`. \newline    3. `Amount Due = Total Amount`. \newline    4. Màn hình thanh toán hiển thị tổng tiền bình thường, không có dòng trừ tiền đặt cọc. \newline \textbf{8a. Áp dụng đặt cọc dưới dạng một phương thức thanh toán riêng:} \newline    1. Thay vì trừ trực tiếp vào Amount Due, hệ thống coi tiền đặt cọc như một khoản đã thanh toán. \newline    2. Trên màn hình thanh toán, Total Amount vẫn giữ nguyên. \newline    3. Có một dòng "Đã thanh toán bằng Đặt cọc" với số tiền tương ứng. \newline    4. Số tiền "Còn lại phải trả" (Remaining Amount) bằng Total Amount - Deposit Amount. (Logic này tương đương nhưng cách hiển thị khác). \\
-\hline
-Exception Flow & \textbf{4a. Lỗi truy xuất thông tin đặt cọc:} \newline    1. Hệ thống tìm thấy liên kết đặt chỗ nhưng gặp lỗi khi đọc trạng thái thanh toán hoặc số tiền đặt cọc. \newline    2. Hệ thống không thể áp dụng tiền đặt cọc. \newline    3. Hệ thống nên hiển thị cảnh báo cho nhân viên "Không thể xác minh tiền đặt cọc. Vui lòng kiểm tra thủ công." và hiển thị Amount Due chưa trừ cọc. Nhân viên cần xử lý tình huống này (ví dụ: liên hệ quản lý, kiểm tra backend). \newline \textbf{6b. Lỗi tính toán số học:} \newline    1. Hệ thống gặp lỗi khi thực hiện phép trừ. \newline    2. Hệ thống báo lỗi và không hiển thị được số tiền cuối cùng chính xác. \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Business Rule & - \textbf{BR-UC5.9-1:} Hệ thống phải tự động kiểm tra và áp dụng tiền đặt cọc khi nhân viên vào màn hình thanh toán cho đơn hàng có liên kết đặt chỗ đã trả cọc. \newline - \textbf{BR-UC5.9-2:} Số tiền đặt cọc được áp dụng phải chính xác bằng số tiền khách hàng đã thanh toán trước đó. \newline - \textbf{BR-UC5.9-3:} Việc áp dụng tiền đặt cọc phải được hiển thị rõ ràng trên màn hình thanh toán và trên hóa đơn cuối cùng để khách hàng và nhân viên đều thấy. \newline - \textbf{BR-UC5.9-4:} Sau khi tiền đặt cọc đã được áp dụng vào một đơn hàng POS, hệ thống phải đánh dấu để tránh việc áp dụng lại lần nữa (ví dụ: cập nhật trạng thái trên bản ghi đặt chỗ hoặc bản ghi thanh toán cọc). \\
-\hline
-Non-Functional Requirement & - \textbf{NFR-UC5.9-1 (Accuracy):} Việc xác định và áp dụng đúng số tiền đặt cọc là cực kỳ quan trọng, phải chính xác 100\%. \newline - \textbf{NFR-UC5.9-2 (Performance):} Quá trình kiểm tra và áp dụng đặt cọc phải diễn ra nhanh chóng, không làm chậm quá trình chuyển sang màn hình thanh toán. \newline - \textbf{NFR-UC5.9-3 (Transparency):} Cách hiển thị việc trừ tiền đặt cọc phải rõ ràng và dễ hiểu cho cả nhân viên và khách hàng. \newline - \textbf{NFR-UC5.9-4 (Reliability):} Logic kiểm tra và áp dụng đặt cọc phải hoạt động ổn định và đáng tin cậy. \\
-\hline
-\end{longtable}
-
-\subsubsection{Use Case UC-MD05-10: Tách hóa đơn (Split Bill)}
-
-\begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-10: Tách hóa đơn (Split Bill)} \label{tab:uc_md05_10} \\
-\hline
-
-\endhead % Header cho các trang tiếp theo
-\hline
-\endfoot % Footer cho bảng
-\hline
-\endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Tách hóa đơn (Split Bill) \\
-\hline
-Use Case ID & UC-MD05-10 \\
-\hline
-Use Case Description & Cung cấp chức năng cho phép Nhân viên phục vụ (US-02) chia một đơn hàng gốc của một bàn thành nhiều đơn hàng/hóa đơn nhỏ hơn để các khách hàng trong cùng bàn có thể thanh toán riêng lẻ phần của họ (theo món ăn hoặc chia đều). Chức năng này cần xem xét việc phân bổ tiền đặt cọc đã được áp dụng (nếu có). \\
+Use Case Description & Cho phép Nhân viên phục vụ (US-02) tạo và in ra một bản hóa đơn tạm thời (bill, pro-forma invoice) liệt kê tất cả các món ăn, đồ uống khách hàng đã gọi tại bàn cùng với số lượng, đơn giá, thành tiền và tổng cộng. Hóa đơn này cũng phải hiển thị số tiền đặt cọc đã được trừ (nếu có) để khách hàng biết số tiền thực tế cần thanh toán. \\
 \hline
 Actor & US-02 (Nhân viên phục vụ) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Một nhóm khách hàng tại cùng bàn yêu cầu thanh toán riêng từng người hoặc theo nhóm nhỏ hơn. \\
+Trigger & Khách hàng tại bàn yêu cầu xem hóa đơn để kiểm tra lại các món đã gọi và số tiền cần trả trước khi thực hiện thanh toán chính thức. \\
 \hline
-Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS hoặc màn hình thanh toán của bàn cần tách hóa đơn. \newline - Đơn hàng có ít nhất hai món ăn hoặc có thể chia thành nhiều phần. \newline - Chức năng tách hóa đơn được bật trong cấu hình POS. \\
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS của bàn khách yêu cầu (UC-MD05-03). \newline - Đơn hàng có ít nhất một món đã gọi. \newline - Máy in hóa đơn (Receipt Printer) đã được cấu hình và kết nối với POS. \\
 \hline
-Post-Condition & - Đơn hàng gốc được chia thành hai hoặc nhiều đơn hàng con riêng biệt. \newline - Mỗi đơn hàng con chứa một phần các món ăn từ đơn hàng gốc. \newline - Tổng giá trị của các đơn hàng con (bao gồm thuế) bằng tổng giá trị của đơn hàng gốc. \newline - Tiền đặt cọc (nếu có) được phân bổ hợp lý cho các đơn hàng con (BR-UC5.10-2). \newline - Mỗi đơn hàng con có thể được thanh toán riêng lẻ (UC-MD05-11). \\
+Post-Condition & - Một bản hóa đơn tạm tính, bao gồm cả việc trừ tiền đặt cọc (nếu có), được in ra từ máy in hóa đơn. \newline - Đơn hàng trên POS vẫn ở trạng thái chờ thanh toán, không có thay đổi về trạng thái sau khi in bill tạm tính. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Tách theo món ăn) & 1. Nhân viên (US-02) đang ở màn hình đơn hàng hoặc màn hình thanh toán của bàn cần tách. \newline 2. US-02 chọn chức năng "Tách hóa đơn" (Split Bill / Split). \newline 3. Hệ thống hiển thị giao diện tách hóa đơn, thường bao gồm hai cột (hoặc nhiều hơn): cột "Đơn hàng gốc" và cột(các) "Đơn hàng mới". \newline 4. Danh sách các món ăn từ đơn hàng gốc được hiển thị ở cột "Đơn hàng gốc". \newline 5. US-02 chọn (nhấp vào) các món ăn mà khách hàng thứ nhất muốn thanh toán từ cột "Đơn hàng gốc". \newline 6. Các món ăn được chọn sẽ di chuyển sang cột "Đơn hàng mới 1". \newline 7. US-02 lặp lại bước 5-6 để tạo "Đơn hàng mới 2" cho khách hàng thứ hai, hoặc các đơn hàng tiếp theo. \newline 8. Hệ thống tự động tính toán lại tổng tiền (bao gồm thuế) cho mỗi đơn hàng con. \newline 9. Hệ thống thực hiện phân bổ tiền đặt cọc đã áp dụng (từ UC-MD05-09) cho các đơn hàng con (theo logic BR-UC5.10-2). \newline 10. Giao diện hiển thị số tiền cần thanh toán cuối cùng cho mỗi đơn hàng con (đã trừ phần cọc được phân bổ). \newline 11. US-02 xác nhận việc tách hóa đơn. \newline 12. Hệ thống tạo ra các bản ghi đơn hàng con riêng biệt. \newline 13. Giao diện quay lại màn hình thanh toán, hiển thị các đơn hàng con sẵn sàng để thanh toán riêng lẻ. \\
+Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng POS của bàn khách. \newline 2. US-02 nhấn nút "In Bill" / "Print Bill" / "Hóa đơn tạm tính" hoặc tương tự trên giao diện POS. \newline 3. Hệ thống (System) tổng hợp thông tin các món ăn/đồ uống đã gọi trong đơn hàng hiện tại (Tên món, Số lượng, Đơn giá, Thành tiền). \newline 4. Hệ thống (System) tính tổng tiền hàng (Subtotal). \newline 5. Hệ thống (System) tính thuế (VAT/GST) nếu có cấu hình cho các sản phẩm hoặc cho toàn bộ đơn hàng. \newline 6. Hệ thống (System) tự động kiểm tra xem đơn hàng POS này có liên kết với một lượt đặt chỗ đã thanh toán tiền đặt cọc hay không (tham chiếu thông tin từ UC-MD03-09, UC-MD03-10). \newline 7. \textbf{Nếu CÓ tiền đặt cọc đã thanh toán liên quan đến đơn hàng này:} \newline    a. Hệ thống (System) lấy ra số tiền đặt cọc đã thanh toán (Paid Deposit Amount). \newline    b. Hệ thống (System) tính toán Tổng cộng cuối cùng cần thanh toán = (Tổng tiền hàng + Thuế) - Paid Deposit Amount. \newline 8. \textbf{Nếu KHÔNG có tiền đặt cọc hoặc tiền cọc chưa thanh toán:} \newline    a. Paid Deposit Amount = 0. \newline    b. Hệ thống (System) tính toán Tổng cộng cuối cùng cần thanh toán = Tổng tiền hàng + Thuế. \newline 9. Hệ thống (System) tạo dữ liệu định dạng hóa đơn tạm tính, bao gồm: \newline    - Thông tin nhà hàng (Tên, địa chỉ, SĐT). \newline    - Thông tin đơn hàng (Số bàn, Tên nhân viên, Ngày giờ in bill). \newline    - Danh sách chi tiết các món đã gọi (Tên món, SL, Đơn giá, Thành tiền). \newline    - Tổng tiền hàng (Subtotal). \newline    - Chi tiết các loại Thuế (VAT/GST Amount). \newline    - (Nếu có) Dòng ghi "Tiền đặt cọc đã thanh toán" với giá trị Paid Deposit Amount. \newline    - Tổng cộng cuối cùng cần thanh toán (Amount Due). \newline    - Lời cảm ơn hoặc các thông tin khác theo mẫu hóa đơn. \newline 10. Hệ thống gửi dữ liệu hóa đơn tạm tính đến máy in hóa đơn đã cấu hình. \newline 11. Máy in in ra hóa đơn tạm tính. \newline 12. Nhân viên lấy hóa đơn và đưa cho khách hàng để kiểm tra. \\
 \hline
-Alternative Flow & \textbf{3a. Tách theo số người (Chia đều):} \newline    1. Thay vì chọn từng món, US-02 chọn tùy chọn "Chia đều" (Split by Guests/Evenly). \newline    2. US-02 nhập số lượng người/phần muốn chia (ví dụ: chia 3). \newline    3. Hệ thống tự động chia tổng số tiền của đơn hàng gốc (bao gồm thuế) thành số phần bằng nhau. \newline    4. Hệ thống cũng chia đều tiền đặt cọc đã áp dụng cho các phần. \newline    5. Hệ thống tạo ra các đơn hàng con với số tiền cần thanh toán bằng nhau. \newline    6. Use Case tiếp tục từ bước 12. \newline \textbf{5a. Tách một phần số lượng của món ăn:} \newline    1. Nếu một món ăn có số lượng lớn hơn 1 (ví dụ: 2 Pizza) và khách muốn chia đôi. \newline    2. Khi chọn món ăn đó (bước 5), hệ thống cho phép nhập số lượng muốn chuyển sang đơn hàng mới (ví dụ: chuyển 1 Pizza). \newline    3. Hệ thống cập nhật số lượng còn lại ở đơn hàng gốc và số lượng ở đơn hàng mới. \\
+Alternative Flow & Không có luồng thay thế đáng kể cho hành động này. Việc khách hàng có yêu cầu tách bill sẽ là một Use Case riêng (UC-MD05-10, UC-MD05-11) trước khi in bill cho từng phần. \\
 \hline
-Exception Flow & \textbf{9a. Lỗi phân bổ tiền đặt cọc:} \newline    1. Hệ thống gặp lỗi logic khi cố gắng phân bổ tiền đặt cọc cho các đơn hàng con. \newline    2. Hệ thống báo lỗi hoặc việc phân bổ không chính xác. Cần kiểm tra lại cấu hình hoặc logic. \newline \textbf{11a. Hủy bỏ việc tách:} \newline    1. Trước khi xác nhận, US-02 chọn hủy bỏ thao tác tách hóa đơn. \newline    2. Hệ thống quay lại trạng thái đơn hàng gốc ban đầu. \newline \textbf{12a. Lỗi tạo đơn hàng con:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng tạo các bản ghi đơn hàng con. \newline    2. Hệ thống báo lỗi. Việc tách hóa đơn thất bại. \\
+Exception Flow & \textbf{10a. Lỗi gửi lệnh in hoặc Lỗi máy in:} \newline    1. Hệ thống không thể gửi lệnh in đến máy in (ví dụ: lỗi kết nối với IoT Box, lỗi cấu hình máy in) hoặc máy in vật lý gặp sự cố (hết giấy, kẹt giấy, hết mực...). \newline    2. Hệ thống hiển thị thông báo lỗi cho US-02 (ví dụ: "Lỗi in hóa đơn tạm tính. Vui lòng kiểm tra máy in và thử lại."). \newline    3. Hóa đơn không được in ra. Nhân viên cần khắc phục sự cố máy in và thử lại hành động in bill, hoặc thông báo tình hình cho khách hàng. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.10-1:} Hệ thống phải hỗ trợ ít nhất hai phương thức tách hóa đơn phổ biến: tách theo món ăn và tách chia đều theo số người/số phần. \newline - \textbf{BR-UC5.10-2 (Deposit Allocation):} Khi tách hóa đơn có áp dụng tiền đặt cọc, tiền đặt cọc phải được phân bổ cho các hóa đơn con một cách hợp lý. Có thể có các logic khác nhau: \newline    - \textit{Logic 1 (Ưu tiên):} Phân bổ cọc tỷ lệ thuận với giá trị của từng hóa đơn con. \newline    - \textit{Logic 2 (Tuần tự):} Trừ hết cọc vào hóa đơn con đầu tiên, nếu còn dư mới trừ tiếp vào hóa đơn con thứ hai... \newline    - \textit{Logic 3 (Chia đều - nếu tách đều):} Chia đều tiền cọc cho các hóa đơn con. \newline    Cần xác định và cấu hình logic mong muốn. Logic 1 thường là công bằng nhất. \newline - \textbf{BR-UC5.10-3:} Tổng số tiền cần thanh toán của tất cả các đơn hàng con sau khi tách và trừ cọc phải bằng tổng số tiền cần thanh toán của đơn hàng gốc sau khi trừ cọc. \newline - \textbf{BR-UC5.10-4:} Sau khi tách, mỗi đơn hàng con hoạt động độc lập cho việc thanh toán. \\
+Business Rule & - \textbf{BR-UC5.9-1:} Hóa đơn tạm tính phải liệt kê chi tiết và chính xác từng món khách đã gọi, bao gồm số lượng, đơn giá, và thành tiền. \newline - \textbf{BR-UC5.9-2 (System):} Nếu đơn hàng có liên kết với một lượt đặt chỗ đã thanh toán cọc, hệ thống phải tự động trừ số tiền cọc đó khỏi tổng số tiền phải trả trên hóa đơn tạm tính. Việc này phải được hiển thị rõ ràng. \newline - \textbf{BR-UC5.9-3:} Hóa đơn tạm tính không phải là hóa đơn tài chính chính thức (VAT invoice) trừ khi hệ thống được cấu hình đặc biệt để phát hành hóa đơn tài chính và tuân thủ đầy đủ các quy định pháp luật về hóa đơn điện tử/tài chính tại thời điểm đó. \newline - \textbf{BR-UC5.9-4:} Việc in hóa đơn tạm tính không làm thay đổi trạng thái của đơn hàng trên POS; đơn hàng vẫn ở trạng thái chờ thanh toán. \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.10-1 (Usability):} Giao diện tách hóa đơn phải trực quan, dễ dàng cho nhân viên thao tác chọn món hoặc chia đều. Việc hiển thị tiền của từng hóa đơn con (bao gồm cả phần cọc được phân bổ) phải rõ ràng. \newline - \textbf{NFR-UC5.10-2 (Performance):} Thao tác tách hóa đơn và tính toán lại tiền phải diễn ra nhanh chóng. \newline - \textbf{NFR-UC5.10-3 (Accuracy):} Việc di chuyển món ăn và tính toán lại tổng tiền, thuế, phân bổ cọc cho từng hóa đơn con phải chính xác tuyệt đối. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.9-1 (Usability):} Nút "In Bill" phải dễ dàng tìm thấy và sử dụng trên giao diện đơn hàng POS. Định dạng của hóa đơn in ra phải rõ ràng, dễ đọc, dễ hiểu cho khách hàng. \newline - \textbf{NFR-UC5.9-2 (Performance):} Thời gian từ lúc nhân viên nhấn nút "In Bill" đến khi lệnh in được gửi đi và hệ thống phản hồi phải nhanh chóng (lý tưởng dưới 2 giây). \newline - \textbf{NFR-UC5.9-3 (Accuracy):} Mọi thông tin trên hóa đơn tạm tính (tên món, số lượng, đơn giá, thành tiền, tổng cộng, thuế, số tiền đặt cọc đã trừ - nếu có) phải được tính toán và hiển thị chính xác tuyệt đối, khớp với dữ liệu đơn hàng trên POS. \newline - \textbf{NFR-UC5.9-4 (Reliability):} Chức năng gửi lệnh in hóa đơn tạm tính phải hoạt động ổn định và đáng tin cậy. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-11: Xử lý Thanh toán}
-
+\subsubsection{Use Case UC-MD05-10: Tách Hóa đơn theo Món}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-11: Xử lý Thanh toán} \label{tab:uc_md05_11} \\
+\caption{Đặc tả Use Case UC-MD05-10: Tách Hóa đơn theo Món} \label{tab:uc_md05_10_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Tách Hóa đơn theo Món \\
+\hline
+Use Case ID & UC-MD05-10 \\
+\hline
+Use Case Description & Cho phép Nhân viên phục vụ (US-02) chia một đơn hàng gốc của một bàn thành nhiều đơn hàng/hóa đơn nhỏ hơn, bằng cách chọn và di chuyển các món ăn cụ thể sang từng hóa đơn con. Hệ thống cần phân bổ tiền đặt cọc đã áp dụng (nếu có) một cách hợp lý cho các hóa đơn con này. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Một nhóm khách hàng tại cùng bàn yêu cầu thanh toán riêng lẻ, mỗi người/nhóm nhỏ trả tiền cho những món họ đã gọi. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS hoặc màn hình chuẩn bị thanh toán của bàn cần tách hóa đơn. \newline - Đơn hàng gốc có ít nhất hai dòng món ăn khác nhau hoặc một dòng món có số lượng lớn hơn 1 có thể chia tách. \newline - Chức năng tách hóa đơn đã được kích hoạt và cấu hình trong hệ thống POS. \\
+\hline
+Post-Condition & - Đơn hàng gốc được chia thành hai hoặc nhiều bản ghi đơn hàng con riêng biệt trong hệ thống. \newline - Mỗi đơn hàng con chứa một tập hợp các món ăn (và số lượng tương ứng) được di chuyển từ đơn hàng gốc. \newline - Tổng giá trị (bao gồm thuế) của tất cả các đơn hàng con cộng lại phải bằng tổng giá trị của đơn hàng gốc. \newline - Tiền đặt cọc (nếu có và đã được áp dụng cho đơn hàng gốc) được phân bổ một cách hợp lý (ví dụ: theo tỷ lệ giá trị) cho các đơn hàng con. \newline - Mỗi đơn hàng con sẵn sàng để được thanh toán riêng lẻ (sử dụng các UC thanh toán). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng hoặc màn hình thanh toán của bàn khách. \newline 2. US-02 chọn chức năng "Tách hóa đơn" (Split Bill / Split). \newline 3. Hệ thống hiển thị giao diện tách hóa đơn. Giao diện này thường có ít nhất hai khu vực: một khu vực hiển thị các món của "Đơn hàng gốc" (hoặc "Phần chưa tách") và một hoặc nhiều khu vực cho "Đơn hàng mới 1", "Đơn hàng mới 2", v.v. \newline 4. US-02 chọn (nhấp vào) các dòng món ăn (bao gồm cả số lượng nếu cần tách một phần của dòng món) từ khu vực "Đơn hàng gốc". \newline 5. US-02 thực hiện hành động di chuyển các món đã chọn sang khu vực "Đơn hàng mới 1" (ví dụ: nhấn nút mũi tên "->", hoặc kéo thả). \newline 6. Hệ thống di chuyển các món đã chọn và cập nhật lại giá trị của "Đơn hàng gốc" và "Đơn hàng mới 1". \newline 7. US-02 có thể tạo thêm "Đơn hàng mới 2" (ví dụ: nhấn nút "Thêm hóa đơn mới") và lặp lại bước 4-6 để di chuyển các món còn lại từ "Đơn hàng gốc" sang "Đơn hàng mới 2" hoặc các đơn hàng con tiếp theo. \newline 8. Sau khi đã phân chia hết các món ăn vào các đơn hàng con mong muốn, hệ thống (System) tự động tính toán lại tổng tiền (bao gồm thuế) cho mỗi đơn hàng con. \newline 9. Hệ thống (System) kiểm tra xem đơn hàng gốc có tiền đặt cọc đã được áp dụng không. Nếu có, hệ thống thực hiện phân bổ số tiền đặt cọc này cho các đơn hàng con (theo logic nghiệp vụ đã định nghĩa, ví dụ: tỷ lệ theo giá trị hóa đơn con - BR-UC5.10-2). \newline 10. Giao diện tách hóa đơn hiển thị rõ số tiền cuối cùng cần thanh toán cho mỗi đơn hàng con (đã bao gồm thuế và đã trừ phần tiền đặt cọc được phân bổ). \newline 11. US-02 kiểm tra lại và nhấn nút "Xác nhận tách" / "Apply Split". \newline 12. Hệ thống tạo ra các bản ghi đơn hàng con riêng biệt trong phiên POS, mỗi đơn hàng con có mã riêng và liên kết với bàn gốc. \newline 13. Giao diện POS quay lại màn hình thanh toán (hoặc màn hình chọn đơn hàng con để thanh toán), hiển thị các đơn hàng con vừa được tách, sẵn sàng để được thanh toán riêng lẻ. \\
+\hline
+Alternative Flow & \textbf{5a. Tách một phần số lượng của một dòng món ăn:} \newline    1. Nếu một dòng món ăn có số lượng lớn hơn 1 (ví dụ: 3 Bia Tiger) và khách muốn chia (ví dụ: người 1 trả 1 lon, người 2 trả 2 lon). \newline    2. Khi US-02 chọn dòng món "Bia Tiger", hệ thống cho phép nhập số lượng muốn di chuyển sang đơn hàng mới (ví dụ: nhập 1). \newline    3. Hệ thống di chuyển 1 Bia Tiger sang đơn hàng mới, và cập nhật số lượng còn lại (2 Bia Tiger) ở đơn hàng gốc. \newline \textbf{11a. Hủy bỏ thao tác tách hóa đơn:} \newline    1. Trước khi nhấn "Xác nhận tách", nếu US-02 muốn hủy bỏ toàn bộ thao tác tách và quay lại đơn hàng gốc ban đầu. \newline    2. US-02 nhấn nút "Hủy bỏ" / "Cancel Split". \newline    3. Hệ thống khôi phục lại trạng thái đơn hàng gốc như trước khi bắt đầu tách. Use Case kết thúc. \\
+\hline
+Exception Flow & \textbf{9a. Lỗi hệ thống khi phân bổ tiền đặt cọc:} \newline    1. Hệ thống gặp lỗi logic hoặc lỗi kỹ thuật khi cố gắng phân bổ tiền đặt cọc cho các đơn hàng con. \newline    2. Hệ thống hiển thị thông báo lỗi. Việc phân bổ có thể không chính xác hoặc không thực hiện được. Nhân viên cần cẩn trọng kiểm tra lại hoặc báo quản lý. \newline \textbf{12a. Lỗi hệ thống khi tạo các đơn hàng con:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng tạo các bản ghi đơn hàng con mới trong cơ sở dữ liệu hoặc bộ nhớ. \newline    2. Hệ thống hiển thị thông báo lỗi. Thao tác tách hóa đơn thất bại, hệ thống nên cố gắng khôi phục về trạng thái đơn hàng gốc. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC5.10-1:} Hệ thống phải cho phép nhân viên chọn chính xác từng món ăn (và số lượng của món đó) để di chuyển sang từng hóa đơn con. \newline - \textbf{BR-UC5.10-2 (System - Deposit Allocation Logic):} Khi một đơn hàng gốc có tiền đặt cọc đã được áp dụng được tách ra, tiền đặt cọc đó phải được phân bổ một cách công bằng và hợp lý cho các hóa đơn con. Logic phân bổ mặc định nên là theo tỷ lệ giá trị của từng hóa đơn con so với tổng giá trị đơn hàng gốc (trước khi trừ cọc). Ví dụ: Nếu Hóa đơn con 1 chiếm 40\% giá trị gốc, nó sẽ được phân bổ 40\% tiền cọc. Cần đảm bảo tổng tiền cọc được phân bổ không vượt quá tổng tiền cọc ban đầu. \newline - \textbf{BR-UC5.10-3:} Tổng giá trị (bao gồm thuế và sau khi đã trừ phần cọc được phân bổ) của tất cả các đơn hàng con cộng lại phải bằng tổng giá trị cần thanh toán của đơn hàng gốc (sau khi trừ cọc). \newline - \textbf{BR-UC5.10-4:} Sau khi được tách, mỗi đơn hàng con được coi là một giao dịch riêng biệt và có thể được thanh toán bằng các phương thức khác nhau bởi những người khác nhau. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.10-1 (Usability):} Giao diện tách hóa đơn phải trực quan, dễ dàng cho nhân viên thực hiện thao tác chọn và di chuyển món ăn giữa các hóa đơn. Việc hiển thị giá trị của từng hóa đơn con (bao gồm cả phần tiền đặt cọc được phân bổ) phải rõ ràng và dễ theo dõi. \newline - \textbf{NFR-UC5.10-2 (Performance):} Thao tác tách hóa đơn, di chuyển món ăn và tính toán lại giá trị cho các hóa đơn con phải diễn ra nhanh chóng, không gây chậm trễ. \newline - \textbf{NFR-UC5.10-3 (Accuracy):} Việc di chuyển món ăn và tính toán lại tổng tiền, thuế, cũng như việc phân bổ tiền đặt cọc cho từng hóa đơn con phải được thực hiện chính xác tuyệt đối để tránh sai sót tài chính. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD05-11: Tách Hóa đơn Chia đều}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD05-11: Tách Hóa đơn Chia đều} \label{tab:uc_md05_11_final} \\
+\hline
 \multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Use Case Name & Xử lý Thanh toán \\
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Tách Hóa đơn Chia đều \\
 \hline
 Use Case ID & UC-MD05-11 \\
 \hline
-Use Case Description & Cho phép Nhân viên (Phục vụ hoặc Thu ngân) nhận tiền thanh toán từ khách hàng cho một đơn hàng (hoặc một đơn hàng con sau khi tách), áp dụng các phương thức thanh toán khác nhau (tiền mặt, thẻ, ví...), xử lý tiền thừa (nếu trả tiền mặt), ghi nhận tiền boa (tip), và xác nhận hoàn tất giao dịch thanh toán trong hệ thống POS. \\
+Use Case Description & Cho phép Nhân viên phục vụ (US-02) chia đều tổng giá trị của một đơn hàng gốc (sau khi đã trừ tiền đặt cọc nếu có) thành một số lượng phần bằng nhau do nhân viên nhập vào (ví dụ: chia cho 3 người, mỗi người trả 1/3). \\
+\hline
+Actor & US-02 (Nhân viên phục vụ) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Một nhóm khách hàng tại cùng bàn muốn chia sẻ đều tổng chi phí của bữa ăn. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng POS hoặc màn hình chuẩn bị thanh toán của bàn cần tách hóa đơn. \newline - Đơn hàng gốc có tổng giá trị lớn hơn 0. \newline - Chức năng tách hóa đơn được bật và hỗ trợ tùy chọn chia đều. \\
+\hline
+Post-Condition & - Đơn hàng gốc được chia thành N đơn hàng con (N là số phần được nhập), mỗi đơn hàng con có giá trị bằng nhau (hoặc gần bằng nhau nhất có thể do làm tròn). \newline - Tiền đặt cọc (nếu có) cũng được chia đều cho N đơn hàng con. \newline - Mỗi đơn hàng con sẵn sàng để được thanh toán riêng lẻ. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02) đang ở màn hình đơn hàng hoặc màn hình thanh toán của bàn khách. \newline 2. US-02 chọn chức năng "Tách hóa đơn" (Split Bill / Split). \newline 3. Hệ thống hiển thị giao diện tách hóa đơn. US-02 chọn tùy chọn "Chia đều" (Split Evenly / Split by Guests). \newline 4. Hệ thống yêu cầu US-02 nhập Số lượng phần muốn chia (Number of Splits/Guests). \newline 5. US-02 nhập một số nguyên dương (ví dụ: 3). \newline 6. Hệ thống (System) lấy Tổng số tiền cần thanh toán của đơn hàng gốc (AmountDue\_Goc = TotalAmount\_Goc - PaidDepositAmount\_Goc). \newline 7. Hệ thống (System) tính toán Số tiền mỗi phần = AmountDue\_Goc / Số lượng phần. Hệ thống xử lý làm tròn nếu cần (BR-UC5.11-2). \newline 8. Hệ thống (System) tạo ra N đơn hàng con, mỗi đơn hàng con có số tiền cần thanh toán là Số tiền mỗi phần đã tính. \newline 9. Giao diện POS hiển thị N đơn hàng con này. \newline 10. US-02 xác nhận việc tách. \newline 11. Hệ thống lưu lại các đơn hàng con. \newline 12. Giao diện quay lại màn hình thanh toán, hiển thị các đơn hàng con để thanh toán riêng. \\
+\hline
+Alternative Flow & \textbf{7a. Xử lý số lẻ do làm tròn:} \newline    1. Nếu tổng tiền không chia hết cho số phần, hệ thống có thể phân bổ phần lẻ vào một trong các hóa đơn con (ví dụ: hóa đơn con đầu tiên hoặc cuối cùng) để đảm bảo tổng của các hóa đơn con bằng hóa đơn gốc. (BR-UC5.11-2). \\
+\hline
+Exception Flow & \textbf{5a. Nhập số phần không hợp lệ:} \newline    1. US-02 nhập số phần là 0, số âm, hoặc không phải số. \newline    2. Hệ thống báo lỗi "Vui lòng nhập số phần hợp lệ (lớn hơn 0)." \newline    3. Use Case quay lại bước 4. \newline \textbf{8a. Lỗi hệ thống khi tạo đơn hàng con hoặc tính toán:} \newline    1. Hệ thống gặp lỗi kỹ thuật. \newline    2. Hệ thống báo lỗi. Việc tách hóa đơn thất bại. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC5.11-1:} Số phần chia phải là một số nguyên dương. \newline - \textbf{BR-UC5.11-2 (System):} Hệ thống phải có quy tắc làm tròn rõ ràng khi tổng tiền không chia hết cho số phần, đảm bảo tổng giá trị các hóa đơn con bằng giá trị hóa đơn gốc. Phần lẻ có thể được cộng vào hóa đơn con đầu tiên hoặc cuối cùng. \newline - \textbf{BR-UC5.11-3 (System):} Nếu đơn hàng gốc có tiền đặt cọc đã áp dụng, thì số tiền đặt cọc đó cũng phải được chia đều cho các hóa đơn con trước khi tính số tiền mỗi phần cần thanh toán. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.11-1 (Usability):} Chức năng chia đều phải dễ sử dụng, việc nhập số phần đơn giản. \newline - \textbf{NFR-UC5.11-2 (Accuracy):} Việc tính toán chia tiền và phân bổ cọc phải chính xác. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD05-12: Thực hiện Thanh toán Tiền mặt}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD05-12: Thực hiện Thanh toán Tiền mặt} \label{tab:uc_md05_12_final} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Thực hiện Thanh toán Tiền mặt \\
+\hline
+Use Case ID & UC-MD05-12 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-02/US-05) nhận tiền mặt từ khách hàng, nhập số tiền khách đưa vào hệ thống POS, để hệ thống tự động tính toán số tiền cần trả lại (nếu có) và ghi nhận một phần hoặc toàn bộ thanh toán cho đơn hàng bằng tiền mặt. \\
 \hline
 Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Khách hàng sẵn sàng thanh toán hóa đơn sau khi đã kiểm tra (và hóa đơn đã được tách nếu cần, tiền cọc đã được áp dụng). Nhân viên đang ở màn hình thanh toán (Payment Screen). \\
+Trigger & Khách hàng chọn phương thức thanh toán là tiền mặt cho một phần hoặc toàn bộ hóa đơn. Nhân viên đang ở màn hình thanh toán. \\
 \hline
-Pre-Condition & - Nhân viên đang ở màn hình thanh toán cho một đơn hàng cụ thể. \newline - Số tiền cuối cùng cần thanh toán (Amount Due, đã trừ cọc nếu có) được hiển thị rõ ràng (từ UC-MD05-09). \newline - Các phương thức thanh toán (Payment Methods: Cash, Bank/Card, ví điện tử...) đã được cấu hình trong POS. \newline - Nếu thanh toán thẻ, thiết bị thanh toán thẻ (Payment Terminal) đã được kết nối và cấu hình (liên quan MD-09). \\
+Pre-Condition & - Nhân viên đang ở màn hình thanh toán (Payment Screen) của một đơn hàng. \newline - Số tiền cần thanh toán (Amount Due) của đơn hàng (hoặc phần đơn hàng nếu thanh toán nhiều lần) được hiển thị. \newline - Phương thức thanh toán "Tiền mặt" (Cash) đã được cấu hình và khả dụng trên POS. \\
 \hline
-Post-Condition & - Giao dịch thanh toán được ghi nhận thành công trong hệ thống. \newline - Số tiền đã thanh toán và phương thức thanh toán được lưu lại. \newline - Trạng thái đơn hàng được cập nhật thành "Đã thanh toán" (Paid). \newline - Hóa đơn/Phiếu thu (Receipt) được in ra cho khách hàng. \newline - Số dư tiền mặt trong phiên POS được cập nhật (nếu thanh toán bằng tiền mặt). \newline - Đơn hàng sẵn sàng để đóng (UC-MD05-12). \\
+Post-Condition & - Một giao dịch thanh toán bằng tiền mặt được ghi nhận vào hệ thống. \newline - Nếu số tiền khách đưa lớn hơn số tiền cần thanh toán, số tiền thừa được hiển thị để nhân viên trả lại. \newline - Số tiền còn lại phải thanh toán của đơn hàng được cập nhật. Nếu đã thanh toán đủ, đơn hàng sẵn sàng để hoàn tất. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Thanh toán bằng một phương thức) & 1. Nhân viên (US-02/US-05) đang ở màn hình thanh toán, thấy rõ Số tiền cần thanh toán cuối cùng (Amount Due). \newline 2. Nhân viên hỏi khách hàng về phương thức thanh toán. \newline 3. Khách hàng chọn thanh toán bằng một phương thức (ví dụ: Tiền mặt). \newline 4. Nhân viên chọn phương thức "Tiền mặt" (Cash) trên giao diện POS. \newline 5. Nhân viên nhập số tiền khách đưa vào ô "Số tiền nhận" (Tendered Amount). \newline 6. Hệ thống tự động tính toán và hiển thị "Số tiền trả lại" (Change). \newline 7. Nhân viên nhận tiền từ khách, trả lại tiền thừa (nếu có). \newline 8. Nhân viên nhấn nút "Xác nhận thanh toán" (Validate / Confirm Payment). \newline 9. Hệ thống ghi nhận giao dịch thanh toán bằng tiền mặt với số tiền bằng Amount Due. \newline 10. Hệ thống cập nhật trạng thái đơn hàng thành "Paid". \newline 11. Hệ thống tự động gửi lệnh in hóa đơn/phiếu thu (Receipt) đến máy in hóa đơn. \newline 12. Hệ thống hiển thị màn hình xác nhận thanh toán thành công (thường có nút "Đơn hàng tiếp theo" - Next Order). \\
+Basic Flow & 1. Nhân viên (US-02/US-05) đang ở màn hình thanh toán. \newline 2. Nhân viên chọn phương thức thanh toán "Tiền mặt" (Cash) trên giao diện POS. \newline 3. Giao diện hiển thị ô để nhập "Số tiền nhận" (Tendered Amount). Có thể có các nút gợi ý mệnh giá tiền mặt phổ biến (ví dụ: 100k, 200k, 500k, hoặc nút "Trả đủ"). \newline 4. Nhân viên nhận tiền mặt từ khách. \newline 5. Nhân viên nhập chính xác số tiền khách đưa vào ô "Số tiền nhận". (Hoặc nhấn nút mệnh giá phù hợp, hoặc nhấn "Trả đủ" nếu khách đưa đúng số tiền cần thanh toán). \newline 6. Hệ thống (System) tự động tính toán và hiển thị "Số tiền trả lại" (Change = Tendered Amount - Amount to Pay for this payment line). \newline 7. Nhân viên xác nhận số tiền nhập và số tiền trả lại (nếu có). \newline 8. Hệ thống ghi nhận khoản thanh toán bằng tiền mặt này. \newline 9. Hệ thống cập nhật số tiền còn lại phải thanh toán cho đơn hàng (nếu chưa đủ) hoặc đánh dấu là đã thanh toán đủ. \\
 \hline
-Alternative Flow & \textbf{3a. Thanh toán bằng Thẻ (Tích hợp Terminal):} \newline    1. Khách hàng chọn thanh toán thẻ. \newline    2. Nhân viên chọn phương thức "Thẻ ngân hàng" (Bank / Card) đã được cấu hình tích hợp với terminal. \newline    3. Hệ thống tự động gửi Số tiền cần thanh toán (Amount Due) đến máy POS quẹt thẻ (Payment Terminal). \newline    4. Nhân viên yêu cầu khách hàng sử dụng thẻ trên terminal (quẹt, cắm chip, chạm...). \newline    5. Khách hàng thực hiện theo tác trên terminal, có thể nhập mã PIN. \newline    6. Terminal xử lý giao dịch với ngân hàng. \newline    7. Terminal gửi kết quả (Thành công/Thất bại) về lại hệ thống POS Odoo. \newline    8. Nếu Thành công: Use Case tiếp tục từ bước 9 (ghi nhận thanh toán bằng thẻ). \newline    9. Nếu Thất bại: Hệ thống báo lỗi trên POS, yêu cầu thử lại hoặc đổi phương thức khác. Use Case quay lại bước 2. \newline \textbf{3b. Thanh toán bằng nhiều phương thức:} \newline    1. Khách hàng muốn trả một phần bằng tiền mặt, một phần bằng thẻ. \newline    2. Nhân viên chọn phương thức thứ nhất (ví dụ: Tiền mặt). \newline    3. Nhân viên nhập số tiền khách muốn trả bằng tiền mặt vào ô tiền nhận của phương thức đó. \newline    4. Hệ thống hiển thị số tiền còn lại cần thanh toán (Remaining Amount). \newline    5. Nhân viên chọn phương thức thứ hai (ví dụ: Thẻ). \newline    6. Hệ thống tự động điền số tiền còn lại vào phương thức thứ hai (hoặc nhân viên nhập). \newline    7. Nhân viên xử lý thanh toán cho phương thức thứ hai (ví dụ: qua terminal). \newline    8. Sau khi cả hai phần thanh toán thành công, tổng số tiền thanh toán bằng Amount Due. Use Case tiếp tục từ bước 8 (Xác nhận thanh toán). \newline \textbf{8a. Thêm tiền boa (Tip):} \newline    1. Trước khi nhấn "Xác nhận thanh toán", khách hàng muốn thêm tiền boa. \newline    2. Nhân viên nhấn nút "Tiền boa" (Tip) trên giao diện thanh toán. \newline    3. Nhân viên nhập số tiền boa khách muốn trả. \newline    4. Hệ thống cộng tiền boa vào tổng số tiền thanh toán cuối cùng. \newline    5. Nhân viên tiếp tục xử lý thanh toán cho tổng số tiền mới. \newline    6. Tiền boa được ghi nhận riêng trong giao dịch. \\
+Alternative Flow & \textbf{5a. Khách đưa tiền lớn hơn và muốn lấy lại đúng số tiền thừa:} \newline    1. Nhân viên nhập số tiền khách đưa. Hệ thống hiển thị tiền thừa. \newline    2. Nhân viên trả tiền thừa cho khách. \newline \textbf{5b. Khách đưa nhiều hơn và muốn phần dư được tính là tiền boa:} \newline    1. Sau khi nhập số tiền khách đưa lớn hơn, nhân viên có thể chọn một tùy chọn (nếu có) để phần tiền thừa được ghi nhận là Tiền Boa (Tip) (liên quan UC-MD05-15). \\
 \hline
-Exception Flow & \textbf{5a. Số tiền mặt nhận không đủ:} \newline    1. Nhân viên nhập số tiền mặt khách đưa nhỏ hơn Amount Due. \newline    2. Hệ thống báo lỗi hoặc không cho phép xác nhận thanh toán. Yêu cầu nhập lại hoặc thêm phương thức thanh toán khác. \newline \textbf{Alternative Flow 3a, step 8b. Lỗi xử lý thẻ/giao dịch thất bại:} Xem lại Exception Flow của Alternative Flow 3a. \newline \textbf{8b. Lỗi hệ thống khi xác nhận thanh toán:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng ghi nhận giao dịch thanh toán hoặc cập nhật trạng thái đơn hàng. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Giao dịch có thể chưa được ghi nhận đúng. Cần kiểm tra và xử lý thủ công nếu cần. \newline \textbf{11a. Lỗi in hóa đơn:} \newline    1. Tương tự Exception Flow của UC-MD05-08, hệ thống không thể in hóa đơn cuối cùng. \newline    2. Hệ thống báo lỗi in. Giao dịch thanh toán vẫn được ghi nhận. Nhân viên có thể thử in lại sau. \\
+Exception Flow & \textbf{5c. Nhập số tiền nhận không hợp lệ:} \newline    1. Nhân viên nhập giá trị không phải số hoặc số âm. \newline    2. Hệ thống báo lỗi yêu cầu nhập lại. \newline \textbf{8a. Lỗi hệ thống khi ghi nhận thanh toán:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi lưu giao dịch thanh toán. \newline    2. Hệ thống báo lỗi. Thanh toán có thể chưa được ghi nhận. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.11-1:} Tổng số tiền thanh toán (từ một hoặc nhiều phương thức) phải bằng đúng Số tiền cần thanh toán cuối cùng (Amount Due, đã trừ cọc). \newline - \textbf{BR-UC5.11-2:} Hệ thống phải hỗ trợ các phương thức thanh toán phổ biến tại nhà hàng (Tiền mặt, Thẻ nội địa/quốc tế, có thể cả Ví điện tử nếu tích hợp). \newline - \textbf{BR-UC5.11-3:} Nếu tích hợp với terminal thanh toán thẻ, việc gửi số tiền và nhận kết quả phải diễn ra tự động và chính xác. \newline - \textbf{BR-UC5.11-4:} Tiền boa (Tip) phải được ghi nhận riêng biệt để phục vụ việc báo cáo và phân chia cho nhân viên (nếu có chính sách). \newline - \textbf{BR-UC5.11-5:} Hóa đơn/Phiếu thu cuối cùng phải thể hiện rõ các món đã gọi, tổng tiền, thuế, tiền đặt cọc đã trừ (nếu có), tiền boa (nếu có), tổng số tiền đã thanh toán và phương thức thanh toán. \\
+Business Rule & - \textbf{BR-UC5.12-1 (System):} Hệ thống phải tính toán chính xác số tiền trả lại cho khách. \newline - \textbf{BR-UC5.12-2:} Số tiền mặt nhận được phải được cập nhật vào tổng tiền mặt của phiên POS để đối chiếu cuối ca (nếu có kiểm soát tiền mặt). \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.11-1 (Usability):} Màn hình thanh toán phải rõ ràng, dễ dàng chọn phương thức, nhập số tiền. Việc xử lý tiền thừa, tiền boa, thanh toán nhiều phương thức phải trực quan. \newline - \textbf{NFR-UC5.11-2 (Performance):} Quá trình xử lý thanh toán (ghi nhận, in hóa đơn) phải nhanh chóng để không làm khách hàng chờ đợi lâu. \newline - \textbf{NFR-UC5.11-3 (Accuracy):} Mọi tính toán (tiền thừa, tổng tiền, tiền còn lại) và ghi nhận giao dịch phải chính xác tuyệt đối. \newline - \textbf{NFR-UC5.11-4 (Security):} Nếu có tích hợp terminal, việc truyền dữ liệu phải an toàn. Hệ thống không lưu thông tin thẻ nhạy cảm. \newline - \textbf{NFR-UC5.11-5 (Reliability):} Quá trình thanh toán, đặc biệt là khi tích hợp với thiết bị ngoài, phải hoạt động ổn định. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.12-1 (Usability):} Giao diện nhập tiền mặt phải dễ sử dụng, có thể có các nút mệnh giá để thao tác nhanh. Hiển thị tiền thừa phải rõ ràng. \newline - \textbf{NFR-UC5.12-2 (Accuracy):} Tính toán tiền thừa phải chính xác 100\%. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-12: Đóng Đơn hàng và Bàn}
-
+\subsubsection{Use Case UC-MD05-13: Thực hiện Thanh toán bằng Nhiều Phương thức (Không bao gồm Thẻ)}
+% (Trước đây là FR-MD05-14, giờ là UC tương ứng, đã bỏ "Thẻ")
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-12: Đóng Đơn hàng và Bàn} \label{tab:uc_md05_12} \\
+\caption{Đặc tả Use Case UC-MD05-13: Thực hiện Thanh toán bằng Nhiều Phương thức (Không bao gồm Thẻ)} \label{tab:uc_md05_13_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Thực hiện Thanh toán bằng Nhiều Phương thức (Không bao gồm Thẻ) \\
+\hline
+Use Case ID & UC-MD05-13 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-02/US-05) nhận thanh toán cho một đơn hàng bằng cách kết hợp nhiều phương thức thanh toán được hỗ trợ (ví dụ: một phần bằng Tiền mặt, một phần bằng Ví điện tử - nếu có tích hợp), không bao gồm thanh toán thẻ trực tiếp qua terminal tích hợp. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & Khách hàng muốn chia nhỏ khoản thanh toán của họ ra nhiều hình thức khác nhau (ví dụ: trả một ít tiền mặt còn lại, phần còn lại dùng ví A). \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình thanh toán của một đơn hàng. \newline - Số tiền cần thanh toán (Amount Due) được hiển thị. \newline - Có ít nhất hai phương thức thanh toán khác nhau (không phải Thẻ tích hợp terminal) được cấu hình và khả dụng trên POS. \\
+\hline
+Post-Condition & - Nhiều giao dịch thanh toán (tương ứng với từng phương thức) được ghi nhận cho cùng một đơn hàng. \newline - Tổng số tiền từ tất cả các phương thức thanh toán bằng số tiền cần thanh toán của đơn hàng. \newline - Đơn hàng sẵn sàng để hoàn tất. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02/US-05) đang ở màn hình thanh toán. \newline 2. Khách hàng thông báo muốn thanh toán bằng nhiều phương thức. \newline 3. Nhân viên chọn Phương thức thanh toán thứ nhất (ví dụ: "Tiền mặt" - theo UC-MD05-12). \newline 4. Nhân viên nhập Số tiền khách muốn trả bằng phương thức thứ nhất vào dòng thanh toán tương ứng. \newline 5. Hệ thống POS hiển thị Số tiền còn lại cần thanh toán (Remaining Amount). \newline 6. Nhân viên chọn Phương thức thanh toán thứ hai (ví dụ: "Ví điện tử ABC" - nếu có tích hợp hoặc ghi nhận thủ công). \newline 7. Hệ thống POS tự động điền Số tiền còn lại vào dòng thanh toán của phương thức thứ hai. (Hoặc nhân viên nhập số tiền cho phương thức thứ hai). \newline 8. Nhân viên xử lý giao dịch cho phương thức thứ hai (ví dụ: quét mã QR của ví, hoặc ghi nhận thủ công nếu ví không tích hợp). \newline 9. Sau khi tất cả các phần thanh toán được xác nhận thành công và tổng số tiền đã thanh toán bằng Amount Due ban đầu. \newline 10. Nhân viên nhấn nút "Xác nhận thanh toán" chung (Validate). (Bước này có thể gộp với xác nhận của lần thanh toán cuối cùng). \\
+\hline
+Alternative Flow & \textbf{7a. Khách muốn trả số tiền cụ thể cho phương thức thứ hai, còn lại dùng phương thức ba:} \newline    1. Nhân viên nhập số tiền cụ thể khách muốn trả cho phương thức thứ hai. \newline    2. Hệ thống lại hiển thị Số tiền còn lại. \newline    3. Nhân viên chọn phương thức thứ ba và xử lý tương tự. \\
+\hline
+Exception Flow & \textbf{4a/7b. Số tiền nhập không hợp lệ / Lỗi xử lý từng phương thức:} \newline    1. Lỗi xảy ra trong quá trình xử lý một trong các phương thức thanh toán (tham khảo Exception Flow của UC-MD05-12 hoặc các UC thanh toán ví điện tử riêng nếu có). \newline    2. Phần thanh toán đó không thành công. Nhân viên cần xử lý lại phần đó hoặc yêu cầu khách đổi phương thức. \newline \textbf{10a. Lỗi hệ thống khi xác nhận thanh toán cuối cùng:} \newline    1. Hệ thống gặp lỗi khi cố gắng ghi nhận toàn bộ các giao dịch thanh toán cho đơn hàng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC5.13-1:} Hệ thống POS phải cho phép thêm nhiều dòng thanh toán (payment lines) với các phương thức khác nhau cho cùng một đơn hàng. \newline - \textbf{BR-UC5.13-2:} Tổng của các dòng thanh toán phải bằng chính xác số tiền cần thanh toán của đơn hàng trước khi đơn hàng có thể được xác nhận là đã thanh toán hoàn tất. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.13-1 (Usability):} Giao diện phải dễ dàng cho nhân viên thêm các dòng thanh toán mới và chọn phương thức. Việc hiển thị số tiền đã trả và số tiền còn lại phải rõ ràng. \newline - \textbf{NFR-UC5.13-2 (Accuracy):} Tính toán số tiền còn lại sau mỗi lần thanh toán một phần phải chính xác. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD05-14: Ghi nhận Tiền Boa (Tip)}
+% (Trước đây là FR-MD05-15, giờ là UC tương ứng)
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD05-14: Ghi nhận Tiền Boa (Tip)} \label{tab:uc_md05_14_final} \\
+\hline
 \multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Use Case Name & Đóng Đơn hàng và Bàn \\
+\endhead % Header cho các trang tiếp theo
 \hline
-Use Case ID & UC-MD05-12 \\
+\endfoot % Footer cho bảng
 \hline
-Use Case Description & Sau khi khách hàng đã thanh toán thành công toàn bộ hóa đơn (UC-MD05-11), Nhân viên phục vụ thực hiện hành động cuối cùng trên POS để chính thức đóng đơn hàng và giải phóng bàn, cập nhật trạng thái bàn thành trống trên sơ đồ tầng. \\
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Ghi nhận Tiền Boa (Tip) \\
+\hline
+Use Case ID & UC-MD05-14 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-02/US-05) nhập và ghi nhận số tiền boa (tip) mà khách hàng muốn trả thêm, ngoài tổng giá trị hóa đơn, vào hệ thống POS. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Should Have \\
+\hline
+Trigger & - Khách hàng muốn để lại tiền boa cho nhân viên/nhà hàng sau khi thanh toán. \newline - Khách hàng đưa một số tiền lớn hơn tổng hóa đơn và nói phần còn lại là tiền boa. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình thanh toán của một đơn hàng. \newline - Chức năng ghi nhận tiền boa được kích hoạt trong cấu hình POS. \\
+\hline
+Post-Condition & - Số tiền boa được ghi nhận vào hệ thống, liên kết với đơn hàng và/hoặc nhân viên. \newline - Tổng số tiền thực tế khách hàng trả (bao gồm cả boa) được ghi nhận. \newline - Tiền boa được hạch toán riêng để quản lý và phân chia (nếu có chính sách). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02/US-05) đang ở màn hình thanh toán. \newline 2. Sau khi khách hàng đã quyết định phương thức và số tiền thanh toán cho hóa đơn chính, khách hàng thông báo muốn trả thêm tiền boa. \newline 3. Nhân viên tìm và nhấp vào nút "Tiền boa" (Tip) trên giao diện thanh toán. \newline 4. Hệ thống hiển thị ô để nhập số tiền boa. \newline 5. Nhân viên nhập số tiền boa do khách hàng cung cấp. \newline 6. Hệ thống cộng số tiền boa này vào tổng số tiền mà khách hàng sẽ trả. (Hoặc, nếu khách đưa tiền mặt lớn hơn và phần dư là boa, thì tiền boa là phần chênh lệch đó). \newline 7. Nhân viên tiến hành xử lý thanh toán cho tổng số tiền mới (Hóa đơn + Boa) theo phương thức khách chọn (tham chiếu UC-MD05-12, UC-MD05-13, UC-MD05-14). \newline 8. Sau khi thanh toán thành công, hệ thống ghi nhận riêng khoản tiền boa này. \\
+\hline
+Alternative Flow & \textbf{6a. Boa từ tiền thừa:} \newline    1. Khách hàng thanh toán tiền mặt, số tiền đưa lớn hơn hóa đơn. \newline    2. Khách hàng nói nhân viên giữ lại phần tiền thừa làm tiền boa. \newline    3. Nhân viên nhập số tiền khách đưa (UC-MD05-12, bước 5). \newline    4. Thay vì trả lại tiền thừa, nhân viên chọn nút "Tiền boa" và hệ thống có thể tự động điền số tiền thừa vào ô tiền boa (hoặc nhân viên nhập thủ công). \newline    5. Use Case tiếp tục từ bước 8. \\
+\hline
+Exception Flow & \textbf{5a. Nhập số tiền boa không hợp lệ:} \newline    1. Nhân viên nhập giá trị không phải số hoặc số âm. \newline    2. Hệ thống báo lỗi. \newline \textbf{8a. Lỗi hệ thống khi ghi nhận tiền boa:} \newline    1. Hệ thống gặp lỗi khi lưu thông tin tiền boa. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC5.14-1:} Tiền boa phải được ghi nhận tách biệt với doanh thu bán hàng để dễ dàng quản lý và báo cáo. \newline - \textbf{BR-UC5.14-2:} Cần có chính sách rõ ràng của nhà hàng về việc quản lý và phân chia tiền boa cho nhân viên (nếu áp dụng tip pooling). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.14-1 (Usability):} Chức năng nhập tiền boa phải dễ sử dụng. \newline - \textbf{NFR-UC5.14-2 (Accuracy):} Số tiền boa ghi nhận phải chính xác. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD05-16: Hoàn tất và In Hóa đơn Cuối cùng}
+% (Trước đây là FR-MD05-16, giờ là UC tương ứng)
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD05-15: Hoàn tất và In Hóa đơn Cuối cùng} \label{tab:uc_md05_15_final} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Hoàn tất và In Hóa đơn Cuối cùng \\
+\hline
+Use Case ID & UC-MD05-15 \\
+\hline
+Use Case Description & Sau khi Nhân viên (US-02/US-05) đã nhận đủ số tiền thanh toán cho đơn hàng (bao gồm cả tiền boa nếu có), nhân viên xác nhận hoàn tất giao dịch trên POS. Hệ thống sẽ tự động (hoặc theo yêu cầu) in ra hóa đơn/biên lai cuối cùng cho khách hàng. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & Toàn bộ số tiền của đơn hàng (và tiền boa nếu có) đã được khách hàng thanh toán bằng một hoặc nhiều phương thức. Nhân viên đang ở màn hình thanh toán. \\
+\hline
+Pre-Condition & - Đơn hàng đã được thanh toán đủ (Amount Due = 0 hoặc Total Paid = Grand Total). \newline - Các giao dịch thanh toán đã được hệ thống ghi nhận thành công (UC-MD05-12, UC-MD05-13, UC-MD05-14, UC-MD05-15). \newline - Máy in hóa đơn đã được cấu hình và sẵn sàng. \\
+\hline
+Post-Condition & - Trạng thái của đơn hàng POS được cập nhật thành "Đã thanh toán" (Paid). \newline - Một bản hóa đơn/biên lai cuối cùng được in ra. \newline - Màn hình POS hiển thị thông báo thanh toán thành công và sẵn sàng cho hành động tiếp theo (ví dụ: đóng đơn hàng, mở đơn hàng mới). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02/US-05) đã hoàn thành việc nhập các khoản thanh toán cho đơn hàng và tổng số tiền đã nhận bằng hoặc lớn hơn số tiền cần thanh toán. \newline 2. Nhân viên nhấn nút "Xác nhận thanh toán" / "Validate" / "Hoàn tất" trên màn hình thanh toán. \newline 3. Hệ thống (System) kiểm tra lại tổng số tiền đã thanh toán so với tổng hóa đơn. \newline 4. Nếu hợp lệ (đã thanh toán đủ), hệ thống (System) cập nhật trạng thái đơn hàng thành "Paid". \newline 5. Hệ thống (System) tự động tạo dữ liệu và gửi lệnh in hóa đơn/biên lai cuối cùng đến máy in. Hóa đơn này bao gồm: \newline    - Thông tin chi tiết như trên hóa đơn tạm tính (UC-MD05-09). \newline    - Thông tin về các khoản đã thanh toán (phương thức, số tiền). \newline    - Tiền boa (nếu có). \newline    - Tiền thừa đã trả lại (nếu có). \newline 6. Máy in in ra hóa đơn/biên lai. \newline 7. Hệ thống hiển thị màn hình xác nhận "Thanh toán thành công!", có thể kèm các nút như "Đơn hàng tiếp theo" (để đóng đơn hiện tại và quay lại sơ đồ tầng - UC-MD05-17) hoặc "In lại hóa đơn". \\
+\hline
+Alternative Flow & \textbf{5a. Tùy chọn không tự động in / Hỏi trước khi in:} \newline    1. Hệ thống có thể được cấu hình để không tự động in mà hiển thị nút "In hóa đơn" sau khi xác nhận thanh toán. \newline    2. Hoặc hệ thống hỏi "Bạn có muốn in hóa đơn không?". Nhân viên chọn Có/Không. \newline \textbf{5b. Gửi hóa đơn điện tử (nếu có):} \newline    1. Nếu khách hàng có email và hệ thống hỗ trợ, sau khi xác nhận thanh toán, hệ thống có thể tự động gửi hóa đơn điện tử đến email khách hàng. \\
+\hline
+Exception Flow & \textbf{3a. Thanh toán chưa đủ:} \newline    1. Hệ thống phát hiện tổng số tiền đã nhận nhỏ hơn số tiền cần thanh toán. \newline    2. Hệ thống báo lỗi "Chưa thanh toán đủ. Còn thiếu [Số tiền còn thiếu]." \newline    3. Nhân viên cần tiếp tục nhận thêm thanh toán. Use Case quay lại bước 1 của các UC thanh toán. \newline \textbf{5a. Lỗi in hóa đơn:} Tương tự UC-MD05-09. \newline \textbf{4a. Lỗi hệ thống khi cập nhật trạng thái đơn hàng:} \newline    1. Hệ thống gặp lỗi khi lưu trạng thái "Paid". \newline    2. Hệ thống báo lỗi. Giao dịch có thể chưa hoàn tất đúng cách. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC5.15-1:} Hóa đơn cuối cùng phải được tạo ra sau khi toàn bộ số tiền đã được thanh toán và ghi nhận. \newline - \textbf{BR-UC5.15-2:} Hóa đơn phải phản ánh chính xác mọi chi tiết của giao dịch. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.15-1 (Reliability):} Việc cập nhật trạng thái "Paid" và kích hoạt in hóa đơn phải đáng tin cậy. \newline - \textbf{NFR-UC5.15-2 (Clarity):} Thông tin trên hóa đơn cuối cùng phải đầy đủ, rõ ràng. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD05-16: Đóng Đơn hàng và Giải phóng Bàn}
+% (Trước đây là FR-MD05-17, giờ là UC tương ứng, nội dung như UC-MD05-12 cũ)
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD05-16: Đóng Đơn hàng và Giải phóng Bàn} \label{tab:uc_md05_16_final} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Đóng Đơn hàng và Giải phóng Bàn \\
+\hline
+Use Case ID & UC-MD05-16 \\
+\hline
+Use Case Description & Sau khi khách hàng đã thanh toán thành công toàn bộ hóa đơn (UC-MD05-16), Nhân viên phục vụ (US-02) thực hiện hành động cuối cùng trên POS để chính thức đóng đơn hàng và giải phóng bàn, cập nhật trạng thái bàn thành trống trên sơ đồ tầng. \\
 \hline
 Actor & US-02 (Nhân viên phục vụ) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Giao dịch thanh toán cho đơn hàng đã hoàn tất (kết thúc thành công UC-MD05-11). Nhân viên nhìn thấy màn hình xác nhận thanh toán thành công. \\
+Trigger & Giao dịch thanh toán cho đơn hàng đã hoàn tất (kết thúc thành công UC-MD05-16). Nhân viên nhìn thấy màn hình xác nhận thanh toán thành công. \\
 \hline
 Pre-Condition & - Đơn hàng POS đã ở trạng thái "Đã thanh toán" (Paid). \newline - Nhân viên đang ở màn hình xác nhận thanh toán thành công hoặc quay lại màn hình đơn hàng đã thanh toán. \\
 \hline
@@ -600,7 +771,7 @@ Post-Condition & - Trạng thái cuối cùng của đơn hàng POS được c�
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow & 1. Sau khi hoàn tất thanh toán (UC-MD05-11), hệ thống hiển thị màn hình xác nhận thanh toán thành công, thường có nút "Đơn hàng tiếp theo" (Next Order) hoặc tương tự. \newline 2. Nhân viên (US-02) nhấp vào nút "Đơn hàng tiếp theo". \newline 3. Hệ thống thực hiện các hành động đóng đơn hàng cuối cùng: \newline    a. Cập nhật trạng thái của bản ghi đơn hàng POS thành "Done" hoặc "Completed". \newline    b. Tìm bàn đang liên kết với đơn hàng này. \newline    c. Cập nhật trạng thái của bàn đó trên sơ đồ tầng thành "Trống" (Available). \newline 4. Hệ thống chuyển hướng giao diện về màn hình chính của POS (Sơ đồ tầng - UC-MD05-02). \\
+Basic Flow & 1. Sau khi hoàn tất thanh toán (UC-MD05-16), hệ thống hiển thị màn hình xác nhận thanh toán thành công, thường có nút "Đơn hàng tiếp theo" (Next Order) hoặc tương tự. \newline 2. Nhân viên (US-02) nhấp vào nút "Đơn hàng tiếp theo". \newline 3. Hệ thống (System) thực hiện các hành động đóng đơn hàng cuối cùng: \newline    a. Cập nhật trạng thái của bản ghi đơn hàng POS thành "Done" hoặc "Completed". \newline    b. Tìm bàn đang liên kết với đơn hàng này. \newline    c. Cập nhật trạng thái của bàn đó trên sơ đồ tầng thành "Trống" (Available). \newline 4. Hệ thống chuyển hướng giao diện về màn hình chính của POS (Sơ đồ tầng - UC-MD05-02). \\
 \hline
 Alternative Flow & \textbf{1a. Đóng đơn hàng từ màn hình chi tiết:} \newline    1. Trong một số trường hợp, nhân viên có thể quay lại màn hình chi tiết đơn hàng sau khi thanh toán. \newline    2. Trên màn hình này có nút "Đóng đơn hàng" / "Close Order". \newline    3. Nhân viên nhấp vào nút đó. Use Case tiếp tục từ bước 3. \\
 \hline
@@ -610,32 +781,31 @@ Exception Flow & \textbf{3d. Lỗi cập nhật trạng thái đơn hàng/bàn:}
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.12-1:} Chỉ những đơn hàng đã được thanh toán đầy đủ (Paid) mới có thể được đóng. \newline - \textbf{BR-UC5.12-2:} Việc đóng đơn hàng phải đồng thời cập nhật trạng thái bàn liên quan thành "Trống" để đảm bảo sơ đồ tầng phản ánh đúng tình trạng thực tế. \newline - \textbf{BR-UC5.12-3:} Sau khi đóng, đơn hàng không thể được mở lại hoặc chỉnh sửa thêm trên giao diện POS thông thường (chỉ có thể xem lại hoặc xử lý nghiệp vụ đặc biệt trong backend nếu cần). \\
+Business Rule & - \textbf{BR-UC5.16-1:} Chỉ những đơn hàng đã được thanh toán đầy đủ (Paid) mới có thể được đóng. \newline - \textbf{BR-UC5.16-2 (System):} Việc đóng đơn hàng phải đồng thời cập nhật trạng thái bàn liên quan thành "Trống" để đảm bảo sơ đồ tầng phản ánh đúng tình trạng thực tế. \newline - \textbf{BR-UC5.16-3:} Sau khi đóng, đơn hàng không thể được mở lại hoặc chỉnh sửa thêm trên giao diện POS thông thường (chỉ có thể xem lại hoặc xử lý nghiệp vụ đặc biệt trong backend nếu cần). \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.12-1 (Performance):} Thao tác đóng đơn hàng và cập nhật trạng thái bàn phải diễn ra nhanh chóng (< 1 giây). \newline - \textbf{NFR-UC5.12-2 (Consistency):} Trạng thái bàn phải được cập nhật đồng bộ và chính xác trên sơ đồ tầng sau khi đóng đơn hàng. \newline - \textbf{NFR-UC5.12-3 (Usability):} Nút "Đơn hàng tiếp theo" hoặc hành động đóng đơn phải rõ ràng, giúp nhân viên nhanh chóng quay lại màn hình chính để phục vụ bàn khác. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.16-1 (Performance):} Thao tác đóng đơn hàng và cập nhật trạng thái bàn phải diễn ra nhanh chóng (< 1 giây). \newline - \textbf{NFR-UC5.16-2 (Consistency):} Trạng thái bàn phải được cập nhật đồng bộ và chính xác trên sơ đồ tầng sau khi đóng đơn hàng. \newline - \textbf{NFR-UC5.16-3 (Usability):} Nút "Đơn hàng tiếp theo" hoặc hành động đóng đơn phải rõ ràng, giúp nhân viên nhanh chóng quay lại màn hình chính để phục vụ bàn khác. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-13: Đóng Phiên làm việc POS}
-
+\subsubsection{Use Case UC-MD05-17: Đóng Phiên làm việc POS}
+% (Trước đây là FR-MD05-18, giờ là UC tương ứng, nội dung như UC-MD05-13 cũ)
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-13: Đóng Phiên làm việc POS} \label{tab:uc_md05_13} \\
+\caption{Đặc tả Use Case UC-MD05-17: Đóng Phiên làm việc POS} \label{tab:uc_md05_17_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
 Use Case Name & Đóng Phiên làm việc POS \\
 \hline
-Use Case ID & UC-MD05-13 \\
+Use Case ID & UC-MD05-17 \\
 \hline
-Use Case Description & Cho phép Nhân viên được phân quyền (Thu ngân, Quản lý) kết thúc phiên làm việc POS hiện tại. Hệ thống sẽ tổng kết tất cả các giao dịch đã xảy ra trong phiên, đối chiếu số tiền mặt thực tế với số tiền dự kiến (nếu có kiểm soát tiền mặt), và ghi nhận các bút toán liên quan vào hệ thống kế toán. \\
+Use Case Description & Cho phép Nhân viên được phân quyền (US-05: Thu ngân, US-01: Quản lý nhà hàng) kết thúc phiên làm việc POS hiện tại. Hệ thống sẽ tổng kết tất cả các giao dịch đã xảy ra trong phiên, đối chiếu số tiền mặt thực tế với số tiền dự kiến (nếu có kiểm soát tiền mặt), và ghi nhận các bút toán liên quan vào hệ thống kế toán. \\
 \hline
 Actor & US-05 (Nhân viên thu ngân), US-01 (Quản lý nhà hàng) \\
 \hline
@@ -643,129 +813,276 @@ Priority & Must Have \\
 \hline
 Trigger & Kết thúc ca làm việc hoặc cuối ngày kinh doanh, cần phải đóng phiên POS để tổng kết và bàn giao. \\
 \hline
-Pre-Condition & - Người dùng đã đăng nhập vào hệ thống Odoo với tài khoản được phép đóng phiên POS. \newline - Có một phiên làm việc POS đang ở trạng thái "Đang hoạt động" (In Progress). \newline - Tất cả các đơn hàng trong phiên nên đã được đóng (thanh toán hoặc hủy). Hệ thống có thể cảnh báo nếu còn đơn hàng mở. \\
+Pre-Condition & - Người dùng đã đăng nhập vào hệ thống với tài khoản được phép đóng phiên POS. \newline - Có một phiên làm việc POS đang ở trạng thái "Đang hoạt động" (In Progress). \newline - Tất cả các đơn hàng trong phiên nên đã được đóng (thanh toán hoặc hủy). Hệ thống có thể cảnh báo nếu còn đơn hàng mở. \\
 \hline
-Post-Condition & - Trạng thái của phiên POS được cập nhật thành "Đã đóng" (Closed). \newline - Tất cả các giao dịch thuộc phiên đó được tổng kết và ghi nhận cuối cùng. \newline - Nếu có kiểm soát tiền mặt, chênh lệch giữa tiền mặt thực tế và dự kiến được ghi nhận. \newline - Các bút toán kế toán liên quan đến doanh thu, thanh toán của phiên được tạo ra hoặc xác nhận trong module Kế toán. \newline - Không thể thực hiện thêm giao dịch nào trong phiên đã đóng. \\
+Post-Condition & - Trạng thái của phiên POS được cập nhật thành "Đã đóng" (Closed). \newline - Tất cả các giao dịch thuộc phiên đó được tổng kết và ghi nhận cuối cùng. \newline - Nếu có kiểm soát tiền mặt, chênh lệch giữa tiền mặt thực tế và dự kiến được ghi nhận. \newline - Các bút toán kế toán liên quan đến doanh thu, thanh toán của phiên được hệ thống tự động tạo ra hoặc xác nhận trong module Kế toán. \newline - Không thể thực hiện thêm giao dịch nào trong phiên đã đóng. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Có kiểm soát tiền mặt) & 1. Người dùng (US-05/US-01) truy cập module Point of Sale. \newline 2. Từ menu chính của POS hoặc khu vực quản lý phiên, Người dùng chọn hành động "Đóng phiên" (Close Session / Close Register). \newline 3. Hệ thống kiểm tra xem còn đơn hàng nào đang mở trong phiên không. Nếu có, hiển thị cảnh báo và yêu cầu đóng các đơn hàng đó trước khi tiếp tục (hoặc có tùy chọn buộc đóng). \newline 4. Hệ thống hiển thị màn hình tóm tắt phiên làm việc, bao gồm: \newline    - Số dư tiền mặt đầu ca (đã nhập ở UC-MD05-01). \newline    - Tổng doanh thu dự kiến theo từng phương thức thanh toán (Tiền mặt, Thẻ...). \newline    - Số tiền mặt dự kiến có trong ngăn kéo cuối ca (Expected Cash = Opening Cash + Cash Payments - Cash Refunds...). \newline 5. Hệ thống yêu cầu người dùng nhập "Số tiền mặt thực tế cuối ca" (Actual Closing Cash). \newline 6. Người dùng đếm tiền mặt trong ngăn kéo và nhập số tiền thực tế vào hệ thống. \newline 7. Hệ thống tính toán và hiển thị "Chênh lệch" (Difference = Actual Closing Cash - Expected Cash). \newline 8. Người dùng xem xét thông tin và nhấn nút "Xác nhận và Đóng phiên" (Validate Closing \& Post Entries). \newline 9. Hệ thống thực hiện các hành động cuối cùng: \newline    a. Cập nhật trạng thái phiên POS thành "Closed". \newline    b. Ghi nhận số tiền mặt thực tế và chênh lệch. \newline    c. Tạo/Xác nhận các bút toán kế toán liên quan đến doanh thu và thanh toán của phiên. \newline 10. Hệ thống hiển thị thông báo "Phiên đã được đóng thành công." \newline 11. Người dùng được chuyển về màn hình quản lý phiên hoặc màn hình chính Odoo. \\
+Basic Flow (Có kiểm soát tiền mặt) & 1. Người dùng (US-05/US-01) truy cập module Point of Sale. \newline 2. Từ menu chính của POS hoặc khu vực quản lý phiên, Người dùng chọn hành động "Đóng phiên" (Close Session / Close Register). \newline 3. Hệ thống (System) kiểm tra xem còn đơn hàng nào đang mở trong phiên không. Nếu có, hiển thị cảnh báo và yêu cầu người dùng đóng các đơn hàng đó trước khi tiếp tục (hoặc có tùy chọn cho phép người có quyền buộc đóng các đơn đang mở). \newline 4. Hệ thống hiển thị màn hình tóm tắt phiên làm việc, bao gồm: \newline    - Số dư tiền mặt đầu ca (đã nhập ở UC-MD05-01). \newline    - Tổng doanh thu dự kiến theo từng phương thức thanh toán đã được cấu hình (Tiền mặt, Ví điện tử...). \newline    - Số tiền mặt dự kiến có trong ngăn kéo cuối ca (Expected Cash in Drawer = Opening Cash Balance + Total Cash Payments - Total Cash Refunds...). \newline 5. Hệ thống yêu cầu người dùng nhập "Số tiền mặt thực tế cuối ca" (Actual Closing Cash). \newline 6. Người dùng đếm toàn bộ tiền mặt có trong ngăn kéo và nhập chính xác số tiền thực tế đó vào hệ thống. \newline 7. Hệ thống (System) tự động tính toán và hiển thị "Chênh lệch" (Difference = Actual Closing Cash - Expected Cash in Drawer). \newline 8. Người dùng xem xét thông tin và nhấn nút "Xác nhận và Đóng phiên" (Validate Closing \& Post Entries). \newline 9. Hệ thống (System) thực hiện các hành động cuối cùng: \newline    a. Cập nhật trạng thái phiên POS thành "Đã đóng" (Closed). \newline    b. Ghi nhận số tiền mặt thực tế cuối ca và khoản chênh lệch (nếu có) vào bản ghi phiên. \newline    c. Tự động tạo/Xác nhận các bút toán kế toán liên quan đến doanh thu và các khoản thanh toán của phiên vào module Kế toán. \newline 10. Hệ thống hiển thị thông báo "Phiên đã được đóng thành công." \newline 11. Người dùng được chuyển về màn hình quản lý phiên hoặc màn hình chính. \\
 \hline
-Alternative Flow & \textbf{Basic Flow (Không kiểm soát tiền mặt):} \newline    1. Các bước 1-3 tương tự. \newline    2. Hệ thống hiển thị màn hình tóm tắt doanh thu theo phương thức thanh toán (bỏ qua các bước liên quan đến đối chiếu tiền mặt). \newline    3. Người dùng nhấn nút "Xác nhận và Đóng phiên". \newline    4. Hệ thống thực hiện bước 9a và 9c. \newline    5. Use Case tiếp tục từ bước 10. \newline \textbf{8a. Ghi chú chênh lệch:} \newline    1. Nếu có chênh lệch tiền mặt (bước 7), hệ thống có thể yêu cầu hoặc cho phép người dùng nhập lý do/ghi chú cho khoản chênh lệch đó trước khi xác nhận đóng phiên. \\
+Alternative Flow & \textbf{Basic Flow (Không kiểm soát tiền mặt):} \newline    1. Các bước 1-3 tương tự. \newline    2. Hệ thống hiển thị màn hình tóm tắt doanh thu theo từng phương thức thanh toán (bỏ qua các bước 4, 5, 6, 7 liên quan đến đối chiếu tiền mặt). \newline    3. Người dùng nhấn nút "Xác nhận và Đóng phiên". \newline    4. Hệ thống thực hiện bước 9a và 9c. \newline    5. Use Case tiếp tục từ bước 10. \newline \textbf{8a. Ghi chú cho khoản chênh lệch tiền mặt:} \newline    1. Nếu có chênh lệch tiền mặt đáng kể (bước 7), hệ thống có thể yêu cầu hoặc cho phép người dùng nhập một ghi chú giải thích cho khoản chênh lệch đó trước khi xác nhận đóng phiên. \\
 \hline
-Exception Flow & \textbf{3a. Còn đơn hàng đang mở:} \newline    1. Hệ thống phát hiện vẫn còn đơn hàng chưa thanh toán hoặc chưa đóng. \newline    2. Hệ thống hiển thị danh sách các đơn hàng đó và yêu cầu người dùng xử lý trước. \newline    3. Việc đóng phiên bị tạm dừng cho đến khi tất cả đơn hàng được xử lý. \newline \textbf{9d. Lỗi tạo bút toán kế toán:} \newline    1. Hệ thống gặp lỗi khi cố gắng tạo hoặc xác nhận các bút toán trong module Kế toán (ví dụ: lỗi cấu hình tài khoản, lỗi ghi dữ liệu). \newline    2. Hệ thống báo lỗi chi tiết (thường hiển thị cho người dùng có quyền kế toán/quản trị). \newline    3. Phiên POS có thể vẫn được đóng nhưng các bút toán chưa được ghi nhận đúng. Cần sự can thiệp của kế toán/quản trị viên để khắc phục. \newline \textbf{9e. Lỗi hệ thống chung khi đóng phiên:} \newline    1. Hệ thống gặp sự cố kỹ thuật khác trong quá trình đóng phiên. \newline    2. Hệ thống báo lỗi chung. Phiên có thể vẫn ở trạng thái "In Progress". \\
+Exception Flow & \textbf{3a. Còn đơn hàng đang mở và không thể buộc đóng:} \newline    1. Hệ thống phát hiện vẫn còn đơn hàng chưa thanh toán hoặc chưa đóng hoàn toàn. \newline    2. Hệ thống hiển thị danh sách các đơn hàng đó và yêu cầu người dùng xử lý (thanh toán, hủy) trước. \newline    3. Nếu người dùng không có quyền buộc đóng, việc đóng phiên bị tạm dừng cho đến khi tất cả đơn hàng được xử lý. \newline \textbf{9d. Lỗi hệ thống khi tạo bút toán kế toán:} \newline    1. Hệ thống gặp lỗi khi cố gắng tạo hoặc xác nhận các bút toán trong module Kế toán (ví dụ: lỗi cấu hình tài khoản kế toán, lỗi ghi dữ liệu vào sổ sách). \newline    2. Hệ thống hiển thị thông báo lỗi chi tiết (thường chỉ dành cho người dùng có quyền kế toán hoặc quản trị viên). \newline    3. Phiên POS có thể vẫn được đóng thành công về mặt hoạt động, nhưng các bút toán kế toán chưa được ghi nhận đúng. Tình trạng này cần sự can thiệp của bộ phận kế toán/quản trị viên để kiểm tra và khắc phục. \newline \textbf{9e. Lỗi hệ thống chung trong quá trình đóng phiên:} \newline    1. Hệ thống gặp sự cố kỹ thuật không mong muốn khác trong quá trình thực hiện các bước đóng phiên. \newline    2. Hệ thống hiển thị thông báo lỗi chung. Phiên làm việc có thể vẫn ở trạng thái "Đang hoạt động" hoặc trạng thái không nhất quán. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.13-1:} Trước khi đóng phiên, tất cả các đơn hàng thuộc phiên đó phải ở trạng thái cuối cùng (Paid hoặc Cancelled). \newline - \textbf{BR-UC5.13-2:} Nếu sử dụng kiểm soát tiền mặt, việc đối chiếu tiền mặt cuối ca là bắt buộc. Khoản chênh lệch (nếu có) phải được ghi nhận. \newline - \textbf{BR-UC5.13-3:} Việc đóng phiên là hành động cuối cùng chốt lại các giao dịch và doanh thu của phiên đó. Sau khi đóng, không thể mở lại để sửa đổi giao dịch thuộc phiên đó. \newline - \textbf{BR-UC5.13-4:} Việc đóng phiên phải kích hoạt việc tạo/xác nhận các bút toán tương ứng trong module Kế toán để đảm bảo dữ liệu tài chính được cập nhật. \\
+Business Rule & - \textbf{BR-UC5.17-1:} Trước khi đóng phiên, tất cả các đơn hàng thuộc phiên đó phải ở trạng thái cuối cùng (ví dụ: "Đã thanh toán" - Paid, hoặc "Đã hủy" - Cancelled/Voided). \newline - \textbf{BR-UC5.17-2:} Nếu sử dụng tính năng kiểm soát tiền mặt, việc đối chiếu số tiền mặt thực tế cuối ca với số tiền dự kiến là bắt buộc. Mọi khoản chênh lệch (thiếu hoặc thừa) phải được ghi nhận. \newline - \textbf{BR-UC5.17-3:} Hành động đóng phiên là hành động cuối cùng để chốt lại tất cả các giao dịch và doanh thu của phiên làm việc đó. Sau khi một phiên đã được đóng, không thể mở lại để thực hiện thêm giao dịch hoặc sửa đổi các giao dịch thuộc phiên đó trên giao diện POS thông thường. \newline - \textbf{BR-UC5.17-4 (System):} Việc đóng phiên phải tự động kích hoạt quá trình tạo hoặc xác nhận các bút toán kế toán tương ứng trong module Kế toán để đảm bảo dữ liệu tài chính của nhà hàng được cập nhật chính xác và kịp thời. \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.13-1 (Usability):} Quy trình đóng phiên phải rõ ràng. Màn hình tóm tắt và đối chiếu tiền mặt (nếu có) phải dễ hiểu. \newline - \textbf{NFR-UC5.13-2 (Performance):} Việc tính toán tổng kết và đóng phiên (bao gồm cả tạo bút toán kế toán) nên được thực hiện trong thời gian hợp lý (ví dụ: dưới 10-15 giây tùy thuộc số lượng giao dịch). \newline - \textbf{NFR-UC5.13-3 (Accuracy):} Mọi số liệu tổng kết (doanh thu, tiền mặt dự kiến, chênh lệch) và các bút toán kế toán được tạo ra phải chính xác tuyệt đối. \newline - \textbf{NFR-UC5.13-4 (Auditability):} Mọi thông tin về phiên làm việc (số dư đầu/cuối, chênh lệch, người đóng phiên, thời gian đóng) phải được lưu trữ đầy đủ để phục vụ kiểm toán. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.17-1 (Usability):} Quy trình đóng phiên phải được thiết kế rõ ràng và dễ thực hiện cho người dùng. Màn hình tóm tắt thông tin phiên và giao diện đối chiếu tiền mặt (nếu có) phải dễ hiểu và dễ thao tác. \newline - \textbf{NFR-UC5.17-2 (Performance):} Việc tính toán tổng kết doanh thu, các khoản thanh toán và thực hiện đóng phiên (bao gồm cả việc tạo các bút toán kế toán liên quan) nên được thực hiện trong một khoảng thời gian hợp lý (ví dụ: dưới 10-15 giây, tùy thuộc vào số lượng giao dịch trong phiên). \newline - \textbf{NFR-UC5.17-3 (Accuracy):} Mọi số liệu được tổng kết trong quá trình đóng phiên (doanh thu, tiền mặt dự kiến, chênh lệch) và tất cả các bút toán kế toán được hệ thống tạo ra phải đảm bảo chính xác tuyệt đối. \newline - \textbf{NFR-UC5.17-4 (Auditability):} Mọi thông tin liên quan đến phiên làm việc (bao gồm số dư tiền mặt đầu ca, số dư cuối ca thực tế, khoản chênh lệch, người thực hiện đóng phiên, thời gian đóng phiên) phải được lưu trữ đầy đủ và an toàn để phục vụ cho mục đích kiểm toán nội bộ và bên ngoài. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-14: Chuyển bàn/Ghép bàn}
-
+\subsubsection{Use Case UC-MD05-18: Thực hiện Chuyển Bàn}
+% (Trước đây là FR-MD05-19, giờ là UC tương ứng, nội dung như UC-MD05-14 cũ - phần chuyển bàn)
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-14: Chuyển bàn/Ghép bàn} \label{tab:uc_md05_14} \\
+\caption{Đặc tả Use Case UC-MD05-18: Thực hiện Chuyển Bàn} \label{tab:uc_md05_18_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+Use Case Name & Thực hiện Chuyển Bàn \\
 \hline
-\textbf{Mục} & \textbf{Nội dung} \\
+Use Case ID & UC-MD05-18 \\
 \hline
-Use Case Name & Chuyển bàn/Ghép bàn \\
-\hline
-Use Case ID & UC-MD05-14 \\
-\hline
-Use Case Description & Cung cấp chức năng cho phép Nhân viên (Quản lý, Phục vụ) di chuyển một đơn hàng đang hoạt động từ bàn này sang một bàn khác (Chuyển bàn - Transfer) hoặc gộp nhiều đơn hàng từ nhiều bàn khác nhau vào một bàn duy nhất (Ghép bàn - Merge). \\
+Use Case Description & Cho phép Nhân viên (US-01: Quản lý nhà hàng, US-02: Nhân viên phục vụ) di chuyển toàn bộ một đơn hàng đang hoạt động cùng với tất cả các món đã gọi từ bàn hiện tại (Bàn Nguồn) sang một bàn khác đang trống (Bàn Đích) trên giao diện POS. \\
 \hline
 Actor & US-01 (Quản lý nhà hàng), US-02 (Nhân viên phục vụ) \\
 \hline
 Priority & Should Have \\
 \hline
-Trigger & - Khách hàng yêu cầu chuyển sang một bàn khác. \newline - Nhiều nhóm khách hàng ngồi riêng lẻ muốn gộp lại và thanh toán chung một hóa đơn. \newline - Nhân viên cần sắp xếp lại bàn để tối ưu không gian. \\
+Trigger & - Khách hàng đang ngồi tại Bàn Nguồn yêu cầu được chuyển sang một bàn khác (Bàn Đích). \newline - Nhân viên cần sắp xếp lại chỗ ngồi cho khách để tối ưu không gian hoặc đáp ứng yêu cầu đặc biệt. \\
 \hline
-Pre-Condition & - Nhân viên đã đăng nhập và đang trong phiên POS hoạt động. \newline - Có ít nhất một đơn hàng đang hoạt động tại một bàn (trạng thái Occupied). \newline - \textit{(Cho Chuyển bàn):} Có một bàn khác đang trống (Available). \newline - \textit{(Cho Ghép bàn):} Có ít nhất hai đơn hàng đang hoạt động ở các bàn khác nhau. \\
+Pre-Condition & - Nhân viên đã đăng nhập và đang trong phiên POS hoạt động. \newline - Có một đơn hàng đang hoạt động (chưa thanh toán) tại Bàn Nguồn (Bàn Nguồn đang ở trạng thái "Occupied"). \newline - Có một Bàn Đích đang ở trạng thái "Trống" (Available) mà khách muốn chuyển đến. \\
 \hline
-Post-Condition & - \textbf{Chuyển bàn:} Đơn hàng được chuyển thành công sang bàn mới. Bàn cũ trở thành trống, bàn mới trở thành Occupied với đơn hàng đó. \newline - \textbf{Ghép bàn:} Tất cả các món ăn từ các đơn hàng nguồn được gộp vào đơn hàng của bàn đích. Các bàn nguồn trở thành trống. Đơn hàng tại bàn đích chứa tất cả món ăn đã gộp. \\
+Post-Condition & - Toàn bộ đơn hàng (bao gồm tất cả các món đã gọi, ghi chú, và các thông tin liên quan như liên kết đặt chỗ nếu có) được chuyển từ Bàn Nguồn sang Bàn Đích. \newline - Trạng thái của Bàn Nguồn được cập nhật thành "Trống" (Available) trên sơ đồ tầng POS. \newline - Trạng thái của Bàn Đích được cập nhật thành "Đang có khách" (Occupied) và liên kết với đơn hàng vừa được chuyển đến. \newline - Nhân viên có thể tiếp tục phục vụ hoặc tiến hành thanh toán cho đơn hàng tại Bàn Đích. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Chuyển bàn - Transfer) & 1. Nhân viên (US-01/US-02) đang ở màn hình đơn hàng POS của bàn cần chuyển (Bàn Nguồn). \newline 2. Nhân viên chọn chức năng "Chuyển bàn" (Transfer). \newline 3. Hệ thống hiển thị lại Sơ đồ tầng (Floor Plan). \newline 4. Nhân viên chọn bàn đích (Bàn Đích) đang ở trạng thái "Trống". \newline 5. Hệ thống thực hiện chuyển đơn hàng từ Bàn Nguồn sang Bàn Đích. \newline 6. Hệ thống cập nhật trạng thái: Bàn Nguồn thành "Trống", Bàn Đích thành "Occupied". \newline 7. Hệ thống quay lại màn hình đơn hàng, giờ đây liên kết với Bàn Đích. \newline 8. Hệ thống hiển thị thông báo chuyển bàn thành công. \\
+Basic Flow & 1. Nhân viên (US-01 hoặc US-02) đang ở màn hình đơn hàng POS của Bàn Nguồn mà khách muốn chuyển đi. \newline 2. Nhân viên tìm và chọn chức năng "Chuyển bàn" (Transfer Table / Move Table) trên giao diện POS (thường nằm trong menu các hành động của đơn hàng hoặc bàn). \newline 3. Hệ thống hiển thị lại giao diện Sơ đồ tầng (Floor Plan - UC-MD05-02), có thể làm nổi bật các bàn đang trống. \newline 4. Nhân viên chọn Bàn Đích (là một bàn đang ở trạng thái "Trống") mà khách muốn chuyển đến. \newline 5. Hệ thống (có thể) yêu cầu nhân viên xác nhận hành động chuyển bàn từ Bàn Nguồn sang Bàn Đích. Nhân viên xác nhận. \newline 6. Hệ thống (System) thực hiện các thao tác sau: \newline    a. Cập nhật bản ghi đơn hàng POS hiện tại, thay đổi liên kết từ Bàn Nguồn sang Bàn Đích. \newline    b. Cập nhật trạng thái của Bàn Nguồn trên sơ đồ tầng thành "Trống" (Available). \newline    c. Cập nhật trạng thái của Bàn Đích trên sơ đồ tầng thành "Đang có khách" (Occupied). \newline 7. Hệ thống quay lại màn hình đơn hàng, giờ đây đơn hàng này được hiển thị là thuộc về Bàn Đích. \newline 8. Hệ thống hiển thị thông báo "Chuyển bàn thành công từ [Tên Bàn Nguồn] sang [Tên Bàn Đích]." \\
 \hline
-Alternative Flow & \textbf{Basic Flow (Ghép bàn - Merge):} \newline    1. Nhân viên đang ở màn hình Sơ đồ tầng. \newline    2. Nhân viên chọn chức năng "Ghép bàn" (Merge) (có thể cần vào chế độ Edit hoặc menu riêng). \newline    3. Nhân viên chọn (các) bàn nguồn có đơn hàng muốn ghép (Bàn Nguồn 1, Bàn Nguồn 2...). \newline    4. Nhân viên chọn bàn đích sẽ nhận tất cả các món (Bàn Đích - thường là một trong các bàn nguồn hoặc một bàn khác). \newline    5. Hệ thống yêu cầu xác nhận hành động ghép. Nhân viên xác nhận. \newline    6. Hệ thống di chuyển tất cả các món ăn từ đơn hàng của (các) Bàn Nguồn vào đơn hàng của Bàn Đích. \newline    7. Hệ thống đóng các đơn hàng ở (các) Bàn Nguồn (nếu cần) và cập nhật trạng thái (các) Bàn Nguồn thành "Trống". \newline    8. Đơn hàng tại Bàn Đích giờ chứa tất cả các món đã gộp. \newline    9. Hệ thống hiển thị thông báo ghép bàn thành công. Nhân viên có thể mở Bàn Đích để xem đơn hàng tổng hợp. \\
+Alternative Flow & \textbf{2a. Chọn bàn nguồn từ sơ đồ tầng (nếu chưa mở đơn hàng):} \newline    1. Nhân viên đang xem Sơ đồ tầng. \newline    2. Nhân viên chọn Bàn Nguồn (đang Occupied). \newline    3. Thay vì mở đơn hàng, nhân viên chọn một tùy chọn "Chuyển bàn" từ menu ngữ cảnh của bàn đó. \newline    4. Use Case tiếp tục từ bước 3 của Basic Flow. \\
 \hline
-Exception Flow & \textbf{Chuyển bàn - 4a. Chọn bàn đích không hợp lệ:} \newline    1. Nhân viên chọn một bàn đích không trống (Occupied, Reserved). \newline    2. Hệ thống báo lỗi "Không thể chuyển đến bàn này. Bàn không trống." \newline    3. Use Case quay lại bước 4. \newline \textbf{Ghép bàn - 6a. Lỗi khi gộp món ăn:} \newline    1. Hệ thống gặp lỗi khi cố gắng di chuyển/gộp các dòng món ăn giữa các đơn hàng. \newline    2. Hệ thống báo lỗi. Hành động ghép có thể thất bại hoặc chỉ thành công một phần. Cần kiểm tra lại các đơn hàng. \newline \textbf{Chung - Lỗi cập nhật trạng thái bàn/đơn hàng:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cập nhật trạng thái bàn hoặc liên kết đơn hàng. \newline    2. Hệ thống báo lỗi. Trạng thái có thể không nhất quán. \\
+Exception Flow & \textbf{4a. Chọn bàn đích không hợp lệ:} \newline    1. Nhân viên chọn một Bàn Đích không ở trạng thái "Trống" (ví dụ: đang Occupied hoặc Reserved bởi một đặt chỗ khác). \newline    2. Hệ thống hiển thị thông báo lỗi, ví dụ: "Không thể chuyển đến bàn này. Bàn [Tên Bàn Đích] hiện không trống." \newline    3. Hệ thống yêu cầu nhân viên chọn lại Bàn Đích. Use Case quay lại bước 4 của Basic Flow. \newline \textbf{6d. Lỗi hệ thống khi thực hiện chuyển bàn:} \newline    1. Hệ thống gặp lỗi kỹ thuật trong quá trình cập nhật liên kết đơn hàng hoặc trạng thái của các bàn (ví dụ: lỗi cơ sở dữ liệu, xung đột dữ liệu). \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Hành động chuyển bàn có thể không thành công hoặc chỉ thành công một phần (ví dụ: đơn hàng đã chuyển nhưng trạng thái bàn chưa cập nhật đúng). Cần có cơ chế kiểm tra và cảnh báo cho nhân viên. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.14-1:} Chỉ có thể chuyển đơn hàng đến một bàn đang trống. \newline - \textbf{BR-UC5.14-2:} Khi ghép bàn, tất cả các món ăn từ các bàn nguồn sẽ được cộng dồn vào bàn đích. Cần đảm bảo không mất mát dữ liệu món ăn. \newline - \textbf{BR-UC5.14-3:} Nếu các đơn hàng được ghép có liên kết với các lượt đặt chỗ khác nhau (có thể có tiền cọc khác nhau), hệ thống cần có logic xử lý việc gộp này một cách hợp lý (ví dụ: chỉ cho phép ghép nếu cùng một khách hàng, hoặc cần xử lý tiền cọc riêng). Trường hợp này phức tạp và cần làm rõ yêu cầu. Mặc định có thể chỉ cho ghép các đơn hàng không có đặt cọc hoặc cùng một đặt cọc. \newline - \textbf{BR-UC5.14-4:} Hành động chuyển/ghép bàn cần được ghi nhận vào lịch sử đơn hàng. \\
+Business Rule & - \textbf{BR-UC5.18-1:} Đơn hàng chỉ có thể được chuyển đến một Bàn Đích đang ở trạng thái hoàn toàn trống và sẵn sàng phục vụ. \newline - \textbf{BR-UC5.18-2:} Tất cả thông tin của đơn hàng gốc (bao gồm các món đã gọi, số lượng, giá, ghi chú, liên kết đặt chỗ và tiền đặt cọc đã áp dụng nếu có) phải được giữ nguyên và chuyển sang Bàn Đích. \newline - \textbf{BR-UC5.18-3:} Hành động chuyển bàn cần được ghi nhận vào lịch sử hoạt động của đơn hàng hoặc nhật ký hệ thống để tiện cho việc theo dõi và kiểm tra sau này. \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.14-1 (Usability):} Chức năng chuyển/ghép bàn phải dễ sử dụng, các bước chọn bàn nguồn/đích phải rõ ràng. \newline - \textbf{NFR-UC5.14-2 (Performance):} Thao tác chuyển/ghép phải diễn ra nhanh chóng. \newline - \textbf{NFR-UC5.14-3 (Data Integrity):} Phải đảm bảo tất cả các món ăn và thông tin liên quan được chuyển/gộp chính xác, không bị mất mát hoặc trùng lặp sai. Trạng thái bàn phải được cập nhật đúng. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.18-1 (Usability):} Chức năng chuyển bàn phải dễ dàng thực hiện trên giao diện POS, các bước chọn bàn nguồn và bàn đích phải rõ ràng và trực quan. \newline - \textbf{NFR-UC5.18-2 (Performance):} Thao tác chuyển bàn, bao gồm cả việc cập nhật trạng thái các bàn và liên kết đơn hàng, phải được thực hiện nhanh chóng để không làm gián đoạn quá trình phục vụ. \newline - \textbf{NFR-UC5.18-3 (Data Integrity):} Phải đảm bảo rằng toàn bộ dữ liệu của đơn hàng được chuyển một cách chính xác và đầy đủ sang bàn mới, không bị mất mát hoặc sai lệch thông tin. Trạng thái của cả Bàn Nguồn và Bàn Đích phải được cập nhật đúng. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD05-15: Hủy món/Hủy đơn (Void)}
-
+\subsubsection{Use Case UC-MD05-19: Thực hiện Ghép Bàn/Đơn hàng}
+% (Trước đây là FR-MD05-20, giờ là UC tương ứng, nội dung như UC-MD05-14 cũ - phần ghép bàn)
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD05-15: Hủy món/Hủy đơn (Void)} \label{tab:uc_md05_15} \\
+\caption{Đặc tả Use Case UC-MD05-19: Thực hiện Ghép Bàn/Đơn hàng} \label{tab:uc_md05_19_final} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+Use Case Name & Thực hiện Ghép Bàn/Đơn hàng \\
 \hline
-\textbf{Mục} & \textbf{Nội dung} \\
+Use Case ID & UC-MD05-19 \\
 \hline
-Use Case Name & Hủy món/Hủy đơn (Void) \\
+Use Case Description & Cho phép Nhân viên (US-01: Quản lý nhà hàng, US-02: Nhân viên phục vụ) gộp các đơn hàng đang hoạt động từ nhiều Bàn Nguồn khác nhau vào một Bàn Đích duy nhất, tạo thành một đơn hàng tổng hợp. \\
 \hline
-Use Case ID & UC-MD05-15 \\
+Actor & US-01 (Quản lý nhà hàng), US-02 (Nhân viên phục vụ) \\
 \hline
-Use Case Description & Cho phép Nhân viên (thường cần quyền Quản lý hoặc được cấp phép đặc biệt) hủy bỏ một món ăn cụ thể đã được thêm vào đơn hàng (Void Item) hoặc hủy bỏ toàn bộ đơn hàng đang hoạt động (Void Order), thường do lỗi nhập liệu hoặc khách hàng đổi ý. Hành động này cần được ghi nhận lại. \\
+Priority & Should Have \\
 \hline
-Actor & US-01 (Quản lý nhà hàng), US-02 (Nhân viên phục vụ - có thể cần quyền) \\
+Trigger & - Nhiều nhóm khách hàng ban đầu ngồi riêng ở các bàn khác nhau sau đó quyết định ngồi chung và muốn thanh toán chung một hóa đơn. \newline - Nhân viên cần gộp các đơn hàng lẻ của cùng một nhóm khách lớn đang ngồi ở nhiều bàn gần nhau. \\
 \hline
-Priority & Must Have \\
+Pre-Condition & - Nhân viên đã đăng nhập và đang trong phiên POS hoạt động. \newline - Có ít nhất hai đơn hàng đang hoạt động (chưa thanh toán) ở các Bàn Nguồn khác nhau. \newline - Bàn Đích (có thể là một trong các Bàn Nguồn hoặc một bàn khác đang có đơn hàng) được chọn để nhận các món từ các Bàn Nguồn. \\
 \hline
-Trigger & - Nhân viên nhập sai món hoặc sai số lượng và cần hủy bỏ món đó. \newline - Khách hàng đổi ý, không muốn lấy món đã gọi nữa. \newline - Cần hủy toàn bộ đơn hàng do một lý do đặc biệt (ví dụ: khách rời đi đột ngột, lỗi hệ thống...). \\
-\hline
-Pre-Condition & - Nhân viên đã đăng nhập và đang trong phiên POS hoạt động. \newline - Đang ở màn hình đơn hàng POS có món cần hủy hoặc đơn hàng cần hủy. \newline - Người dùng có quyền thực hiện hành động Void. \\
-\hline
-Post-Condition & - \textbf{Hủy món:} Món ăn được chọn bị loại bỏ khỏi đơn hàng hoặc được đánh dấu là đã hủy (với số lượng và giá trị bị điều chỉnh về 0 hoặc âm). Tổng tiền đơn hàng được cập nhật. \newline - \textbf{Hủy đơn:} Toàn bộ đơn hàng được đánh dấu là đã hủy (Cancelled/Voided). Bàn liên kết trở thành trống. \newline - Hành động hủy (món hoặc đơn) và lý do (nếu có) được ghi nhận vào hệ thống để kiểm soát và báo cáo. \\
+Post-Condition & - Tất cả các món ăn từ các đơn hàng của (các) Bàn Nguồn được gộp vào đơn hàng của Bàn Đích. \newline - (Các) Bàn Nguồn (nếu không phải là Bàn Đích) được cập nhật trạng thái thành "Trống" (Available). \newline - Đơn hàng tại Bàn Đích giờ đây chứa tất cả các món ăn đã được gộp, và tổng giá trị được tính lại. \newline - Các đơn hàng gốc tại (các) Bàn Nguồn (nếu không phải Bàn Đích) có thể được đóng hoặc hủy (tùy logic hệ thống). \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Hủy món - Void Item) & 1. Nhân viên (US-01/US-02) đang ở màn hình đơn hàng POS. \newline 2. Nhân viên chọn dòng món ăn cần hủy. \newline 3. Nhân viên chọn tùy chọn/nút "Hủy món" / "Void Item" / "Remove" (có thể cần nhập số lượng muốn hủy nếu SL > 1). \newline 4. Hệ thống (có thể) yêu cầu nhập lý do hủy hoặc yêu cầu xác nhận quyền quản lý (ví dụ: nhập mã PIN của quản lý). \newline 5. Người dùng cung cấp thông tin/xác nhận cần thiết. \newline 6. Hệ thống loại bỏ món ăn khỏi danh sách hoặc đánh dấu là đã hủy (ví dụ: gạch ngang, giá trị âm). \newline 7. Hệ thống cập nhật lại tổng tiền của đơn hàng. \newline 8. Hệ thống ghi nhận hành động hủy món và lý do (nếu có) vào log. \\
+Basic Flow & 1. Nhân viên (US-01 hoặc US-02) đang ở màn hình Sơ đồ tầng POS hoặc màn hình đơn hàng của một trong các bàn cần ghép. \newline 2. Nhân viên chọn chức năng "Ghép bàn/đơn hàng" (Merge Tables / Merge Orders). (Chức năng này có thể yêu cầu chọn nhiều bàn trên sơ đồ tầng trước, hoặc mở một đơn hàng rồi chọn "Ghép với đơn hàng khác"). \newline 3. Hệ thống yêu cầu nhân viên chọn (các) Bàn Nguồn có đơn hàng muốn ghép (ví dụ: Bàn A, Bàn B). \newline 4. Hệ thống yêu cầu nhân viên chọn Bàn Đích sẽ nhận tất cả các món (ví dụ: Bàn A sẽ là bàn đích). \newline 5. Hệ thống hiển thị thông tin tóm tắt về các đơn hàng sẽ được ghép và yêu cầu nhân viên xác nhận hành động. \newline 6. Nhân viên xác nhận. \newline 7. Hệ thống (System) thực hiện các thao tác: \newline    a. Di chuyển tất cả các dòng món ăn (items) từ đơn hàng của (các) Bàn Nguồn (ví dụ: Bàn B) vào đơn hàng của Bàn Đích (Bàn A). \newline    b. Tính toán lại tổng giá trị cho đơn hàng tại Bàn Đích. \newline    c. (Nếu Bàn Nguồn khác Bàn Đích) Đóng hoặc hủy đơn hàng gốc tại (các) Bàn Nguồn. \newline    d. (Nếu Bàn Nguồn khác Bàn Đích) Cập nhật trạng thái của (các) Bàn Nguồn thành "Trống" (Available). \newline 8. Hệ thống hiển thị thông báo "Ghép bàn/đơn hàng thành công. Tất cả món đã được chuyển vào Bàn [Tên Bàn Đích]." \newline 9. Nhân viên có thể mở đơn hàng tại Bàn Đích để xem kết quả đơn hàng tổng hợp. \\
 \hline
-Alternative Flow & \textbf{Basic Flow (Hủy đơn - Void Order):} \newline    1. Nhân viên đang ở màn hình đơn hàng POS. \newline    2. Nhân viên chọn nút/tùy chọn "Hủy đơn hàng" / "Void Order" / "Delete Order". \newline    3. Hệ thống yêu cầu xác nhận hành động hủy toàn bộ đơn hàng, có thể yêu cầu lý do hoặc quyền quản lý. \newline    4. Người dùng cung cấp thông tin/xác nhận cần thiết. \newline    5. Hệ thống cập nhật trạng thái đơn hàng thành "Cancelled" hoặc "Voided". \newline    6. Hệ thống cập nhật trạng thái bàn liên kết thành "Trống". \newline    7. Hệ thống ghi nhận hành động hủy đơn và lý do vào log. \newline    8. Hệ thống thường chuyển về màn hình Sơ đồ tầng. \\
+Alternative Flow & \textbf{3a. Chọn bàn đích trước, sau đó chọn các bàn nguồn để gộp vào:} \newline    1. Nhân viên mở đơn hàng của Bàn Đích. \newline    2. Chọn chức năng "Thêm đơn hàng từ bàn khác". \newline    3. Chọn (các) Bàn Nguồn muốn lấy món. \newline    4. Use Case tiếp tục từ bước 5. \\
 \hline
-Exception Flow & \textbf{4a/3a-cancel. Không có quyền hủy:} \newline    1. Nhân viên không có quyền thực hiện hành động hủy món/đơn. \newline    2. Hệ thống báo lỗi "Bạn không có quyền thực hiện hành động này" hoặc yêu cầu xác thực của quản lý nhưng nhân viên không cung cấp được. \newline    3. Hành động hủy không được thực hiện. \newline \textbf{6a/5a-cancel. Lỗi hệ thống khi hủy:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng cập nhật trạng thái món ăn hoặc đơn hàng. \newline    2. Hệ thống báo lỗi chung. Hành động hủy có thể không thành công. \\
+Exception Flow & \textbf{7e. Lỗi hệ thống khi di chuyển món ăn hoặc cập nhật đơn hàng/bàn:} \newline    1. Hệ thống gặp lỗi kỹ thuật trong quá trình gộp dữ liệu (ví dụ: lỗi cơ sở dữ liệu, xung đột logic). \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Hành động ghép bàn/đơn hàng có thể thất bại hoặc chỉ thành công một phần. Nhân viên cần kiểm tra kỹ lại tất cả các đơn hàng và bàn liên quan để đảm bảo không có sai sót hoặc mất mát dữ liệu. Có thể cần sự can thiệp của quản lý. \newline \textbf{5a. Ghép các đơn hàng có tiền đặt cọc khác nhau:} \newline    1. Nếu các đơn hàng nguồn có liên kết với các lượt đặt chỗ đã trả tiền đặt cọc khác nhau. \newline    2. Hệ thống có thể không cho phép ghép hoặc hiển thị cảnh báo yêu cầu nhân viên xử lý tiền đặt cọc một cách đặc biệt trước khi ghép. (BR-UC5.20-3) \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC5.15-1:} Hành động hủy món/đơn nên yêu cầu quyền hạn đặc biệt (quản lý hoặc nhân viên cấp cao) để tránh lạm dụng và kiểm soát thất thoát. \newline - \textbf{BR-UC5.15-2:} Việc hủy món/đơn phải được ghi log chi tiết: người thực hiện, thời gian, món/đơn bị hủy, lý do (nếu có). \newline - \textbf{BR-UC5.15-3:} Nếu hủy một món đã được gửi xuống bếp, cần có quy trình thông báo cho bếp biết để ngừng chế biến (có thể là thông báo tự động qua KDS/in phiếu hủy hoặc thông báo thủ công). \newline - \textbf{BR-UC5.15-4:} Việc hủy đơn hàng phải giải phóng bàn liên quan. \\
+Business Rule & - \textbf{BR-UC5.19-1:} Tất cả các món ăn, bao gồm số lượng, biến thể, và ghi chú đặc biệt, từ các đơn hàng nguồn phải được chuyển chính xác và đầy đủ vào đơn hàng của Bàn Đích. \newline - \textbf{BR-UC5.19-2:} Sau khi ghép, (các) Bàn Nguồn (nếu không phải là Bàn Đích) phải được giải phóng (trạng thái "Trống"). \newline - \textbf{BR-UC5.19-3:} Cần có quy định rõ ràng về việc xử lý tiền đặt cọc khi ghép các đơn hàng có thể đến từ các lượt đặt chỗ khác nhau. Mặc định, hệ thống có thể chỉ cho phép ghép các đơn hàng không có đặt cọc hoặc các đơn hàng cùng thuộc một lượt đặt chỗ lớn. Nếu khác, có thể cần quản lý xác nhận hoặc xử lý thủ công các khoản cọc. \newline - \textbf{BR-UC5.19-4:} Hành động ghép bàn/đơn hàng cần được ghi nhận vào lịch sử của các đơn hàng liên quan. \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC5.15-1 (Security/Auditability):} Chức năng hủy phải được kiểm soát chặt chẽ về quyền hạn và mọi hành động phải được ghi log đầy đủ. \newline - \textbf{NFR-UC5.15-2 (Usability):} Thao tác hủy phải rõ ràng nhưng cũng cần có bước xác nhận để tránh hủy nhầm. Yêu cầu nhập lý do (nếu bắt buộc) cần thuận tiện. \newline - \textbf{NFR-UC5.15-3 (Performance):} Hành động hủy và cập nhật trạng thái phải nhanh chóng. \\
+Non-Functional Requirement & - \textbf{NFR-UC5.19-1 (Usability):} Chức năng ghép bàn/đơn hàng phải dễ sử dụng, các bước chọn bàn nguồn và bàn đích phải rõ ràng. \newline - \textbf{NFR-UC5.19-2 (Performance):} Thao tác ghép (đặc biệt khi có nhiều món) phải được thực hiện nhanh chóng. \newline - \textbf{NFR-UC5.19-3 (Data Integrity):} Phải đảm bảo tính toàn vẹn dữ liệu tuyệt đối trong quá trình di chuyển và gộp các món ăn, không để xảy ra mất mát, trùng lặp sai, hoặc tính toán sai tổng tiền. \\
 \hline
 \end{longtable}
 
+\subsubsection{Use Case UC-MD05-20: Hủy Món đã gọi (Void Item)}
+% (Trước đây là FR-MD05-21, giờ là UC tương ứng, nội dung như UC-MD05-15 cũ - phần hủy món)
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD05-20: Hủy Món đã gọi (Void Item)} \label{tab:uc_md05_20_final} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Hủy Món đã gọi (Void Item) \\
+\hline
+Use Case ID & UC-MD05-20 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-01: Quản lý nhà hàng, hoặc US-02: Nhân viên phục vụ - nếu được cấp quyền) hủy bỏ một món ăn hoặc đồ uống cụ thể đã được thêm vào đơn hàng POS, thường do khách hàng đổi ý hoặc nhân viên nhập sai. Hành động này cần được ghi nhận và có thể yêu cầu lý do. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-02 (Nhân viên phục vụ) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khách hàng yêu cầu hủy một món đã gọi (trước hoặc sau khi món đã được gửi bếp, tùy chính sách). \newline - Nhân viên phát hiện đã nhập sai món hoặc sai số lượng và cần loại bỏ món sai. \\
+\hline
+Pre-Condition & - Nhân viên đã đăng nhập và đang trong phiên POS hoạt động. \newline - Đang ở màn hình đơn hàng POS có chứa món ăn cần hủy. \newline - Người dùng có quyền thực hiện hành động "Void Item" (có thể cần quyền quản lý). \\
+\hline
+Post-Condition & - Món ăn được chọn bị loại bỏ khỏi danh sách các món tính tiền của đơn hàng, HOẶC được đánh dấu là đã hủy (ví dụ: số lượng và giá trị được điều chỉnh về 0 hoặc hiển thị giá trị âm để đối trừ). \newline - Tổng tiền của đơn hàng được cập nhật lại. \newline - Hành động hủy món và lý do (nếu có) được ghi nhận vào hệ thống để kiểm soát và báo cáo. \newline - (Nếu món đã gửi bếp) Cần có thông báo cho bếp về việc hủy món. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-01 hoặc US-02) đang ở màn hình đơn hàng POS. \newline 2. Nhân viên chọn (nhấp vào) dòng món ăn cụ thể cần hủy trong danh sách các món đã gọi. \newline 3. Nhân viên chọn tùy chọn/nút "Hủy món" / "Void Item" / "Remove Line" (tên gọi có thể khác nhau). \newline 4. Hệ thống (có thể) yêu cầu nhân viên nhập Lý do hủy (ví dụ: "Khách đổi ý", "Nhập sai", "Hết hàng đột xuất"). Danh sách lý do có thể được cấu hình sẵn. \newline 5. Hệ thống (có thể) yêu cầu xác nhận quyền quản lý (ví dụ: nhập mã PIN của quản lý) nếu nhân viên hiện tại không có đủ quyền tự hủy. \newline 6. Sau khi lý do được nhập (nếu bắt buộc) và/hoặc quyền được xác nhận (nếu cần), nhân viên xác nhận hành động hủy món. \newline 7. Hệ thống xử lý hủy món: \newline    a. Nếu món chưa gửi bếp: Loại bỏ dòng món đó khỏi đơn hàng hoặc đặt số lượng về 0. \newline    b. Nếu món đã gửi bếp (BR-UC5.20-3): Hệ thống đánh dấu món là đã hủy, có thể tạo một dòng có giá trị âm để đối trừ, và kích hoạt thông báo hủy đến bếp (qua KDS hoặc in phiếu hủy). \newline 8. Hệ thống tính toán lại và cập nhật tổng tiền của đơn hàng. \newline 9. Hệ thống ghi nhận hành động hủy món, người thực hiện, thời gian, và lý do (nếu có) vào nhật ký đơn hàng hoặc một log riêng. \\
+\hline
+Alternative Flow & \textbf{3a. Hủy một phần số lượng:} \newline    1. Nếu một dòng món có số lượng lớn hơn 1 (ví dụ: 3 Bia Tiger) và khách chỉ muốn hủy 1 lon. \newline    2. Nhân viên chọn dòng món, sau đó có thể chọn "Giảm số lượng" (UC-MD05-06) hoặc một tùy chọn "Hủy một phần" nếu có. \newline    3. Nếu dùng chức năng "Hủy món" chung, hệ thống có thể hỏi số lượng muốn hủy. \newline \textbf{4a. Không yêu cầu lý do/quyền cho một số trường hợp:} \newline    1. Hệ thống có thể được cấu hình để không yêu cầu lý do hoặc quyền quản lý cho việc hủy các món chưa gửi bếp, hoặc hủy các món có giá trị nhỏ. \\
+\hline
+Exception Flow & \textbf{5a. Không có quyền hủy / Xác thực quản lý thất bại:} \newline    1. Nhân viên không có quyền thực hiện hành động hủy món và không cung cấp được xác thực quản lý hợp lệ. \newline    2. Hệ thống hiển thị thông báo "Bạn không có quyền thực hiện hành động này." hoặc "Xác thực quản lý không thành công." \newline    3. Hành động hủy món không được thực hiện. \newline \textbf{7c. Lỗi hệ thống khi xử lý hủy món:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng cập nhật đơn hàng hoặc gửi thông báo hủy xuống bếp. \newline    2. Hệ thống hiển thị thông báo lỗi chung. Hành động hủy có thể không thành công hoặc không được ghi nhận đúng cách. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC5.20-1:} Hành động hủy món (Void Item) nên yêu cầu quyền hạn phù hợp (ví dụ: Quản lý hoặc nhân viên được cấp quyền đặc biệt) để kiểm soát thất thoát và gian lận. \newline - \textbf{BR-UC5.20-2:} Mọi hành động hủy món phải được ghi log chi tiết trong hệ thống, bao gồm: người thực hiện, thời gian, món bị hủy, số lượng hủy, lý do hủy (nếu có), và có thể cả người phê duyệt (nếu quy trình yêu cầu). \newline - \textbf{BR-UC5.20-3:} Nếu món ăn đã được gửi xuống bếp (thông qua UC-MD05-08), việc hủy món phải đi kèm với một quy trình thông báo rõ ràng cho bộ phận bếp để họ ngừng chế biến món đó. Điều này có thể được thực hiện tự động qua KDS (hiển thị món bị hủy) hoặc bằng cách in ra một "phiếu hủy" tại máy in bếp. \newline - \textbf{BR-UC5.20-4:} Việc hủy món có thể ảnh hưởng đến tính toán tồn kho (nếu là sản phẩm Stockable và đã trừ kho) và cần có cơ chế điều chỉnh lại tồn kho nếu cần. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.20-1 (Security \& Auditability):} Chức năng hủy món phải được kiểm soát chặt chẽ về quyền hạn và mọi hành động phải được ghi log đầy đủ, chi tiết để phục vụ cho việc kiểm toán và điều tra khi cần. \newline - \textbf{NFR-UC5.20-2 (Usability):} Thao tác hủy món phải rõ ràng trên giao diện. Nếu có yêu cầu nhập lý do hoặc xác thực quản lý, quy trình phải thuận tiện và không quá rườm rà. \newline - \textbf{NFR-UC5.20-3 (Performance):} Hành động hủy món và việc cập nhật lại tổng tiền đơn hàng, cũng như gửi thông báo (nếu có), phải được thực hiện nhanh chóng. \newline - \textbf{NFR-UC5.20-4 (Integration):} Nếu có KDS, thông tin hủy món phải được đồng bộ và hiển thị kịp thời trên KDS. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD05-21: Hủy Toàn bộ Đơn hàng (Void Order)}
+% (Trước đây là FR-MD05-22, giờ là UC tương ứng, nội dung như UC-MD05-15 cũ - phần hủy đơn)
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD05-21: Hủy Toàn bộ Đơn hàng (Void Order)} \label{tab:uc_md05_21_final} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Hủy Toàn bộ Đơn hàng (Void Order) \\
+\hline
+Use Case ID & UC-MD05-21 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-01: Quản lý nhà hàng, hoặc US-02: Nhân viên phục vụ - thường cần quyền quản lý) hủy bỏ toàn bộ một đơn hàng POS đang hoạt động (chưa thanh toán), ví dụ do khách hàng rời đi đột ngột, lỗi hệ thống nghiêm trọng, hoặc các lý do đặc biệt khác. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-02 (Nhân viên phục vụ) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Khách hàng quyết định không dùng bữa và rời đi trước khi thanh toán. \newline - Có sai sót nghiêm trọng trong việc tạo đơn hàng và cần hủy bỏ để làm lại. \newline - Các tình huống đặc biệt khác khiến đơn hàng không thể tiếp tục. \\
+\hline
+Pre-Condition & - Nhân viên đã đăng nhập và đang trong phiên POS hoạt động. \newline - Đang ở màn hình đơn hàng POS cần hủy (đơn hàng này chưa được thanh toán). \newline - Người dùng có quyền thực hiện hành động "Void Order" (thường là quyền quản lý). \\
+\hline
+Post-Condition & - Toàn bộ đơn hàng POS được đánh dấu là "Đã hủy" (Cancelled/Voided) trong hệ thống. \newline - Bàn đang liên kết với đơn hàng này (nếu có) được cập nhật trạng thái thành "Trống" (Available). \newline - Hành động hủy đơn và lý do (nếu có) được ghi nhận vào hệ thống. \newline - (Nếu các món đã gửi bếp) Cần có thông báo cho bếp về việc hủy toàn bộ đơn hàng. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-01 hoặc US-02 có quyền) đang ở màn hình đơn hàng POS cần hủy. \newline 2. Nhân viên tìm và chọn nút/tùy chọn "Hủy đơn hàng" / "Void Order" / "Delete Order" (tên gọi có thể khác nhau, thường trong menu các hành động của đơn hàng). \newline 3. Hệ thống hiển thị hộp thoại yêu cầu xác nhận hành động hủy toàn bộ đơn hàng. \newline 4. Hệ thống (bắt buộc hoặc tùy chọn) yêu cầu nhân viên nhập Lý do hủy đơn hàng. \newline 5. Hệ thống (có thể) yêu cầu xác nhận quyền quản lý (ví dụ: nhập mã PIN của quản lý) nếu nhân viên hiện tại không có đủ quyền tự hủy toàn bộ đơn. \newline 6. Sau khi lý do được nhập (nếu bắt buộc) và/hoặc quyền được xác nhận (nếu cần), nhân viên xác nhận cuối cùng việc hủy đơn. \newline 7. Hệ thống (System) thực hiện các thao tác: \newline    a. Cập nhật trạng thái của bản ghi đơn hàng POS thành "Cancelled" hoặc "Voided". \newline    b. Nếu đơn hàng có liên kết với một bàn, cập nhật trạng thái của bàn đó trên sơ đồ tầng thành "Trống" (Available). \newline    c. (Nếu các món đã được gửi bếp) Kích hoạt thông báo hủy toàn bộ đơn hàng này đến các bộ phận bếp/bar liên quan (qua KDS hoặc in phiếu hủy). \newline 8. Hệ thống ghi nhận hành động hủy đơn, người thực hiện, thời gian, và lý do (nếu có) vào nhật ký đơn hàng hoặc một log kiểm soát riêng. \newline 9. Hệ thống hiển thị thông báo "Đơn hàng đã được hủy thành công." \newline 10. Hệ thống thường tự động chuyển người dùng về màn hình Sơ đồ tầng POS (UC-MD05-02). \\
+\hline
+Alternative Flow & \textbf{2a. Hủy đơn từ danh sách đơn hàng đang mở (nếu có):} \newline    1. Nếu POS có giao diện liệt kê các đơn hàng đang mở, nhân viên có thể chọn một đơn và thực hiện hành động "Hủy đơn" từ đó. \\
+\hline
+Exception Flow & \textbf{5a. Không có quyền hủy đơn / Xác thực quản lý thất bại:} \newline    1. Nhân viên không có quyền thực hiện hành động hủy toàn bộ đơn hàng và không cung cấp được xác thực quản lý hợp lệ. \newline    2. Hệ thống hiển thị thông báo "Bạn không có quyền thực hiện hành động này." hoặc "Xác thực quản lý không thành công." \newline    3. Hành động hủy đơn không được thực hiện. \newline \textbf{7d. Lỗi hệ thống khi xử lý hủy đơn hàng:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng cập nhật trạng thái đơn hàng, trạng thái bàn, hoặc gửi thông báo hủy xuống bếp. \newline    2. Hệ thống hiển thị thông báo lỗi chung. Hành động hủy có thể không thành công hoặc không được ghi nhận đầy đủ. Cần kiểm tra lại và có thể cần can thiệp thủ công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC5.21-1:} Hành động hủy toàn bộ đơn hàng (Void Order) nên yêu cầu quyền hạn của Quản lý hoặc nhân viên cấp cao được ủy quyền để kiểm soát chặt chẽ, tránh lạm dụng. \newline - \textbf{BR-UC5.21-2:} Việc yêu cầu nhập lý do hủy đơn là rất quan trọng để phục vụ cho việc báo cáo, phân tích nguyên nhân và cải thiện quy trình, cũng như kiểm soát thất thoát. \newline - \textbf{BR-UC5.21-3:} Nếu đơn hàng đã có các món được gửi xuống bếp, việc hủy đơn phải đi kèm với quy trình thông báo ngay lập tức cho bộ phận bếp để ngừng chế biến, tránh lãng phí. \newline - \textbf{BR-UC5.21-4:} Việc hủy đơn hàng phải giải phóng bàn đang liên kết (nếu có) để bàn đó có thể được sử dụng cho khách khác. \newline - \textbf{BR-UC5.21-5:} Đơn hàng đã bị hủy không được tính vào doanh thu. Cần có báo cáo riêng về các đơn hàng bị hủy. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.21-1 (Security \& Auditability):} Chức năng hủy đơn phải được kiểm soát quyền hạn nghiêm ngặt. Mọi hành động hủy đơn phải được ghi log đầy đủ và chi tiết (ai hủy, khi nào, lý do gì) để phục vụ kiểm toán. \newline - \textbf{NFR-UC5.21-2 (Usability):} Thao tác hủy đơn phải rõ ràng, nhưng cũng cần có (các) bước xác nhận cẩn thận để tránh việc hủy nhầm một đơn hàng quan trọng. \newline - \textbf{NFR-UC5.21-3 (Performance):} Hành động hủy đơn và các cập nhật liên quan (trạng thái bàn, thông báo bếp) phải được thực hiện nhanh chóng. \newline - \textbf{NFR-UC5.21-4 (Integration):} Nếu có KDS, thông tin hủy toàn bộ đơn hàng phải được đồng bộ và hiển thị rõ ràng trên KDS. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD05-22: Quản lý Trạng thái Bàn trên Sơ đồ tầng}
+% (Trước đây là FR-MD05-22, giờ là UC tương ứng)
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD05-22: Quản lý Trạng thái Bàn trên Sơ đồ tầng} \label{tab:uc_md05_22_final} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Quản lý Trạng thái Bàn trên Sơ đồ tầng \\
+\hline
+Use Case ID & UC-MD05-22 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-02: Phục vụ, US-03: Lễ tân) thay đổi thủ công trạng thái của một bàn trên sơ đồ tầng POS, ví dụ: đánh dấu bàn là "Cần dọn dẹp" sau khi khách rời đi, hoặc "Đang chờ khách" cho một đặt chỗ sắp tới nhưng chưa đến giờ check-in. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-03 (Nhân viên lễ tân) \\
+\hline
+Priority & Nice to Have \\
+\hline
+Trigger & - Sau khi khách rời đi, bàn cần được đánh dấu là "Cần dọn dẹp". \newline - Một bàn đặt trước sắp đến giờ nhưng khách chưa đến, nhân viên muốn đánh dấu là "Đang giữ cho khách". \newline - Các tình huống khác cần cập nhật trạng thái bàn thủ công để phản ánh đúng thực tế cho các nhân viên khác biết. \\
+\hline
+Pre-Condition & - Nhân viên đã đăng nhập và đang trong phiên POS hoạt động. \newline - Nhân viên đang xem giao diện Sơ đồ tầng (UC-MD05-02). \newline - Hệ thống POS hỗ trợ các trạng thái bàn tùy chỉnh và cho phép thay đổi thủ công. \\
+\hline
+Post-Condition & - Trạng thái của bàn được chọn trên sơ đồ tầng được cập nhật thành trạng thái mới do nhân viên chọn. \newline - Thay đổi này được hiển thị trực quan cho tất cả các nhân viên đang sử dụng POS. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02 hoặc US-03) đang xem Sơ đồ tầng POS (UC-MD05-02). \newline 2. Nhân viên xác định bàn cần thay đổi trạng thái. \newline 3. Nhân viên nhấp (hoặc chạm giữ) vào biểu tượng bàn đó để mở menu ngữ cảnh hoặc danh sách các hành động khả dụng cho bàn. \newline 4. Trong menu/danh sách hành động, nhân viên tìm và chọn tùy chọn "Thay đổi Trạng thái Bàn" (Change Table Status) hoặc một trạng thái cụ thể được liệt kê (ví dụ: "Đánh dấu Cần dọn", "Đặt là Đang chờ"). \newline 5. Nếu chọn "Thay đổi Trạng thái Bàn" chung, hệ thống có thể hiển thị một danh sách các trạng thái tùy chỉnh khả dụng (ví dụ: "Cần dọn dẹp", "Đang chờ khách", "Tạm khóa"...). Nhân viên chọn trạng thái mong muốn. \newline 6. Hệ thống cập nhật trạng thái mới cho bàn đó trên sơ đồ tầng. \newline 7. Giao diện sơ đồ tầng được làm mới, hiển thị bàn với màu sắc hoặc biểu tượng tương ứng với trạng thái mới. \\
+\hline
+Alternative Flow & \textbf{3a. Sử dụng nút bấm nhanh cho các trạng thái phổ biến:} \newline    1. Giao diện có thể có các nút bấm nhanh (ví dụ: một nút "Dọn bàn") cho phép thay đổi sang một trạng thái cụ thể mà không cần qua menu. \\
+\hline
+Exception Flow & \textbf{6a. Lỗi hệ thống khi cập nhật trạng thái bàn:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng lưu trạng thái mới cho bàn. \newline    2. Hệ thống hiển thị thông báo lỗi. Trạng thái bàn có thể không được cập nhật. \newline \textbf{4a. Trạng thái không hợp lệ hoặc không được phép thay đổi thủ công:} \newline    1. Nhân viên cố gắng đặt một trạng thái không phù hợp với tình huống hiện tại của bàn (ví dụ: cố gắng đặt bàn "Occupied" thành "Trống" mà không qua quy trình đóng đơn hàng). \newline    2. Hệ thống có thể không cho phép hoặc cảnh báo. (Việc này phụ thuộc vào mức độ kiểm soát của hệ thống đối với thay đổi trạng thái thủ công). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC5.22-1:} Hệ thống nên cho phép quản trị viên cấu hình danh sách các trạng thái bàn tùy chỉnh có thể được nhân viên gán thủ công. \newline - \textbf{BR-UC5.22-2:} Việc thay đổi trạng thái bàn thủ công cần được sử dụng một cách hợp lý để không gây xung đột với các quy trình tự động cập nhật trạng thái (ví dụ: khi mở đơn, đóng đơn, check-in đặt chỗ). \newline - \textbf{BR-UC5.22-3:} Các trạng thái tùy chỉnh (như "Cần dọn dẹp") phải có biểu hiện trực quan rõ ràng trên sơ đồ tầng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC5.22-1 (Usability):} Thao tác thay đổi trạng thái bàn thủ công phải nhanh chóng và dễ dàng cho nhân viên. \newline - \textbf{NFR-UC5.22-2 (Consistency):} Trạng thái bàn được cập nhật thủ công phải được đồng bộ và hiển thị nhất quán cho tất cả người dùng POS. \\
+\hline
+\end{longtable}

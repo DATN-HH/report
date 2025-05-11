@@ -23,7 +23,7 @@ US-05 & Nhân viên thu ngân & Cashier (Có thể là Nhân viên phục vụ h
 \hline
 US-06 & Kế toán & Accountant/Bookkeeper & Truy cập dữ liệu bán hàng đã được tổng hợp, báo cáo tài chính, quản lý công nợ (nếu có), đối soát doanh thu và tiền đặt cọc. \\
 \hline
-US-07 & Nhân viên (Chung) & Bất kỳ nhân viên nào cần xem lịch làm việc & Xem lịch làm việc cá nhân được phân công qua Odoo Planning/Employee Portal, có thể có quyền yêu cầu đổi ca hoặc báo nghỉ. \\
+US-07 & Nhân viên (Chung) & Bất kỳ nhân viên nào cần xem lịch làm việc & Xem lịch làm việc cá nhân được phân công qua Employee Portal, có thể có quyền yêu cầu đổi ca hoặc báo nghỉ. \\
 \hline
 US-08 & Khách hàng & Customer/Guest & Tương tác qua giao diện web/app để đặt bàn, đặt món ăn trước, thanh toán đặt cọc, đặt hàng mang về hoặc giao hàng. \\
 \hline
@@ -211,8 +211,7 @@ US-10 & Quản trị viên Hệ thống & System Administrator (Có thể là Qu
 \multicolumn{4}{|l|}{\textbf{US-09: Nhân viên hỗ trợ/ Vận hành}} \\ \hline
 \multirow{1}{=}[2pt]{US-09: Nhân viên hỗ trợ/ Vận hành} & FR-MD04-03 & (Tiếp nhận) Xử lý Phản hồi Khách hàng từ Bot Call & Nhận cuộc gọi chuyển tiếp từ Bot khi khách bấm phím 2 để hỗ trợ. \\
 &&&
-\hline
-
+\tabularnewline\hline
 % === US-10: Quản trị viên Hệ thống ===
 \multicolumn{4}{|l|}{\textbf{US-10: Quản trị viên Hệ thống}} \\ \hline
 \multirow{7}{=}[2pt]{US-10: Quản trị viên Hệ thống} & FR-MD02-05 & Định nghĩa Thuộc tính \& Giá trị (cho Biến thể) & Định nghĩa các đặc tính (size, độ cay) và lựa chọn (S, M, L). (Có thể là US-01) \\ \cline{2-4}
@@ -230,23 +229,7 @@ US-10 & Quản trị viên Hệ thống & System Administrator (Có thể là Qu
 
 \end{longtable}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \newpage
-
 
 
 \begin{longtable}{|m{1.5cm}|m{4.5cm}|m{9cm}|}
@@ -277,7 +260,7 @@ MD-07 & Quản lý Giao hàng (POS - Delivery) & Cung cấp một giao diện/lu
 \hline
 MD-08 & Tích hợp Bếp (Kitchen Integration) & Truyền thông tin đơn hàng (từ Eat-in, Takeout, Delivery - bao gồm món đặt trước và ghi chú) tới khu vực bếp thông qua Màn hình hiển thị Bếp (KDS) hoặc máy in phiếu bếp. Cho phép nhân viên bếp cập nhật trạng thái món ăn (đang làm, đã xong). \\
 \hline
-MD-09 & Quản lý Phiên \& Báo cáo (Session \& Reporting) & Quản lý việc mở và đóng phiên làm việc trên POS, đối soát tiền mặt. Cung cấp các báo cáo về doanh thu (theo loại hình: Eat-in, Takeout, Delivery), sản phẩm bán chạy, hiệu suất nhân viên, tiền đặt cọc, trạng thái đơn hàng giao, tích hợp dữ liệu với phân hệ Kế toán của Odoo. \\
+MD-09 & Quản lý Phiên \& Báo cáo (Session \& Reporting) & Quản lý việc mở và đóng phiên làm việc trên POS, đối soát tiền mặt. Cung cấp các báo cáo về doanh thu (theo loại hình: Eat-in, Takeout, Delivery), sản phẩm bán chạy, hiệu suất nhân viên, tiền đặt cọc, trạng thái đơn hàng giao, tích hợp dữ liệu. \\
 \hline
 MD-10 & Quản lý Hệ thống \& Người dùng (System \& User) & Quản lý tài khoản người dùng (tạo, sửa, xóa), phân quyền truy cập chi tiết cho từng vai trò vào các module và chức năng. Quản lý các cấu hình chung như tỷ lệ đặt cọc, giá trị bàn, thời gian gọi bot, cấu hình tích hợp bên thứ ba (API keys,...). \\
 \hline
@@ -287,12 +270,13 @@ MD-10 & Quản lý Hệ thống \& Người dùng (System \& User) & Quản lý 
 
 \include{Sections/tong_quan/functional_spec/module1}
 \include{Sections/tong_quan/functional_spec/module2}
-% \include{Sections/tong_quan/functional_spec/module3}
-% \include{Sections/tong_quan/functional_spec/module4}
-% \include{Sections/tong_quan/functional_spec/module5}
-% \include{Sections/tong_quan/functional_spec/module6}
-% \include{Sections/tong_quan/functional_spec/module7}
-% \include{Sections/tong_quan/functional_spec/module8}
-% \include{Sections/tong_quan/functional_spec/module9}
+\include{Sections/tong_quan/functional_spec/module3}
+\include{Sections/tong_quan/functional_spec/module4}
+\include{Sections/tong_quan/functional_spec/module5}
+\include{Sections/tong_quan/functional_spec/module6}
+\include{Sections/tong_quan/functional_spec/module7}
+\include{Sections/tong_quan/functional_spec/module8}
+\include{Sections/tong_quan/functional_spec/module9}
 
-% \include{Sections/tong_quan/functional_spec/module10}
+\include{Sections/tong_quan/functional_spec/module10}
+\include{Sections/tong_quan/functional_spec/module11}

@@ -1,4 +1,6 @@
 \subsubsection{Module MD-04: Xác nhận Tự động qua Bot}
+Phạm vi của module bao gồm việc lên lịch các cuộc gọi dựa trên dữ liệu đặt chỗ, tích hợp với dịch vụ Bot Call bên ngoài để thực hiện cuộc gọi, xử lý phản hồi từ khách hàng nhận được qua Bot Call, cập nhật trạng thái đặt chỗ tương ứng, và cung cấp các công cụ cấu hình, theo dõi cho quản lý.
+
 
 \begin{longtable}{|m{2cm}|m{2.5cm}|m{2.5cm}|m{4.5cm}|m{3.5cm}|}
 \caption{Danh sách Yêu cầu Chức năng cho Module MD-04: Xác nhận Tự động qua Bot} \label{tab:fr_md04} \\
@@ -25,4 +27,98 @@ MD-04 & FR-MD04-05 & US-01 / US-10 & Cấu hình Dịch vụ Bot Call & Cho phé
 \hline
 
 \end{longtable}
+
+Module Xác nhận Tự động qua Bot (MD-04) là một giải pháp tự động hóa quy trình xác nhận các lượt đặt chỗ với khách hàng bằng cách sử dụng dịch vụ Bot Call của bên thứ ba. Mục tiêu của module này là giảm tải công việc cho nhân viên lễ tân, tăng hiệu quả xác nhận, giảm thiểu tỷ lệ khách không đến (no-show), và cung cấp một phương thức tương tác chuyên nghiệp với khách hàng trước ngày họ đến nhà hàng.
+
+\subsubsubsection{Mục tiêu và Phạm vi}
+\label{sssec:md04_objectives_scope}
+Mục tiêu chính của module MD-04 là:
+\begin{itemize}
+    \item \textbf{Tự động hóa quy trình xác nhận đặt chỗ:} Giảm thiểu sự can thiệp thủ công của nhân viên trong việc gọi điện thoại xác nhận từng lượt đặt.
+    \item \textbf{Nâng cao tỷ lệ xác nhận thành công:} Thực hiện cuộc gọi vào thời điểm tối ưu, tăng khả năng khách hàng nghe máy và phản hồi.
+    \item \textbf{Giảm thiểu tình trạng khách không đến (no-show):} Việc xác nhận lại giúp nhắc nhở khách hàng và cho phép họ hủy hoặc điều chỉnh nếu có thay đổi kế hoạch.
+    \item \textbf{Cập nhật trạng thái đặt chỗ tự động:} Ghi nhận phản hồi của khách hàng (xác nhận, hủy) và cập nhật vào hệ thống.
+    \item \textbf{Cung cấp thông tin cho xử lý ngoại lệ:} Nếu khách hàng cần hỗ trợ hoặc cuộc gọi thất bại, hệ thống cung cấp thông tin để nhân viên can thiệp.
+    \item \textbf{Lưu trữ lịch sử tương tác:} Ghi lại kết quả của mỗi cuộc gọi xác nhận để phục vụ việc kiểm tra và báo cáo.
+\end{itemize}
+Module Xác nhận Tự động qua Bot (MD-04) là một giải pháp tự động hóa quy trình xác nhận các lượt đặt chỗ với khách hàng bằng cách sử dụng dịch vụ Bot Call của bên thứ ba. Mục tiêu của module này là giảm tải công việc cho nhân viên lễ tân, tăng hiệu quả xác nhận, giảm thiểu tỷ lệ khách không đến (no-show), và cung cấp một phương thức tương tác chuyên nghiệp với khách hàng trước ngày họ đến nhà hàng.
+
+\subsubsubsection{Mục tiêu và Phạm vi}
+\label{sssec:md04_objectives_scope}
+Mục tiêu chính của module MD-04 là:
+\begin{itemize}
+    \item \textbf{Tự động hóa quy trình xác nhận đặt chỗ:} Giảm thiểu sự can thiệp thủ công của nhân viên trong việc gọi điện thoại xác nhận từng lượt đặt.
+    \item \textbf{Nâng cao tỷ lệ xác nhận thành công:} Thực hiện cuộc gọi vào thời điểm tối ưu, tăng khả năng khách hàng nghe máy và phản hồi.
+    \item \textbf{Giảm thiểu tình trạng khách không đến (no-show):} Việc xác nhận lại giúp nhắc nhở khách hàng và cho phép họ hủy hoặc điều chỉnh nếu có thay đổi kế hoạch.
+    \item \textbf{Cập nhật trạng thái đặt chỗ tự động:} Ghi nhận phản hồi của khách hàng (xác nhận, hủy) và cập nhật vào hệ thống.
+    \item \textbf{Cung cấp thông tin cho xử lý ngoại lệ:} Nếu khách hàng cần hỗ trợ hoặc cuộc gọi thất bại, hệ thống cung cấp thông tin để nhân viên can thiệp.
+    \item \textbf{Lưu trữ lịch sử tương tác:} Ghi lại kết quả của mỗi cuộc gọi xác nhận để phục vụ việc kiểm tra và báo cáo.
+\end{itemize}
+
+\subsubsubsection{Đối tượng Sử dụng Chính}
+\label{sssec:md04_primary_users}
+Module này có các đối tượng tương tác chính sau:
+\begin{itemize}
+    \item \textbf{System (Hệ thống):} Chịu trách nhiệm chính trong việc lên lịch, kích hoạt cuộc gọi (qua API), nhận và xử lý kết quả cuộc gọi, cập nhật dữ liệu.
+    \item \textbf{Bot Call Service (Dịch vụ Bot Call bên thứ ba):} Thực hiện các cuộc gọi thực tế đến khách hàng, phát kịch bản thoại và ghi nhận phản hồi (bấm phím).
+    \item \textbf{US-08 (Khách hàng):} Là người nhận cuộc gọi xác nhận và tương tác với bot bằng cách bấm phím.
+    \item \textbf{US-01 (Quản lý nhà hàng) / US-10 (Quản trị viên Hệ thống):} Chịu trách nhiệm cấu hình các tham số tích hợp và vận hành của dịch vụ Bot Call.
+    \item \textbf{US-09 (Nhân viên hỗ trợ):} Tiếp nhận cuộc gọi nếu khách hàng chọn tùy chọn cần hỗ trợ trực tiếp từ bot.
+\end{itemize}
+
+\subsubsubsection{Các Chức năng Chính}
+\label{sssec:md04_key_functionalities}
+Module MD-04 tập trung vào các chức năng tự động hóa và tích hợp, được mô tả qua các Use Case sau:
+
+\begin{itemize}
+    \item \textbf{Lên lịch và Kích hoạt Cuộc gọi (UC-MD04-01):}
+    \begin{itemize}
+        \item Hệ thống tự động quét các lượt đặt chỗ đã xác nhận và sắp đến hạn, sau đó lên lịch và gửi yêu cầu thực hiện cuộc gọi đến dịch vụ Bot Call bên ngoài.
+    \end{itemize}
+
+    \item \textbf{Thực hiện Cuộc gọi và Tương tác Khách hàng (UC-MD04-02):}
+    \begin{itemize}
+        \item Dịch vụ Bot Call bên ngoài thực hiện cuộc gọi đến khách hàng, phát kịch bản thoại và ghi nhận lựa chọn của khách hàng (xác nhận, hủy, cần hỗ trợ).
+    \end{itemize}
+
+    \item \textbf{Xử lý Phản hồi và Cập nhật Hệ thống (UC-MD04-03, UC-MD04-04):}
+    \begin{itemize}
+        \item Hệ thống nhận kết quả cuộc gọi từ Bot Call Service (thường qua webhook).
+        \item Dựa trên phản hồi của khách hàng, hệ thống tự động cập nhật trạng thái đặt chỗ (ví dụ: "Đã hủy bởi khách qua Bot") và giải phóng bàn nếu khách hủy (UC-MD04-03).
+        \item Hệ thống lưu trữ chi tiết kết quả của mỗi cuộc gọi vào lịch sử đặt chỗ hoặc một bảng log riêng để theo dõi (UC-MD04-04).
+    \end{itemize}
+
+    \item \textbf{Cấu hình Dịch vụ (UC-MD04-05):}
+    \begin{itemize}
+        \item Cho phép Quản lý/Quản trị viên cấu hình các tham số cần thiết cho việc tích hợp và vận hành Bot Call, bao gồm thông tin API, kịch bản, thời gian gọi, và số điện thoại hỗ trợ.
+    \end{itemize}
+\end{itemize}
+
+\subsubsubsection{Tóm tắt Luồng Hoạt động Tổng thể}
+\label{sssec:md04_overall_workflow}
+Luồng hoạt động chính của module Xác nhận Tự động qua Bot diễn ra như sau:
+\begin{enumerate}
+    \item \textbf{Cấu hình ban đầu:} Quản lý nhà hàng hoặc Quản trị viên Cấu hình Dịch vụ Bot Call (UC-MD04-05), bao gồm thông tin API, kịch bản thoại, số ngày gọi trước, và số điện thoại hỗ trợ.
+    \item \textbf{Lên lịch và kích hoạt tự động:}
+        \begin{itemize}
+            \item Một tác vụ tự động chạy định kỳ (ví dụ: hàng ngày) để Lên lịch và Kích hoạt Cuộc gọi Xác nhận (UC-MD04-01).
+            \item Hệ thống xác định các đặt chỗ cần gọi và gửi yêu cầu đến dịch vụ Bot Call bên ngoài.
+        \end{itemize}
+    \item \textbf{Bot Call thực hiện cuộc gọi:}
+        \begin{itemize}
+            \item Dịch vụ Bot Call Thực hiện Cuộc gọi và Tương tác Khách hàng (UC-MD04-02). Bot phát kịch bản, khách hàng nghe và bấm phím (1 để xác nhận, 0 để hủy, 2 để cần hỗ trợ).
+        \end{itemize}
+    \item \textbf{Xử lý kết quả:}
+        \begin{itemize}
+            \item Dịch vụ Bot Call gửi kết quả cuộc gọi về (thường qua webhook).
+            \item Hệ thống Xử lý Phản hồi Khách hàng từ Bot Call (UC-MD04-03). Dựa trên lựa chọn của khách, cập nhật trạng thái đặt chỗ, giải phóng bàn (nếu hủy), hoặc ghi nhận yêu cầu hỗ trợ.
+            \item Hệ thống Ghi nhận Kết quả Cuộc gọi (UC-MD04-04) vào lịch sử đặt chỗ.
+        \end{itemize}
+    \item \textbf{Xử lý ngoại lệ (nếu có):}
+        \begin{itemize}
+            \item Nếu khách hàng chọn cần hỗ trợ (phím 2), cuộc gọi được chuyển đến Nhân viên hỗ trợ (US-09) để xử lý trực tiếp.
+            \item Nếu cuộc gọi thất bại (không liên lạc được, lỗi...), hệ thống ghi nhận và có thể cảnh báo để nhân viên theo dõi, liên hệ thủ công nếu cần.
+        \end{itemize}
+\end{enumerate}
+Module MD-04 giúp tự động hóa một phần quan trọng trong quy trình phục vụ khách hàng, mang lại hiệu quả và tính chuyên nghiệp cao hơn cho nhà hàng.
 

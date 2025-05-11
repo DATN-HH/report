@@ -1,649 +1,727 @@
 \subsection{Module MD-07: Quản lý Giao hàng (POS - Delivery)}
 
-\subsubsection{Use Case UC-MD07-01: Chọn Chế độ Giao hàng}
-
+\subsubsection{Use Case UC-MD07-01: Chọn Chế độ Xử lý Đơn Giao hàng}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-01: Chọn Chế độ Giao hàng} \label{tab:uc_md07_01} \\
+\caption{Đặc tả Use Case UC-MD07-01: Chọn Chế độ Xử lý Đơn Giao hàng} \label{tab:uc_md07_01_final_full} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Chọn Chế độ Giao hàng \\
+Use Case Name & Chọn Chế độ Xử lý Đơn Giao hàng \\
 \hline
 Use Case ID & UC-MD07-01 \\
 \hline
-Use Case Description & Cho phép Nhân viên (Phục vụ hoặc Thu ngân) tại POS lựa chọn một chế độ hoạt động hoặc giao diện riêng biệt để tiếp nhận và quản lý các đơn hàng cần giao đến địa chỉ của khách hàng (Delivery). \\
+Use Case Description & Cho phép Nhân viên (US-02: Phục vụ hoặc US-05: Thu ngân) tại điểm bán hàng (POS) lựa chọn một chế độ hoạt động hoặc một giao diện được thiết kế riêng cho việc tiếp nhận, xử lý và quản lý các đơn hàng cần được giao đến địa chỉ của khách hàng (Delivery). \\
 \hline
 Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Có yêu cầu tạo đơn hàng giao đi (ví dụ: khách gọi điện đặt giao hàng, đơn hàng từ nền tảng online khác cần nhập vào POS để xử lý). \\
+Trigger & Có yêu cầu tạo một đơn hàng mới để giao đi (ví dụ: khách hàng gọi điện thoại đến nhà hàng để đặt giao hàng, hoặc một đơn hàng từ một nền tảng đặt hàng online khác cần được nhân viên nhập thủ công vào POS để xử lý giao hàng qua Shipday). \\
 \hline
-Pre-Condition & - Nhân viên đã đăng nhập và đang trong phiên POS hoạt động (UC-MD05-01). \newline - Giao diện POS chính đang hiển thị. \newline - Chế độ/Nút chức năng "Giao hàng" (Delivery) đã được cấu hình và hiển thị trên giao diện POS. \\
+Pre-Condition & - Nhân viên đã đăng nhập thành công vào hệ thống và đang trong một phiên POS hoạt động (UC-MD05-01). \newline - Giao diện POS chính (ví dụ: Sơ đồ tầng hoặc màn hình chờ mặc định) đang được hiển thị. \newline - Nút chức năng hoặc tùy chọn "Giao hàng" (Delivery) đã được quản trị viên cấu hình và hiển thị rõ ràng trên giao diện POS. \\
 \hline
-Post-Condition & - Hệ thống chuyển sang giao diện hoặc chế độ dành riêng cho việc tạo đơn hàng giao hàng. \newline - Giao diện này sẵn sàng để tạo đơn hàng mới (UC-MD07-02) và yêu cầu nhập thông tin khách hàng/địa chỉ giao. \\
+Post-Condition & - Hệ thống chuyển sang giao diện hoặc chế độ được tối ưu hóa cho việc tạo và quản lý đơn hàng giao hàng theo lựa chọn của Nhân viên. \newline - Giao diện này sẵn sàng để Nhân viên bắt đầu tạo một đơn hàng giao hàng mới (UC-MD07-02), thường sẽ yêu cầu nhập hoặc chọn thông tin khách hàng và địa chỉ giao hàng trước tiên. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow & 1. Nhân viên (US-02/US-05) đang ở giao diện POS chính. \newline 2. Nhân viên xác định vị trí nút hoặc tùy chọn "Giao hàng" (Delivery) trên màn hình. \newline 3. Nhân viên nhấp vào nút "Giao hàng". \newline 4. Hệ thống chuyển đổi giao diện hoặc ngữ cảnh sang chế độ giao hàng. Giao diện này thường yêu cầu nhập/chọn thông tin khách hàng trước tiên hoặc mở ngay một đơn hàng mới với yêu cầu bắt buộc liên kết khách hàng. \\
+Basic Flow & 1. Nhân viên (US-02 hoặc US-05) đang ở giao diện POS chính. \newline 2. Nhân viên xác định vị trí của nút hoặc tùy chọn "Giao hàng" (Delivery) trên màn hình POS. \newline 3. Nhân viên nhấp (hoặc chạm) vào nút "Giao hàng". \newline 4. Hệ thống (System) phản hồi bằng cách chuyển đổi giao diện hoặc ngữ cảnh sang chế độ xử lý đơn hàng giao hàng. Giao diện này có thể: \newline    a. Ngay lập tức yêu cầu Nhân viên nhập/chọn thông tin khách hàng và địa chỉ giao hàng (chuẩn bị cho UC-MD07-03). \newline    b. Hoặc hiển thị một danh sách các đơn hàng giao hàng đang chờ xử lý (nếu có) cùng với nút "Tạo đơn giao hàng mới". \\
 \hline
-Alternative Flow & Tương tự UC-MD06-01, nút "Giao hàng" có thể nằm ở menu chính hoặc dashboard. Hệ thống cũng có thể sử dụng cùng giao diện nhưng kích hoạt các quy tắc và trường thông tin đặc thù cho giao hàng. \\
+Alternative Flow & \textbf{1a. Truy cập từ Menu chính/Dashboard của POS:} \newline    1. Nhân viên chọn tùy chọn "Giao hàng" từ menu chính hoặc dashboard nếu có. \newline    2. Use Case tiếp tục từ bước 3. \\
 \hline
-Exception Flow & Tương tự UC-MD06-01 (Nút bị vô hiệu hóa, Lỗi chuyển đổi giao diện). \\
+Exception Flow & \textbf{3a. Nút/Chức năng "Giao hàng" bị vô hiệu hóa hoặc không tồn tại:} \newline    1. Nhân viên không tìm thấy hoặc không thể nhấp vào nút "Giao hàng" (do lỗi cấu hình hoặc thiếu quyền). \newline    2. Hệ thống không thay đổi giao diện. Nhân viên cần báo quản lý. \newline \textbf{4c. Lỗi hệ thống khi chuyển đổi giao diện/chế độ:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi tải giao diện giao hàng. \newline    2. Hệ thống hiển thị thông báo lỗi. Nhân viên không thể tiếp tục. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC7.1-1:} Phải có cách thức rõ ràng để nhân viên vào chế độ xử lý đơn hàng giao hàng. \newline - \textbf{BR-UC7.1-2:} Chế độ giao hàng phải yêu cầu thông tin khách hàng và địa chỉ giao hàng chi tiết. \\
+Business Rule & - \textbf{BR-UC7.1-1:} Phải có một cách thức rõ ràng để Nhân viên chủ động chuyển sang chế độ xử lý đơn hàng giao hàng. \newline - \textbf{BR-UC7.1-2 (System):} Chế độ giao hàng phải được thiết kế để thu thập đầy đủ thông tin cần thiết cho việc giao hàng (khách hàng, địa chỉ, SĐT) và tích hợp với Shipday. \\
 \hline
-Non-Functional Requirement & Tương tự UC-MD06-01 (Usability, Performance). \\
+Non-Functional Requirement & - \textbf{NFR-UC7.1-1 (Usability):} Nút/Tùy chọn "Giao hàng" dễ tìm, chuyển đổi chế độ nhanh chóng. \newline - \textbf{NFR-UC7.1-2 (Performance):} Thời gian hệ thống phản hồi và chuyển giao diện phải rất ngắn (< 1-2 giây). \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD07-02: Tạo/Mở Đơn hàng Giao hàng}
-
+\subsubsection{Use Case UC-MD07-02: Tạo Đơn hàng Giao hàng Mới}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-02: Tạo/Mở Đơn hàng Giao hàng} \label{tab:uc_md07_02} \\
+\caption{Đặc tả Use Case UC-MD07-02: Tạo Đơn hàng Giao hàng Mới} \label{tab:uc_md07_02_final_full} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Tạo/Mở Đơn hàng Giao hàng \\
+Use Case Name & Tạo Đơn hàng Giao hàng Mới \\
 \hline
 Use Case ID & UC-MD07-02 \\
 \hline
-Use Case Description & Khởi tạo một bản ghi đơn hàng POS mới hoặc mở lại một đơn hàng giao hàng đang chờ xử lý, với yêu cầu bắt buộc phải liên kết với thông tin khách hàng và địa chỉ giao hàng. \\
+Use Case Description & Sau khi vào chế độ Giao hàng, cho phép Nhân viên (US-02/US-05) khởi tạo một đơn hàng Point of Sale mới, hệ thống sẽ tự động đánh dấu đơn hàng này là loại hình "Giao hàng" (Delivery) và yêu cầu phải có thông tin khách hàng và địa chỉ giao hàng được liên kết. \\
 \hline
 Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Nhân viên đã chọn chế độ Giao hàng (UC-MD07-01) và cần tạo đơn mới hoặc xử lý đơn đang chờ. \\
+Trigger & Nhân viên đã chọn chế độ Giao hàng (UC-MD07-01) và cần tạo một đơn hàng mới để giao đi. \\
 \hline
-Pre-Condition & - Nhân viên đang ở trong chế độ/giao diện Giao hàng (UC-MD07-01 thành công). \\
+Pre-Condition & - Nhân viên đang ở trong chế độ/giao diện Giao hàng trên POS (UC-MD07-01 thành công). \\
 \hline
-Post-Condition & - Một bản ghi đơn hàng POS mới được tạo với loại hình "Giao hàng" (Delivery) HOẶC một đơn hàng giao hàng cũ được mở lại. \newline - Đơn hàng này bắt buộc phải được liên kết với khách hàng và địa chỉ giao (thông qua UC-MD07-03). \newline - Giao diện đơn hàng được hiển thị, sẵn sàng để thêm món hoặc xử lý tiếp. \\
+Post-Condition & - Một bản ghi đơn hàng POS mới được hệ thống tạo ra với loại hình là "Giao hàng". \newline - Hệ thống chuyển sang hoặc yêu cầu Nhân viên thực hiện UC-MD07-03 (Nhập/Chọn Thông tin Khách hàng và Địa chỉ Giao hàng) để hoàn thành thông tin bắt buộc cho đơn hàng này. \newline - Sau khi có thông tin khách hàng và địa chỉ, giao diện đơn hàng được hiển thị, sẵn sàng để thêm món. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Tạo mới) & 1. Tiếp nối từ UC-MD07-01. \newline 2. Nhân viên chọn "Tạo đơn mới" hoặc hệ thống yêu cầu chọn/nhập khách hàng trước. \newline 3. Hệ thống chuyển sang giao diện yêu cầu thông tin khách hàng (UC-MD07-03). \newline 4. Sau khi khách hàng được chọn/tạo và địa chỉ giao được xác nhận (trong UC-MD07-03). \newline 5. Hệ thống tạo bản ghi đơn hàng POS mới, loại "Delivery", liên kết với khách hàng và địa chỉ đã chọn. \newline 6. Hệ thống hiển thị giao diện đơn hàng (tương tự UC-MD06-02 nhưng có hiển thị thông tin giao hàng). \\
+Basic Flow & 1. Tiếp nối từ UC-MD07-01, Nhân viên (US-02/US-05) đang ở giao diện Giao hàng. \newline 2. Nhân viên chọn hành động "Tạo đơn giao hàng mới" (New Delivery Order) (nếu giao diện UC-MD07-01, bước 4b yêu cầu). \newline 3. Hệ thống (System) khởi tạo một tiến trình tạo đơn hàng mới và ngay lập tức yêu cầu Nhân viên cung cấp thông tin khách hàng và địa chỉ giao hàng bằng cách chuyển sang giao diện của UC-MD07-03. \newline 4. Sau khi Nhân viên hoàn thành việc nhập/chọn thông tin khách hàng và địa chỉ giao hàng hợp lệ (kết thúc thành công UC-MD07-03): \newline    a. Hệ thống (System) tạo bản ghi đơn hàng POS mới, tự động gán loại hình "Delivery". \newline    b. Hệ thống (System) liên kết thông tin khách hàng và địa chỉ giao hàng đã cung cấp với đơn hàng này. \newline    c. Hệ thống hiển thị giao diện đơn hàng cho Nhân viên, bao gồm khu vực hiển thị thông tin giao hàng, khu vực danh sách món (trống), khu vực chọn món, và các nút chức năng. \\
 \hline
-Alternative Flow & \textbf{1a. Mở đơn hàng giao hàng đang chờ:} \newline    1. Giao diện chế độ giao hàng hiển thị danh sách các đơn hàng giao đi đang chờ xử lý (ví dụ: chờ gửi bếp, chờ gán tài xế). \newline    2. Nhân viên chọn một đơn hàng từ danh sách. \newline    3. Hệ thống mở lại chi tiết đơn hàng đó. \\
+Alternative Flow & \textbf{2a. Mở đơn hàng giao hàng đang chờ xử lý:} \newline    1. Nếu giao diện chế độ giao hàng (UC-MD07-01, bước 4b) hiển thị danh sách các đơn giao hàng đang chờ (ví dụ: đơn từ web đã về nhưng chưa xử lý). \newline    2. Nhân viên chọn một đơn hàng từ danh sách. \newline    3. Hệ thống mở lại chi tiết đơn hàng đó (đã có sẵn thông tin khách hàng, địa chỉ, có thể cả món ăn). Use Case này kết thúc, chuyển sang các UC xử lý đơn đã có. \\
 \hline
-Exception Flow & \textbf{5a. Lỗi tạo đơn hàng mới:} Tương tự UC-MD06-02. \newline \textbf{Alternative Flow 1a - Step 3a. Lỗi mở lại đơn hàng cũ:} Tương tự UC-MD05-03 (Exception Flow 2a). \\
+Exception Flow & \textbf{4d. Nhân viên không hoàn thành/hủy bỏ việc nhập thông tin khách hàng ở UC-MD07-03:} \newline    1. Nếu Nhân viên không cung cấp đủ thông tin khách hàng/địa chỉ bắt buộc hoặc hủy bỏ quá trình nhập liệu ở UC-MD07-03. \newline    2. Hệ thống không thể tạo đơn hàng giao hàng. \newline    3. Hệ thống có thể quay lại màn hình chọn chế độ giao hàng hoặc hiển thị thông báo "Cần thông tin khách hàng và địa chỉ để tạo đơn giao hàng." \newline \textbf{4e. Lỗi hệ thống khi tạo bản ghi đơn hàng mới (sau khi đã có thông tin khách):} \newline    1. Hệ thống gặp lỗi kỹ thuật khi tạo đơn hàng. \newline    2. Hệ thống hiển thị thông báo lỗi. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC7.2-1:} Đơn hàng loại "Delivery" bắt buộc phải có thông tin khách hàng và địa chỉ giao hàng hợp lệ được liên kết. \newline - \textbf{BR-UC7.2-2:} Hệ thống cần phân loại rõ ràng đơn hàng "Delivery" để tích hợp với Shipday và báo cáo. \\
+Business Rule & - \textbf{BR-UC7.2-1 (System):} Đơn hàng tạo ra từ chế độ "Giao hàng" phải được hệ thống phân loại đúng là "Delivery". \newline - \textbf{BR-UC7.2-2:} Việc cung cấp thông tin khách hàng và địa chỉ giao hàng (thông qua UC-MD07-03) là bước bắt buộc trước khi có thể tiếp tục thêm món vào đơn hàng giao đi. \\
 \hline
-Non-Functional Requirement & Tương tự UC-MD06-02 (Performance, Usability). \\
+Non-Functional Requirement & - \textbf{NFR-UC7.2-1 (Performance):} Quá trình chuyển tiếp sang yêu cầu thông tin khách hàng và sau đó là tạo đơn hàng phải nhanh chóng. \newline - \textbf{NFR-UC7.2-2 (Usability):} Luồng tạo đơn giao hàng phải logic và hướng dẫn nhân viên cung cấp đủ thông tin cần thiết. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD07-03: Liên kết/Nhập Thông tin Khách hàng Giao hàng}
-
+\subsubsection{Use Case UC-MD07-03: Nhập/Chọn Thông tin Khách hàng và Địa chỉ Giao hàng}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-03: Liên kết/Nhập Thông tin Khách hàng Giao hàng} \label{tab:uc_md07_03} \\
+\caption{Đặc tả Use Case UC-MD07-03: Nhập/Chọn Thông tin Khách hàng và Địa chỉ Giao hàng} \label{tab:uc_md07_03_final_full} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Liên kết/Nhập Thông tin Khách hàng Giao hàng \\
+Use Case Name & Nhập/Chọn Thông tin Khách hàng và Địa chỉ Giao hàng \\
 \hline
 Use Case ID & UC-MD07-03 \\
 \hline
-Use Case Description & Yêu cầu Nhân viên bắt buộc phải tìm kiếm và chọn một khách hàng đã có (với địa chỉ đã lưu) hoặc nhập thông tin cho khách hàng mới, bao gồm Tên, Số điện thoại và Địa chỉ giao hàng chi tiết (số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố), để liên kết với đơn hàng giao đi. \\
+Use Case Description & Yêu cầu Nhân viên (US-02/US-05) bắt buộc phải tìm kiếm và chọn một khách hàng đã có (với địa chỉ đã lưu) hoặc nhập thông tin cho khách hàng mới, bao gồm Tên, Số điện thoại và Địa chỉ giao hàng chi tiết (số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố), để liên kết với đơn hàng giao đi đang được tạo. \\
 \hline
 Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Bắt đầu tạo đơn hàng giao hàng mới (UC-MD07-02). \\
+Trigger & Nhân viên đang trong quá trình tạo một đơn hàng giao hàng mới (bước 3 của UC-MD07-02). \\
 \hline
-Pre-Condition & - Nhân viên đang trong luồng tạo đơn hàng giao hàng. \newline - Hệ thống quản lý khách hàng (Contacts/CRM) đang hoạt động. \\
+Pre-Condition & - Nhân viên đang trong luồng tạo đơn hàng giao hàng trên POS. \newline - Hệ thống quản lý khách hàng (Contacts/CRM) và cấu trúc địa chỉ đang hoạt động. \\
 \hline
-Post-Condition & - Một bản ghi khách hàng (cũ hoặc mới) với đầy đủ thông tin Tên, SĐT và Địa chỉ giao hàng hợp lệ được liên kết với đơn hàng giao đi. \newline - Hệ thống sẵn sàng để tạo bản ghi đơn hàng POS (bước 5 của UC-MD07-02). \\
+Post-Condition & - Một bản ghi khách hàng (cũ hoặc mới) với đầy đủ thông tin Tên, SĐT và một Địa chỉ giao hàng hợp lệ được chọn hoặc tạo mới và liên kết với tiến trình tạo đơn hàng giao đi. \newline - Hệ thống sẵn sàng để chính thức tạo bản ghi đơn hàng POS và cho phép thêm món (tiếp tục từ bước 4 của UC-MD07-02). \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Chọn khách hàng đã có với địa chỉ) & 1. Hệ thống hiển thị giao diện yêu cầu chọn/nhập khách hàng. \newline 2. Nhân viên (US-02/US-05) tìm kiếm khách hàng theo Tên hoặc SĐT (tương tự UC-MD06-03). \newline 3. Hệ thống hiển thị kết quả tìm kiếm. \newline 4. Nhân viên chọn khách hàng đúng. \newline 5. Hệ thống kiểm tra xem khách hàng này đã có địa chỉ giao hàng được lưu chưa. \newline 6. \textbf{Nếu đã có địa chỉ (hoặc nhiều địa chỉ):} \newline    a. Hệ thống hiển thị (các) địa chỉ đã lưu. \newline    b. Nhân viên chọn/xác nhận địa chỉ giao hàng đúng. \newline 7. \textbf{Nếu chưa có địa chỉ hoặc cần nhập địa chỉ mới:} \newline    a. Hệ thống hiển thị form nhập địa chỉ chi tiết (Số nhà, Đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành phố). \newline    b. Nhân viên nhập đầy đủ thông tin địa chỉ giao hàng. \newline    c. (Tùy chọn) Nhân viên có thể đánh dấu lưu địa chỉ này vào hồ sơ khách hàng cho lần sau. \newline 8. Nhân viên xác nhận thông tin khách hàng và địa chỉ giao hàng. \\
+Basic Flow (Chọn khách hàng đã có và chọn địa chỉ đã lưu) & 1. Hệ thống hiển thị giao diện yêu cầu chọn hoặc nhập thông tin khách hàng cho đơn hàng giao đi. \newline 2. Nhân viên (US-02/US-05) sử dụng ô tìm kiếm để tìm khách hàng theo Tên hoặc Số điện thoại. \newline 3. Hệ thống (System) hiển thị danh sách các khách hàng khớp với từ khóa tìm kiếm. \newline 4. Nhân viên chọn đúng khách hàng từ danh sách. \newline 5. Hệ thống (System) kiểm tra xem khách hàng này đã có (các) địa chỉ giao hàng nào được lưu trong hồ sơ hay chưa. \newline 6. \textbf{Nếu khách hàng đã có một hoặc nhiều địa chỉ giao hàng lưu sẵn:} \newline    a. Hệ thống hiển thị danh sách các địa chỉ đó. \newline    b. Nhân viên chọn một địa chỉ giao hàng phù hợp từ danh sách. \newline 7. Nhân viên xác nhận lựa chọn khách hàng và địa chỉ giao hàng. \\
 \hline
-Alternative Flow & \textbf{2a. Tạo khách hàng mới:} \newline    1. Nếu không tìm thấy khách hàng, nhân viên chọn "Tạo mới". \newline    2. Hệ thống hiển thị form nhập thông tin khách hàng và địa chỉ. \newline    3. Nhân viên nhập Tên, SĐT (bắt buộc), Email (tùy chọn), và Địa chỉ giao hàng chi tiết (bắt buộc). \newline    4. Nhân viên nhấn "Lưu". \newline    5. Hệ thống tạo khách hàng mới và địa chỉ, sau đó tự động chọn khách hàng và địa chỉ này. Use Case tiếp tục từ bước 8. \\
+Alternative Flow & \textbf{6c. Nhập địa chỉ giao hàng mới cho khách hàng đã có:} \newline    1. Nếu khách hàng đã có trong hệ thống nhưng địa chỉ giao hàng lần này khác với các địa chỉ đã lưu, hoặc khách hàng chưa có địa chỉ nào. \newline    2. Nhân viên chọn tùy chọn "Thêm địa chỉ mới" cho khách hàng hiện tại. \newline    3. Hệ thống hiển thị form nhập địa chỉ chi tiết: Số nhà, Tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành phố (các trường này là bắt buộc - BR-UC7.3-2). \newline    4. Nhân viên nhập đầy đủ thông tin địa chỉ giao hàng mới. \newline    5. (Tùy chọn) Nhân viên có thể đánh dấu "Lưu địa chỉ này vào hồ sơ khách hàng" để sử dụng cho các lần sau. \newline    6. Use Case tiếp tục từ bước 7 của Basic Flow. \newline \textbf{2a. Tạo khách hàng mới hoàn toàn:} \newline    1. Nếu tìm kiếm ở bước 2 không thấy khách hàng, Nhân viên chọn nút "Tạo khách hàng mới". \newline    2. Hệ thống hiển thị form yêu cầu nhập thông tin: Tên khách hàng (bắt buộc), Số điện thoại (bắt buộc - BR-UC7.3-1), Email (tùy chọn). \newline    3. Sau khi nhập thông tin khách hàng, hệ thống yêu cầu nhập Địa chỉ giao hàng chi tiết (tương tự bước 3-5 của Alternative Flow 6c). \newline    4. Nhân viên nhấn "Lưu" / "Xác nhận". \newline    5. Hệ thống tạo bản ghi khách hàng mới và địa chỉ giao hàng mới, sau đó tự động chọn khách hàng và địa chỉ này. Use Case kết thúc, thông tin được trả về cho UC-MD07-02. \\
 \hline
-Exception Flow & \textbf{8a. Thiếu thông tin bắt buộc / Địa chỉ không hợp lệ:} \newline    1. Nhân viên xác nhận nhưng thiếu Tên, SĐT, hoặc các thành phần bắt buộc của địa chỉ giao hàng. Hoặc định dạng SĐT không đúng. \newline    2. Hệ thống báo lỗi, yêu cầu nhập đầy đủ/chính xác thông tin. \newline    3. Use Case quay lại bước nhập liệu tương ứng. \newline \textbf{Alternative Flow 2a - Step 4a. Lỗi tạo khách hàng/địa chỉ mới:} \newline    1. Hệ thống gặp lỗi khi lưu khách hàng hoặc địa chỉ mới. \newline    2. Hệ thống báo lỗi. \newline \textbf{8b. Lỗi hệ thống khi liên kết khách hàng/địa chỉ:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi lưu liên kết. \newline    2. Hệ thống báo lỗi. \\
+Exception Flow & \textbf{7a. Nhân viên không chọn/nhập đủ thông tin địa chỉ bắt buộc:} \newline    1. Sau khi chọn khách hàng, Nhân viên không chọn địa chỉ đã có hoặc không nhập đủ các trường bắt buộc của địa chỉ mới (Số nhà, Đường, Phường/Xã, Quận/Huyện, Tỉnh/TP). \newline    2. Khi Nhân viên cố gắng xác nhận (bước 7 của Basic Flow hoặc bước 4 của Alternative Flow 2a), hệ thống hiển thị thông báo lỗi, yêu cầu "Vui lòng nhập đầy đủ thông tin địa chỉ giao hàng." \newline    3. Hệ thống không cho phép tiếp tục. Use Case quay lại bước nhập liệu địa chỉ tương ứng. \newline \textbf{Alternative Flow 2a - Step 3a. Thiếu thông tin khách hàng bắt buộc khi tạo mới:} \newline    1. Nhân viên không nhập Tên hoặc SĐT khi tạo khách hàng mới. \newline    2. Hệ thống báo lỗi yêu cầu nhập đủ. \newline \textbf{Lỗi hệ thống khi lưu khách hàng/địa chỉ/liên kết:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi lưu thông tin khách hàng, địa chỉ mới, hoặc khi liên kết chúng với đơn hàng. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC7.3-1:} Thông tin khách hàng (Tên, SĐT) và Địa chỉ giao hàng chi tiết là bắt buộc đối với đơn hàng loại "Delivery". \newline - \textbf{BR-UC7.3-2:} Địa chỉ giao hàng cần có cấu trúc rõ ràng (Số nhà, Đường, Phường/Xã, Quận/Huyện, Tỉnh/TP) để đảm bảo tính chính xác cho việc giao hàng và tích hợp với Shipday. \newline - \textbf{BR-UC7.3-3:} Hệ thống nên cho phép lưu nhiều địa chỉ giao hàng cho một khách hàng và cho phép chọn địa chỉ cụ thể cho từng đơn hàng. \\
+Business Rule & - \textbf{BR-UC7.3-1:} Thông tin Khách hàng (Tên, Số điện thoại) là bắt buộc phải có để liên kết với đơn hàng giao đi. \newline - \textbf{BR-UC7.3-2:} Địa chỉ giao hàng chi tiết (bao gồm Số nhà, Tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành phố) là thông tin bắt buộc phải có cho đơn hàng loại "Delivery" để đảm bảo việc giao hàng chính xác. \newline - \textbf{BR-UC7.3-3 (System):} Hệ thống nên cho phép lưu trữ nhiều địa chỉ giao hàng khác nhau cho cùng một khách hàng và cho phép nhân viên chọn một địa chỉ cụ thể khi tạo đơn hàng giao đi. \newline - \textbf{BR-UC7.3-4 (System):} Dữ liệu địa chỉ cần được cấu trúc hóa (các trường riêng biệt) để dễ dàng tích hợp và gửi sang hệ thống quản lý giao hàng Shipday một cách chính xác. \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC7.3-1 (Usability):} Việc tìm kiếm khách hàng, chọn/nhập địa chỉ phải thuận tiện. Form nhập địa chỉ nên có cấu trúc rõ ràng, có thể có gợi ý hoặc tích hợp bản đồ (nếu nâng cao). \newline - \textbf{NFR-UC7.3-2 (Data Validation):} Cần có kiểm tra định dạng cơ bản cho SĐT và các thành phần địa chỉ (ví dụ: không để trống trường bắt buộc). \newline - \textbf{NFR-UC7.3-3 (Integration):} Dữ liệu địa chỉ phải có cấu trúc phù hợp để gửi sang Shipday qua API một cách chính xác. \\
+Non-Functional Requirement & - \textbf{NFR-UC7.3-1 (Usability):} Giao diện tìm kiếm khách hàng và nhập/chọn địa chỉ phải thân thiện, dễ sử dụng và nhanh chóng cho nhân viên thao tác tại quầy. Form nhập địa chỉ cần có cấu trúc logic. \newline - \textbf{NFR-UC7.3-2 (Data Validation):} Cần có cơ chế kiểm tra định dạng cơ bản cho Số điện thoại và đảm bảo các trường địa chỉ bắt buộc không bị bỏ trống. \newline - \textbf{NFR-UC7.3-3 (Integration):} Cấu trúc dữ liệu địa chỉ thu thập được phải tương thích và dễ dàng ánh xạ (map) sang các trường dữ liệu mà API của Shipday yêu cầu. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD07-04: Thêm món vào Đơn hàng Giao hàng}
-
+\subsubsection{Use Case UC-MD07-04: Thêm Món vào Đơn hàng Giao hàng}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-04: Thêm món vào Đơn hàng Giao hàng} \label{tab:uc_md07_04} \\
+\caption{Đặc tả Use Case UC-MD07-04: Thêm Món vào Đơn hàng Giao hàng} \label{tab:uc_md07_04_final_full} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Thêm món vào Đơn hàng Giao hàng \\
+Use Case Name & Thêm Món vào Đơn hàng Giao hàng \\
 \hline
 Use Case ID & UC-MD07-04 \\
 \hline
-Use Case Description & Cho phép Nhân viên thêm các món ăn và đồ uống vào đơn hàng giao đi đang mở, sử dụng giao diện chọn sản phẩm tương tự như các loại đơn hàng khác. \\
+Use Case Description & Cho phép Nhân viên (US-02/US-05) thêm các món ăn và đồ uống từ thực đơn POS vào đơn hàng giao đi đang được tạo hoặc chỉnh sửa. \\
 \hline
 Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Khách hàng (qua điện thoại hoặc kênh khác) đang đặt món cho đơn hàng giao đi. \\
+Trigger & Khách hàng (đặt qua điện thoại hoặc kênh khác được nhân viên nhập lại) yêu cầu các món ăn/đồ uống cho đơn hàng giao đi của họ. \\
 \hline
-Pre-Condition & - Nhân viên đang ở màn hình đơn hàng giao hàng đã liên kết khách hàng và địa chỉ (UC-MD07-02 và UC-MD07-03 thành công). \newline - Giao diện POS hiển thị các danh mục và sản phẩm. \\
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng giao hàng (đã hoàn thành UC-MD07-02 và UC-MD07-03). \newline - Giao diện POS hiển thị các danh mục và sản phẩm được phép bán. \\
 \hline
-Post-Condition & - Món ăn/đồ uống được chọn được thêm vào đơn hàng giao hàng. \newline - Tổng tiền tạm tính của đơn hàng được cập nhật. \\
+Post-Condition & - Các món ăn/đồ uống được Nhân viên chọn (cùng số lượng và các tùy chọn biến thể nếu có) được thêm thành công vào danh sách các món đã gọi của đơn hàng giao hàng. \newline - Tổng tiền tạm tính của đơn hàng được hệ thống tự động cập nhật. \newline - Các món ăn mới thêm sẵn sàng để được gửi yêu cầu chuẩn bị xuống bếp/bar (UC-MD07-06). \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow, Alternative Flow, Exception Flow & Luồng thực thi, các luồng thay thế và ngoại lệ về cơ bản là giống hệt với Use Case UC-MD05-05: Thêm món ăn/đồ uống vào đơn hàng. \\
+Basic Flow, Alternative Flow, Exception Flow & Hành động của Nhân viên khi thêm món vào đơn hàng giao hàng (bao gồm duyệt danh mục, chọn sản phẩm, chọn biến thể, tìm kiếm sản phẩm, thay đổi số lượng ban đầu khi thêm) về cơ bản là **giống hệt** với các hành động đã được mô tả trong **Use Case UC-MD05-05: Thêm Món mới vào Đơn hàng POS** và **Use Case UC-MD05-06: Điều chỉnh Số lượng Món trong Đơn hàng POS** (cho phần tăng/giảm số lượng của món vừa thêm hoặc nhập số lượng trực tiếp). Giao diện chọn món là tương tự. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & Các Business Rule tương tự như BR-UC5.5-1, BR-UC5.5-2, BR-UC5.5-3. \\
+Business Rule & Các Business Rule liên quan đến việc sản phẩm nào được hiển thị trên POS, cách xử lý sản phẩm có biến thể, và tính chính xác của giá cả khi thêm món là tương tự như các Business Rule đã định nghĩa cho UC-MD05-05 (ví dụ: BR-UC5.5-1, BR-UC5.5-2, BR-UC5.5-3). \\
 \hline
-Non-Functional Requirement & Các Non-Functional Requirement tương tự như NFR-UC5.5-1, NFR-UC5.5-2, NFR-UC5.5-3. \\
+Non-Functional Requirement & Các Non-Functional Requirement liên quan đến tính dễ sử dụng của giao diện chọn món, hiệu năng phản hồi của hệ thống khi thêm món, và tính chính xác của thông tin món ăn/giá cả cũng tương tự như các Non-Functional Requirement của UC-MD05-05 (ví dụ: NFR-UC5.5-1, NFR-UC5.5-2, NFR-UC5.5-3). \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD07-05: Xử lý Ghi chú cho Đơn Giao hàng}
-
+\subsubsection{Use Case UC-MD07-05: Thêm Ghi chú cho Đơn Giao hàng (Bếp/Tài xế)}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-05: Xử lý Ghi chú cho Đơn Giao hàng} \label{tab:uc_md07_05} \\
+\caption{Đặc tả Use Case UC-MD07-05: Thêm Ghi chú cho Đơn Giao hàng (Bếp/Tài xế)} \label{tab:uc_md07_05_final_full} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Xử lý Ghi chú cho Đơn Giao hàng \\
+Use Case Name & Thêm Ghi chú cho Đơn Giao hàng (Bếp/Tài xế) \\
 \hline
 Use Case ID & UC-MD07-05 \\
 \hline
-Use Case Description & Cho phép Nhân viên thêm các ghi chú đặc biệt liên quan đến đơn hàng giao đi, bao gồm yêu cầu về món ăn, đóng gói, hoặc hướng dẫn cho tài xế giao hàng. \\
+Use Case Description & Cho phép Nhân viên (US-02/US-05) thêm các ghi chú đặc biệt liên quan đến đơn hàng giao đi. Các ghi chú này có thể dành cho bộ phận bếp/bar (ví dụ: yêu cầu về khẩu vị, dị ứng) hoặc dành cho tài xế giao hàng (ví dụ: hướng dẫn đường đi cụ thể, thời gian giao mong muốn, yêu cầu gọi trước khi đến). \\
 \hline
 Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & Khách hàng có yêu cầu đặc biệt hoặc nhân viên cần ghi chú thông tin quan trọng cho bếp hoặc tài xế. \\
+Trigger & - Khách hàng có yêu cầu đặc biệt về món ăn cần truyền đạt cho bếp. \newline - Khách hàng có hướng dẫn hoặc yêu cầu đặc biệt cho việc giao hàng cần tài xế biết. \newline - Nhân viên cần ghi chú nội bộ liên quan đến việc chuẩn bị hoặc giao đơn hàng. \\
 \hline
-Pre-Condition & - Nhân viên đang ở màn hình đơn hàng giao hàng. \newline - Có thể đã thêm món hoặc chưa. \\
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng giao hàng trên POS. \newline - Đơn hàng có thể đã có món hoặc chưa. \\
 \hline
-Post-Condition & - Ghi chú được đính kèm vào món ăn hoặc đơn hàng. \newline - Ghi chú liên quan đến món ăn sẽ được gửi xuống bếp/bar (UC-MD07-06). \newline - Ghi chú liên quan đến giao hàng sẽ được gửi sang Shipday (UC-MD07-08). \\
+Post-Condition & - Ghi chú được đính kèm vào (các) món ăn cụ thể hoặc vào toàn bộ đơn hàng trên giao diện POS. \newline - Ghi chú dành cho bếp/bar sẽ được truyền đi khi gửi yêu cầu chuẩn bị (UC-MD07-06). \newline - Ghi chú dành cho tài xế sẽ được truyền sang hệ thống Shipday khi gửi đơn hàng (UC-MD07-08). \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow, Alternative Flow, Exception Flow & Luồng thực thi, các luồng thay thế và ngoại lệ về cơ bản là giống hệt với Use Case UC-MD05-06: Xử lý Yêu cầu đặc biệt/Ghi chú bếp. Tuy nhiên, cần phân biệt: \newline - Ghi chú cho món ăn (sẽ gửi bếp/bar). \newline - Ghi chú cho giao hàng (sẽ gửi cho tài xế qua Shipday). Giao diện có thể cần có ô ghi chú riêng cho việc giao hàng. \\
+Basic Flow (Thêm ghi chú cho món ăn - gửi bếp) & 1. Nhân viên (US-02/US-05) đang ở màn hình đơn hàng giao hàng, đã thêm món ăn cần ghi chú. \newline 2. US-02/US-05 chọn dòng món ăn muốn thêm ghi chú. \newline 3. Giao diện hiển thị nút/ô "Thêm ghi chú bếp" (Add Kitchen Note). US-02/US-05 nhấp vào đó. \newline 4. Hệ thống hiển thị hộp thoại/bàn phím ảo. US-02/US-05 nhập nội dung ghi chú cho bếp (ví dụ: "Không cay, thêm nhiều rau"). \newline 5. US-02/US-05 xác nhận ghi chú. Ghi chú được hiển thị kèm theo dòng món ăn. \\
+\hline
+Alternative Flow & \textbf{Basic Flow (Thêm ghi chú cho tài xế giao hàng):} \newline    1. Nhân viên (US-02/US-05) đang ở màn hình đơn hàng giao hàng. \newline    2. Nhân viên tìm đến một trường hoặc nút "Ghi chú Giao hàng" / "Delivery Instructions" / "Note for Driver" riêng biệt trên giao diện đơn hàng. \newline    3. US-02/US-05 nhấp vào đó và nhập nội dung ghi chú cho tài xế (ví dụ: "Gọi SĐT 09xxxxxxxx trước khi đến. Giao hàng sau 6 giờ chiều."). \newline    4. US-02/US-05 xác nhận ghi chú. Ghi chú này được lưu lại và sẽ được gửi sang Shipday. \newline \textbf{4a. Chọn ghi chú bếp/giao hàng có sẵn:} \newline    1. Tương tự UC-MD05-07 (Alternative Flow 5a), hệ thống có thể cung cấp danh sách các ghi chú thường dùng cho bếp hoặc cho giao hàng để nhân viên chọn nhanh. \\
+\hline
+Exception Flow & \textbf{5a/4a-alt. Lỗi lưu ghi chú:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng lưu ghi chú. \newline    2. Hệ thống hiển thị thông báo lỗi. Ghi chú có thể không được lưu. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & Các Business Rule tương tự như BR-UC5.6-1, BR-UC5.6-2, BR-UC5.6-3. Bổ sung: \newline - \textbf{BR-UC7.5-1:} Cần có cách phân biệt rõ ràng giữa ghi chú cho bếp/bar và ghi chú cho tài xế giao hàng để thông tin được gửi đúng nơi. \newline - \textbf{BR-UC7.5-2:} Ghi chú cho tài xế (ví dụ: "Gọi trước khi đến", "Để hàng ở cổng bảo vệ") phải được truyền sang hệ thống Shipday. \\
+Business Rule & - \textbf{BR-UC7.5-1:} Cần có sự phân biệt rõ ràng giữa ghi chú dành cho bộ phận bếp/bar (liên quan đến chế biến món ăn) và ghi chú dành cho tài xế giao hàng (liên quan đến quá trình giao nhận). Hệ thống nên có các trường nhập liệu riêng cho từng loại. \newline - \textbf{BR-UC7.5-2 (System):} Ghi chú cho bếp/bar phải được truyền đi cùng thông tin món ăn khi gửi yêu cầu chuẩn bị (UC-MD07-06). \newline - \textbf{BR-UC7.5-3 (System):} Ghi chú cho tài xế giao hàng phải được bao gồm trong dữ liệu gửi sang hệ thống Shipday (UC-MD07-08). \newline - \textbf{BR-UC7.5-4:} Nên có khả năng cấu hình sẵn các mẫu ghi chú thường dùng cho cả bếp và giao hàng. \\
 \hline
-Non-Functional Requirement & Các Non-Functional Requirement tương tự như NFR-UC5.6-1, NFR-UC5.6-2, NFR-UC5.6-3. Việc phân biệt loại ghi chú cần được thiết kế rõ ràng (Usability). \\
+Non-Functional Requirement & - \textbf{NFR-UC7.5-1 (Usability):} Việc thêm các loại ghi chú khác nhau phải dễ dàng và trực quan. Nhân viên không bị nhầm lẫn giữa ghi chú cho bếp và ghi chú cho tài xế. \newline - \textbf{NFR-UC7.5-2 (Accuracy):} Nội dung ghi chú phải được lưu và truyền đi một cách chính xác. \newline - \textbf{NFR-UC7.5-3 (Integration):} Dữ liệu ghi chú phải được các hệ thống liên quan (KDS/máy in bếp, Shipday) đọc và hiển thị đúng cách. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD07-06: Gửi đơn Giao hàng xuống Bếp/Bar}
-
+\subsubsection{Use Case UC-MD07-06: Gửi Yêu cầu Chuẩn bị Đơn Giao hàng (Bếp/Bar)}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-06: Gửi đơn Giao hàng xuống Bếp/Bar} \label{tab:uc_md07_06} \\
+\caption{Đặc tả Use Case UC-MD07-06: Gửi Yêu cầu Chuẩn bị Đơn Giao hàng (Bếp/Bar)} \label{tab:uc_md07_06_final_full} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Gửi đơn Giao hàng xuống Bếp/Bar \\
+Use Case Name & Gửi Yêu cầu Chuẩn bị Đơn Giao hàng (Bếp/Bar) \\
 \hline
 Use Case ID & UC-MD07-06 \\
 \hline
-Use Case Description & Gửi thông tin các món ăn/đồ uống của đơn hàng giao đi đến các máy in hoặc màn hình KDS tại bộ phận bếp/bar để bắt đầu chuẩn bị. Phiếu gửi đi cần chỉ rõ đây là đơn hàng giao hàng. \\
-\hline
-Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), System \\
-\hline
-Priority & Must Have \\
-\hline
-Trigger & Nhân viên đã nhập xong các món cho đơn hàng giao đi và cần thông báo cho bếp/bar. \\
-\hline
-Pre-Condition & - Nhân viên đang ở màn hình đơn hàng giao hàng. \newline - Có các món ăn chưa được gửi đi trong đơn hàng. \newline - Các thiết bị bếp/bar và quy tắc định tuyến đã được cấu hình. \\
-\hline
-Post-Condition & - Thông tin các món cần chuẩn bị được gửi đến đúng bộ phận bếp/bar, có đánh dấu là đơn "Delivery". \newline - Trạng thái các món trên POS được cập nhật là "Đã gửi". \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Basic Flow, Alternative Flow, Exception Flow & Luồng thực thi, các luồng thay thế và ngoại lệ về cơ bản là giống hệt với Use Case UC-MD05-07: Gửi đơn hàng xuống Bếp/Bar. Điểm khác biệt quan trọng là: \newline - Hệ thống cần bao gồm thông tin "Delivery" hoặc "Giao hàng" và có thể cả thông tin khách hàng/địa chỉ tóm tắt (nếu cần) trên dữ liệu gửi đi (bước 5 của UC-MD05-07) để bếp/bar biết cách đóng gói phù hợp. \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Business Rule & Các Business Rule tương tự như BR-UC5.7-1, BR-UC5.7-2, BR-UC5.7-3. Bổ sung: \newline - \textbf{BR-UC7.6-1:} Phiếu in/Hiển thị KDS cho đơn giao hàng phải có dấu hiệu rõ ràng (ví dụ: chữ "Delivery", "Giao hàng") và có thể kèm theo tên/SĐT khách hoặc mã đơn hàng để dễ đối chiếu khi đóng gói. \\
-\hline
-Non-Functional Requirement & Các Non-Functional Requirement tương tự như NFR-UC5.7-1, NFR-UC5.7-2, NFR-UC5.7-3. \\
-\hline
-\end{longtable}
-
-\subsubsection{Use Case UC-MD07-07: Áp dụng Đặt cọc/Thanh toán Trước (Nếu có)}
-
-\begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-07: Áp dụng Đặt cọc/Thanh toán Trước (Nếu có)} \label{tab:uc_md07_07} \\
-\hline
-
-\endhead % Header cho các trang tiếp theo
-\hline
-\endfoot % Footer cho bảng
-\hline
-\endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Áp dụng Đặt cọc/Thanh toán Trước (Nếu có) \\
-\hline
-Use Case ID & UC-MD07-07 \\
-\hline
-Use Case Description & Khi chuẩn bị thanh toán cho đơn hàng giao đi, nếu đơn hàng này bắt nguồn từ một kênh online (ví dụ: website/app) và khách hàng đã thanh toán trước một phần (đặt cọc) hoặc toàn bộ giá trị đơn hàng, hệ thống POS cần tự động nhận diện và áp dụng khoản đã thanh toán này vào hóa đơn. \\
-\hline
-Actor & System (Thực hiện chính), US-02, US-05 (Kích hoạt khi vào màn hình thanh toán) \\
-\hline
-Priority & Must Have (Nếu có kênh đặt hàng giao đi online và cho phép thanh toán trước/đặt cọc) \\
-\hline
-Trigger & Nhân viên tại POS mở màn hình thanh toán cho một đơn hàng giao hàng có liên kết với một bản ghi đơn hàng online đã thanh toán trước (một phần hoặc toàn bộ). \\
-\hline
-Pre-Condition & - Có một hệ thống/luồng cho phép khách hàng đặt hàng giao đi online và thanh toán trước/đặt cọc. \newline - Nhân viên POS đã mở đúng đơn hàng online đó trên giao diện POS. \newline - Đơn hàng online đó có ghi nhận số tiền đã thanh toán trước. \\
-\hline
-Post-Condition & - Số tiền đã thanh toán trước được tự động trừ vào tổng số tiền cần thanh toán trên màn hình thanh toán POS. \newline - Nếu số tiền đã thanh toán trước bằng hoặc lớn hơn tổng hóa đơn, số tiền cần thanh toán cuối cùng là 0. \newline - Nếu số tiền đã thanh toán trước nhỏ hơn tổng hóa đơn, số tiền cần thanh toán cuối cùng là phần còn lại (COD). \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Basic Flow, Alternative Flow, Exception Flow & Logic kiểm tra và áp dụng khoản thanh toán trước về cơ bản là giống hệt với Use Case UC-MD05-09: Áp dụng Tiền Đặt cọc vào Hóa đơn. Hệ thống kiểm tra trường lưu số tiền đã thanh toán trước (Prepaid Amount) của đơn hàng liên kết và trừ vào tổng hóa đơn để ra số tiền còn lại cần thu (Amount Due / COD Amount). \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Business Rule & Các Business Rule tương tự như BR-UC5.9-1, BR-UC5.9-2, BR-UC5.9-3, BR-UC5.9-4. Đảm bảo hệ thống phân biệt rõ giữa tiền đặt cọc và tiền thanh toán toàn bộ trước. \\
-\hline
-Non-Functional Requirement & Các Non-Functional Requirement tương tự như NFR-UC5.9-1, NFR-UC5.9-2, NFR-UC5.9-3, NFR-UC5.9-4. \\
-\hline
-\end{longtable}
-
-\subsubsection{Use Case UC-MD07-08: Xác nhận và Gửi Đơn hàng sang Shipday}
-
-\begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-08: Xác nhận và Gửi Đơn hàng sang Shipday} \label{tab:uc_md07_08} \\
-\hline
-
-\endhead % Header cho các trang tiếp theo
-\hline
-\endfoot % Footer cho bảng
-\hline
-\endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Xác nhận và Gửi Đơn hàng sang Shipday \\
-\hline
-Use Case ID & UC-MD07-08 \\
-\hline
-Use Case Description & Sau khi đơn hàng giao đi đã được chuẩn bị xong (hoặc gần xong) và thông tin đã đầy đủ, Nhân viên thực hiện hành động trên POS để gửi thông tin chi tiết của đơn hàng này (thông tin khách hàng, địa chỉ, danh sách món, số tiền COD nếu có) đến hệ thống quản lý giao hàng Shipday thông qua API tích hợp. \\
-\hline
-Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), System (Thực hiện gọi API) \\
-\hline
-Priority & Must Have \\
-\hline
-Trigger & Đơn hàng giao đi đã sẵn sàng để được điều phối tài xế và giao cho khách. \\
-\hline
-Pre-Condition & - Nhân viên đang xem chi tiết đơn hàng giao đi trên POS. \newline - Đơn hàng đã có đầy đủ thông tin bắt buộc: khách hàng, SĐT, địa chỉ giao hàng hợp lệ, danh sách món ăn. \newline - Tích hợp API giữa Odoo và Shipday đã được cấu hình thành công (FR-MD07-13). \\
-\hline
-Post-Condition & - Yêu cầu tạo đơn hàng mới trên Shipday được gửi thành công qua API. \newline - Shipday nhận được thông tin và tạo một tác vụ giao hàng (delivery task) tương ứng. \newline - Đơn hàng trên POS Odoo có thể được cập nhật trạng thái (ví dụ: "Đã gửi Shipday", "Chờ gán tài xế") và/hoặc lưu lại ID đơn hàng từ Shipday để theo dõi. \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Basic Flow & 1. Nhân viên (US-02/US-05) đang xem chi tiết đơn hàng giao đi đã sẵn sàng. \newline 2. Nhân viên nhấn nút "Gửi Giao hàng" / "Push to Shipday" / "Request Delivery" hoặc tương tự trên giao diện POS. \newline 3. Hệ thống Odoo thu thập các thông tin cần thiết từ đơn hàng POS: \newline    - Tên khách hàng. \newline    - Số điện thoại khách hàng. \newline    - Địa chỉ giao hàng chi tiết (đã được cấu trúc). \newline    - Danh sách các món ăn (có thể chỉ cần tổng số lượng hoặc mô tả chung). \newline    - Tổng giá trị đơn hàng. \newline    - Số tiền cần thu hộ (COD Amount = Amount Due sau khi trừ cọc/trả trước). \newline    - Ghi chú cho tài xế (từ UC-MD07-05). \newline    - Mã đơn hàng Odoo (để tham chiếu). \newline    - (Tùy chọn) Thời gian giao hàng mong muốn (nếu có). \newline 4. Hệ thống Odoo định dạng dữ liệu theo yêu cầu của API Shipday. \newline 5. Hệ thống Odoo thực hiện gọi API "Create Order" (hoặc tương đương) của Shipday, truyền dữ liệu đã chuẩn bị. \newline 6. Hệ thống Odoo chờ và nhận phản hồi từ API Shipday. \newline 7. \textbf{Nếu phản hồi thành công:} \newline    a. Phản hồi thường chứa ID đơn hàng trên Shipday (Shipday Order ID). \newline    b. Hệ thống Odoo lưu lại Shipday Order ID vào đơn hàng POS. \newline    c. Hệ thống Odoo cập nhật trạng thái đơn hàng POS thành "Đã gửi Shipday" hoặc tương đương. \newline    d. Hệ thống hiển thị thông báo "Đã gửi đơn hàng sang Shipday thành công." \newline 8. \textbf{Nếu phản hồi thất bại:} \newline    a. Phản hồi chứa mã lỗi và thông báo lỗi từ Shipday (ví dụ: địa chỉ không hợp lệ, thiếu thông tin bắt buộc...). \newline    b. Hệ thống Odoo hiển thị thông báo lỗi chi tiết cho nhân viên. \newline    c. Đơn hàng chưa được gửi sang Shipday. Nhân viên cần sửa lại thông tin và thử lại (quay lại bước 2). \\
-\hline
-Alternative Flow & \textbf{2a. Tự động gửi khi đạt trạng thái nhất định:} \newline    1. Hệ thống có thể được cấu hình để tự động gửi đơn hàng sang Shipday khi đơn hàng POS đạt một trạng thái cụ thể (ví dụ: "Sẵn sàng giao") mà không cần nhân viên nhấn nút thủ công. \\
-\hline
-Exception Flow & \textbf{5a. Lỗi kết nối hoặc gọi API Shipday:} \newline    1. Hệ thống Odoo không thể kết nối đến API của Shipday (lỗi mạng, sai endpoint, API key hết hạn...) hoặc API Shipday trả về lỗi hệ thống (5xx). \newline    2. Hệ thống Odoo ghi nhận lỗi kết nối/API. \newline    3. Hệ thống hiển thị thông báo lỗi chung cho nhân viên "Không thể gửi đơn hàng sang Shipday. Vui lòng thử lại sau hoặc kiểm tra cấu hình." \newline    4. Đơn hàng chưa được gửi. \newline \textbf{7e. Lỗi cập nhật trạng thái/lưu ID trong Odoo:} \newline    1. Sau khi nhận phản hồi thành công từ Shipday, hệ thống Odoo gặp lỗi khi lưu Shipday Order ID hoặc cập nhật trạng thái đơn hàng POS. \newline    2. Hệ thống Odoo ghi nhận lỗi nội bộ. Đơn hàng đã được tạo trên Shipday nhưng Odoo không ghi nhận đúng trạng thái, có thể gây nhầm lẫn. Cần cơ chế cảnh báo/xử lý. \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Business Rule & - \textbf{BR-UC7.8-1:} Thông tin gửi sang Shipday phải đầy đủ và chính xác, đặc biệt là địa chỉ giao hàng và số tiền COD (nếu có). \newline - \textbf{BR-UC7.8-2:} Mỗi đơn hàng POS giao đi chỉ nên được gửi sang Shipday một lần. Cần có cơ chế kiểm tra trạng thái để tránh gửi trùng lặp. \newline - \textbf{BR-UC7.8-3:} Việc ánh xạ (mapping) dữ liệu giữa các trường của Odoo và các trường của API Shipday phải được định nghĩa chính xác trong quá trình tích hợp. \\
-\hline
-Non-Functional Requirement & - \textbf{NFR-UC7.8-1 (Reliability):} Tích hợp API phải ổn định và đáng tin cậy. Cần có xử lý lỗi mạng và lỗi từ API Shipday. \newline - \textbf{NFR-UC7.8-2 (Performance):} Thời gian gửi yêu cầu và nhận phản hồi từ API Shipday nên nhanh chóng để không làm gián đoạn quy trình của nhân viên. \newline - \textbf{NFR-UC7.8-3 (Accuracy):} Dữ liệu truyền đi phải chính xác 100%. \newline - \textbf{NFR-UC7.8-4 (Security):} Việc gọi API phải sử dụng phương thức xác thực an toàn (API Key/Token). \\
-\hline
-\end{longtable}
-
-\subsubsection{Use Case UC-MD07-09: Nhận và Hiển thị Trạng thái Giao hàng từ Shipday}
-
-\begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-09: Nhận và Hiển thị Trạng thái Giao hàng từ Shipday} \label{tab:uc_md07_09} \\
-\hline
-
-\endhead % Header cho các trang tiếp theo
-\hline
-\endfoot % Footer cho bảng
-\hline
-\endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Nhận và Hiển thị Trạng thái Giao hàng từ Shipday \\
-\hline
-Use Case ID & UC-MD07-09 \\
-\hline
-Use Case Description & Hệ thống Odoo tự động nhận các cập nhật về trạng thái của đơn hàng giao đi từ hệ thống Shipday (thường thông qua cơ chế Webhook) và hiển thị trạng thái này (ví dụ: Đã nhận đơn, Đã gán tài xế, Đang lấy hàng, Đang giao, Đã giao thành công, Giao thất bại) trên giao diện chi tiết đơn hàng trong Odoo (POS hoặc Backend). \\
-\hline
-Actor & System (Odoo Backend - Nhận Webhook, Shipday - Gửi Webhook) \\
-\hline
-Priority & Must Have \\
-\hline
-Trigger & Shipday cập nhật trạng thái của một tác vụ giao hàng (delivery task) và gửi thông báo cập nhật đó đến endpoint webhook đã đăng ký của Odoo. \\
-\hline
-Pre-Condition & - Đơn hàng đã được gửi thành công sang Shipday (UC-MD07-08). \newline - Odoo đã lưu lại ID đơn hàng Shipday tương ứng. \newline - Webhook endpoint của Odoo đã được đăng ký và cấu hình đúng trên Shipday để nhận cập nhật trạng thái. \newline - Webhook endpoint của Odoo đang hoạt động và sẵn sàng nhận yêu cầu. \\
-\hline
-Post-Condition & - Trạng thái giao hàng của đơn hàng POS tương ứng trong Odoo được cập nhật theo thông tin nhận được từ Shipday. \newline - Nhân viên có thể xem trạng thái giao hàng mới nhất khi xem chi tiết đơn hàng. \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Basic Flow & 1. Shipday cập nhật trạng thái một đơn hàng (ví dụ: tài xế A chấp nhận đơn, tài xế B bắt đầu giao, tài xế C giao thành công). \newline 2. Shipday tự động gửi một yêu cầu HTTP (webhook) đến endpoint đã đăng ký của Odoo, chứa thông tin về đơn hàng (Shipday Order ID hoặc Mã đơn hàng Odoo) và trạng thái mới. \newline 3. Endpoint webhook của Odoo nhận được yêu cầu. \newline 4. Hệ thống Odoo xác thực yêu cầu webhook (nếu có cơ chế bảo mật). \newline 5. Hệ thống Odoo phân tích dữ liệu webhook, xác định đơn hàng POS tương ứng dựa trên ID. \newline 6. Hệ thống Odoo đọc trạng thái giao hàng mới từ dữ liệu webhook (ví dụ: "ASSIGNED", "STARTED", "PICKED\_UP", "DELIVERED", "FAILED"). \newline 7. Hệ thống Odoo cập nhật một trường trạng thái giao hàng (ví dụ: `delivery\_status`) trên bản ghi đơn hàng POS với giá trị mới nhận được. \newline 8. Hệ thống Odoo gửi phản hồi HTTP 200 OK cho Shipday để xác nhận đã nhận webhook. \newline 9. Khi nhân viên xem chi tiết đơn hàng POS đó trên Odoo (Backend hoặc có thể cả POS nếu thiết kế), họ sẽ thấy trường trạng thái giao hàng hiển thị giá trị mới nhất (ví dụ: "Đang giao", "Đã giao thành công"). \\
-\hline
-Alternative Flow & \textbf{7a. Ánh xạ trạng thái:} \newline    1. Trạng thái từ Shipday có thể cần được ánh xạ sang các trạng thái tương ứng trong Odoo nếu Odoo sử dụng bộ trạng thái riêng. \newline \textbf{9a. Thông báo nội bộ khi có cập nhật quan trọng:} \newline    1. Hệ thống Odoo có thể được cấu hình để gửi thông báo nội bộ (Odoo Discuss) cho nhân viên liên quan khi có cập nhật trạng thái quan trọng (ví dụ: "Đã giao thành công", "Giao thất bại"). \\
-\hline
-Exception Flow & \textbf{3a. Lỗi nhận Webhook / Xác thực thất bại:} Tương tự UC-MD04-03. \newline \textbf{5a. Không tìm thấy Đơn hàng POS tương ứng:} Tương tự UC-MD04-03. \newline \textbf{7a. Lỗi cập nhật trạng thái trong Odoo:} \newline    1. Hệ thống gặp lỗi khi cố gắng lưu trạng thái giao hàng mới vào đơn hàng POS. \newline    2. Hệ thống ghi nhận lỗi nội bộ. Trạng thái trên Odoo không được cập nhật dù Shipday đã gửi. Cần cơ chế cảnh báo/xử lý. \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Business Rule & - \textbf{BR-UC7.9-1:} Hệ thống Odoo phải có khả năng nhận và xử lý webhook cập nhật trạng thái từ Shipday một cách đáng tin cậy. \newline - \textbf{BR-UC7.9-2:} Trạng thái giao hàng hiển thị trên Odoo phải phản ánh đúng trạng thái mới nhất nhận được từ Shipday. \newline - \textbf{BR-UC7.9-3:} Cần định nghĩa rõ các trạng thái giao hàng của Shipday sẽ được hiển thị/ánh xạ như thế nào trong Odoo. \\
-\hline
-Non-Functional Requirement & - \textbf{NFR-UC7.9-1 (Reliability):} Webhook endpoint phải có độ sẵn sàng cao. Quá trình xử lý webhook và cập nhật trạng thái phải đáng tin cậy. \newline - \textbf{NFR-UC7.9-2 (Performance):} Việc xử lý webhook và cập nhật trạng thái nên diễn ra nhanh chóng để thông tin trên Odoo không bị quá trễ so với thực tế. \newline - \textbf{NFR-UC7.9-3 (Security):} Webhook endpoint cần được bảo mật để tránh bị lạm dụng. \newline - \textbf{NFR-UC7.9-4 (Usability):} Việc hiển thị trạng thái giao hàng trên chi tiết đơn hàng Odoo phải rõ ràng và dễ hiểu cho nhân viên. \\
-\hline
-\end{longtable}
-
-\subsubsection{Use Case UC-MD07-10: Xử lý Thanh toán Đơn hàng Giao hàng (Nếu COD)}
-
-\begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-10: Xử lý Thanh toán Đơn hàng Giao hàng (Nếu COD)} \label{tab:uc_md07_10} \\
-\hline
-
-\endhead % Header cho các trang tiếp theo
-\hline
-\endfoot % Footer cho bảng
-\hline
-\endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Xử lý Thanh toán Đơn hàng Giao hàng (Nếu COD) \\
-\hline
-Use Case ID & UC-MD07-10 \\
-\hline
-Use Case Description & Đối với các đơn hàng giao đi thanh toán khi nhận hàng (Cash on Delivery - COD), cho phép Nhân viên (thường là Thu ngân hoặc Quản lý) ghi nhận việc đã nhận đủ số tiền COD từ tài xế giao hàng vào hệ thống POS/Odoo, từ đó hoàn tất quy trình thanh toán cho đơn hàng. \\
-\hline
-Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), US-01 (Quản lý nhà hàng) \\
-\hline
-Priority & Must Have (Nếu hỗ trợ hình thức thanh toán COD) \\
-\hline
-Trigger & Tài xế giao hàng quay lại cửa hàng và nộp tiền COD đã thu từ khách cho đơn hàng giao đi. \\
-\hline
-Pre-Condition & - Đơn hàng giao đi đã được đánh dấu là COD và đã được giao thành công (trạng thái từ Shipday - UC-MD07-09 - là "DELIVERED"). \newline - Đơn hàng trên Odoo đang ở trạng thái chờ thanh toán (hoặc một trạng thái tương ứng với COD đã giao). \newline - Nhân viên có quyền ghi nhận thanh toán COD. \\
-\hline
-Post-Condition & - Giao dịch thanh toán COD được ghi nhận thành công trong hệ thống Odoo, liên kết với đơn hàng giao đi. \newline - Trạng thái thanh toán của đơn hàng được cập nhật thành "Đã thanh toán" (Paid). \newline - Số dư tiền mặt của phiên POS (nếu nhận tiền mặt) hoặc tài khoản đối ứng (nếu tài xế chuyển khoản) được cập nhật. \newline - Đơn hàng sẵn sàng để đóng cuối cùng (UC-MD07-12). \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Basic Flow & 1. Nhân viên (US-02/US-05/US-01) nhận tiền COD từ tài xế giao hàng. \newline 2. Nhân viên tìm và mở lại đơn hàng giao đi tương ứng trên POS hoặc Backend Odoo (có thể lọc theo trạng thái "Đã giao, chờ thanh toán COD"). \newline 3. Nhân viên xác minh số tiền COD cần thu khớp với số tiền tài xế nộp. \newline 4. Nhân viên truy cập chức năng ghi nhận thanh toán cho đơn hàng này (có thể là nút "Register Payment" hoặc tương tự). \newline 5. Hệ thống hiển thị giao diện ghi nhận thanh toán, thường đã điền sẵn số tiền COD cần thu. \newline 6. Nhân viên chọn phương thức thanh toán mà tài xế nộp tiền (ví dụ: "Tiền mặt" nếu tài xế nộp tiền mặt, hoặc "Chuyển khoản" nếu tài xế chuyển khoản cho nhà hàng). \newline 7. Nhân viên xác nhận thông tin thanh toán. \newline 8. Hệ thống ghi nhận giao dịch thanh toán COD. \newline 9. Hệ thống cập nhật trạng thái đơn hàng thành "Paid". \newline 10. Hệ thống hiển thị thông báo ghi nhận thanh toán thành công. \\
-\hline
-Alternative Flow & \textbf{6a. Tài xế nộp thiếu/thừa tiền:} \newline    1. Nếu số tiền tài xế nộp khác với số tiền COD cần thu. \newline    2. Nhân viên cần xử lý theo quy trình của nhà hàng (ví dụ: ghi nhận số tiền thực nhận và tạo bút toán chênh lệch, yêu cầu tài xế nộp đủ...). Quy trình này có thể phức tạp và cần sự can thiệp của quản lý/kế toán. Hệ thống POS cơ bản có thể chỉ cho phép ghi nhận đúng số tiền COD. \newline \textbf{4a. Ghi nhận thanh toán hàng loạt:} \newline    1. Nếu có nhiều đơn COD cần ghi nhận cùng lúc, hệ thống có thể cung cấp chức năng chọn nhiều đơn và ghi nhận thanh toán hàng loạt (thường ở Backend). \\
-\hline
-Exception Flow & \textbf{8a. Lỗi ghi nhận thanh toán:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng tạo bản ghi thanh toán hoặc cập nhật trạng thái đơn hàng. \newline    2. Hệ thống báo lỗi. Thanh toán chưa được ghi nhận đúng. \newline \textbf{2a. Không tìm thấy đơn hàng / Đơn hàng sai trạng thái:} \newline    1. Nhân viên không tìm thấy đơn hàng hoặc đơn hàng không ở trạng thái phù hợp để ghi nhận thanh toán COD. \newline    2. Cần kiểm tra lại thông tin đơn hàng và trạng thái giao hàng từ Shipday. \\
-\hline
-\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Business Rule & - \textbf{BR-UC7.10-1:} Chỉ những đơn hàng được xác định là COD và đã có trạng thái giao hàng thành công từ Shipday mới được phép ghi nhận thanh toán theo luồng này. \newline - \textbf{BR-UC7.10-2:} Số tiền ghi nhận thanh toán phải khớp với số tiền COD cần thu của đơn hàng. Việc xử lý chênh lệch (nếu có) cần tuân theo quy định của nhà hàng. \newline - \textbf{BR-UC7.10-3:} Phương thức thanh toán ghi nhận phải phản ánh đúng cách thức tài xế nộp tiền (tiền mặt, chuyển khoản...). \\
-\hline
-Non-Functional Requirement & - \textbf{NFR-UC7.10-1 (Usability):} Việc tìm đơn hàng COD đã giao và thực hiện ghi nhận thanh toán phải đơn giản cho nhân viên. \newline - \textbf{NFR-UC7.10-2 (Accuracy):} Việc ghi nhận đúng số tiền và đúng phương thức thanh toán là rất quan trọng cho đối soát tài chính. \newline - \textbf{NFR-UC7.10-3 (Auditability):} Cần ghi log rõ ràng về việc ai đã ghi nhận thanh toán COD, thời gian, số tiền. \\
-\hline
-\end{longtable}
-
-\subsubsection{Use Case UC-MD07-11: In Hóa đơn/Phiếu Giao hàng}
-
-\begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-11: In Hóa đơn/Phiếu Giao hàng} \label{tab:uc_md07_11} \\
-\hline
-
-\endhead % Header cho các trang tiếp theo
-\hline
-\endfoot % Footer cho bảng
-\hline
-\endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & In Hóa đơn/Phiếu Giao hàng \\
-\hline
-Use Case ID & UC-MD07-11 \\
-\hline
-Use Case Description & Cho phép Nhân viên in ra một hoặc nhiều bản hóa đơn hoặc phiếu giao hàng chi tiết cho đơn hàng giao đi. Phiếu này thường được đính kèm cùng gói hàng để tài xế tham khảo và giao cho khách hàng. \\
+Use Case Description & Cho phép Nhân viên (US-02/US-05) gửi thông tin chi tiết về các món ăn/đồ uống cần chuẩn bị cho một đơn hàng giao đi đến các máy in bếp hoặc màn hình KDS tại các bộ phận liên quan (bếp, bar), đồng thời chỉ rõ đây là đơn hàng loại "Delivery". \\
 \hline
 Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & - Sau khi đơn hàng giao đi được xác nhận và gửi bếp/bar (để chuẩn bị phiếu). \newline - Hoặc sau khi thanh toán thành công (nếu là hóa đơn cuối cùng). \newline - Hoặc khi tài xế đến lấy hàng. \\
+Trigger & Nhân viên đã hoàn tất việc nhập các món ăn/đồ uống (và các ghi chú liên quan đến món) cho đơn hàng giao đi và cần thông báo cho bộ phận bếp/bar bắt đầu quá trình chuẩn bị. \\
 \hline
-Pre-Condition & - Nhân viên đang xem chi tiết đơn hàng giao đi trên POS hoặc Backend. \newline - Máy in hóa đơn/phiếu đã được cấu hình và kết nối. \newline - Mẫu in phù hợp cho đơn giao hàng đã được thiết lập. \\
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng giao hàng trên POS. \newline - Có ít nhất một món ăn/đồ uống trong đơn hàng có trạng thái "chưa gửi bếp". \newline - Các thiết bị máy in bếp/KDS và quy tắc định tuyến sản phẩm theo danh mục (FR-MD02-20) đã được cấu hình chính xác. \\
 \hline
-Post-Condition & - Một hoặc nhiều bản hóa đơn/phiếu giao hàng được in ra. \\
+Post-Condition & - Hệ thống (System) đã gửi thông tin các món cần chuẩn bị đến đúng (các) thiết bị tại bếp/bar, kèm theo chỉ dẫn rõ ràng đây là đơn "Delivery". \newline - Trạng thái của các món ăn trên đơn hàng POS được Nhân viên cập nhật (hoặc hệ thống tự động đánh dấu) thành "Đã gửi bếp". \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow & 1. Nhân viên (US-02/US-05) đang xem chi tiết đơn hàng giao đi. \newline 2. Nhân viên chọn nút "In Hóa đơn" / "In Phiếu Giao hàng" / "Print Receipt". \newline 3. Hệ thống (có thể) hỏi số lượng bản in mong muốn. Nhân viên nhập số lượng. \newline 4. Hệ thống tạo dữ liệu cần in, bao gồm: \newline    - Thông tin nhà hàng. \newline    - Thông tin khách hàng (Tên, SĐT, Địa chỉ giao hàng). \newline    - Mã đơn hàng. \newline    - Danh sách chi tiết các món ăn (SL, Tên, Đơn giá, Thành tiền). \newline    - Tổng tiền hàng, Thuế. \newline    - Tiền đặt cọc/đã trả trước (nếu có). \newline    - Số tiền COD cần thu (nếu có). \newline    - Ghi chú cho tài xế/khách hàng. \newline 5. Hệ thống gửi dữ liệu đến máy in hóa đơn/phiếu đã cấu hình. \newline 6. Máy in in ra (các) bản hóa đơn/phiếu giao hàng. \\
-\hline
-Alternative Flow & \textbf{4a. Mẫu in khác nhau:} \newline    1. Hệ thống có thể có các mẫu in khác nhau (ví dụ: Phiếu giao hàng cho tài xế chỉ có địa chỉ, SĐT, COD; Hóa đơn chi tiết cho khách). \newline    2. Nhân viên chọn đúng mẫu cần in. \newline \textbf{2a. Tự động in khi gửi Shipday:} \newline    1. Hệ thống có thể được cấu hình để tự động in phiếu giao hàng ngay sau khi gửi đơn thành công sang Shipday (UC-MD07-08). \\
-\hline
-Exception Flow & \textbf{5a. Lỗi gửi lệnh in / Lỗi máy in:} Tương tự UC-MD05-08. \\
+Basic Flow, Alternative Flow, Exception Flow & Hành động của Nhân viên khi gửi yêu cầu chuẩn bị cho đơn hàng giao hàng (ví dụ: nhấn nút "Gửi Bếp/Order") và các bước xử lý tiếp theo của hệ thống (xác định món cần gửi, áp dụng quy tắc định tuyến, tạo yêu cầu in/hiển thị, gửi lệnh đến thiết bị, cập nhật trạng thái món trên POS) về cơ bản là **giống hệt** với các hành động đã được mô tả trong **Use Case UC-MD05-08: Gửi Các Món đã chọn xuống Bếp/Bar**. \newline Một điểm khác biệt quan trọng trong dữ liệu được hệ thống (System) chuẩn bị và gửi đi (bước 5 của UC-MD05-08) là phải bao gồm thông tin rõ ràng để nhận diện đây là đơn hàng "Delivery". Thông tin này có thể là: \newline    - Một tiêu đề hoặc nhãn "DELIVERY ORDER" / "ĐƠN GIAO HÀNG". \newline    - Thông tin khách hàng (Tên, SĐT) và địa chỉ giao hàng (tóm tắt nếu cần). \newline    - Mã đơn hàng để dễ dàng đối chiếu khi đóng gói. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC7.11-1:} Phiếu giao hàng/hóa đơn phải chứa đủ thông tin cần thiết cho tài xế (địa chỉ, SĐT khách, tiền COD) và cho khách hàng (chi tiết đơn hàng, tổng tiền). \newline - \textbf{BR-UC7.11-2:} Thông tin trên phiếu in phải khớp với thông tin đơn hàng trong hệ thống tại thời điểm in. \\
+Business Rule & Các Business Rule liên quan đến việc tuân thủ quy tắc định tuyến, thông tin đầy đủ trên phiếu/KDS, và cơ chế đánh dấu món đã gửi là tương tự như BR-UC5.8-1, BR-UC5.8-2, BR-UC5.8-3. Bổ sung: \newline - \textbf{BR-UC7.6-1 (System):} Phiếu in bếp hoặc thông tin hiển thị trên KDS cho đơn hàng giao đi phải có các dấu hiệu nhận biết rõ ràng (ví dụ: tiêu đề "DELIVERY", thông tin khách hàng/địa chỉ nếu cần cho việc chuẩn bị/đóng gói đặc biệt) để bộ phận bếp/bar có thể xử lý phù hợp (ví dụ: sử dụng bao bì mang đi, chuẩn bị dụng cụ ăn uống kèm theo). \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC7.11-1 (Usability):} Nút in phải dễ tìm. Nếu có nhiều mẫu in, việc lựa chọn phải rõ ràng. \newline - \textbf{NFR-UC7.11-2 (Clarity):} Định dạng phiếu in phải rõ ràng, dễ đọc, các thông tin quan trọng (địa chỉ, COD) phải nổi bật. \\
+Non-Functional Requirement & Các Non-Functional Requirement liên quan đến Performance, Reliability, và Integration là tương tự như NFR-UC5.8-1, NFR-UC5.8-2, NFR-UC5.8-3. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD07-12: Đóng Đơn hàng Giao hàng}
-
+\subsubsection{Use Case UC-MD07-07: Xác nhận và Tiến hành Thanh toán Đơn Giao hàng (có xem xét Cọc/Trả trước)}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-12: Đóng Đơn hàng Giao hàng} \label{tab:uc_md07_12} \\
+\caption{Đặc tả Use Case UC-MD07-07: Xác nhận và Tiến hành Thanh toán Đơn Giao hàng (có xem xét Cọc/Trả trước)} \label{tab:uc_md07_07_final_full} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Xác nhận và Tiến hành Thanh toán Đơn Giao hàng (có xem xét Cọc/Trả trước) \\
+\hline
+Use Case ID & UC-MD07-07 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-02/US-05) chuyển sang màn hình thanh toán cho một đơn hàng giao đi. Trước khi hiển thị số tiền cuối cùng cần thu (nếu là COD) hoặc xác nhận đơn (nếu đã trả trước toàn bộ), hệ thống sẽ tự động kiểm tra và áp dụng (trừ đi) bất kỳ khoản tiền đặt cọc hoặc thanh toán trước nào mà khách hàng có thể đã thực hiện cho đơn hàng đó (ví dụ: khi đặt hàng giao đi online). \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have (Nếu có kênh đặt hàng giao đi online cho phép trả trước/cọc) \\
+\hline
+Trigger & Nhân viên đã hoàn tất việc nhập món cho đơn hàng giao đi (và các món đã được gửi bếp/bar) và cần tiến hành các bước tiếp theo liên quan đến thanh toán hoặc xác nhận đơn để gửi giao hàng. \\
+\hline
+Pre-Condition & - Nhân viên đang ở màn hình đơn hàng giao hàng trên POS. \newline - Đơn hàng giao hàng có thể đã được liên kết với một đơn đặt hàng online có thông tin về tiền cọc/thanh toán trước. \\
+\hline
+Post-Condition & - Nhân viên được chuyển đến màn hình thanh toán (Payment Screen) hoặc một màn hình xác nhận đơn hàng. \newline - Số tiền cần thanh toán cuối cùng (Amount Due / COD Amount) hiển thị trên màn hình đã được hệ thống tự động điều chỉnh (trừ đi) nếu có khoản cọc/trả trước hợp lệ được tìm thấy và áp dụng. \newline - Nếu đơn hàng đã được thanh toán trước toàn bộ, hệ thống có thể chỉ hiển thị thông tin xác nhận và sẵn sàng cho việc gửi đi giao hàng (UC-MD07-08). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02/US-05) đang ở màn hình đơn hàng giao hàng và nhấp vào nút "Thanh toán" (Payment) hoặc "Xác nhận đơn" (Confirm Order) (tên nút có thể tùy thuộc vào việc đơn hàng đã được trả trước hay chưa). \newline 2. Hệ thống (System) chuẩn bị dữ liệu để hiển thị thông tin tổng kết và/hoặc màn hình thanh toán. \newline 3. Hệ thống (System) kiểm tra xem đơn hàng giao hàng hiện tại có được liên kết với một bản ghi đơn hàng đặt trước online nào không và đơn hàng online đó có ghi nhận khoản tiền đã thanh toán trước (đặt cọc hoặc trả toàn bộ) hay không. \newline 4. \textbf{Nếu có liên kết và có ghi nhận khoản thanh toán trước hợp lệ:} \newline    a. Hệ thống (System) lấy giá trị số tiền đã thanh toán trước (PaidDepositOrPrepaymentAmount). \newline 5. \textbf{Nếu không có liên kết hoặc không có thanh toán trước (ví dụ: đơn COD tạo trực tiếp tại POS):} \newline    a. PaidDepositOrPrepaymentAmount = 0. \newline 6. Hệ thống (System) tính toán Tổng số tiền phải trả ban đầu của đơn hàng giao hàng (TotalDeliveryOrderAmount = Subtotal của các món + Phí giao hàng (nếu có) + Thuế). \newline 7. Hệ thống (System) tính toán Số tiền cần thanh toán còn lại (AmountDueForDelivery / COD Amount): \newline    `AmountDueForDelivery = TotalDeliveryOrderAmount - PaidDepositOrPrepaymentAmount` \newline 8. Hệ thống hiển thị màn hình tiếp theo. Nội dung màn hình này phụ thuộc vào `AmountDueForDelivery`: \newline    a. \textbf{Nếu `AmountDueForDelivery` > 0 (cần thu COD):} Hệ thống hiển thị màn hình thanh toán (Payment Screen). Trên đó, hiển thị rõ ràng: Tổng tiền ban đầu, Số tiền đã trả trước/cọc (nếu có), và Số tiền COD cần thu cuối cùng (AmountDueForDelivery). Nhân viên sẽ thực hiện các UC thanh toán COD (UC-MD07-10, UC-MD07-11, UC-MD07-12) sau khi tài xế giao hàng và thu tiền. (Trong trường hợp này, nút "Xác nhận đơn" có thể chuyển đơn sang trạng thái "Chờ giao và thu COD"). \newline    b. \textbf{Nếu `AmountDueForDelivery` <= 0 (khách đã trả đủ hoặc thừa):} Hệ thống có thể hiển thị màn hình xác nhận đơn hàng đã được thanh toán, không yêu cầu thêm thao tác thanh toán nào. Đơn hàng sẵn sàng để gửi đi giao hàng (UC-MD07-08). \\
+\hline
+Alternative Flow & \textbf{8c. Nhân viên xác nhận thủ công việc áp dụng trả trước:} \newline    1. Thay vì tự động trừ, hệ thống có thể hiển thị thông báo "Đơn hàng này có khoản trả trước [Số tiền]. Bạn có muốn áp dụng vào hóa đơn không?". \newline    2. Nhân viên chọn "Có" để hệ thống thực hiện trừ. \\
+\hline
+Exception Flow & \textbf{3a. Lỗi hệ thống khi truy xuất thông tin liên kết đơn hàng online hoặc thông tin thanh toán trước:} \newline    1. Hệ thống không thể xác định một cách đáng tin cậy liệu có khoản trả trước nào hay không. \newline    2. Hệ thống nên hiển thị cảnh báo cho Nhân viên: "Không thể xác minh thông tin thanh toán trước. Vui lòng kiểm tra thủ công." và có thể mặc định `AmountDueForDelivery = TotalDeliveryOrderAmount`. \newline    3. Nhân viên cần cẩn trọng và có thể cần liên hệ quản lý để xác minh trước khi tiến hành các bước tiếp theo. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC7.7-1 (System):} Hệ thống phải có cơ chế tin cậy để liên kết đơn hàng giao hàng tạo trên POS với một đơn hàng đặt trước online (nếu có) để truy xuất thông tin thanh toán trước. \newline - \textbf{BR-UC7.7-2 (System):} Việc áp dụng (trừ đi) khoản đã thanh toán trước vào tổng hóa đơn phải được thực hiện tự động và chính xác bởi hệ thống trước khi yêu cầu nhân viên thực hiện các bước thanh toán còn lại (nếu có). \newline - \textbf{BR-UC7.7-3:} Phải có sự phân biệt rõ ràng giữa "Tiền đặt cọc" (một phần giá trị) và "Tiền thanh toán trước toàn bộ". Logic tính toán `AmountDueForDelivery` phải xử lý đúng cả hai trường hợp. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC7.7-1 (Accuracy):} Việc xác định và áp dụng đúng số tiền đã thanh toán trước là cực kỳ quan trọng để đảm bảo tính chính xác tài chính và sự hài lòng của khách hàng. \newline - \textbf{NFR-UC7.7-2 (Performance):} Quá trình hệ thống kiểm tra và áp dụng các khoản thanh toán trước phải diễn ra nhanh chóng, không làm chậm đáng kể quy trình chuyển sang màn hình thanh toán/xác nhận của nhân viên. \newline - \textbf{NFR-UC7.7-3 (Transparency):} Cách hệ thống hiển thị việc đã trừ các khoản thanh toán trước (nếu có) trên màn hình thanh toán/xác nhận phải rõ ràng và dễ hiểu cho cả nhân viên và khách hàng (nếu có màn hình khách). \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD07-08: Gửi Yêu cầu Giao hàng qua Shipday}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD07-08: Gửi Yêu cầu Giao hàng qua Shipday} \label{tab:uc_md07_08_final_full} \\
+\hline
 \multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Use Case Name & Đóng Đơn hàng Giao hàng \\
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Gửi Yêu cầu Giao hàng qua Shipday \\
+\hline
+Use Case ID & UC-MD07-08 \\
+\hline
+Use Case Description & Sau khi đơn hàng giao đi đã được chuẩn bị xong (hoặc gần xong), thông tin đã đầy đủ và đã được xác nhận (bao gồm cả việc xử lý thanh toán trước nếu có), cho phép Nhân viên (US-02/US-05) thực hiện hành động trên POS để gửi thông tin chi tiết của đơn hàng này đến hệ thống quản lý giao hàng Shipday thông qua API đã tích hợp. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Đơn hàng giao đi đã được chuẩn bị xong tại bếp/bar. \newline - Thông tin đơn hàng (khách hàng, địa chỉ, món ăn, số tiền COD nếu có) đã đầy đủ và chính xác. \newline - Đơn hàng đã được xác nhận (ví dụ: nếu là đơn trả trước toàn bộ) hoặc đã sẵn sàng để giao và thu COD. \\
+\hline
+Pre-Condition & - Nhân viên đang xem chi tiết đơn hàng giao đi trên POS. \newline - Đơn hàng đã có đầy đủ thông tin bắt buộc: tên khách hàng, số điện thoại, địa chỉ giao hàng hợp lệ, danh sách món ăn. \newline - Tích hợp API Shipday đã được cấu hình thành công và đang hoạt động (FR-MD07-15). \\
+\hline
+Post-Condition & - Yêu cầu tạo một tác vụ giao hàng (delivery task) mới trên hệ thống Shipday được hệ thống gửi đi thành công thông qua API. \newline - Nếu API call thành công, Shipday nhận được thông tin và tạo tác vụ giao hàng tương ứng, sẵn sàng để được điều phối cho tài xế. \newline - Đơn hàng trên POS có thể được cập nhật trạng thái (ví dụ: "Đã gửi Shipday", "Chờ gán tài xế") và/hoặc lưu lại ID đơn hàng từ Shipday (Shipday Order ID) để phục vụ cho việc theo dõi sau này (UC-MD07-09). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02/US-05) đang xem chi tiết đơn hàng giao đi đã sẵn sàng để được gửi đi giao. \newline 2. Nhân viên nhấn nút "Gửi Giao hàng" / "Push to Shipday" / "Request Delivery" hoặc một nút có chức năng tương tự trên giao diện POS. \newline 3. Hệ thống (System) thu thập tất cả các thông tin cần thiết từ đơn hàng POS hiện tại để gửi sang Shipday, bao gồm: \newline    - Tên khách hàng. \newline    - Số điện thoại liên hệ của khách hàng. \newline    - Địa chỉ giao hàng chi tiết (đã được cấu trúc hóa từ UC-MD07-03). \newline    - Danh sách các món ăn (có thể là mô tả chung về đơn hàng hoặc danh sách chi tiết tùy theo cấu hình tích hợp và yêu cầu của Shipday). \newline    - Tổng giá trị đơn hàng. \newline    - Số tiền cần thu hộ khi giao hàng (COD Amount), được tính là `AmountDueForDelivery` từ UC-MD07-07 (nếu > 0). Nếu `AmountDueForDelivery` <= 0 (khách đã trả trước đủ), thì COD Amount là 0. \newline    - Ghi chú cho tài xế giao hàng (từ UC-MD07-05). \newline    - Mã đơn hàng (để tham chiếu và liên kết). \newline    - (Tùy chọn) Thời gian giao hàng mong muốn (nếu khách hàng có yêu cầu và hệ thống cho phép nhập). \newline 4. Hệ thống (System) định dạng dữ liệu này theo đúng cấu trúc yêu cầu của API Shipday. \newline 5. Hệ thống (System) thực hiện một lời gọi API đến endpoint "Create Order" (hoặc tương đương) của Shipday, truyền các dữ liệu đã chuẩn bị. \newline 6. Hệ thống (System) chờ và nhận phản hồi từ API của Shipday. \newline 7. \textbf{Nếu phản hồi từ Shipday là thành công (ví dụ: HTTP 200 OK và có chứa ID đơn hàng Shipday):} \newline    a. Phản hồi thường chứa một ID đơn hàng duy nhất được tạo bởi Shipday (Shipday Order ID). \newline    b. Hệ thống (System) lưu lại Shipday Order ID này vào trường tương ứng của đơn hàng POS. \newline    c. Hệ thống (System) cập nhật trạng thái của đơn hàng POS thành một trạng thái phù hợp (ví dụ: "Đã gửi sang Shipday", "Đang chờ tài xế nhận đơn"). \newline    d. Hệ thống hiển thị thông báo cho Nhân viên: "Đã gửi đơn hàng sang Shipday thành công. Mã đơn Shipday: [Shipday Order ID]." \newline 8. \textbf{Nếu phản hồi từ Shipday là thất bại (ví dụ: lỗi xác thực API, lỗi dữ liệu đầu vào không hợp lệ, lỗi từ phía Shipday):} \newline    a. Phản hồi thường chứa mã lỗi và một thông điệp mô tả lỗi (ví dụ: "Địa chỉ không hợp lệ", "Thiếu thông tin bắt buộc: Số điện thoại khách hàng"...). \newline    b. Hệ thống (System) hiển thị thông báo lỗi chi tiết này cho Nhân viên. \newline    c. Đơn hàng chưa được gửi sang Shipday. Nhân viên cần xem xét lỗi, sửa lại thông tin trên đơn hàng POS (nếu cần) và thử lại hành động gửi (quay lại bước 2). \\
+\hline
+Alternative Flow & \textbf{2a. Tự động gửi đơn sang Shipday khi đơn hàng đạt một trạng thái nhất định:} \newline    1. Hệ thống có thể được cấu hình để tự động kích hoạt việc gửi đơn hàng sang Shipday (thực hiện các bước 3-8) khi đơn hàng POS đạt một trạng thái cụ thể (ví dụ: "Đã xác nhận thanh toán và sẵn sàng giao") mà không cần Nhân viên phải nhấn nút thủ công. \\
+\hline
+Exception Flow & \textbf{5a. Lỗi kết nối mạng hoặc lỗi API của Shipday không phản hồi:} \newline    1. Hệ thống không thể thiết lập kết nối đến API của Shipday (do lỗi mạng cục bộ, lỗi DNS, hoặc API endpoint của Shipday không khả dụng tạm thời) hoặc API của Shipday không trả về phản hồi sau một khoảng thời gian chờ đợi (timeout). \newline    2. Hệ thống (System) ghi nhận lỗi kết nối hoặc timeout. \newline    3. Hệ thống hiển thị thông báo lỗi chung cho Nhân viên (ví dụ: "Không thể kết nối đến dịch vụ giao hàng Shipday. Vui lòng thử lại sau hoặc kiểm tra lại cấu hình tích hợp."). \newline    4. Đơn hàng chưa được gửi sang Shipday. \newline \textbf{7e. Lỗi hệ thống khi lưu Shipday Order ID hoặc cập nhật trạng thái đơn hàng POS:} \newline    1. Sau khi nhận được phản hồi thành công từ Shipday (đã có Shipday Order ID), hệ thống gặp lỗi kỹ thuật nội bộ khi cố gắng lưu ID này hoặc cập nhật trạng thái của đơn hàng POS. \newline    2. Hệ thống (System) ghi nhận lỗi nội bộ này. \newline    3. Tình huống này phức tạp: đơn hàng đã được tạo trên Shipday nhưng không ghi nhận đúng trạng thái hoặc ID liên kết. Điều này có thể gây ra việc gửi lại đơn trùng lặp hoặc khó khăn trong việc theo dõi. Cần có cơ chế cảnh báo cho quản trị viên và có thể cần quy trình đối soát/sửa lỗi thủ công. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC7.8-1:} Thông tin được gửi sang Shipday (đặc biệt là địa chỉ giao hàng, số điện thoại khách, và số tiền COD nếu có) phải hoàn toàn chính xác và đầy đủ để đảm bảo quá trình giao hàng diễn ra suôn sẻ. \newline - \textbf{BR-UC7.8-2 (System):} Hệ thống phải đảm bảo rằng mỗi đơn hàng POS giao đi chỉ được gửi sang Shipday một lần duy nhất để tạo tác vụ giao hàng. Cần có cơ chế kiểm tra trạng thái (ví dụ: dựa vào việc đã có Shipday Order ID hay chưa) để tránh gửi trùng lặp. \newline - \textbf{BR-UC7.8-3 (System):} Việc ánh xạ (mapping) dữ liệu giữa các trường thông tin của đơn hàng trong và các trường dữ liệu mà API của Shipday yêu cầu phải được định nghĩa và thực hiện một cách chính xác trong quá trình phát triển tích hợp. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC7.8-1 (Reliability):} Quá trình tích hợp API với Shipday phải hoạt động ổn định và đáng tin cậy. Hệ thống cần có khả năng xử lý các lỗi kết nối mạng và các lỗi phản hồi từ API của Shipday một cách hợp lý. \newline - \textbf{NFR-UC7.8-2 (Performance):} Thời gian Nhân viên thực hiện hành động gửi yêu cầu và hệ thống nhận được phản hồi từ API Shipday nên nhanh chóng, không làm gián đoạn đáng kể quy trình làm việc của nhân viên. \newline - \textbf{NFR-UC7.8-3 (Accuracy):} Dữ liệu được truyền đi Shipday phải đảm bảo chính xác 100\% để tránh sai sót trong quá trình giao hàng. \newline - \textbf{NFR-UC7.8-4 (Security):} Việc gọi API sang Shipday phải sử dụng các phương thức xác thực an toàn (ví dụ: API Key/Token được truyền qua HTTPS) để bảo vệ thông tin. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD07-09: Xem Trạng thái Giao hàng của Đơn hàng (từ Shipday)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD07-09: Xem Trạng thái Giao hàng của Đơn hàng (từ Shipday)} \label{tab:uc_md07_09_final_full} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Xem Trạng thái Giao hàng của Đơn hàng (từ Shipday) \\
+\hline
+Use Case ID & UC-MD07-09 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-02/US-05/US-01) xem trạng thái giao hàng mới nhất của một đơn hàng giao đi đã được gửi sang Shipday. Thông tin trạng thái này được hệ thống tự động nhận và cập nhật từ Shipday (thường qua cơ chế Webhook). \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Nhân viên muốn kiểm tra tình trạng hiện tại của một đơn hàng đang được giao. \newline - Khách hàng gọi điện hỏi về tình trạng đơn hàng của họ. \\
+\hline
+Pre-Condition & - Đơn hàng đã được gửi thành công sang Shipday (UC-MD07-08) và đã lưu lại ID đơn hàng Shipday tương ứng. \newline - Cơ chế nhận cập nhật trạng thái từ Shipday (ví dụ: Webhook) đang hoạt động và hệ thống đã nhận được ít nhất một cập nhật trạng thái (hoặc trạng thái ban đầu). \newline - Nhân viên đang xem chi tiết đơn hàng giao đi trên giao diện (POS hoặc Backend). \\
+\hline
+Post-Condition & - Nhân viên thấy được trạng thái giao hàng mới nhất của đơn hàng (ví dụ: "Đã gán tài xế", "Đang lấy hàng", "Đang giao", "Đã giao thành công", "Giao thất bại") trên giao diện. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02/US-05/US-01) tìm và mở chi tiết một đơn hàng giao đi cụ thể trên giao diện (POS hoặc Backend). \newline 2. Hệ thống (System) hiển thị thông tin chi tiết của đơn hàng. \newline 3. Trong phần thông tin của đơn hàng, có một trường hoặc khu vực riêng hiển thị ``Trạng thái Giao hàng'' (Delivery Status). \newline 4. Giá trị hiển thị trong trường ``Trạng thái Giao hàng'' này là trạng thái mới nhất mà hệ thống đã nhận được từ Shipday cho đơn hàng này (thông qua cơ chế webhook nền). Các trạng thái có thể bao gồm (ví dụ, tùy thuộc vào Shipday): \newline    - ``PENDING'' / ``UNASSIGNED'' (Đang chờ/Chưa gán tài xế) \newline    - ``ACCEPTED'' / ``ASSIGNED'' (Đã chấp nhận/Đã gán tài xế [Tên tài xế, SĐT tài xế - nếu có]) \newline    - ``STARTED'' / ``ON\_THE\_WAY\_TO\_PICKUP'' (Tài xế đang đến lấy hàng) \newline    - ``PICKED\_UP'' (Tài xế đã lấy hàng) \newline    - ``ON\_THE\_WAY\_TO\_DROPOFF'' / ``EN\_ROUTE'' (Đang giao đến khách) \newline    - ``ARRIVED\_AT\_DROPOFF'' (Tài xế đã đến điểm giao) \newline    - ``DELIVERED'' (Đã giao thành công) \newline    - ``FAILED\_DELIVERY'' / ``CANCELLED\_BY\_DRIVER'' (Giao thất bại/Tài xế hủy) \newline 5. Nhân viên xem thông tin trạng thái này để biết tình hình. \\
+\hline
+Alternative Flow & \textbf{3a. Hiển thị thêm chi tiết từ Shipday (nếu có):} \newline    1. Bên cạnh trạng thái, hệ thống có thể hiển thị thêm các thông tin khác nhận được từ Shipday như tên tài xế, SĐT tài xế, thời gian dự kiến giao (ETA), hoặc một liên kết để theo dõi đơn hàng trực tiếp trên bản đồ của Shipday (nếu Shipday cung cấp). \newline \textbf{5a. Làm mới thủ công trạng thái (nếu hệ thống hỗ trợ polling):} \newline    1. Nếu cơ chế webhook gặp sự cố hoặc để chắc chắn, có thể có nút "Làm mới trạng thái giao hàng" để chủ động gọi API của Shipday để lấy trạng thái mới nhất (ít phổ biến hơn webhook). \\
+\hline
+Exception Flow & \textbf{3a. Không có thông tin trạng thái / Trạng thái không được cập nhật:} \newline    1. Do lỗi trong quá trình gửi đơn sang Shipday (UC-MD07-08), hoặc lỗi cấu hình/hoạt động của webhook từ Shipday về, hoặc lỗi xử lý webhook. \newline    2. Trường "Trạng thái Giao hàng" có thể trống, hiển thị trạng thái cũ, hoặc một trạng thái lỗi. \newline    3. Nhân viên không có thông tin chính xác. Cần kiểm tra log hệ thống, cấu hình webhook, và có thể cần kiểm tra trực tiếp trên dashboard của Shipday. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC7.9-1 (System):} Hệ thống phải có khả năng nhận và xử lý các yêu cầu webhook cập nhật trạng thái từ Shipday một cách đáng tin cậy và kịp thời. \newline - \textbf{BR-UC7.9-2 (System):} Trạng thái giao hàng hiển thị trên phải là trạng thái mới nhất và chính xác nhất đã được Shipday gửi về. \newline - \textbf{BR-UC7.9-3:} Cần có sự ánh xạ (mapping) rõ ràng giữa các mã trạng thái mà Shipday sử dụng và các mô tả trạng thái thân thiện với người dùng sẽ được hiển thị trên giao diện. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC7.9-1 (Reliability):} Cơ chế nhận và xử lý webhook cập nhật trạng thái từ Shipday phải hoạt động ổn định. Phải có khả năng xử lý trường hợp webhook đến không theo thứ tự hoặc trùng lặp (nếu có thể xảy ra). \newline - \textbf{NFR-UC7.9-2 (Near Real-time Update):} Việc cập nhật trạng thái nên diễn ra gần như ngay sau khi Shipday gửi webhook để nhân viên có thông tin kịp thời. \newline - \textbf{NFR-UC7.9-3 (Security):} Webhook endpoint dùng để nhận cập nhật từ Shipday cần được bảo mật (ví dụ: sử dụng secret key, chữ ký số) để đảm bảo tính toàn vẹn và xác thực của dữ liệu. \newline - \textbf{NFR-UC7.9-4 (Usability):} Việc hiển thị trạng thái giao hàng trên chi tiết đơn hàng phải rõ ràng, dễ hiểu cho nhân viên. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD07-10: Thực hiện Thanh toán Tiền mặt cho Đơn Giao hàng (Nếu COD)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD07-10: Thực hiện Thanh toán Tiền mặt cho Đơn Giao hàng (Nếu COD)} \label{tab:uc_md07_10_final_full} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Thực hiện Thanh toán Tiền mặt cho Đơn Giao hàng (Nếu COD) \\
+\hline
+Use Case ID & UC-MD07-10 \\
+\hline
+Use Case Description & Đối với các đơn hàng giao đi được khách hàng thanh toán khi nhận hàng (Cash on Delivery - COD), cho phép Nhân viên được phân quyền (US-02/US-05/US-01) ghi nhận vào hệ thống POS việc đã nhận đủ số tiền COD bằng tiền mặt từ tài xế giao hàng, từ đó hoàn tất quy trình thanh toán cho đơn hàng đó. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have (Nếu nhà hàng hỗ trợ hình thức thanh toán COD cho đơn giao hàng) \\
+\hline
+Trigger & Tài xế giao hàng quay trở lại nhà hàng và nộp số tiền COD (tiền mặt) đã thu được từ khách hàng cho một đơn hàng giao đi cụ thể. \\
+\hline
+Pre-Condition & - Đơn hàng giao đi đã được đánh dấu là thanh toán theo hình thức COD. \newline - Hệ thống đã nhận được cập nhật trạng thái từ Shipday là đơn hàng đã được "Giao thành công" (DELIVERED) (UC-MD07-09). \newline - Đơn hàng đang ở trạng thái chờ ghi nhận thanh toán COD (ví dụ: "Đã giao, chờ thanh toán COD"). \newline - Nhân viên thực hiện có quyền ghi nhận thanh toán. \\
+\hline
+Post-Condition & - Giao dịch thanh toán COD bằng tiền mặt được ghi nhận thành công vào hệ thống, liên kết với đơn hàng giao đi. \newline - Trạng thái thanh toán của đơn hàng được cập nhật thành "Đã thanh toán" (Paid). \newline - Số dư tiền mặt của phiên POS hiện tại (nếu việc ghi nhận được thực hiện trong một phiên POS đang mở và nhận tiền mặt trực tiếp vào ngăn kéo) được cập nhật. \newline - Đơn hàng sẵn sàng để được đóng cuối cùng (UC-MD07-14). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02/US-05/US-01) nhận tiền mặt COD từ tài xế giao hàng cho một đơn hàng cụ thể. \newline 2. Nhân viên tìm và mở lại đơn hàng giao đi tương ứng trên giao diện (có thể là POS hoặc Backend), thường dựa vào Mã đơn hàng, Tên khách, hoặc SĐT. Đơn hàng này nên ở trạng thái "Đã giao thành công" và "Chờ thanh toán COD". \newline 3. Nhân viên xác minh số tiền mặt tài xế nộp khớp với Số tiền COD cần thu (AmountDueForDelivery / COD Amount) đã được tính toán cho đơn hàng đó (từ UC-MD07-07). \newline 4. Nhân viên truy cập chức năng "Ghi nhận Thanh toán" (Register Payment) hoặc tương tự cho đơn hàng này. \newline 5. Hệ thống hiển thị giao diện ghi nhận thanh toán, thường đã tự động điền sẵn Số tiền COD cần thu. \newline 6. Nhân viên chọn Phương thức thanh toán là "Tiền mặt" (Cash). \newline 7. Nhân viên xác nhận thông tin thanh toán (ví dụ: nhấn nút "Validate", "Confirm Payment"). \newline 8. Hệ thống (System) ghi nhận giao dịch thanh toán COD bằng tiền mặt. \newline 9. Hệ thống (System) cập nhật trạng thái thanh toán của đơn hàng thành "Đã thanh toán" (Paid). \newline 10. Hệ thống hiển thị thông báo "Đã ghi nhận thanh toán COD thành công." \\
+\hline
+Alternative Flow & \textbf{3a. Tài xế nộp thiếu hoặc thừa tiền mặt so với COD dự kiến:} \newline    1. Nếu số tiền mặt tài xế nộp không khớp chính xác với số tiền COD cần thu. \newline    2. Nhân viên cần xử lý theo quy trình nghiệp vụ riêng của nhà hàng (ví dụ: yêu cầu tài xế nộp đủ, ghi nhận số tiền thực nhận và tạo một bút toán chênh lệch, hoặc liên hệ quản lý để giải quyết). Hệ thống POS cơ bản có thể chỉ cho phép ghi nhận đúng số tiền COD hoặc yêu cầu quyền đặc biệt để ghi nhận khác đi. Việc xử lý chênh lệch có thể nằm ngoài phạm vi của UC này và thuộc về quy trình kế toán/quản lý. \newline \textbf{4a. Ghi nhận thanh toán COD hàng loạt (thường ở Backend):} \newline    1. Nếu có nhiều đơn COD cần được ghi nhận thanh toán cùng lúc (ví dụ: cuối ngày khi nhiều tài xế về nộp tiền). \newline    2. Hệ thống có thể cung cấp chức năng (thường ở giao diện Backend) cho phép chọn nhiều đơn hàng COD đã giao thành công và ghi nhận thanh toán hàng loạt bằng một phương thức chung (ví dụ: Tiền mặt). \\
+\hline
+Exception Flow & \textbf{8a. Lỗi hệ thống khi ghi nhận thanh toán COD:} \newline    1. Hệ thống gặp lỗi kỹ thuật (ví dụ: lỗi cơ sở dữ liệu, lỗi logic) khi cố gắng tạo bản ghi thanh toán hoặc cập nhật trạng thái đơn hàng. \newline    2. Hệ thống hiển thị thông báo lỗi chung. \newline    3. Giao dịch thanh toán COD có thể chưa được ghi nhận đúng cách. Nhân viên cần báo quản lý để kiểm tra và xử lý. \newline \textbf{2a. Không tìm thấy đơn hàng hoặc đơn hàng ở trạng thái không phù hợp:} \newline    1. Nhân viên không tìm thấy đơn hàng giao đi tương ứng trong hệ thống, hoặc đơn hàng tìm thấy không ở trạng thái "Đã giao thành công, chờ thanh toán COD". \newline    2. Nhân viên cần kiểm tra lại thông tin đơn hàng (Mã đơn, thông tin khách) và trạng thái giao hàng nhận được từ Shipday (UC-MD07-09). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC7.10-1:} Chỉ những đơn hàng giao đi được xác định là thanh toán theo hình thức COD và đã có trạng thái giao hàng "DELIVERED" từ Shipday mới được phép ghi nhận thanh toán theo luồng này. \newline - \textbf{BR-UC7.10-2:} Số tiền được ghi nhận thanh toán phải khớp chính xác với số tiền COD cần thu của đơn hàng đó, trừ khi có quy trình xử lý chênh lệch được quản lý phê duyệt. \newline - \textbf{BR-UC7.10-3:} Phương thức thanh toán được ghi nhận (ví dụ: "Tiền mặt") phải phản ánh đúng cách thức tài xế đã nộp tiền cho nhà hàng. \newline - \textbf{BR-UC7.10-4 (System):} Sau khi thanh toán COD được ghi nhận thành công, trạng thái của đơn hàng phải được cập nhật thành "Đã thanh toán" (Paid). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC7.10-1 (Usability):} Quy trình tìm kiếm đơn hàng COD đã giao và thực hiện ghi nhận thanh toán phải đơn giản và hiệu quả cho nhân viên. \newline - \textbf{NFR-UC7.10-2 (Accuracy):} Việc ghi nhận đúng số tiền và đúng phương thức thanh toán cho đúng đơn hàng là cực kỳ quan trọng để đảm bảo tính chính xác của việc đối soát tài chính và công nợ với tài xế (nếu có). \newline - \textbf{NFR-UC7.10-3 (Auditability):} Hệ thống cần ghi log rõ ràng về việc ai đã thực hiện ghi nhận thanh toán COD, thời gian ghi nhận, và số tiền đã ghi nhận. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD07-11: Ghi nhận Thanh toán bằng Phương thức Khác (Không Thẻ) cho Đơn Giao hàng (Nếu COD)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD07-11: Ghi nhận Thanh toán bằng Phương thức Khác (Không Thẻ) cho Đơn Giao hàng (Nếu COD)} \label{tab:uc_md07_11_final_full} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Ghi nhận Thanh toán bằng Phương thức Khác (Không Thẻ) cho Đơn Giao hàng (Nếu COD) \\
+\hline
+Use Case ID & UC-MD07-11 \\
+\hline
+Use Case Description & Đối với các đơn hàng giao đi COD, cho phép Nhân viên (US-02/US-05/US-01) ghi nhận việc tài xế giao hàng đã nộp tiền COD bằng một phương thức khác tiền mặt (ví dụ: tài xế chuyển khoản tổng tiền COD của nhiều đơn cho nhà hàng, hoặc sử dụng một hình thức đối soát công nợ khác), không bao gồm thẻ ngân hàng. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Should Have (Tùy thuộc vào quy trình làm việc với tài xế và các phương thức nhà hàng chấp nhận từ tài xế) \\
+\hline
+Trigger & Tài xế giao hàng nộp tiền COD cho một hoặc nhiều đơn hàng bằng một phương thức không phải tiền mặt (ví dụ: chuyển khoản ngân hàng vào tài khoản công ty). \\
+\hline
+Pre-Condition & - Đơn hàng giao đi đã được đánh dấu COD và đã giao thành công. \newline - Đơn hàng đang ở trạng thái chờ ghi nhận thanh toán COD. \newline - Nhân viên có quyền ghi nhận thanh toán. \newline - Các phương thức thanh toán "Khác" (ví dụ: "Chuyển khoản Tài xế", "Đối trừ Công nợ Tài xế") đã được cấu hình trong hệ thống POS/Accounting. \\
+\hline
+Post-Condition & - Giao dịch thanh toán COD bằng phương thức đã chọn được ghi nhận. \newline - Trạng thái thanh toán của đơn hàng được cập nhật thành "Paid". \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Nhân viên (US-02/US-05/US-01) nhận được xác nhận từ tài xế hoặc bộ phận kế toán rằng tiền COD cho một đơn hàng cụ thể đã được tài xế thanh toán cho nhà hàng bằng một phương thức khác tiền mặt (ví dụ: tài xế đã chuyển khoản). \newline 2. Nhân viên tìm và mở lại đơn hàng giao đi tương ứng trên POS hoặc Backend. \newline 3. Nhân viên xác minh số tiền cần thu COD. \newline 4. Nhân viên truy cập chức năng "Ghi nhận Thanh toán". \newline 5. Hệ thống hiển thị giao diện ghi nhận thanh toán. \newline 6. Nhân viên chọn Phương thức thanh toán phù hợp (ví dụ: "Chuyển khoản từ Tài xế", "Ví điện tử Tài xế"). \newline 7. Nhân viên nhập Số tiền tương ứng với số tiền COD đã được tài xế chuyển/thanh toán. \newline 8. (Tùy chọn) Nhân viên có thể nhập thêm thông tin tham chiếu cho giao dịch (ví dụ: mã giao dịch chuyển khoản của tài xế). \newline 9. Nhân viên xác nhận thông tin thanh toán. \newline 10. Hệ thống (System) ghi nhận giao dịch thanh toán. \newline 11. Hệ thống (System) cập nhật trạng thái đơn hàng thành "Paid". \newline 12. Hệ thống hiển thị thông báo thành công. \\
+\hline
+Alternative Flow & Tương tự UC-MD07-10 (Ghi nhận hàng loạt). \\
+\hline
+Exception Flow & \textbf{10a. Lỗi ghi nhận thanh toán:} Tương tự UC-MD07-10. \newline \textbf{6a. Phương thức thanh toán không phù hợp/không có sẵn:} \newline    1. Nhân viên không tìm thấy phương thức thanh toán phù hợp để ghi nhận (ví dụ: chưa được cấu hình). \newline    2. Cần báo quản trị viên để cấu hình thêm phương thức thanh toán. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC7.11-1 (V3):} Việc ghi nhận thanh toán COD bằng phương thức khác tiền mặt cần có quy trình đối soát rõ ràng với bộ phận kế toán để đảm bảo tiền thực sự đã về tài khoản nhà hàng. \newline - \textbf{BR-UC7.11-2 (V3):} Các phương thức thanh toán này phải được định nghĩa rõ ràng trong hệ thống kế toán của để hạch toán đúng. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC7.11-1 (V3) (Accuracy):} Ghi nhận đúng số tiền và đúng phương thức là cực kỳ quan trọng. \newline - \textbf{NFR-UC7.11-2 (V3) (Auditability):} Cần có khả năng truy vết các giao dịch thanh toán này. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD07-12: Thực hiện Thanh toán Đơn Giao hàng bằng Nhiều Phương thức (Không Thẻ, Nếu COD)}
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD07-12: Thực hiện Thanh toán Đơn Giao hàng bằng Nhiều Phương thức (Không Thẻ, Nếu COD)} \label{tab:uc_md07_12_final_full} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Thực hiện Thanh toán Đơn Giao hàng bằng Nhiều Phương thức (Không Thẻ, Nếu COD) \\
 \hline
 Use Case ID & UC-MD07-12 \\
 \hline
-Use Case Description & Hoàn tất vòng đời của một đơn hàng giao đi trong hệ thống Odoo sau khi đã xác nhận giao hàng thành công (từ Shipday) và đã xử lý xong vấn đề thanh toán (khách trả trước hoặc đã thu COD). \\
+Use Case Description & Cho phép Nhân viên (US-02/US-05/US-01) ghi nhận việc tài xế giao hàng nộp tiền COD cho một đơn hàng bằng cách kết hợp nhiều phương thức thanh toán được hỗ trợ (ví dụ: một phần bằng tiền mặt, một phần tài xế chuyển khoản cho nhà hàng), không bao gồm thẻ ngân hàng. \\
 \hline
-Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), System (Có thể tự động đóng) \\
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), US-01 (Quản lý nhà hàng) \\
 \hline
-Priority & Must Have \\
+Priority & Low / Nice to Have (Tùy thuộc vào sự phức tạp của quy trình đối soát với tài xế) \\
 \hline
-Trigger & - Đơn hàng giao đi có trạng thái giao hàng là "Đã giao thành công" (từ UC-MD07-09). \newline - Và trạng thái thanh toán là "Đã thanh toán" (Paid - do trả trước hoặc đã thu COD UC-MD07-10). \\
+Trigger & Tài xế giao hàng muốn nộp tiền COD cho một đơn hàng bằng nhiều cách khác nhau. \\
 \hline
-Pre-Condition & - Đơn hàng giao đi ở trạng thái "Đã giao thành công" VÀ "Đã thanh toán". \\
+Pre-Condition & - Đơn hàng giao đi COD đã giao thành công và chờ ghi nhận thanh toán. \newline - Có ít nhất hai phương thức thanh toán khác nhau (không phải Thẻ) được cấu hình và khả dụng. \\
 \hline
-Post-Condition & - Trạng thái cuối cùng của đơn hàng POS giao đi được cập nhật thành "Đã hoàn thành" (Done) hoặc tương đương. \newline - Đơn hàng không còn xuất hiện trong danh sách các đơn hàng cần xử lý. \\
+Post-Condition & - Nhiều giao dịch thanh toán được ghi nhận cho cùng một đơn hàng COD. \newline - Tổng số tiền từ các phương thức bằng số tiền COD cần thu. \newline - Đơn hàng được cập nhật thành "Paid". \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow (Tự động đóng) & 1. Hệ thống (ví dụ: qua một tác vụ tự động hoặc ngay khi nhận đủ trạng thái) phát hiện một đơn hàng giao đi có trạng thái giao hàng = "DELIVERED" VÀ trạng thái thanh toán = "Paid". \newline 2. Hệ thống tự động cập nhật trạng thái của đơn hàng POS đó thành "Done" hoặc "Completed". \newline 3. Hệ thống ghi nhận hoạt động đóng đơn. \\
-\hline
-Alternative Flow & \textbf{Basic Flow (Đóng thủ công):} \newline    1. Nhân viên (US-02/US-05) xem chi tiết một đơn hàng giao đi đã thỏa mãn điều kiện đóng (đã giao, đã thanh toán). \newline    2. Nhân viên nhấn nút "Đóng đơn hàng" / "Mark as Done". \newline    3. Hệ thống cập nhật trạng thái thành "Done". \newline    4. Hệ thống ghi nhận hoạt động. \\
-\hline
-Exception Flow & \textbf{2a/3a. Lỗi cập nhật trạng thái cuối cùng:} \newline    1. Hệ thống gặp lỗi kỹ thuật khi cố gắng cập nhật trạng thái "Done". \newline    2. Hệ thống báo lỗi. Đơn hàng có thể vẫn ở trạng thái trước đó. \\
+Basic Flow, Alternative Flow, Exception Flow & Hành động của Nhân viên khi ghi nhận thanh toán COD bằng nhiều phương thức (chọn phương thức 1, nhập số tiền, chọn phương thức 2, nhập số tiền còn lại, xác nhận) về cơ bản là **giống hệt** với **Use Case UC-MD05-14: Thực hiện Thanh toán bằng Nhiều Phương thức (Không bao gồm Thẻ)**. \newline Ngữ cảnh là việc đối soát tiền COD với tài xế. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC7.12-1:} Một đơn hàng giao đi chỉ nên được đóng cuối cùng khi đã xác nhận cả việc giao hàng thành công và việc thanh toán hoàn tất. \newline - \textbf{BR-UC7.12-2:} Việc đóng đơn nên được tự động hóa dựa trên trạng thái giao hàng và thanh toán để giảm thao tác thủ công. \\
+Business Rule & Các Business Rule về cho phép nhiều dòng thanh toán, tổng tiền phải khớp tương tự BR-UC5.14-1, BR-UC5.14-2. \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC7.12-1 (Automation):} Ưu tiên quy trình đóng đơn tự động để đảm bảo tính kịp thời và giảm sai sót. \newline - \textbf{NFR-UC7.12-2 (Reliability):} Logic kiểm tra điều kiện và cập nhật trạng thái đóng đơn phải đáng tin cậy. \\
+Non-Functional Requirement & Các Non-Functional Requirement về Usability, Accuracy tương tự NFR-UC5.14-1, NFR-UC5.14-2. \\
 \hline
 \end{longtable}
 
-\subsubsection{Use Case UC-MD07-13: Cấu hình Tích hợp Shipday}
-
+\subsubsection{Use Case UC-MD07-13: In Hóa đơn/Phiếu Giao hàng}
 \begin{longtable}{|m{4cm}|p{11cm}|}
-\caption{Đặc tả Use Case UC-MD07-13: Cấu hình Tích hợp Shipday} \label{tab:uc_md07_13} \\
+\caption{Đặc tả Use Case UC-MD07-13: In Hóa đơn/Phiếu Giao hàng} \label{tab:uc_md07_13_final_full} \\
 \hline
-
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
 \endhead % Header cho các trang tiếp theo
 \hline
 \endfoot % Footer cho bảng
 \hline
 \endlastfoot % Footer cho trang cuối cùng
-\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
-\hline
-\textbf{Mục} & \textbf{Nội dung} \\
-\hline
-Use Case Name & Cấu hình Tích hợp Shipday \\
+Use Case Name & In Hóa đơn/Phiếu Giao hàng \\
 \hline
 Use Case ID & UC-MD07-13 \\
 \hline
-Use Case Description & Cho phép Quản lý nhà hàng hoặc Quản trị viên hệ thống thiết lập các tham số cần thiết để kết nối và trao đổi dữ liệu giữa hệ thống Odoo và nền tảng quản lý giao hàng Shipday, bao gồm thông tin xác thực API và các quy tắc đồng bộ dữ liệu cơ bản. \\
+Use Case Description & Cho phép Nhân viên (US-02/US-05) in ra một hoặc nhiều bản hóa đơn hoặc phiếu giao hàng chi tiết cho một đơn hàng giao đi. Phiếu này thường được đính kèm cùng gói hàng để tài xế tham khảo, làm bằng chứng giao nhận và giao cho khách hàng. \\
 \hline
-Actor & US-01 (Quản lý nhà hàng), US-10 (Quản trị viên Hệ thống) \\
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân) \\
 \hline
 Priority & Must Have \\
 \hline
-Trigger & - Thiết lập lần đầu cho việc tích hợp Odoo với Shipday. \newline - Cần cập nhật thông tin API Key hoặc các cài đặt tích hợp khác. \\
+Trigger & - Sau khi đơn hàng giao đi đã được xác nhận và các món đã được gửi bếp/bar chuẩn bị (để nhân viên đóng gói có phiếu đi kèm). \newline - Hoặc sau khi đơn hàng đã được thanh toán (nếu là hóa đơn cuối cùng cho khách). \newline - Hoặc khi tài xế đến lấy hàng và cần phiếu giao hàng. \\
 \hline
-Pre-Condition & - Người dùng (US-01 hoặc US-10) đã đăng nhập với quyền quản trị cấu hình hệ thống hoặc cấu hình module Giao hàng/Tích hợp. \newline - Nhà hàng đã có tài khoản Shipday và đã lấy được API Key từ Shipday. \\
+Pre-Condition & - Nhân viên đang xem chi tiết một đơn hàng giao đi trên giao diện (POS hoặc Backend). \newline - Máy in hóa đơn/phiếu (Receipt Printer) đã được cấu hình và kết nối. \newline - Một hoặc nhiều mẫu in phù hợp cho đơn giao hàng (ví dụ: Phiếu giao hàng, Hóa đơn bán lẻ) đã được thiết lập trong hệ thống. \\
 \hline
-Post-Condition & - Thông tin kết nối API và các quy tắc tích hợp cơ bản giữa Odoo và Shipday được lưu lại trong cấu hình hệ thống Odoo. \newline - Hệ thống Odoo sẵn sàng để gửi đơn hàng sang Shipday (UC-MD07-08) và nhận cập nhật trạng thái từ Shipday (UC-MD07-09). \\
+Post-Condition & - Một hoặc nhiều bản hóa đơn/phiếu giao hàng với đầy đủ thông tin chi tiết được in ra. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Basic Flow & 1. Người dùng (US-01/US-10) truy cập vào khu vực Cài đặt chung của hệ thống hoặc Cài đặt của module Giao hàng/Tích hợp bên thứ ba. \newline 2. Người dùng tìm đến phần cấu hình liên quan đến "Shipday Integration" hoặc tương tự. \newline 3. Hệ thống hiển thị form cấu hình với các trường: \newline    - \textbf{Kích hoạt Tích hợp Shipday:} Ô kiểm để bật/tắt. \newline    - \textbf{Shipday API Key:} Trường để nhập API Key do Shipday cung cấp. \newline    - (Tùy chọn) \textbf{Shipday API Endpoint:} URL của API Shipday (thường là cố định). \newline    - (Tùy chọn) \textbf{Webhook URL (của Odoo):} Hệ thống hiển thị URL webhook mà người dùng cần cấu hình bên phía Shipday để Shipday gửi cập nhật trạng thái về Odoo. \newline    - (Tùy chọn) Các cài đặt khác như: Tự động gửi đơn sang Shipday khi nào, Ánh xạ trạng thái Odoo-Shipday (nếu cần tùy chỉnh)... \newline 4. Người dùng nhập hoặc cập nhật các giá trị cấu hình, đặc biệt là API Key. \newline 5. (Tùy chọn) Người dùng sao chép Webhook URL để cấu hình trên tài khoản Shipday. \newline 6. Người dùng chọn hành động "Lưu" (Save). \newline 7. Hệ thống kiểm tra tính hợp lệ cơ bản (ví dụ: API Key không được trống). \newline 8. Hệ thống lưu lại các cấu hình mới. \newline 9. Hệ thống hiển thị thông báo lưu thành công. \\
+Basic Flow & 1. Nhân viên (US-02/US-05) đang xem chi tiết đơn hàng giao đi mà họ muốn in phiếu. \newline 2. Nhân viên tìm và chọn nút "In Hóa đơn" / "In Phiếu Giao hàng" / "Print Receipt" hoặc một tùy chọn in cụ thể từ menu. \newline 3. Hệ thống (có thể) hiển thị một danh sách các mẫu in có sẵn (ví dụ: "Phiếu Giao Hàng cho Tài xế", "Hóa đơn Khách hàng"). Nhân viên chọn mẫu in mong muốn. \newline 4. Hệ thống (có thể) hỏi số lượng bản in cần thiết. Nhân viên nhập số lượng (mặc định là 1). \newline 5. Hệ thống (System) tạo dữ liệu cần in dựa trên thông tin của đơn hàng và mẫu in đã chọn. Dữ liệu thường bao gồm: \newline    - Thông tin nhà hàng (Tên, địa chỉ, SĐT). \newline    - Thông tin khách hàng (Tên, SĐT, Địa chỉ giao hàng chi tiết). \newline    - Mã đơn hàng (Order ID, và có thể cả Shipday Order ID nếu đã có). \newline    - Ngày giờ tạo/in. \newline    - Danh sách chi tiết các món ăn/đồ uống (Số lượng, Tên món, Đơn giá, Thành tiền). \newline    - Tổng tiền hàng, Chi tiết Thuế. \newline    - Phí giao hàng (nếu có). \newline    - Tiền đặt cọc hoặc khoản đã thanh toán trước (nếu có, hiển thị dưới dạng khoản trừ). \newline    - Số tiền COD cần thu bởi tài xế (nếu đơn hàng là COD và chưa thanh toán). \newline    - Ghi chú cho tài xế hoặc ghi chú của khách hàng (từ UC-MD07-05). \newline 6. Hệ thống gửi dữ liệu đã định dạng đến máy in hóa đơn/phiếu đã được cấu hình. \newline 7. Máy in thực hiện in ra (các) bản hóa đơn/phiếu giao hàng. \\
 \hline
-Alternative Flow & \textbf{3a. Kiểm tra kết nối API:} \newline    1. Giao diện cấu hình có nút "Kiểm tra kết nối" / "Test Connection". \newline    2. Người dùng nhấp nút này sau khi nhập API Key. \newline    3. Hệ thống Odoo thực hiện một lời gọi API đơn giản đến Shipday (ví dụ: lấy thông tin tài khoản) để xác thực API Key. \newline    4. Hệ thống hiển thị kết quả kiểm tra (Thành công/Thất bại kèm lý do). \\
+Alternative Flow & \textbf{2a. Tự động in phiếu khi gửi đơn sang Shipday:} \newline    1. Hệ thống có thể được cấu hình để tự động thực hiện việc in một loại phiếu cụ thể (ví dụ: "Phiếu Giao hàng cho Tài xế") ngay sau khi đơn hàng được Nhân viên gửi thành công sang Shipday (sau UC-MD07-08). \newline \textbf{2b. In lại hóa đơn/phiếu đã thanh toán:} \newline    1. Đối với đơn hàng đã thanh toán, nhân viên có thể cần in lại hóa đơn cho mục đích lưu trữ hoặc nếu khách yêu cầu bản sao. Luồng tương tự Basic Flow. \\
 \hline
-Exception Flow & \textbf{7a. Lỗi Xác thực Dữ liệu:} \newline    1. Hệ thống phát hiện thiếu API Key hoặc định dạng không hợp lệ. \newline    2. Hệ thống báo lỗi. \newline    3. Không lưu cấu hình. Use Case quay lại bước 4. \newline \textbf{8a. Lỗi Hệ thống khi Lưu:} \newline    1. Hệ thống gặp sự cố kỹ thuật khi lưu cấu hình. \newline    2. Hệ thống báo lỗi chung. \\
+Exception Flow & \textbf{6a. Lỗi gửi lệnh in hoặc Lỗi máy in vật lý:} \newline    1. Tương tự như Exception Flow của UC-MD05-09 (Lỗi in hóa đơn tạm tính). Hệ thống không thể gửi lệnh in hoặc máy in gặp sự cố. \newline    2. Hệ thống hiển thị thông báo lỗi cho nhân viên. Phiếu không được in ra. \\
 \hline
 \multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
 \hline
 \textbf{Mục} & \textbf{Nội dung} \\
 \hline
-Business Rule & - \textbf{BR-UC7.13-1:} API Key của Shipday phải chính xác và còn hiệu lực. \newline - \textbf{BR-UC7.13-2:} Webhook URL do Odoo cung cấp phải được cấu hình đúng bên phía Shipday để đảm bảo Odoo nhận được cập nhật trạng thái. \newline - \textbf{BR-UC7.13-3:} Các quy tắc ánh xạ dữ liệu (nếu có) cần được thiết lập cẩn thận để đảm bảo thông tin được truyền đi và nhận về đúng cách. \\
+Business Rule & - \textbf{BR-UC7.13-1 (V3):} Phiếu giao hàng/hóa đơn phải chứa đầy đủ và chính xác các thông tin cần thiết cho cả tài xế giao hàng (ví dụ: địa chỉ rõ ràng, SĐT khách, số tiền COD cần thu) và cho khách hàng (chi tiết các món hàng, tổng tiền). \newline - \textbf{BR-UC7.13-2 (V3):} Thông tin trên phiếu in phải khớp 100\% với thông tin đơn hàng trong hệ thống tại thời điểm thực hiện lệnh in. \newline - \textbf{BR-UC7.13-3:} Cần có các mẫu in (Report Templates) riêng biệt được thiết kế cho đơn hàng giao đi, có thể khác với mẫu hóa đơn cho khách ăn tại bàn hoặc mua mang về tại quầy. \\
 \hline
-Non-Functional Requirement & - \textbf{NFR-UC7.13-1 (Usability):} Giao diện cấu hình tích hợp phải rõ ràng, dễ hiểu các trường cần nhập. Việc kiểm tra kết nối API là một tính năng hữu ích. \newline - \textbf{NFR-UC7.13-2 (Security):} API Key phải được lưu trữ an toàn, không hiển thị trực tiếp sau khi lưu. \\
+Non-Functional Requirement & - \textbf{NFR-UC7.13-1 (V3) (Usability):} Nút chức năng in phải dễ dàng tìm thấy trên giao diện đơn hàng. Nếu có nhiều mẫu in, việc lựa chọn mẫu phải rõ ràng. \newline - \textbf{NFR-UC7.13-2 (V3) (Clarity):} Định dạng của phiếu in phải rõ ràng, dễ đọc, các thông tin quan trọng như địa chỉ giao hàng và số tiền COD (nếu có) phải được làm nổi bật. \newline - \textbf{NFR-UC7.13-3 (V3) (Reliability):} Chức năng in phải hoạt động ổn định và đáng tin cậy. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD07-14: Hoàn tất Đơn hàng Giao hàng}
+% (Trước đây là FR-MD07-14, giờ là UC tương ứng, tương tự UC-MD06-12)
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD07-14: Hoàn tất Đơn hàng Giao hàng} \label{tab:uc_md07_14_final_full} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Hoàn tất Đơn hàng Giao hàng \\
+\hline
+Use Case ID & UC-MD07-14 \\
+\hline
+Use Case Description & Cho phép Nhân viên (US-02/US-05) hoặc hệ thống tự động (dựa trên cập nhật từ Shipday) chính thức đóng một đơn hàng giao đi trong hệ thống sau khi đã xác nhận việc giao hàng thành công và tất cả các vấn đề liên quan đến thanh toán (khách trả trước hoặc đã thu đủ tiền COD) đã được xử lý xong. \\
+\hline
+Actor & US-02 (Nhân viên phục vụ), US-05 (Nhân viên thu ngân), US-01 (Quản lý nhà hàng) \\
+\hline
+Priority & Must Have \\
+\hline
+Trigger & - Hệ thống nhận được cập nhật trạng thái "Đã giao thành công" (DELIVERED) từ Shipday (UC-MD07-09) VÀ đơn hàng đã ở trạng thái "Đã thanh toán" (Paid - do khách trả trước toàn bộ hoặc nhân viên đã ghi nhận thanh toán COD ở UC-MD07-10/11/12). \newline - Hoặc, Nhân viên thực hiện hành động đóng đơn thủ công sau khi đã xác nhận các điều kiện trên. \\
+\hline
+Pre-Condition & - Đơn hàng giao đi đã có trạng thái giao hàng là "Đã giao thành công" (hoặc một trạng thái cuối cùng tương đương từ Shipday). \newline - Đơn hàng giao đi đã có trạng thái thanh toán là "Đã thanh toán" (Paid). \\
+\hline
+Post-Condition & - Trạng thái cuối cùng của đơn hàng POS giao đi trong hệ thống được cập nhật thành "Đã hoàn thành" (Done), "Completed" hoặc một trạng thái tương đương, biểu thị rằng vòng đời của đơn hàng này đã kết thúc. \newline - Đơn hàng này không còn xuất hiện trong danh sách các đơn hàng đang cần xử lý hoặc theo dõi tích cực. \newline - Các bút toán kế toán liên quan đến doanh thu (nếu chưa được tạo ở bước thanh toán) có thể được chốt lại. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow (Nhân viên đóng thủ công) & 1. Nhân viên (US-02/US-05/US-01) xem chi tiết một đơn hàng giao đi đã thỏa mãn các điều kiện đóng (đã giao thành công và đã thanh toán đầy đủ). \newline 2. Nhân viên tìm và nhấp vào nút "Đóng đơn hàng" / "Hoàn tất đơn" / "Mark as Done" trên giao diện chi tiết đơn hàng. \newline 3. Hệ thống (System) cập nhật trạng thái của bản ghi đơn hàng POS đó thành "Done" hoặc "Completed". \newline 4. Hệ thống hiển thị thông báo "Đơn hàng giao hàng đã được hoàn tất thành công." \newline 5. Đơn hàng này có thể được di chuyển ra khỏi danh sách các đơn hàng đang hoạt động. \\
+\hline
+Alternative Flow & \textbf{1a. Hệ thống tự động đóng đơn:} \newline    1. Hệ thống (thông qua một tác vụ tự động hoặc logic xử lý webhook) liên tục kiểm tra các đơn hàng giao đi. \newline    2. Khi hệ thống phát hiện một đơn hàng giao đi đồng thời thỏa mãn cả hai điều kiện: trạng thái giao hàng từ Shipday là "DELIVERED" (hoặc tương đương) VÀ trạng thái thanh toán là "Paid". \newline    3. Hệ thống tự động thực hiện bước 3 của Basic Flow (cập nhật trạng thái đơn hàng thành "Done"). \newline    4. (Tùy chọn) Hệ thống có thể ghi nhận vào log rằng đơn hàng được đóng tự động. \\
+\hline
+Exception Flow & \textbf{3a. Lỗi hệ thống khi cập nhật trạng thái cuối cùng của đơn hàng:} \newline    1. Hệ thống gặp lỗi kỹ thuật (ví dụ: lỗi cơ sở dữ liệu) khi cố gắng cập nhật trạng thái "Done" cho đơn hàng. \newline    2. Hệ thống hiển thị thông báo lỗi (nếu là hành động thủ công của nhân viên) hoặc ghi nhận lỗi vào log hệ thống (nếu là quy trình tự động). \newline    3. Trạng thái của đơn hàng có thể không được cập nhật đúng cách, cần sự can thiệp của quản trị viên để kiểm tra và sửa lỗi. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC7.14-1:} Một đơn hàng giao đi chỉ nên được chuyển sang trạng thái hoàn thành cuối cùng ("Done"/"Completed") khi đã có xác nhận chắc chắn về việc giao hàng thành công cho khách VÀ tất cả các nghĩa vụ thanh toán đã được hoàn tất (khách đã trả trước đủ, hoặc tiền COD đã được thu và ghi nhận). \newline - \textbf{BR-UC7.14-2:} Việc tự động hóa quy trình đóng đơn hàng (Alternative Flow 1a) dựa trên các trạng thái đồng bộ được khuyến khích để giảm thiểu thao tác thủ công và đảm bảo tính kịp thời của dữ liệu. \newline - \textbf{BR-UC7.14-3:} Sau khi một đơn hàng giao đi đã được đóng hoàn toàn, nó không nên cho phép các chỉnh sửa thông tin nghiệp vụ quan trọng nữa (trừ khi có quy trình đặc biệt dành cho quản trị viên hoặc kế toán). \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC7.14-1 (Automation \& Reliability):} Nếu áp dụng quy trình đóng đơn tự động, logic kiểm tra điều kiện và hành động cập nhật trạng thái phải cực kỳ đáng tin cậy để tránh đóng sai hoặc bỏ sót đơn hàng. \newline - \textbf{NFR-UC7.14-2 (Performance):} Dù là đóng thủ công hay tự động, việc cập nhật trạng thái cuối cùng của đơn hàng phải được thực hiện nhanh chóng và không gây ảnh hưởng đến hiệu năng chung của hệ thống, đặc biệt nếu có nhiều đơn hàng cần được xử lý. \\
+\hline
+\end{longtable}
+
+\subsubsection{Use Case UC-MD07-15: Cấu hình Thông tin Tích hợp Shipday}
+% (Trước đây là FR-MD07-15, giờ là UC tương ứng, nội dung như UC-MD07-13 cũ)
+\begin{longtable}{|m{4cm}|p{11cm}|}
+\caption{Đặc tả Use Case UC-MD07-15: Cấu hình Thông tin Tích hợp Shipday} \label{tab:uc_md07_15_final_full} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.1. Tóm tắt (Summary)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+\endhead % Header cho các trang tiếp theo
+\hline
+\endfoot % Footer cho bảng
+\hline
+\endlastfoot % Footer cho trang cuối cùng
+Use Case Name & Cấu hình Thông tin Tích hợp Shipday \\
+\hline
+Use Case ID & UC-MD07-15 \\
+\hline
+Use Case Description & Cho phép Quản lý nhà hàng (US-01) hoặc Quản trị viên hệ thống (US-10) thiết lập và quản lý các tham số cần thiết để kết nối và trao đổi dữ liệu giữa hệ thống và nền tảng quản lý giao hàng Shipday. Điều này bao gồm việc nhập thông tin xác thực API (API Key) và các cài đặt liên quan khác để đảm bảo tích hợp hoạt động trơn tru. \\
+\hline
+Actor & US-01 (Quản lý nhà hàng), US-10 (Quản trị viên Hệ thống) \\
+\hline
+Priority & Must Have (Để chức năng giao hàng qua Shipday có thể hoạt động) \\
+\hline
+Trigger & - Khi nhà hàng bắt đầu triển khai và thiết lập lần đầu cho việc tích hợp với Shipday. \newline - Khi cần cập nhật thông tin API Key (ví dụ: do API Key cũ hết hạn hoặc bị thay đổi từ phía Shipday). \newline - Khi cần thay đổi các cài đặt hoặc quy tắc khác liên quan đến việc đồng bộ dữ liệu Shipday. \\
+\hline
+Pre-Condition & - Người dùng (US-01 hoặc US-10) đã đăng nhập vào hệ thống với quyền quản trị cài đặt chung của hệ thống hoặc quyền quản trị cấu hình module Giao hàng/Tích hợp bên thứ ba. \newline - Nhà hàng đã đăng ký và sở hữu một tài khoản đang hoạt động trên nền tảng Shipday. \newline - Nhà hàng đã lấy được thông tin API Key cần thiết từ tài khoản Shipday của mình. \\
+\hline
+Post-Condition & - Thông tin kết nối API (ví dụ: API Key) và các quy tắc tích hợp cơ bản Shipday được lưu trữ an toàn và chính xác trong cấu hình hệ thống. \newline - Hệ thống đã sẵn sàng để thực hiện các lời gọi API gửi đơn hàng sang Shipday (UC-MD07-08) và có endpoint sẵn sàng để nhận cập nhật trạng thái từ Shipday qua webhook (UC-MD07-09). \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.2. Luồng thực thi (Flow)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Basic Flow & 1. Người dùng (US-01/US-10) truy cập vào khu vực Cài đặt chung (Settings) của hệ thống hoặc vào mục Cài đặt (Configuration) của module Giao hàng (Delivery) hoặc một module Tích hợp (Integrations) riêng biệt (tùy thuộc vào cách module tích hợp Shipday được xây dựng). \newline 2. Người dùng tìm đến phần cấu hình dành riêng cho "Shipday Integration" hoặc một tên gọi tương tự. \newline 3. Hệ thống hiển thị một form hoặc một nhóm các trường cấu hình, bao gồm tối thiểu: \newline    - Một ô kiểm (checkbox) để "Kích hoạt Tích hợp Shipday" (Enable Shipday Integration). \newline    - Một trường văn bản để nhập "Shipday API Key". \newline    - (Tùy chọn) Một trường để nhập "Shipday API Endpoint" (URL của API Shipday, thường là một giá trị cố định và có thể được điền sẵn). \newline    - (Tùy chọn, thường là thông tin hiển thị) URL của Webhook Endpoint mà người dùng cần sao chép và cấu hình bên phía tài khoản Shipday (để Shipday có thể gửi cập nhật trạng thái). \newline    - (Tùy chọn) Các cài đặt khác liên quan đến việc đồng bộ dữ liệu, ví dụ: Tự động gửi đơn sang Shipday khi đơn hàng POS đạt trạng thái nào, Cách ánh xạ (map) các trường địa chỉ, v.v. \newline 4. Người dùng nhập hoặc cập nhật các giá trị cấu hình mong muốn, đặc biệt là đánh dấu vào ô "Kích hoạt Tích hợp" và nhập chính xác API Key do Shipday cung cấp. \newline 5. (Tùy chọn) Nếu có Webhook URL được cung cấp, người dùng cần sao chép URL này và thực hiện việc cấu hình webhook tương ứng trên trang quản trị tài khoản Shipday của họ (hành động này nằm ngoài hệ thống). \newline 6. Người dùng chọn hành động "Lưu" (Save) trên giao diện cấu hình. \newline 7. Hệ thống kiểm tra tính hợp lệ cơ bản của dữ liệu nhập vào (ví dụ: API Key không được để trống). \newline 8. Hệ thống lưu trữ an toàn các thông tin cấu hình mới này. \newline 9. Hệ thống hiển thị thông báo "Cấu hình tích hợp Shipday đã được lưu thành công." \\
+\hline
+Alternative Flow & \textbf{3a. Kiểm tra kết nối API (Test Connection):} \newline    1. Giao diện cấu hình tích hợp Shipday có thể cung cấp một nút "Kiểm tra kết nối" hoặc "Test API Connection". \newline    2. Sau khi nhập API Key, người dùng nhấp vào nút này. \newline    3. Hệ thống thực hiện một lời gọi API đơn giản đến Shipday (ví dụ: lấy thông tin cơ bản về tài khoản Shipday hoặc kiểm tra tính hợp lệ của API Key). \newline    4. Hệ thống hiển thị kết quả kiểm tra cho người dùng (ví dụ: "Kết nối thành công!" hoặc "Kết nối thất bại: [Lý do lỗi từ Shipday hoặc lỗi kết nối]"). Điều này giúp xác nhận API Key và kết nối mạng là chính xác trước khi lưu cấu hình. \\
+\hline
+Exception Flow & \textbf{7a. Lỗi Xác thực Dữ liệu khi Lưu:} \newline    1. Hệ thống phát hiện thông tin cấu hình nhập vào không hợp lệ (ví dụ: thiếu API Key khi ô Kích hoạt được chọn, hoặc định dạng API Key không đúng theo một quy tắc nào đó nếu có). \newline    2. Hệ thống hiển thị thông báo lỗi, chỉ rõ trường hoặc vấn đề. \newline    3. Hệ thống không lưu cấu hình. Use Case quay lại bước 4 để người dùng sửa lỗi. \newline \textbf{8a. Lỗi Hệ thống khi Lưu Cấu hình:} \newline    1. Hệ thống gặp sự cố kỹ thuật (ví dụ: lỗi cơ sở dữ liệu) trong quá trình cố gắng lưu trữ các thông tin cấu hình. \newline    2. Hệ thống hiển thị thông báo lỗi chung. Các thay đổi cấu hình có thể không được lưu. \\
+\hline
+\multicolumn{2}{|c|}{\textbf{2.3. Thông tin bổ sung (Additional Information)}} \\
+\hline
+\textbf{Mục} & \textbf{Nội dung} \\
+\hline
+Business Rule & - \textbf{BR-UC7.15-1:} Thông tin API Key của Shipday phải được nhập chính xác và phải là API Key còn hiệu lực do Shipday cung cấp cho tài khoản của nhà hàng. \newline - \textbf{BR-UC7.15-2:} Webhook URL cung cấp (nếu có và cần thiết cho việc nhận cập nhật trạng thái) phải được người dùng cấu hình đúng và chính xác bên trong cài đặt tài khoản của họ trên nền tảng Shipday để đảm bảo hệ thống có thể nhận được thông tin cập nhật trạng thái giao hàng. \newline - \textbf{BR-UC7.15-3:} Các quy tắc về việc ánh xạ dữ liệu giữa hệ thống và Shipday (ví dụ: cách các thành phần của địa chỉ trong hệ thống được gửi sang các trường địa chỉ tương ứng của Shipday) cần được thiết lập cẩn thận để đảm bảo tính chính xác của thông tin khi truyền đi. \\
+\hline
+Non-Functional Requirement & - \textbf{NFR-UC7.15-1 (Usability):} Giao diện cấu hình tích hợp Shipday phải rõ ràng, dễ hiểu, và chỉ yêu cầu những thông tin thực sự cần thiết. Việc có tính năng "Kiểm tra kết nối" (Test Connection) là một lợi thế lớn giúp người dùng xác thực cấu hình dễ dàng. \newline - \textbf{NFR-UC7.15-2 (Security):} Thông tin nhạy cảm như API Key của Shipday phải được lưu trữ một cách an toàn trong hệ thống (ví dụ: được mã hóa khi lưu trong cơ sở dữ liệu hoặc ít nhất là không hiển thị trực tiếp dạng text thuần sau khi đã lưu). Quyền truy cập vào khu vực cấu hình này phải được hạn chế tối đa cho những người dùng quản trị có thẩm quyền. \\
 \hline
 \end{longtable}
 

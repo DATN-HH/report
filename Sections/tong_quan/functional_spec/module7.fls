@@ -1,0 +1,10 @@
+PWD /Users/nguyen/report/Sections/tong_quan/functional_spec
+INPUT /usr/local/texlive/2025/texmf.cnf
+INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/nguyen/report/Sections/tong_quan/functional_spec/module7.tex
+OUTPUT module7.log
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+OUTPUT module7.pdf
+INPUT /usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map
