@@ -1,86 +1,86 @@
 \subsection{Thiết kế Sitemap}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\linewidth]{Images/sitemap.png}
-    \vspace{0.5cm}
-    \caption{Sitemap của hệ thống}
-    \label{fig:my_label}
+	\centering
+	\includegraphics[width=\linewidth]{Images/sitemap.png}
+	\vspace{0.5cm}
+	\caption{Sitemap của hệ thống}
+	\label{fig:my_label}
 \end{figure}
 
 Sitemap này mô tả cấu trúc và các tính năng chính của Hệ thống quản lý đặt món cho nhà hàng, nêu chi tiết các chức năng và mô-đun cốt lõi của nó.
 
 \begin{enumerate}
-    \item \textbf{Tất cả người dùng}
-        \begin{itemize}
-            \item \textit{Homepage}: Trang chính của ứng dụng, hiển thị thông tin giới thiệu về nhà hàng, các danh mục chính (Menu, Đặt hàng, Liên hệ), và nút đăng nhập/đăng ký để chuyển đến các cổng phù hợp với vai trò người dùng.
-            \item \textit{About Us (Giới thiệu)}: Cung cấp thông tin về nhà hàng, bao gồm lịch sử, giá trị cốt lõi, đội ngũ, và các chi nhánh.
-            \item \textit{Menu}: Hiển thị danh sách các món ăn và khuyến mãi hiện có, phân loại theo loại (đồ ăn, đồ uống, món tráng miệng), cho phép người dùng xem chi tiết món ăn và thêm vào giỏ hàng.
-            \item \textit{Food Details (Chi tiết món ăn)}: Food Details (Chi tiết món ăn): Hiển thị thông tin chi tiết về một món ăn cụ thể (tên, giá, mô tả, hình ảnh, thành phần, đánh giá), cho phép thêm vào giỏ hàng hoặc quay lại danh sách menu.
-            \item \textit{Cart (Giỏ hàng)}: Hiển thị danh sách món ăn đã chọn, cho phép chỉnh sửa số lượng và ghi chú, xóa món, và chọn phương thức đặt hàng (Dine-In Order hoặc Delivery Order).
-            \item \textit{Dine-In Order (Đặt món tại quán)}: Cho phép người dùng xác nhận đơn hàng để ăn tại quán, cho phép chuyển sang trang thanh toán khi hoàn thành bữa ăn.
-            \item \textit{Payment (Thanh toán)}: Xử lý thanh toán cho đơn hàng tại quán, hỗ trợ các phương thức thanh toán (tiền mặt, thẻ, QR code), và hiển thị xác nhận sau khi thanh toán thành công.
-            \item \textit{Contact Us (Liên hệ)}: Cung cấp thông tin liên hệ (số điện thoại, email, địa chỉ), và biểu mẫu để khách hàng gửi câu hỏi hoặc phản hồi.
-        \end{itemize}
-    \item \textbf{Khách hàng đã có tài khoản}
-        \begin{itemize}
-            \item \textit{Profile Management (Quản lý thông tin cá nhân)}: Cho phép khách hàng xem và chỉnh sửa thông tin cá nhân (tên, số điện thoại, email, địa chỉ), quản lý tài khoản và mật khẩu.
-            \item \textit{Table Reservation (Đặt bàn)}: Cho phép khách hàng chọn thời gian, số lượng người, xem sơ đồ và đặt bàn tại nhà hàng, với xác nhận qua email hoặc tin nhắn. Nếu đang có yêu cầu đặt bàn thì cũng sẽ hiển thị và hủy ở đây.
-            \item \textit{Delivery Order (Đặt món giao về)}: Cho phép người dùng chọn giao hàng, nhập thông tin giao hàng (địa chỉ, số điện thoại), và chuyển sang trang thanh toán.
-            \item \textit{Order Summary (Tóm tắt đơn hàng)}: Hiển thị tất cả đơn hàng (món ăn, số lượng, tổng tiền, thông tin giao hàng), cho phép chuyển qua trang xem chi tiết.
-            \item \textit{View Order Details (Xem chi tiết đơn hàng)}: Hiển thị trạng thái và thông tin chi tiết của một đơn hàng đã đặt (thời gian, địa chỉ, tình trạng giao hàng), cho phép khách hàng theo dõi. Nếu đơn hàng đã thành công, có thể chuyển đến trang gửi đánh giá.
-            \item \textit{Submit Review (Gửi đánh giá)}: Cho phép người dùng viết đánh giá hoặc xếp hạng cho món ăn hoặc dịch vụ sau khi hoàn tất đơn hàng, gửi lên hệ thống.
-        \end{itemize}
-    \item \textbf{Nhân viên}
-    
-        \textbf{\textit{Tất cả nhân viên}}
-        \begin{itemize}
-            \item \textit{View word schedule (Xem lịch làm)}: Hiển thị lịch làm việc được xếp.
-        \end{itemize}
-        \textbf{\textit{Nhân viên Phục vụ}}
-        \begin{itemize}
-            \item \textit{Table List (Danh sách bàn)}: Hiển thị trạng thái các bàn (trống, đang sử dụng, đặt trước), cho phép nhân viên phục vụ cập nhật hoặc quản lý.
-            \item \textit{Order List (Danh sách đơn hàng)}: Hiển thị danh sách các đơn hàng đang chờ xử lý, cho phép nhân viên chọn đơn để xem chi tiết hoặc chuyển sang bếp.
-            \item \textit{Order Details (Chi tiết đơn hàng)}: Hiển thị thông tin chi tiết của một đơn hàng (món ăn, số lượng, ghi chú), cho phép nhân viên xác nhận hoặc cập nhật trạng thái.
-        \end{itemize}
-            
-        \textit{\textbf{Nhân viên Thu ngân}}
-        \begin{itemize}
-            \item \textit{Process Payment (Xử lý thanh toán)}: Cho phép nhân viên thu ngân nhập thông tin thanh toán, xử lý các phương thức (tiền mặt, thẻ), và xuất hóa đơn.
-            \item \textit{Cash In/Out}: Thêm thông tin vào dòng tiền bên ngoài.
-            \item \textit{Daily Revenue Report (Báo cáo doanh thu hàng ngày)}: Hiển thị tổng doanh thu, số lượng đơn hàng, và các thống kê khác trong ngày, hỗ trợ nhân viên thu ngân theo dõi.
-        \end{itemize}
-            
-        \textit{\textbf{Nhân viên Bếp}}
-        \begin{itemize}
-            \item \textit{Area Display (Các khu vực bếp): Hiển thị danh sách các khu vực bếp tương ứng với các món ăn được chỉ định sẵn.}
-            \item \textit{Pending Dishes (Món ăn đang chờ)}: Hiển thị danh sách món ăn cần chuẩn bị, cho phép nhân viên bếp theo dõi và cập nhật trạng thái hoàn thành.
-        \end{itemize}
-            
-        \textit{\textbf{Nhân viên Vận hành}}
-        \begin{itemize}
-            \item \textit{Manage Reservations (Quản lý đặt bàn)}: Cho phép nhân viên xem, chỉnh sửa, hoặc hủy đặt bàn (bao gồm hủy khi khách đến trễ quá), cập nhật trạng thái bàn.
-            \item \textit{Contact Requests (Yêu cầu liên hệ)}: Hiển thị danh sách yêu cầu hỗ trợ từ khách hàng, cho phép nhân viên hỗ trợ trả lời hoặc chuyển tiếp.
-            \item \textit{Promotions (Khuyến mãi)}: Hiển thị danh sách các chương trình khuyến mãi hiện tại, cho phép quản lý tạo mới hoặc chỉnh sửa.
-            \item \textit{Promotion Details (Chi tiết khuyến mãi)}: Hiển thị thông tin chi tiết của từng chương trình khuyến mãi (thời gian, điều kiện, ưu đãi), cho phép chỉnh sửa hoặc xóa. Thống kê số liệu về chương trình khuyến mãi
-        \end{itemize}
-    \item \textbf{Quản lý}
-        \begin{itemize}
-            \item \textit{Staff Management (Quản lý nhân viên)}: Cho phép quản lý thêm, chỉnh sửa, hoặc xóa thông tin nhân viên (tên, vai trò, lịch làm việc).
-            \item \textit{Staff Details (Chi tiết nhân viên)}: Hiển thị thông tin chi tiết của từng nhân viên (hồ sơ, lịch sử làm việc, hiệu suất), cho phép chỉnh sửa.
-            \item \textit{Branch Details (Chi tiết chi nhánh)}: Hiển thị thông tin chi tiết của chi nhánh, cho phép chỉnh sửa sơ đồ nhà hàng.
-            \item \textit{Branch Dashboard (Bảng điều khiển chi nhánh)}: Hiển thị thông tin cụ thể của từng chi nhánh (doanh thu, đơn hàng, nhân viên), hỗ trợ quản lý theo dõi.
-            \item \textit{Distribute work schedule (Xếp lịch làm)}: Cho phép lập lịch trực qua, thêm ghi chú công việc cho nhân viên.
-        \end{itemize}
-        
-        \textit{\textbf{Dành cho quản trị viên}}
-        \begin{itemize}
-            \item \textit{Dashboard (Bảng điều khiển)}: Hiển thị tổng quan về hoạt động nhà hàng (doanh thu, số đơn hàng, trạng thái nhân viên), với các biểu đồ và số liệu chính.
-            \item \textit{Branch Management (Quản lý chi nhánh)}: Cho phép quản lý thêm, chỉnh sửa, hoặc xóa thông tin chi nhánh (địa chỉ, số điện thoại, giờ hoạt động).
-            \item \textit{Menu Management (Quản lý menu)}: Cho phép quản lý thêm, chỉnh sửa, hoặc xóa món ăn trong menu (tên, giá, hình ảnh, mô tả). Thống kế các thông tin số liệu về món ăn.
-            \item \textit{Food Details (Chi tiết món ăn)}: Hiển thị và chỉnh sửa thông tin chi tiết của từng món ăn trong menu (dành cho quản lý).
-        \end{itemize}
-    
+	\item \textbf{Tất cả người dùng}
+	      \begin{itemize}
+		      \item \textit{Homepage}: Trang chính của ứng dụng, hiển thị thông tin giới thiệu về nhà hàng, các danh mục chính (Menu, Đặt hàng, Liên hệ), và nút đăng nhập/đăng ký để chuyển đến các cổng phù hợp với vai trò người dùng.
+		      \item \textit{About Us (Giới thiệu)}: Cung cấp thông tin về nhà hàng, bao gồm lịch sử, giá trị cốt lõi, đội ngũ, và các chi nhánh.
+		      \item \textit{Menu}: Hiển thị danh sách các món ăn và khuyến mãi hiện có, phân loại theo loại (đồ ăn, đồ uống, món tráng miệng), cho phép người dùng xem chi tiết món ăn và thêm vào giỏ hàng.
+		      \item \textit{Food Details (Chi tiết món ăn)}: Food Details (Chi tiết món ăn): Hiển thị thông tin chi tiết về một món ăn cụ thể (tên, giá, mô tả, hình ảnh, thành phần, đánh giá), cho phép thêm vào giỏ hàng hoặc quay lại danh sách menu.
+		      \item \textit{Cart (Giỏ hàng)}: Hiển thị danh sách món ăn đã chọn, cho phép chỉnh sửa số lượng và ghi chú, xóa món, và chọn phương thức đặt hàng (Dine-In Order hoặc Delivery Order).
+		      \item \textit{Dine-In Order (Đặt món tại quán)}: Cho phép người dùng xác nhận đơn hàng để ăn tại quán, cho phép chuyển sang trang thanh toán khi hoàn thành bữa ăn.
+		      \item \textit{Payment (Thanh toán)}: Xử lý thanh toán cho đơn hàng tại quán, hỗ trợ các phương thức thanh toán (tiền mặt, thẻ, QR code), và hiển thị xác nhận sau khi thanh toán thành công.
+		      \item \textit{Contact Us (Liên hệ)}: Cung cấp thông tin liên hệ (số điện thoại, email, địa chỉ), và biểu mẫu để khách hàng gửi câu hỏi hoặc phản hồi.
+	      \end{itemize}
+	\item \textbf{Khách hàng đã có tài khoản}
+	      \begin{itemize}
+		      \item \textit{Profile Management (Quản lý thông tin cá nhân)}: Cho phép khách hàng xem và chỉnh sửa thông tin cá nhân (tên, số điện thoại, email, địa chỉ), quản lý tài khoản và mật khẩu.
+		      \item \textit{Table Reservation (Đặt bàn)}: Cho phép khách hàng chọn thời gian, số lượng người, xem sơ đồ và đặt bàn tại nhà hàng, với xác nhận qua email hoặc tin nhắn. Nếu đang có yêu cầu đặt bàn thì cũng sẽ hiển thị và hủy ở đây.
+		      \item \textit{Delivery Order (Đặt món giao về)}: Cho phép người dùng chọn giao hàng, nhập thông tin giao hàng (địa chỉ, số điện thoại), và chuyển sang trang thanh toán.
+		      \item \textit{Order Summary (Tóm tắt đơn hàng)}: Hiển thị tất cả đơn hàng (món ăn, số lượng, tổng tiền, thông tin giao hàng), cho phép chuyển qua trang xem chi tiết.
+		      \item \textit{View Order Details (Xem chi tiết đơn hàng)}: Hiển thị trạng thái và thông tin chi tiết của một đơn hàng đã đặt (thời gian, địa chỉ, tình trạng giao hàng), cho phép khách hàng theo dõi. Nếu đơn hàng đã thành công, có thể chuyển đến trang gửi đánh giá.
+		      \item \textit{Submit Review (Gửi đánh giá)}: Cho phép người dùng viết đánh giá hoặc xếp hạng cho món ăn hoặc dịch vụ sau khi hoàn tất đơn hàng, gửi lên hệ thống.
+	      \end{itemize}
+	\item \textbf{Nhân viên}
+
+	      \textbf{\textit{Tất cả nhân viên}}
+	      \begin{itemize}
+		      \item \textit{View word schedule (Xem lịch làm)}: Hiển thị lịch làm việc được xếp.
+	      \end{itemize}
+	      \textbf{\textit{Nhân viên Phục vụ}}
+	      \begin{itemize}
+		      \item \textit{Table List (Danh sách bàn)}: Hiển thị trạng thái các bàn (trống, đang sử dụng, đặt trước), cho phép nhân viên phục vụ cập nhật hoặc quản lý.
+		      \item \textit{Order List (Danh sách đơn hàng)}: Hiển thị danh sách các đơn hàng đang chờ xử lý, cho phép nhân viên chọn đơn để xem chi tiết hoặc chuyển sang bếp.
+		      \item \textit{Order Details (Chi tiết đơn hàng)}: Hiển thị thông tin chi tiết của một đơn hàng (món ăn, số lượng, ghi chú), cho phép nhân viên xác nhận hoặc cập nhật trạng thái.
+	      \end{itemize}
+
+	      \textit{\textbf{Nhân viên Thu ngân}}
+	      \begin{itemize}
+		      \item \textit{Process Payment (Xử lý thanh toán)}: Cho phép nhân viên thu ngân nhập thông tin thanh toán, xử lý các phương thức (tiền mặt, thẻ), và xuất hóa đơn.
+		      \item \textit{Cash In/Out}: Thêm thông tin vào dòng tiền bên ngoài.
+		      \item \textit{Daily Revenue Report (Báo cáo doanh thu hàng ngày)}: Hiển thị tổng doanh thu, số lượng đơn hàng, và các thống kê khác trong ngày, hỗ trợ nhân viên thu ngân theo dõi.
+	      \end{itemize}
+
+	      \textit{\textbf{Nhân viên Bếp}}
+	      \begin{itemize}
+		      \item \textit{Area Display (Các khu vực bếp): Hiển thị danh sách các khu vực bếp tương ứng với các món ăn được chỉ định sẵn.}
+		      \item \textit{Pending Dishes (Món ăn đang chờ)}: Hiển thị danh sách món ăn cần chuẩn bị, cho phép nhân viên bếp theo dõi và cập nhật trạng thái hoàn thành.
+	      \end{itemize}
+
+	      \textit{\textbf{Nhân viên Vận hành}}
+	      \begin{itemize}
+		      \item \textit{Manage Reservations (Quản lý đặt bàn)}: Cho phép nhân viên xem, chỉnh sửa, hoặc hủy đặt bàn (bao gồm hủy khi khách đến trễ quá), cập nhật trạng thái bàn.
+		      \item \textit{Contact Requests (Yêu cầu liên hệ)}: Hiển thị danh sách yêu cầu hỗ trợ từ khách hàng, cho phép nhân viên hỗ trợ trả lời hoặc chuyển tiếp.
+		      \item \textit{Promotions (Khuyến mãi)}: Hiển thị danh sách các chương trình khuyến mãi hiện tại, cho phép quản lý tạo mới hoặc chỉnh sửa.
+		      \item \textit{Promotion Details (Chi tiết khuyến mãi)}: Hiển thị thông tin chi tiết của từng chương trình khuyến mãi (thời gian, điều kiện, ưu đãi), cho phép chỉnh sửa hoặc xóa. Thống kê số liệu về chương trình khuyến mãi
+	      \end{itemize}
+	\item \textbf{Quản lý}
+	      \begin{itemize}
+		      \item \textit{Staff Management (Quản lý nhân viên)}: Cho phép quản lý thêm, chỉnh sửa, hoặc xóa thông tin nhân viên (tên, vai trò, lịch làm việc).
+		      \item \textit{Staff Details (Chi tiết nhân viên)}: Hiển thị thông tin chi tiết của từng nhân viên (hồ sơ, lịch sử làm việc, hiệu suất), cho phép chỉnh sửa.
+		      \item \textit{Branch Details (Chi tiết chi nhánh)}: Hiển thị thông tin chi tiết của chi nhánh, cho phép chỉnh sửa sơ đồ nhà hàng.
+		      \item \textit{Branch Dashboard (Bảng điều khiển chi nhánh)}: Hiển thị thông tin cụ thể của từng chi nhánh (doanh thu, đơn hàng, nhân viên), hỗ trợ quản lý theo dõi.
+		      \item \textit{Distribute work schedule (Xếp lịch làm)}: Cho phép lập lịch trực qua, thêm ghi chú công việc cho nhân viên.
+	      \end{itemize}
+
+	      \textit{\textbf{Dành cho quản trị viên}}
+	      \begin{itemize}
+		      \item \textit{Dashboard (Bảng điều khiển)}: Hiển thị tổng quan về hoạt động nhà hàng (doanh thu, số đơn hàng, trạng thái nhân viên), với các biểu đồ và số liệu chính.
+		      \item \textit{Branch Management (Quản lý chi nhánh)}: Cho phép quản lý thêm, chỉnh sửa, hoặc xóa thông tin chi nhánh (địa chỉ, số điện thoại, giờ hoạt động).
+		      \item \textit{Menu Management (Quản lý menu)}: Cho phép quản lý thêm, chỉnh sửa, hoặc xóa món ăn trong menu (tên, giá, hình ảnh, mô tả). Thống kế các thông tin số liệu về món ăn.
+		      \item \textit{Food Details (Chi tiết món ăn)}: Hiển thị và chỉnh sửa thông tin chi tiết của từng món ăn trong menu (dành cho quản lý).
+	      \end{itemize}
+
 \end{enumerate}
 
 \subsection{Thiết kế Database}
@@ -101,13 +101,13 @@ Hệ thống quản lý các mã giảm giá (VOUCHER), mỗi voucher có điề
 Khách hàng có thể gửi yêu cầu hỗ trợ (SUPPORT TICKET) với tiêu đề, nội dung cụ thể và trạng thái xử lý như đã xử lý, đang xử lý hoặc đang chờ bổ sung thông tin. Mỗi yêu cầu sẽ được phân công cho nhân viên vận hành để tiếp nhận và xử lý. Khách hàng cũng có thể gửi phản hồi (FEEDBACK) với nội dung giới hạn trong 500 ký tự về dịch vụ hoặc món ăn, gắn liền với từng đơn hàng, và đánh giá chất lượng từ 1 đến 5 sao. Trong trường hợp có sự cố, khách hàng có thể yêu cầu hoàn tiền (REFUND), yêu cầu này gắn liền với hóa đơn (INVOICE) liên quan để nhân viên có thể theo dõi và xử lý.
 
 \begin{landscape}
-\begin{figure}[H]
-    \centering
-    \includegraphics[height=0.85\textheight]{Images/db.png}
-    \vspace{0.5cm}
-    \caption{EERD của cơ sở dữ liệu}
-    \label{fig:my_label}
-\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[height=0.85\textheight]{Images/db.png}
+		\vspace{0.5cm}
+		\caption{EERD của cơ sở dữ liệu}
+		\label{fig:my_label}
+	\end{figure}
 \end{landscape}
 
 % \subsubsection{Các ràng buộc}
@@ -246,152 +246,151 @@ Khách hàng có thể gửi yêu cầu hỗ trợ (SUPPORT TICKET) với tiêu 
 \subsubsection{Thiết kế luận lý}
 
 Thiết kế luận lý thể hiện cấu trúc cơ sở dữ liệu dưới dạng các bảng quan hệ, bao gồm tên bảng, các thuộc tính, khóa chính, khóa ngoại và mối quan hệ giữa chúng. Trong phần này, chúng tôi trình bày \textbf{một số bảng quan trọng tiêu biểu} trong hệ thống quản lý đặt món cho chuỗi nhà hàng, tập trung vào những bảng cốt lõi phục vụ chức năng đặt món, đặt bàn và xử lý đơn hàng.
-    
+
 \begin{longtable}{|l|p{6cm}|l|l|}
-\hline
-\textbf{Tên thuộc tính} & \textbf{Mô tả} & \textbf{Loại khóa} & \textbf{Bảng liên quan} \\
-\hline
-\endfirsthead
+	\caption{Tổng hợp các khóa chính và khóa ngoại của các bảng chính}
+	\hline
+	\textbf{Tên thuộc tính} & \textbf{Mô tả}                                 & \textbf{Loại khóa} & \textbf{Bảng liên quan} \\
+	\hline
+	\endfirsthead
 
-% \multicolumn{4}{c}%
-% {{\bfseries \tablename\ \thetable{} -- tiếp theo}} \\
-\hline
-\textbf{Tên thuộc tính} & \textbf{Mô tả} & \textbf{Loại khóa} & \textbf{Bảng liên quan} \\
-\hline
-\endhead
+	% \multicolumn{4}{c}%
+	% {{\bfseries \tablename\ \thetable{} -- tiếp theo}} \\
+	\hline
+	\textbf{Tên thuộc tính} & \textbf{Mô tả}                                 & \textbf{Loại khóa} & \textbf{Bảng liên quan} \\
+	\hline
+	\endhead
 
-\hline \multicolumn{4}{|r|}{{Còn tiếp ...}} \\
-\hline
-\endfoot
+	\hline \multicolumn{4}{|r|}{{Còn tiếp ...}}                                                                             \\
+	\hline
+	\endfoot
 
-\hline
-\endlastfoot
+	\hline
+	\endlastfoot
 
-\multicolumn{4}{|c|}{\textbf{Bảng branch}} \\
-\hline
-id & Định danh chi nhánh & PK & - \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng branch}}                                                                              \\
+	\hline
+	id                      & Định danh chi nhánh                            & PK                 & -                       \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng category}} \\
-\hline
-id & Định danh danh mục & PK & - \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng category}}                                                                            \\
+	\hline
+	id                      & Định danh danh mục                             & PK                 & -                       \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng promotion}} \\
-\hline
-id & Định danh khuyến mãi & PK & - \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng promotion}}                                                                           \\
+	\hline
+	id                      & Định danh khuyến mãi                           & PK                 & -                       \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng combo}} \\
-\hline
-id & Định danh combo & PK & - \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng combo}}                                                                               \\
+	\hline
+	id                      & Định danh combo                                & PK                 & -                       \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng product}} \\
-\hline
-id & Định danh sản phẩm & PK & - \\
-category\_id & Danh mục sản phẩm & FK & category \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng product}}                                                                             \\
+	\hline
+	id                      & Định danh sản phẩm                             & PK                 & -                       \\
+	category\_id            & Danh mục sản phẩm                              & FK                 & category                \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng product\_promotion}} \\
-\hline
-id & Định danh liên kết giữa khuyến mãi và sản phẩm & PK & - \\
-product\_id & Liên kết tới sản phẩm & FK & product \\
-promotion\_id & Liên kết tới khuyến mãi & FK & promotion \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng product\_promotion}}                                                                  \\
+	\hline
+	id                      & Định danh liên kết giữa khuyến mãi và sản phẩm & PK                 & -                       \\
+	product\_id             & Liên kết tới sản phẩm                          & FK                 & product                 \\
+	promotion\_id           & Liên kết tới khuyến mãi                        & FK                 & promotion               \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng combo\_product}} \\
-\hline
-id & Định danh liên kết giữa combo và sản phẩm & PK & - \\
-product\_id & Liên kết tới sản phẩm & FK & product \\
-combo\_id & Liên kết tới conbo & FK & combo \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng combo\_product}}                                                                      \\
+	\hline
+	id                      & Định danh liên kết giữa combo và sản phẩm      & PK                 & -                       \\
+	product\_id             & Liên kết tới sản phẩm                          & FK                 & product                 \\
+	combo\_id               & Liên kết tới conbo                             & FK                 & combo                   \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng orders}} \\
-\hline
-id & Định danh đơn hàng & PK & - \\
-customer\_id & Người đặt hàng & FK & user \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng orders}}                                                                              \\
+	\hline
+	id                      & Định danh đơn hàng                             & PK                 & -                       \\
+	customer\_id            & Người đặt hàng                                 & FK                 & user                    \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng order\_product}} \\
-\hline
-id & Định danh dòng món trong đơn hàng & PK & - \\
-order\_id & Liên kết tới đơn hàng & FK & orders \\
-product\_id & Liên kết tới sản phẩm & FK & product \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng order\_product}}                                                                      \\
+	\hline
+	id                      & Định danh dòng món trong đơn hàng              & PK                 & -                       \\
+	order\_id               & Liên kết tới đơn hàng                          & FK                 & orders                  \\
+	product\_id             & Liên kết tới sản phẩm                          & FK                 & product                 \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng restaurant\_table}} \\
-\hline
-id & Định danh bàn ăn & PK & - \\
-branch\_id & Thuộc chi nhánh & FK & branch \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng restaurant\_table}}                                                                   \\
+	\hline
+	id                      & Định danh bàn ăn                               & PK                 & -                       \\
+	branch\_id              & Thuộc chi nhánh                                & FK                 & branch                  \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng order\_table}} \\
-\hline
-id & Định danh liên kết giữa bàn và đơn hàng & PK & - \\
-order\_id & Liên kết tới đơn hàng & FK & orders \\
-table\_id & Liên kết tới bàn ăn & FK & restaurant\_table \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng order\_table}}                                                                        \\
+	\hline
+	id                      & Định danh liên kết giữa bàn và đơn hàng        & PK                 & -                       \\
+	order\_id               & Liên kết tới đơn hàng                          & FK                 & orders                  \\
+	table\_id               & Liên kết tới bàn ăn                            & FK                 & restaurant\_table       \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng booking\_table}} \\
-\hline
-id & Định danh đặt bàn & PK & - \\
-customer\_id & Người đặt bàn & FK & user \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng booking\_table}}                                                                      \\
+	\hline
+	id                      & Định danh đặt bàn                              & PK                 & -                       \\
+	customer\_id            & Người đặt bàn                                  & FK                 & user                    \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng booking\_table\_table}} \\
-\hline
-id & Định danh dòng liên kết bàn và đặt bàn & PK & - \\
-booking\_table\_id & Liên kết tới đặt bàn & FK & booking\_table \\
-table\_id & Liên kết tới bàn ăn & FK & restaurant\_table \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng booking\_table\_table}}                                                               \\
+	\hline
+	id                      & Định danh dòng liên kết bàn và đặt bàn         & PK                 & -                       \\
+	booking\_table\_id      & Liên kết tới đặt bàn                           & FK                 & booking\_table          \\
+	table\_id               & Liên kết tới bàn ăn                            & FK                 & restaurant\_table       \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng booking\_product}} \\
-\hline
-id & Định danh đặt món trước & PK & - \\
-customer\_id & Người đặt món & FK & user \\
-branch\_id & Chi nhánh thực hiện & FK & branch \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng booking\_product}}                                                                    \\
+	\hline
+	id                      & Định danh đặt món trước                        & PK                 & -                       \\
+	customer\_id            & Người đặt món                                  & FK                 & user                    \\
+	branch\_id              & Chi nhánh thực hiện                            & FK                 & branch                  \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng booking\_product\_product}} \\
-\hline
-id & Định danh dòng món trong đặt món trước & PK & - \\
-booking\_product\_id & Liên kết tới đặt món & FK & booking\_product \\
-product\_id & Liên kết tới sản phẩm & FK & product \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng booking\_product\_product}}                                                           \\
+	\hline
+	id                      & Định danh dòng món trong đặt món trước         & PK                 & -                       \\
+	booking\_product\_id    & Liên kết tới đặt món                           & FK                 & booking\_product        \\
+	product\_id             & Liên kết tới sản phẩm                          & FK                 & product                 \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng invoice}} \\
-\hline
-id & Định danh hóa đơn & PK & - \\
-order\_id & Liên kết tới hóa đơn & FK & order \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng invoice}}                                                                             \\
+	\hline
+	id                      & Định danh hóa đơn                              & PK                 & -                       \\
+	order\_id               & Liên kết tới hóa đơn                           & FK                 & order                   \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng voucher}} \\
-\hline
-id & Định danh voucher & PK & - \\
-\hline
+	\multicolumn{4}{|c|}{\textbf{Bảng voucher}}                                                                             \\
+	\hline
+	id                      & Định danh voucher                              & PK                 & -                       \\
+	\hline
 
-\multicolumn{4}{|c|}{\textbf{Bảng invoice\_voucher}} \\
-\hline
-id & Định danh dòng liên hóa đơn và voucher & PK & - \\
-invoice\_id & Liên kết tới hóa đơn & FK & invoice \\
-voucher\_id & Liên kết tới voucher & FK & voucher \\
-\hline
-
-\caption{Tổng hợp các khóa chính và khóa ngoại của các bảng chính}
+	\multicolumn{4}{|c|}{\textbf{Bảng invoice\_voucher}}                                                                    \\
+	\hline
+	id                      & Định danh dòng liên hóa đơn và voucher         & PK                 & -                       \\
+	invoice\_id             & Liên kết tới hóa đơn                           & FK                 & invoice                 \\
+	voucher\_id             & Liên kết tới voucher                           & FK                 & voucher                 \\
+	\hline
 \end{longtable}
 
 Hình dưới đây thể hiện lược đồ quan hệ luận lý cho hệ thống cơ sở dữ liệu quản lý đặt món nhà hàng, bao gồm các bảng, khóa chính, khóa ngoại và các mối quan hệ giữa các bảng một cách đầy đủ.
 
 \begin{landscape}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[height=0.9\textheight]{Images/relation.png}
-    \vspace{0.5cm}
-    \caption{Lược đồ quan hệ cơ sở dữ liệu luận lý}
-    \label{fig:my_label}
-\end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[height=0.9\textheight]{Images/relation.png}
+		\vspace{0.5cm}
+		\caption{Lược đồ quan hệ cơ sở dữ liệu luận lý}
+		\label{fig:my_label}
+	\end{figure}
 
 \end{landscape}
 
@@ -401,125 +400,125 @@ Hình dưới đây thể hiện lược đồ quan hệ luận lý cho hệ th�
 Dưới đây là chi tiết thiết kế vật lý \textbf{một số bảng quan trọng} trong hệ thống. Mỗi bảng thể hiện rõ các thuộc tính, kiểu dữ liệu cụ thể, các ràng buộc và khóa ngoại (nếu có).
 
 \begin{longtable}{|p{3.5cm}|p{3.5cm}|p{7.5cm}|}
-\hline
-\textbf{Thuộc tính} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc / CHECK} \\
-\hline
-\endfirsthead
+	\hline
+	\textbf{Thuộc tính} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc / CHECK}                                            \\
+	\hline
+	\endfirsthead
 
-\hline
-\textbf{Thuộc tính} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc / CHECK} \\
-\hline
-\endhead
+	\hline
+	\textbf{Thuộc tính} & \textbf{Kiểu dữ liệu} & \textbf{Ràng buộc / CHECK}                                            \\
+	\hline
+	\endhead
 
-% \hline \multicolumn{4}{|r|}{{Còn tiếp ...}} \\
-\hline
-\endfoot
+	% \hline \multicolumn{4}{|r|}{{Còn tiếp ...}} \\
+	\hline
+	\endfoot
 
-\hline
-\endlastfoot
+	\hline
+	\endlastfoot
 
-\multicolumn{3}{|l|}{\textbf{product}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-name & varchar(255) & NOT NULL \\
-price & numeric(38,2) & \\
-type & varchar(255) & CHECK IN ('COUNTABLE', 'UNCOUNTABLE', 'SERVICE') \\
-category\_id & bigint & NOT NULL, FK \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{product}}                                                                              \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	name                & varchar(255)          & NOT NULL                                                              \\
+	price               & numeric(38,2)         &                                                                       \\
+	type                & varchar(255)          & CHECK IN ('COUNTABLE', 'UNCOUNTABLE', 'SERVICE')                      \\
+	category\_id        & bigint                & NOT NULL, FK                                                          \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{voucher}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-code & varchar(100) & NOT NULL \\
-discount\_value & numeric(38,2) & \\
-discount\_percent & double precision & \\
-start\_date & date & NOT NULL \\
-end\_date & date & NOT NULL \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{voucher}}                                                                              \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	code                & varchar(100)          & NOT NULL                                                              \\
+	discount\_value     & numeric(38,2)         &                                                                       \\
+	discount\_percent   & double precision      &                                                                       \\
+	start\_date         & date                  & NOT NULL                                                              \\
+	end\_date           & date                  & NOT NULL                                                              \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{invoice}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-order\_id & bigint & NOT NULL, FK \\
-invoice\_type & varchar(255) & CHECK IN ('NORMAL', 'MERGED', 'SPLIT') \\
-total\_amount & numeric(38,2) & \\
-tax\_amount & numeric(38,2) & \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{invoice}}                                                                              \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	order\_id           & bigint                & NOT NULL, FK                                                          \\
+	invoice\_type       & varchar(255)          & CHECK IN ('NORMAL', 'MERGED', 'SPLIT')                                \\
+	total\_amount       & numeric(38,2)         &                                                                       \\
+	tax\_amount         & numeric(38,2)         &                                                                       \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{combo}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-name & varchar(255) & NOT NULL \\
-price & numeric(38,2) & NOT NULL \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{combo}}                                                                                \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	name                & varchar(255)          & NOT NULL                                                              \\
+	price               & numeric(38,2)         & NOT NULL                                                              \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{orders}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-type & varchar(255) & CHECK IN ('DINE\_IN', 'TAKE\_AWAY', 'DELIVERY') \\
-oder\_status & varchar(255) & CHECK IN ('PLACED', 'PREPARING', 'COMPLETED', 'CANCELLED') \\
-total\_amount & numeric(38,2) & \\
-customer\_id & bigint & NOT NULL, FK \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{orders}}                                                                               \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	type                & varchar(255)          & CHECK IN ('DINE\_IN', 'TAKE\_AWAY', 'DELIVERY')                       \\
+	oder\_status        & varchar(255)          & CHECK IN ('PLACED', 'PREPARING', 'COMPLETED', 'CANCELLED')            \\
+	total\_amount       & numeric(38,2)         &                                                                       \\
+	customer\_id        & bigint                & NOT NULL, FK                                                          \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{order\_product}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-order\_id & bigint & NOT NULL, FK \\
-product\_id & bigint & NOT NULL, FK \\
-product\_status & varchar(255) & CHECK IN ('PENDING', 'PREPARING', 'COMPLETED', 'SERVED', 'CANCELLED') \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{order\_product}}                                                                       \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	order\_id           & bigint                & NOT NULL, FK                                                          \\
+	product\_id         & bigint                & NOT NULL, FK                                                          \\
+	product\_status     & varchar(255)          & CHECK IN ('PENDING', 'PREPARING', 'COMPLETED', 'SERVED', 'CANCELLED') \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{restaurant\_table}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-capacity & integer & \\
-table\_status & varchar(255) & CHECK IN ('AVAILABLE', 'OCCUPIED', 'NEEDS\_CLEANING') \\
-table\_type & varchar(255) & CHECK IN ('STANDARD', 'VIP') \\
-branch\_id & bigint & NOT NULL, FK \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{restaurant\_table}}                                                                    \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	capacity            & integer               &                                                                       \\
+	table\_status       & varchar(255)          & CHECK IN ('AVAILABLE', 'OCCUPIED', 'NEEDS\_CLEANING')                 \\
+	table\_type         & varchar(255)          & CHECK IN ('STANDARD', 'VIP')                                          \\
+	branch\_id          & bigint                & NOT NULL, FK                                                          \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{booking\_table}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-booking\_status & varchar(255) & CHECK IN ('BOOKED', 'DEPOSIT\_PAID', 'CANCELLED', 'COMPLETED') \\
-time\_start & timestamp & NOT NULL \\
-time\_end & timestamp & \\
-customer\_id & bigint & NOT NULL, FK \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{booking\_table}}                                                                       \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	booking\_status     & varchar(255)          & CHECK IN ('BOOKED', 'DEPOSIT\_PAID', 'CANCELLED', 'COMPLETED')        \\
+	time\_start         & timestamp             & NOT NULL                                                              \\
+	time\_end           & timestamp             &                                                                       \\
+	customer\_id        & bigint                & NOT NULL, FK                                                          \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{booking\_product}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-booking\_status & varchar(255) & CHECK IN ('BOOKED', 'DEPOSIT\_PAID', 'CANCELLED', 'COMPLETED') \\
-booking\_type & varchar(255) & CHECK IN ('DINE\_IN','TAKE\_AWAY','DELIVERY') \\
-customer\_id & bigint & NOT NULL, FK \\
-branch\_id & bigint & NOT NULL, FK \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{booking\_product}}                                                                     \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	booking\_status     & varchar(255)          & CHECK IN ('BOOKED', 'DEPOSIT\_PAID', 'CANCELLED', 'COMPLETED')        \\
+	booking\_type       & varchar(255)          & CHECK IN ('DINE\_IN','TAKE\_AWAY','DELIVERY')                         \\
+	customer\_id        & bigint                & NOT NULL, FK                                                          \\
+	branch\_id          & bigint                & NOT NULL, FK                                                          \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{combo\_product}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-combo\_id & bigint & NOT NULL, FK \\
-product\_id & bigint & NOT NULL, FK \\
-quantity & integer & \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{combo\_product}}                                                                       \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	combo\_id           & bigint                & NOT NULL, FK                                                          \\
+	product\_id         & bigint                & NOT NULL, FK                                                          \\
+	quantity            & integer               &                                                                       \\
+	\hline
 
-\multicolumn{3}{|l|}{\textbf{invoice\_voucher}} \\
-\hline
-id & bigint & NOT NULL, PK \\
-voucher\_id & bigint & NOT NULL, FK \\
-invoice\_id & bigint & NOT NULL, FK \\
-quantity & integer & \\
-\hline
+	\multicolumn{3}{|l|}{\textbf{invoice\_voucher}}                                                                     \\
+	\hline
+	id                  & bigint                & NOT NULL, PK                                                          \\
+	voucher\_id         & bigint                & NOT NULL, FK                                                          \\
+	invoice\_id         & bigint                & NOT NULL, FK                                                          \\
+	quantity            & integer               &                                                                       \\
+	\hline
 \end{longtable}
 
 Sau khi hoàn thiện các bước thiết kế cơ sở dữ liệu từ mô hình khái niệm đến mô hình luận lý và vật lý, hệ thống đã được triển khai trên phần mềm quản lý cơ sở dữ liệu để trực quan hóa quan hệ giữa các bảng. Hình dưới đây thể hiện lược đồ quan hệ đầy đủ của hệ thống cơ sở dữ liệu, được xuất từ công cụ DBeaver sau khi định nghĩa và thiết lập các bảng, khóa chính, khóa ngoại và các liên kết liên quan.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[height=0.9\textheight]{Images/ldqh.png}
-    \vspace{0.5cm}
-    \caption{Lược đồ quan hệ cơ sở dữ liệu vật lý}
-    \label{fig:logical_schema}
+	\centering
+	\includegraphics[height=0.9\textheight]{Images/ldqh.png}
+	\vspace{0.5cm}
+	\caption{Lược đồ quan hệ cơ sở dữ liệu vật lý}
+	\label{fig:logical_schema}
 \end{figure}
