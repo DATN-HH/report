@@ -247,59 +247,59 @@ Hành trình khách hàng trong ngành dịch vụ nhà hàng là một chuỗi 
 	\item Giai đoạn Hậu trải nghiệm (Post-Experience): Sau khi khách hàng rời nhà hàng, việc duy trì kết nối và khuyến khích quay lại là rất quan trọng. Gửi email cảm ơn, mời tham gia khảo sát đánh giá, cung cấp các chương trình khách hàng thân thiết, và gửi các ưu đãi đặc biệt là những phương pháp hiệu quả.
 \end{enumerate}
 
-\subsection{Mô hình MVC}
-MVC là viết tắt của khái niệm "Model-View-Controller", một trong những mô hình thiết kế phần mềm phổ biến nhất.\\
+% \subsection{Mô hình MVC}
+% MVC là viết tắt của khái niệm "Model-View-Controller", một trong những mô hình thiết kế phần mềm phổ biến nhất.\\
 
-MVC tách biệt dữ liệu, giao diện người dùng và logic xử lý thành ba thành phần riêng biệt nhưng vẫn được kết nối chặt chẽ với nhau.
+% MVC tách biệt dữ liệu, giao diện người dùng và logic xử lý thành ba thành phần riêng biệt nhưng vẫn được kết nối chặt chẽ với nhau.
 
-\begin{itemize}
-	\item Model (M): Đại diện cho dữ liệu và logic xử lý các nghiệp vụ của ứng dụng.
-	\item View (V): Quản lý giao diện và hiển thị dữ liệu ra cho người dùng.
-	\item Controller (C): Làm điều phối và điều hướng tương tác giữa Model và View. Nó nhận yêu cầu từ View, thực hiện xử lý trên Model và trả kết quả về cho View hiển thị.
-\end{itemize}
+% \begin{itemize}
+% 	\item Model (M): Đại diện cho dữ liệu và logic xử lý các nghiệp vụ của ứng dụng.
+% 	\item View (V): Quản lý giao diện và hiển thị dữ liệu ra cho người dùng.
+% 	\item Controller (C): Làm điều phối và điều hướng tương tác giữa Model và View. Nó nhận yêu cầu từ View, thực hiện xử lý trên Model và trả kết quả về cho View hiển thị.
+% \end{itemize}
 
-MVC giúp tách biệt các thành phần của ứng dụng, tăng tính bảo trì và khả năng mở rộng trong tương lai \cite{MVC}.
+% MVC giúp tách biệt các thành phần của ứng dụng, tăng tính bảo trì và khả năng mở rộng trong tương lai \cite{MVC}.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=10cm]{Images/ezgif-4-c53032b3fd.png}
-	\vspace{0.5cm}
-	\caption{MVC là gì? Nguồn: \href{https://viblo.asia/p/ios-mot-so-cach-co-ban-de-truyen-du-lieu-tu-model-toi-controller-trong-mo-hinh-mvc-L4x5xNWqZBM}{viblo.asia}}
-	\label{fig:my_label}
-\end{figure}
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=10cm]{Images/ezgif-4-c53032b3fd.png}
+% 	\vspace{0.5cm}
+% 	\caption{MVC là gì? Nguồn: \href{https://viblo.asia/p/ios-mot-so-cach-co-ban-de-truyen-du-lieu-tu-model-toi-controller-trong-mo-hinh-mvc-L4x5xNWqZBM}{viblo.asia}}
+% 	\label{fig:my_label}
+% \end{figure}
 
-Mô hình MVC (MVC pattern) thường được dùng để phát triển giao diện người dùng. Nó cung cấp các thành phần cơ bản để thiết kế một chương trình cho máy tính hoặc điện thoại di động, cũng như là các ứng dụng web.
+% Mô hình MVC (MVC pattern) thường được dùng để phát triển giao diện người dùng. Nó cung cấp các thành phần cơ bản để thiết kế một chương trình cho máy tính hoặc điện thoại di động, cũng như là các ứng dụng web.
 
-\subsubsection{Các thành phần của MVC}
-Mô hình MVC gồm 3 loại chính là thành phần bên trong không thể thiếu khi áp dụng mô hình này:
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=10cm]{Images/cacthanhphanmvc.png}
-	\vspace{0.5cm}
-	\caption{Thành phần của MVC. Nguồn: \href{https://mhhj.tistory.com/m/95}{mhhj.tistory.com}}
-	\label{fig:my_label}
-\end{figure}
+% \subsubsection{Các thành phần của MVC}
+% Mô hình MVC gồm 3 loại chính là thành phần bên trong không thể thiếu khi áp dụng mô hình này:
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=10cm]{Images/cacthanhphanmvc.png}
+% 	\vspace{0.5cm}
+% 	\caption{Thành phần của MVC. Nguồn: \href{https://mhhj.tistory.com/m/95}{mhhj.tistory.com}}
+% 	\label{fig:my_label}
+% \end{figure}
 
-\begin{itemize}
-	\item Model: Là bộ phận có chức năng lưu trữ toàn bộ dữ liệu của ứng dụng và là cầu nối giữa 2 thành phần bên dưới là View và Controller. Một model là dữ liệu được sử dụng bởi chương trình. Đây có thể là cơ sở dữ liệu, hoặc file XML bình thường hay một đối tượng đơn giản. Chẳng hạn như biểu tượng hay là một nhân vật trong game.
-	\item View: Đây là phần giao diện (theme) dành cho người sử dụng. View là phương tiện hiển thị các đối tượng trong một ứng dụng. Chẳng hạn như hiển thị một cửa sổ, nút hay văn bản trong một cửa sổ khác. Nó bao gồm bất cứ thứ gì mà người dùng có thể nhìn thấy được.
-	\item Controller: Là bộ phận có nhiệm vụ xử lý các yêu cầu người dùng đưa đến thông qua View. Một controller bao gồm cả Model lẫn View. Nó nhận input và thực hiện các update tương ứng.
-\end{itemize}
+% \begin{itemize}
+% 	\item Model: Là bộ phận có chức năng lưu trữ toàn bộ dữ liệu của ứng dụng và là cầu nối giữa 2 thành phần bên dưới là View và Controller. Một model là dữ liệu được sử dụng bởi chương trình. Đây có thể là cơ sở dữ liệu, hoặc file XML bình thường hay một đối tượng đơn giản. Chẳng hạn như biểu tượng hay là một nhân vật trong game.
+% 	\item View: Đây là phần giao diện (theme) dành cho người sử dụng. View là phương tiện hiển thị các đối tượng trong một ứng dụng. Chẳng hạn như hiển thị một cửa sổ, nút hay văn bản trong một cửa sổ khác. Nó bao gồm bất cứ thứ gì mà người dùng có thể nhìn thấy được.
+% 	\item Controller: Là bộ phận có nhiệm vụ xử lý các yêu cầu người dùng đưa đến thông qua View. Một controller bao gồm cả Model lẫn View. Nó nhận input và thực hiện các update tương ứng.
+% \end{itemize}
 
-\subsubsection{Luồng xử lý trong MVC}
-Luồng xử lý trong của mô hình MVC, bạn có thể hình dung cụ thể và chi tiết qua từng bước dưới đây:
-\begin{itemize}
-	\item Khi một yêu cầu của từ máy khách (Client) gửi đến Server. Thì bị Controller trong MVC chặn lại để xem đó là URL request hay sự kiện.
-	\item Sau đó, Controller xử lý input của user rồi giao tiếp với Model trong MVC.
-	\item Model chuẩn bị data và gửi lại cho Controller.
-	\item Cuối cùng, khi xử lý xong yêu cầu thì Controller gửi dữ liệu trở lại View và hiển thị cho người dùng trên trình duyệt.
-\end{itemize}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=10cm]{Images/luongmvc.png}
-	\vspace{0.5cm}
-	\caption{View và Model sẽ được xử lý bởi Controller. Nguồn: \href{https://dev.to/michellebuchiokonicha/the-model-view-controller-mvc-software-architectural-design-pattern-4jjd}{dev.to}}
-	\label{fig:my_label}
-\end{figure}
+% \subsubsection{Luồng xử lý trong MVC}
+% Luồng xử lý trong của mô hình MVC, bạn có thể hình dung cụ thể và chi tiết qua từng bước dưới đây:
+% \begin{itemize}
+% 	\item Khi một yêu cầu của từ máy khách (Client) gửi đến Server. Thì bị Controller trong MVC chặn lại để xem đó là URL request hay sự kiện.
+% 	\item Sau đó, Controller xử lý input của user rồi giao tiếp với Model trong MVC.
+% 	\item Model chuẩn bị data và gửi lại cho Controller.
+% 	\item Cuối cùng, khi xử lý xong yêu cầu thì Controller gửi dữ liệu trở lại View và hiển thị cho người dùng trên trình duyệt.
+% \end{itemize}
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=10cm]{Images/luongmvc.png}
+% 	\vspace{0.5cm}
+% 	\caption{View và Model sẽ được xử lý bởi Controller. Nguồn: \href{https://dev.to/michellebuchiokonicha/the-model-view-controller-mvc-software-architectural-design-pattern-4jjd}{dev.to}}
+% 	\label{fig:my_label}
+% \end{figure}
 
-Ở đây, View không giao tiếp trực tiếp với Model. Sự tương tác giữa View và Model sẽ chỉ được xử lý bởi Controller.
+% Ở đây, View không giao tiếp trực tiếp với Model. Sự tương tác giữa View và Model sẽ chỉ được xử lý bởi Controller.

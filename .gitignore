@@ -1,13 +1,14 @@
-main.aux
-main.fdb_latexmk
-main.fls
-main.lof
-main.log
-main.lot
-main.out
-main.pdf
-main.toc
-main.toc
-main.synctex.gz
-*.log
-*.aux
+# Ignore LaTeX aux files everywhere
+**/*.aux
+**/*.log
+**/*.out
+**/*.toc
+**/*.fdb_latexmk
+**/*.fls
+**/*.lof
+**/*.lot
+**/*.synctex.gz
+**/*.bbl
+**/*.blg
+**/*.nav
+**/*.snm

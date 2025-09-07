@@ -1,2 +1,3 @@
+#!/bin/bash
 latexmk -c
-latexmk -pdf -f main.tex
+yes "" | latexmk -pdf -f main.tex
