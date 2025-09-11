@@ -225,3 +225,92 @@ Trong đó:
 Kết quả kiểm thử cho thấy hệ thống \textbf{cơ bản đáp ứng được yêu cầu phi chức năng}: phần lớn các request hoàn thành dưới 3 giây, phù hợp với tiêu chuẩn phản hồi của hệ thống thời gian thực. Tuy nhiên, vẫn tồn tại khoảng 8\% lỗi và một số request kéo dài tới 30 giây. Do đó, cần tiếp tục tối ưu hiệu năng xử lý ở phía backend (các API phức tạp, thao tác cơ sở dữ liệu) để giảm thiểu các trường hợp chậm trễ này.
 
 \subsection{Tổng quan LightHouse}
+
+Công cụ Google LightHouse được sử dụng để đánh giá hiệu năng, khả năng truy cập, tuân thủ các thực hành tốt nhất và tối ưu hóa SEO cho ứng dụng.  
+Các chỉ số được chấm theo thang điểm 100, với bốn hạng mục chính:  
+
+\begin{itemize}
+    \item \textbf{Performance}: đo lường tốc độ tải và khả năng phản hồi của trang.  
+    \item \textbf{Accessibility}: đánh giá khả năng truy cập cho người dùng, đặc biệt là người khuyết tật.  
+    \item \textbf{Best Practices}: kiểm tra các lỗi bảo mật, sử dụng HTTPS, và các khuyến nghị từ Google.  
+    \item \textbf{SEO}: đánh giá mức độ thân thiện với công cụ tìm kiếm.  
+\end{itemize}
+
+Kết quả kiểm thử được thực hiện trên nhiều màn hình chức năng:
+
+\begin{itemize}
+    \item \textbf{Trang chủ (Homepage)}  
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=14cm]{Images/hienthuc/lh_homepage.png}
+        \vspace{0.5cm}
+        \caption{Đánh giá LightHouse Trang chủ (Homepage)}
+        \label{fig:lh_homepage}
+    \end{figure}
+    Điểm số đạt được: Performance 97, Accessibility 89, Best Practices 96, SEO 100.  
+
+    \textit{Nhận xét:} Trang chủ có hiệu năng khá tốt, cần tối ưu thêm Accessibility.  
+
+    \item \textbf{Kitchen Display System (KDS)}  
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=14cm]{Images/hienthuc/lh_kds.png}
+        \vspace{0.5cm}
+        \caption{Đánh giá LightHouse KDS}
+        \label{fig:lh_kds}
+    \end{figure}
+    Điểm số đạt được: Performance 100, Accessibility 94, Best Practices 100, SEO 100.  
+
+    \textit{Nhận xét:} KDS đạt điểm gần như tuyệt đối, đáp ứng đầy đủ yêu cầu phi chức năng.  
+
+    \item \textbf{Trang Menu}  
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=14cm]{Images/hienthuc/lh_menu.png}
+        \vspace{0.5cm}
+        \caption{Đánh giá LightHouse trang Menu}
+        \label{fig:lh_menu}
+    \end{figure}
+    Điểm số đạt được: Performance 79, Accessibility 91, Best Practices 100, SEO 100.  
+
+    \textit{Nhận xét:} Cần cải thiện hiệu năng (Performance) để đảm bảo trải nghiệm người dùng tốt hơn.  
+
+    \item \textbf{POS - Quản lý bàn}  
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=14cm]{Images/hienthuc/lh_pos.png}
+        \vspace{0.5cm}
+        \caption{Đánh giá LightHouse POS - Quản lý bàn}
+        \label{fig:lh_pos}
+    \end{figure}
+    Điểm số đạt được: Performance 88, Accessibility 88, Best Practices 100, SEO 100.  
+
+    \textit{Nhận xét:} Kết quả khá ổn, nhưng Accessibility vẫn có thể được cải thiện thêm.  
+
+    \item \textbf{Pre-Order}  
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=14cm]{Images/hienthuc/lh_preorder.png}
+        \vspace{0.5cm}
+        \caption{Đánh giá LightHouse Pre-Order}
+        \label{fig:lh_preorder}
+    \end{figure}
+    Điểm số đạt được: Performance 98, Accessibility 91, Best Practices 100, SEO 100.  
+
+    \textit{Nhận xét:} Hiệu năng rất tốt, đảm bảo đáp ứng yêu cầu người dùng.  
+
+    \item \textbf{Table Booking}  
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=14cm]{Images/hienthuc/lh_tablebooking.png}
+        \vspace{0.5cm}
+        \caption{Đánh giá LightHouse Table Booking}
+        \label{fig:lh_tablebooking}
+    \end{figure}
+    Điểm số đạt được: Performance 85, Accessibility 88, Best Practices 100, SEO 100.  
+
+    \textit{Nhận xét:} Cần cải thiện hiệu năng và Accessibility, đặc biệt khi hiển thị sơ đồ bàn.  
+\end{itemize}
+
+\textbf{Kết luận:}  
+Các kết quả trên cho thấy hầu hết các module đều đạt điểm cao về Best Practices và SEO (đều 100), chứng tỏ hệ thống tuân thủ tốt các quy chuẩn kỹ thuật và thân thiện với công cụ tìm kiếm. Tuy nhiên, hiệu năng (Performance) và khả năng truy cập (Accessibility) ở một số trang vẫn còn hạn chế, cần tiếp tục tối ưu về tốc độ tải và khả năng tiếp cận cho mọi đối tượng người dùng.

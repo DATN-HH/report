@@ -2,28 +2,51 @@
 
 \subsection{Những gì đã thực hiện và đạt được}
 
-Trong giai đoạn đầu tiên của đồ án – giai đoạn phân tích và thiết kế hệ thống – nhóm đã hoàn thiện đầy đủ các nội dung quan trọng, bao gồm:
+Dựa trên bảng tổng hợp \textbf{Functional Requirements}, hệ thống đã hiện thực thành công phần lớn các chức năng cốt lõi:
 
 \begin{itemize}
-    \item \textbf{Phân tích yêu cầu hệ thống}: Xác định và đặc tả rõ các yêu cầu chức năng, phi chức năng; xây dựng các sơ đồ use-case, hành trình khách hàng và module chức năng cốt lõi.
-    \item \textbf{Nghiên cứu hệ thống liên quan}: Phân tích nhiều hệ thống nhà hàng nổi bật để tham khảo thiết kế chức năng phù hợp cho hệ thống Menu+.
-    \item \textbf{Thiết kế tổng thể hệ thống}: Bao gồm thiết kế kiến trúc (MVC), sơ đồ EERD, lược đồ quan hệ logic và vật lý cho cơ sở dữ liệu PostgreSQL.
-    \item \textbf{Thiết kế giao diện và API}: Phác thảo sitemap, wireframe, screenflow và thiết kế OpenAPI cho các chức năng chính.
-    \item \textbf{Xác định công nghệ}: Lựa chọn stack công nghệ sử dụng trong giai đoạn triển khai gồm ReactJS, Spring Boot, Redis, Docker, GitHub Actions,...
+    \item \textbf{Scheduling}: 13/14 chức năng được triển khai (\textasciitilde 93\%). Hệ thống cho phép quản lý ca làm việc, nghỉ phép, số dư ngày nghỉ và phê duyệt ca. Tuy nhiên, chức năng \textit{Xuất bản lịch làm việc chính thức} chưa hỗ trợ.
+    \item \textbf{Menu}: Hoàn thành toàn bộ 5/5 chức năng (\textbf{100\%}), bao gồm quản lý sản phẩm, danh mục, combo, thuộc tính và hình ảnh.
+    \item \textbf{POS – Ăn tại chỗ}: 6/10 chức năng (\textasciitilde 60\%). Các thao tác cơ bản như xem trạng thái bàn, thêm món, thanh toán, hủy đơn đã hoạt động. Một số chức năng nâng cao như chia hóa đơn, tạo hóa đơn tạm tính, gộp đơn hàng còn thiếu.
+    \item \textbf{POS – Mang về}: 7/7 chức năng (\textbf{100\%}), đảm bảo toàn bộ quy trình đặt món mang về, thanh toán và chuyển đến bếp.
+    \item \textbf{Đặt bàn \& Pre-order}: 13/15 chức năng (\textasciitilde 87\%). Đặt bàn trực tuyến, tích hợp thanh toán, gửi thông báo và quản lý trạng thái đã hoàn thiện. Các chức năng nâng cao như đặt chỗ qua điện thoại, báo cáo món đặt trước chưa được triển khai.
+    \item \textbf{Kitchen/KDS}: 6/6 chức năng (\textbf{100\%}), đảm bảo đồng bộ POS và hiển thị, xử lý món tại bếp.
+    \item \textbf{POS – Giao hàng}: 5/9 chức năng (\textasciitilde 55\%). Các thao tác tạo đơn, thêm món, định tuyến đến bếp đã có. Tuy nhiên, tích hợp với dịch vụ giao hàng ngoài (Shipday, Webhook) và thanh toán COD chưa hoàn thiện.
+    \item \textbf{Báo cáo}: 3/7 chức năng (\textasciitilde 43\%). Một số báo cáo cơ bản đã triển khai, nhưng các báo cáo chi tiết và xuất file vẫn thiếu.
+    \item \textbf{Bot xác nhận}: chưa được hiện thực.
 \end{itemize}
 
-Các kết quả đạt được trong giai đoạn này là nền tảng quan trọng giúp đảm bảo sự mạch lạc và hiệu quả cho các bước phát triển tiếp theo của hệ thống.
+Tổng cộng, hệ thống đã hoàn thành khoảng \textbf{75–80\%} yêu cầu chức năng cốt lõi, đảm bảo vận hành các quy trình chính trong nhà hàng. Một số module và tính năng nâng cao vẫn chưa được triển khai, đặc biệt là:
+\begin{itemize}
+    \item Xuất bản lịch làm việc trong \textbf{Scheduling}.
+    \item Quản lý hóa đơn nâng cao trong \textbf{POS – Ăn tại chỗ}.
+    \item Báo cáo chi tiết và xuất file trong \textbf{Báo cáo}.
+    \item Tích hợp dịch vụ giao hàng ngoài trong \textbf{POS – Giao hàng}.
+    \item Toàn bộ \textbf{Bot xác nhận đặt chỗ}.
+\end{itemize}
+
+\textbf{Về Non-Functional Requirements:}  
+Kết quả kiểm thử với \textbf{k6} cho thấy hệ thống có thể phục vụ tối đa 100 người dùng đồng thời với tốc độ trung bình \textbf{19.5 request/giây}.  
+\begin{itemize}
+    \item Thời gian phản hồi trung bình: \textbf{2.84s}, trong đó với các request hợp lệ (200) chỉ \textbf{1.2s}.
+    \item Tỉ lệ lỗi: \textbf{8.08\%}, chủ yếu từ API thiếu dữ liệu test hoặc xử lý phức tạp.
+    \item 87.92\% các kiểm thử thành công, đạt yêu cầu cho hệ thống thử nghiệm.
+\end{itemize}
+
+Ngoài ra, kết quả đánh giá \textbf{Google Lighthouse} cho thấy:
+\begin{itemize}
+    \item \textbf{Performance}: dao động từ 79–100 tuỳ màn hình.
+    \item \textbf{Accessibility}: đạt 88–94, cần cải thiện thêm về hỗ trợ người khuyết tật.
+    \item \textbf{Best Practices} và \textbf{SEO}: đa số đạt 100, đảm bảo tuân thủ chuẩn web và tối ưu cho tìm kiếm.
+\end{itemize}
 
 \subsection{Định hướng và triển khai trong giai đoạn tiếp theo}
 
-Giai đoạn tiếp theo sẽ tập trung vào hiện thực hóa hệ thống thông qua lập trình, kiểm thử và triển khai. Cụ thể, nhóm sẽ:
-
+Trong giai đoạn tới, nhóm sẽ tập trung vào:
 \begin{itemize}
-    \item \textbf{Phát triển chức năng hệ thống}: Xây dựng API và giao diện người dùng cho các module: quản lý thực đơn, POS (tại chỗ, mang về, giao hàng), đặt bàn & món trước, quản lý lịch làm việc, tích hợp bếp (KDS), báo cáo vận hành và gọi xác nhận bằng bot.
-    
-    \item \textbf{Kiểm thử và tích hợp hệ thống}: Kiểm thử chức năng từng phần và toàn bộ quy trình nghiệp vụ (end-to-end); phân tích hiệu năng API, tốc độ phản hồi và tối ưu giao diện.
-
-    \item \textbf{Triển khai và CI/CD}: Thiết lập quy trình triển khai bằng Docker và GitHub Actions để tự động hóa kiểm thử, build và deploy. Hệ thống sẽ được triển khai trên môi trường staging để đánh giá trước khi lên production. Toàn bộ tài liệu hướng dẫn triển khai, sử dụng và đào tạo cũng sẽ được chuẩn bị.
+    \item \textbf{Hoàn thiện chức năng còn thiếu}: chia hóa đơn, hóa đơn tạm tính, xuất báo cáo, tích hợp Shipday/Webhook, đặt bàn qua điện thoại và toàn bộ module bot xác nhận.
+    \item \textbf{Tối ưu hiệu năng}: giảm thời gian phản hồi xuống dưới \textbf{2 giây} cho 95\% request, giảm tỉ lệ lỗi dưới \textbf{1\%}.
+    \item \textbf{Cải thiện Accessibility}: đạt mức từ 95+ trên toàn bộ các màn hình, hỗ trợ trải nghiệm người dùng tốt hơn.
 \end{itemize}
 
-Giai đoạn này là bước kiểm chứng tính khả thi và hiệu quả của thiết kế, đồng thời đưa hệ thống tiến gần đến việc sẵn sàng vận hành thực tế.
+\textbf{Kết luận:} Hệ thống Menu+ đã đạt mức \textbf{khả dụng cao}, hoàn thiện đa số chức năng cốt lõi và cơ bản đáp ứng yêu cầu phi chức năng. Dù còn một số hạn chế và module chưa được hiện thực, kết quả hiện tại là nền tảng vững chắc để tiếp tục tối ưu, mở rộng và tiến tới triển khai thực tế.
