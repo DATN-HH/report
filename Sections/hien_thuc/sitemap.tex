@@ -205,7 +205,7 @@ Khách hàng có thể gửi yêu cầu hỗ trợ (SUPPORT TICKET) với tiêu 
 		\centering
 		\includegraphics[height=0.85\textheight]{Images/db.png}
 		\vspace{0.5cm}
-		\caption{EERD của cơ sở dữ liệu}
+		\caption{Lược đồ thực thể-mối liên kết}
 		\label{fig:my_label}
 	\end{figure}
 \end{landscape}
@@ -488,7 +488,7 @@ Hình dưới đây thể hiện lược đồ quan hệ luận lý cho hệ th�
 		\centering
 		\includegraphics[height=0.9\textheight]{Images/relation.png}
 		\vspace{0.5cm}
-		\caption{Lược đồ quan hệ cơ sở dữ liệu luận lý}
+		\caption{Lược đồ cơ sở dữ liệu luận lý}
 		\label{fig:my_label}
 	\end{figure}
 
@@ -619,6 +619,28 @@ Sau khi hoàn thiện các bước thiết kế cơ sở dữ liệu từ mô h�
 	\centering
 	\includegraphics[height=0.9\textheight]{Images/ldqh.png}
 	\vspace{0.5cm}
-	\caption{Lược đồ quan hệ cơ sở dữ liệu vật lý}
+	\caption{Lược đồ cơ sở dữ liệu vậy lý}
 	\label{fig:logical_schema}
 \end{figure}
+
+\subsubsection{Truy vấn với Index}
+
+Nhóm đã phân tích các luồng nghiệp vụ chính và xác định các cột thường xuyên được sử dụng trong các mệnh đề \texttt{WHERE}, \texttt{JOIN} và \texttt{ORDER BY} để tạo các chỉ mục phù hợp. Bảng dưới đây trình bày một số index tiêu biểu đã được triển khai và vai trò của chúng trong hệ thống.
+
+\begin{table}[h!]
+\centering
+\caption{Mô tả một số Index tiêu biểu trong thiết kế vật lý}
+\label{tab:index-description}
+\begin{tabular}{|l|p{8cm}|}
+\hline
+\textbf{Tên Index} & \textbf{Mục đích \& Tác động} \\ \hline
+\texttt{idx\_booking\_table\_customer\_phone} & Tăng tốc độ tìm kiếm thông tin đặt bàn của khách hàng qua số điện thoại. Đây là thao tác thường xuyên của nhân viên lễ tân. \\ \hline
+\texttt{idx\_booking\_table\_time\_range} & Phục vụ truy vấn tìm kiếm bàn trống trong một khoảng thời gian cụ thể. Đây là index composite (ghép trên nhiều cột), tối quan trọng cho hiệu năng của chức năng đặt bàn online. \\ \hline
+\texttt{idx\_pos\_orders\_branch\_status\_date} & Tối ưu hóa các truy vấn tổng hợp, báo cáo doanh thu theo chi nhánh, trạng thái và ngày tháng. Giúp các trang dashboard và báo cáo tải dữ liệu nhanh chóng. \\ \hline
+\texttt{uc\_branch\_name} & Đảm bảo tính toàn vẹn dữ liệu, không cho phép tạo ra hai chi nhánh có tên trùng nhau. Đây là một \textit{unique index}. \\ \hline
+\texttt{idx\_category\_parent} & Hỗ trợ truy vấn đệ quy hoặc các thao tác JOIN để hiển thị cây danh mục sản phẩm (cha-con) một cách hiệu quả, tránh việc quét toàn bộ bảng \texttt{category}. \\ \hline
+\texttt{idx\_pos\_order\_items\_status} & Tăng tốc các truy vấn lọc món ăn trong đơn hàng theo trạng thái (ví dụ: đang chế biến, đã hoàn thành), thường dùng trong màn hình KDS của bếp và trang quản lý đơn hàng. \\ \hline
+\end{tabular}
+\end{table}
+
+Bằng việc áp dụng chiến lược đánh index một cách có chủ đích, hệ thống Menu+ không chỉ đảm bảo tính đúng đắn về mặt logic mà còn được tối ưu hóa về mặt hiệu suất, sẵn sàng cho việc vận hành trong thực tế với khối lượng giao dịch lớn.
