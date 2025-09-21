@@ -2,86 +2,186 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{Images/sitemap.png}
+	\includegraphics[width=12cm]{Images/site_map/Site_map}
 	\vspace{0.5cm}
-	\caption{Sitemap của hệ thống}
+	\caption{Sitemap của cho các trang chung}
 	\label{fig:my_label}
 \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Images/site_map/staff1}
+    \vspace{0.5cm}
+    \caption{Sitemap của cho các trang quản lý (1)}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Images/site_map/Staff2}
+    \vspace{0.5cm}
+    \caption{Sitemap của cho các trang quản lý (2)}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=13cm]{Images/site_map/SiteRole1}
+    \vspace{0.5cm}
+    \caption{Sitemap theo vai trò người dùng (Nhân viên và Khách hàng)}
+    \label{fig:my_label}
+\end{figure}
+%\begin{landscape}
+%
+%    % The 'figure' environment holds our images and caption.
+%    % The [!htbp] specifier is a bit more flexible than [p].
+%    \begin{figure}[!htbp]
+%        \centering % Center the entire content horizontally on the page
+%
+%        % --- LEFT IMAGE ---
+%        % The [b] option aligns the minipages at their bottom.
+%        \begin{minipage}[b]{0.49\textwidth}
+%            \centering % Center the image within this column
+%            \includegraphics[
+%                width=\linewidth,      % Set image width to 100% of the minipage width
+%                height=0.9\textheight, % Limit height to 80% of page height
+%                keepaspectratio        % IMPORTANT: Prevents image distortion
+%            ]{Images/site_map/staff1}
+%        \end{minipage}% <-- The % here is crucial. It removes any unwanted space/newline.
+%        \hfill % This command creates a flexible space that pushes the two images apart
+%        % --- RIGHT IMAGE ---
+%        \begin{minipage}[b]{0.49\textwidth}
+%            \centering % Center the image within this column
+%            \includegraphics[
+%                width=\linewidth,      % Set image width to 100% of the minipage width
+%                height=0.9\textheight, % Limit height to 80% of page height
+%                keepaspectratio        % IMPORTANT: Prevents image distortion
+%            ]{Images/site_map/Staff2}
+%        \end{minipage}
+%
+%        \vspace{1cm} % Add a little vertical space before the caption
+%
+%        % --- CAPTION for BOTH images ---
+%        \caption{Sitemap cho hệ thống quản lý nhà hàng}
+%        \label{fig:sitemap_staff_side_by_side} % A unique label for referencing
+%
+%    \end{figure}
+%
+%\end{landscape}
+%
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=20cm]{Images/site_map/SiteRole1}
+%    \vspace{0.5cm}
+%    \caption{Sitemap cho khách hàng, nhân viên}
+%    \label{fig:my_label}
+%\end{figure}
+%\begin{landscape}
 
-Sitemap này mô tả cấu trúc và các tính năng chính của Hệ thống quản lý đặt món cho nhà hàng, nêu chi tiết các chức năng và mô-đun cốt lõi của nó.
+    % Use the figure environment as usual.
+    % The [p] specifier is good for full-page figures.
 
-\begin{enumerate}
-	\item \textbf{Tất cả người dùng}
-	      \begin{itemize}
-		      \item \textit{Homepage}: Trang chính của ứng dụng, hiển thị thông tin giới thiệu về nhà hàng, các danh mục chính (Menu, Đặt hàng, Liên hệ), và nút đăng nhập/đăng ký để chuyển đến các cổng phù hợp với vai trò người dùng.
-		      \item \textit{About Us (Giới thiệu)}: Cung cấp thông tin về nhà hàng, bao gồm lịch sử, giá trị cốt lõi, đội ngũ, và các chi nhánh.
-		      \item \textit{Menu}: Hiển thị danh sách các món ăn và khuyến mãi hiện có, phân loại theo loại (đồ ăn, đồ uống, món tráng miệng), cho phép người dùng xem chi tiết món ăn và thêm vào giỏ hàng.
-		      \item \textit{Food Details (Chi tiết món ăn)}: Food Details (Chi tiết món ăn): Hiển thị thông tin chi tiết về một món ăn cụ thể (tên, giá, mô tả, hình ảnh, thành phần, đánh giá), cho phép thêm vào giỏ hàng hoặc quay lại danh sách menu.
-		      \item \textit{Cart (Giỏ hàng)}: Hiển thị danh sách món ăn đã chọn, cho phép chỉnh sửa số lượng và ghi chú, xóa món, và chọn phương thức đặt hàng (Dine-In Order hoặc Delivery Order).
-		      \item \textit{Dine-In Order (Đặt món tại quán)}: Cho phép người dùng xác nhận đơn hàng để ăn tại quán, cho phép chuyển sang trang thanh toán khi hoàn thành bữa ăn.
-		      \item \textit{Payment (Thanh toán)}: Xử lý thanh toán cho đơn hàng tại quán, hỗ trợ các phương thức thanh toán (tiền mặt, thẻ, QR code), và hiển thị xác nhận sau khi thanh toán thành công.
-		      \item \textit{Contact Us (Liên hệ)}: Cung cấp thông tin liên hệ (số điện thoại, email, địa chỉ), và biểu mẫu để khách hàng gửi câu hỏi hoặc phản hồi.
-	      \end{itemize}
-	\item \textbf{Khách hàng đã có tài khoản}
-	      \begin{itemize}
-		      \item \textit{Profile Management (Quản lý thông tin cá nhân)}: Cho phép khách hàng xem và chỉnh sửa thông tin cá nhân (tên, số điện thoại, email, địa chỉ), quản lý tài khoản và mật khẩu.
-		      \item \textit{Table Reservation (Đặt bàn)}: Cho phép khách hàng chọn thời gian, số lượng người, xem sơ đồ và đặt bàn tại nhà hàng, với xác nhận qua email hoặc tin nhắn. Nếu đang có yêu cầu đặt bàn thì cũng sẽ hiển thị và hủy ở đây.
-		      \item \textit{Delivery Order (Đặt món giao về)}: Cho phép người dùng chọn giao hàng, nhập thông tin giao hàng (địa chỉ, số điện thoại), và chuyển sang trang thanh toán.
-		      \item \textit{Order Summary (Tóm tắt đơn hàng)}: Hiển thị tất cả đơn hàng (món ăn, số lượng, tổng tiền, thông tin giao hàng), cho phép chuyển qua trang xem chi tiết.
-		      \item \textit{View Order Details (Xem chi tiết đơn hàng)}: Hiển thị trạng thái và thông tin chi tiết của một đơn hàng đã đặt (thời gian, địa chỉ, tình trạng giao hàng), cho phép khách hàng theo dõi. Nếu đơn hàng đã thành công, có thể chuyển đến trang gửi đánh giá.
-		      \item \textit{Submit Review (Gửi đánh giá)}: Cho phép người dùng viết đánh giá hoặc xếp hạng cho món ăn hoặc dịch vụ sau khi hoàn tất đơn hàng, gửi lên hệ thống.
-	      \end{itemize}
-	\item \textbf{Nhân viên}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Images/site_map/ManagerSite}
+    \vspace{0.5cm}
+    \caption{Sitemap theo vai trò người dùng (Quản lý) (1)}
+    \label{fig:my_label}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=13cm]{Images/site_map/ManagerSite2}
+    \vspace{0.5cm}
+    \caption{Sitemap theo vai trò người dùng (Quản lý) (2)}
+    \label{fig:my_label}
+\end{figure}
 
-	      \textbf{\textit{Tất cả nhân viên}}
-	      \begin{itemize}
-		      \item \textit{View word schedule (Xem lịch làm)}: Hiển thị lịch làm việc được xếp.
-	      \end{itemize}
-	      \textbf{\textit{Nhân viên Phục vụ}}
-	      \begin{itemize}
-		      \item \textit{Table List (Danh sách bàn)}: Hiển thị trạng thái các bàn (trống, đang sử dụng, đặt trước), cho phép nhân viên phục vụ cập nhật hoặc quản lý.
-		      \item \textit{Order List (Danh sách đơn hàng)}: Hiển thị danh sách các đơn hàng đang chờ xử lý, cho phép nhân viên chọn đơn để xem chi tiết hoặc chuyển sang bếp.
-		      \item \textit{Order Details (Chi tiết đơn hàng)}: Hiển thị thông tin chi tiết của một đơn hàng (món ăn, số lượng, ghi chú), cho phép nhân viên xác nhận hoặc cập nhật trạng thái.
-	      \end{itemize}
+\begin{longtable}{
+    >{\raggedright\arraybackslash}p{2.5cm} % Cột 1: Vai trò
+    >{\raggedright\arraybackslash}p{4.5cm} % Cột 2: Tính năng
+    p{8cm}  % Cột 3: Mô tả
+}
+\caption{Sitemap Chi Tiết của Hệ thống Quản lý Nhà hàng} \\
+\toprule
+\textbf{Vai trò} & \textbf{Tính năng / Mô-đun} & \textbf{Mô tả} \\
+\midrule
+\endfirsthead % Header cho trang đầu tiên
 
-	      \textit{\textbf{Nhân viên Thu ngân}}
-	      \begin{itemize}
-		      \item \textit{Process Payment (Xử lý thanh toán)}: Cho phép nhân viên thu ngân nhập thông tin thanh toán, xử lý các phương thức (tiền mặt, thẻ), và xuất hóa đơn.
-		      \item \textit{Cash In/Out}: Thêm thông tin vào dòng tiền bên ngoài.
-		      \item \textit{Daily Revenue Report (Báo cáo doanh thu hàng ngày)}: Hiển thị tổng doanh thu, số lượng đơn hàng, và các thống kê khác trong ngày, hỗ trợ nhân viên thu ngân theo dõi.
-	      \end{itemize}
+\toprule
+\textbf{Vai trò} & \textbf{Tính năng / Mô-đun} & \textbf{Mô tả} \\
+\midrule
+\endhead % Header cho các trang tiếp theo
 
-	      \textit{\textbf{Nhân viên Bếp}}
-	      \begin{itemize}
-		      \item \textit{Area Display (Các khu vực bếp): Hiển thị danh sách các khu vực bếp tương ứng với các món ăn được chỉ định sẵn.}
-		      \item \textit{Pending Dishes (Món ăn đang chờ)}: Hiển thị danh sách món ăn cần chuẩn bị, cho phép nhân viên bếp theo dõi và cập nhật trạng thái hoàn thành.
-	      \end{itemize}
+\bottomrule
+\endfoot % Footer cho bảng
 
-	      \textit{\textbf{Nhân viên Vận hành}}
-	      \begin{itemize}
-		      \item \textit{Manage Reservations (Quản lý đặt bàn)}: Cho phép nhân viên xem, chỉnh sửa, hoặc hủy đặt bàn (bao gồm hủy khi khách đến trễ quá), cập nhật trạng thái bàn.
-		      \item \textit{Contact Requests (Yêu cầu liên hệ)}: Hiển thị danh sách yêu cầu hỗ trợ từ khách hàng, cho phép nhân viên hỗ trợ trả lời hoặc chuyển tiếp.
-		      \item \textit{Promotions (Khuyến mãi)}: Hiển thị danh sách các chương trình khuyến mãi hiện tại, cho phép quản lý tạo mới hoặc chỉnh sửa.
-		      \item \textit{Promotion Details (Chi tiết khuyến mãi)}: Hiển thị thông tin chi tiết của từng chương trình khuyến mãi (thời gian, điều kiện, ưu đãi), cho phép chỉnh sửa hoặc xóa. Thống kê số liệu về chương trình khuyến mãi
-	      \end{itemize}
-	\item \textbf{Quản lý}
-	      \begin{itemize}
-		      \item \textit{Staff Management (Quản lý nhân viên)}: Cho phép quản lý thêm, chỉnh sửa, hoặc xóa thông tin nhân viên (tên, vai trò, lịch làm việc).
-		      \item \textit{Staff Details (Chi tiết nhân viên)}: Hiển thị thông tin chi tiết của từng nhân viên (hồ sơ, lịch sử làm việc, hiệu suất), cho phép chỉnh sửa.
-		      \item \textit{Branch Details (Chi tiết chi nhánh)}: Hiển thị thông tin chi tiết của chi nhánh, cho phép chỉnh sửa sơ đồ nhà hàng.
-		      \item \textit{Branch Dashboard (Bảng điều khiển chi nhánh)}: Hiển thị thông tin cụ thể của từng chi nhánh (doanh thu, đơn hàng, nhân viên), hỗ trợ quản lý theo dõi.
-		      \item \textit{Distribute work schedule (Xếp lịch làm)}: Cho phép lập lịch trực qua, thêm ghi chú công việc cho nhân viên.
-	      \end{itemize}
+%--- Dữ liệu của bảng ---%
 
-	      \textit{\textbf{Dành cho quản trị viên}}
-	      \begin{itemize}
-		      \item \textit{Dashboard (Bảng điều khiển)}: Hiển thị tổng quan về hoạt động nhà hàng (doanh thu, số đơn hàng, trạng thái nhân viên), với các biểu đồ và số liệu chính.
-		      \item \textit{Branch Management (Quản lý chi nhánh)}: Cho phép quản lý thêm, chỉnh sửa, hoặc xóa thông tin chi nhánh (địa chỉ, số điện thoại, giờ hoạt động).
-		      \item \textit{Menu Management (Quản lý menu)}: Cho phép quản lý thêm, chỉnh sửa, hoặc xóa món ăn trong menu (tên, giá, hình ảnh, mô tả). Thống kế các thông tin số liệu về món ăn.
-		      \item \textit{Food Details (Chi tiết món ăn)}: Hiển thị và chỉnh sửa thông tin chi tiết của từng món ăn trong menu (dành cho quản lý).
-	      \end{itemize}
+\textbf{Khách (Guest)}
+    & Trang chủ (Homepage)
+    & Giao diện chính, giới thiệu nhà hàng, các chức năng chính. \\
+\cmidrule(lr){2-3}
+    & Giới thiệu (About Us)
+    & Cung cấp thông tin chi tiết về nhà hàng. \\
+\cmidrule(lr){2-3}
+    & Thực đơn (Menu) \& Chi tiết món ăn
+    & Hiển thị danh sách món ăn, combo và thông tin chi tiết. \\
+\cmidrule(lr){2-3}
+    & Đặt bàn (Table Booking)
+    & Cho phép khách đặt bàn trước tại nhà hàng. \\
+\cmidrule(lr){2-3}
+    & Tự phục vụ (Self Order)
+    & Cung cấp tính năng tự đặt món tại bàn qua QR code. \\
+\cmidrule(lr){2-3}
+    & Liên hệ (Contact Us)
+    & Cung cấp thông tin liên hệ và biểu mẫu phản hồi. \\
+\midrule
 
-\end{enumerate}
+\textbf{Khách hàng (Đã đăng nhập)}
+    & Quản lý đặt bàn (My Bookings)
+    & Xem và quản lý các lịch đặt bàn của cá nhân. \\
+\cmidrule(lr){2-3}
+    & Đặt món trực tuyến (My Pre Orders)
+    & Đặt món trước hoặc đặt giao hàng tận nơi. \\
+\cmidrule(lr){2-3}
+    & Quản lý đơn hàng (My Orders)
+    & Theo dõi lịch sử và trạng thái các đơn hàng đã đặt. \\
+\cmidrule(lr){2-3}
+    & Gửi phản hồi (Feedback)
+    & Đánh giá về nhà hàng, dịch vụ và món ăn. \\
+\midrule
+
+\textbf{Nhân viên}
+    & \textbf{Tổng quan \& Cổng thông tin}
+    & \\
+    & Bảng điều khiển (App Dashboard)
+    & Giao diện chính, truy cập các mô-đun theo vai trò. \\
+    & Cổng thông tin nhân viên
+    & Xem lịch làm, đăng ký ca, xin nghỉ phép. \\
+\cmidrule(lr){2-3}
+    & \textbf{Bếp (KDS - Kitchen Display System)}
+    & \\
+    & Bảng điều khiển KDS \& Giao diện Bếp
+    & Hiển thị, theo dõi và cập nhật trạng thái các món ăn cần chuẩn bị. \\
+\cmidrule(lr){2-3}
+    & \textbf{Thu ngân (POS - Point of Sale)}
+    & \\
+    & Bảng điều khiển POS
+    & Giao diện chính để xử lý đơn hàng và thanh toán. \\
+    & Quản lý đơn hàng, Thanh toán, Quản lý bàn
+    & Các chức năng cốt lõi cho việc vận hành tại quầy. \\
+\cmidrule(lr){2-3}
+    & \textbf{Quản lý (Manager)}
+    & \\
+    & Quản lý Thực đơn
+    & Quản lý toàn bộ món ăn, danh mục, thuộc tính, và combo. \\
+    & Quản lý Đặt chỗ
+    & Xử lý và xác nhận các đơn hàng đặt trước và đặt bàn. \\
+    & Quản lý Phản hồi
+    & Xem, phân tích và phản hồi các đánh giá của khách hàng. \\
+    & Quản lý Lịch làm việc
+    & Tạo, phân công và quản lý lịch làm, ca làm cho nhân viên. \\
+    & Cài đặt \& Hệ thống
+    & Quản lý sơ đồ bàn, chi nhánh, nhân viên và phân quyền. \\
+
+\end{longtable}
 
 \subsection{Thiết kế Database}
 \subsubsection{EERD Database}
